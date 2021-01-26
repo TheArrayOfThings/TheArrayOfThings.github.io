@@ -1,0 +1,198 @@
+html, body	{
+	padding:0;
+	margin:0;
+	font-family:calibri;
+}
+div.container	{
+	min-height:100vh;
+	margin-bottom:-2.25em;
+}
+ul.topMenu, nav.navigate	{	
+	position:relative;
+	list-style-type:none;
+	background-color:lightskyblue;
+	text-align:center;
+	border-radius:0.4em;
+	border:1px solid black;
+	overflow:hidden;
+	margin:0em;
+}
+ul.topMenu	{
+	border-radius:0em;
+}
+canvas#topLogo	{
+	border:1px solid black;
+	border-radius:0.5em;
+}
+a.topMenu	{	
+	text-decoration:none;
+	color:black;
+	float:right;
+	padding:0.25em;
+	margin:0.5em;
+	margin-top:0.1em;
+}
+a:hover.topMenu	{
+	background-color:black;
+	color:white;
+	border-radius:5px;
+}
+li.topLogo	{
+	float:left;
+	font-size:24px;
+	font-weight:bold;
+}
+footer	{	
+	position:relative;
+	background-color:lightskyblue;
+	text-align:center;
+	font-size:22px;
+	height:1.6em;
+	border-radius:0.2em;
+	border-top:1px solid black;
+	overflow:hidden;
+}
+a.navigate, a:hover.navigate, a.current, a:hover.current	{
+	text-decoration:unset;
+	color:black;
+	padding:0.5em;
+	display:block;
+	font-size:16px;
+	float:left;
+}
+a:hover.navigate	{
+	background-color:black;
+	color:white;
+}
+a.current, a:hover.current	{
+	color:white;
+	background-color:black;
+}
+div.main	{
+	margin-left:15%;
+	margin-right:15%;
+	overflow:hidden;
+	padding:0.2em;
+	padding-bottom:3em;
+}
+div#leftColour, div#rightColour	{
+	background-color:#e7f5fe;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	padding:1px 1%;
+	position:fixed;
+	top:0;
+	bottom:0;
+	min-width:10%;
+	max-width:10%;
+	overflow:hidden;
+}
+div#leftColour	{
+	left:0;
+}
+div#rightColour	{
+	right:0;
+}
+div.containFloat	{
+	overflow:hidden;
+}
+div#leftDiv	{
+	width:35%;
+	float:left;
+}
+div#rightDiv	{
+	width:35%;
+	float:right;
+}
+textArea	{
+	max-width:98%;
+}
+#hidden	{
+	display:none;
+	color:lightskyblue;
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+	font-size:6em;
+}
+@media (max-width:800px) {
+	div.container	{
+		margin-bottom:-1.45em;
+	}
+	nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover, div.main	{
+		float:unset;
+		border:unset;
+		border-radius:unset;
+		width:unset;
+		font-size:14px;
+		float:none;
+		position:unset;
+		min-height:unset;
+		max-height:unset;
+	}
+	li.topMenu, li.topLogo, ul.topMenu, a.topMenu, a.topMenu:hover	{
+		padding:0;
+		margin:0;
+		float:unset;
+	}
+	div.main	{
+		margin-left:10%;
+		margin-right:10%;
+	}
+	nav.navigate	{
+		position:relative;
+		bottom:unset;
+		top:unset;
+		border:1px solid black;
+		border-right:unset;
+		border-left:unset;
+		min-height:unset;
+		height:auto;
+		min-width:unset;
+		max-width:unset;
+		text-align:center;
+	}
+	a.navigate, a.topMenu, li.topMenu, li.topLogo, a:hover.navigate, a:hover.topMenu, a.current, a.current:hover	{
+		padding:0.2em;
+		display:block;
+	}
+	canvas#topLogo	{
+		border:1px solid black;
+		border-radius:1em;
+		height:30px;
+		width:100px;
+	}
+	div#leftDiv, div#rightDiv, #hidden	{
+		float:unset;
+		padding:unset;
+		position:unset;
+		width:unset;
+	}
+	div#leftColour, div#rightColour	{
+		min-width:5%;
+		max-width:5%;
+	}
+	footer	{
+		font-size:14px;
+	}
+	#hidden	{
+		font-size:4em;
+	}
+}
+
+h1#quizTitle, div.quiz, ul.quiz li	{
+	padding: 0.2em;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color:lightskyblue;
+}
+ul.quiz li	{
+	background-color: white;
+}
+h1#quizTitle	{
+	text-align:center;
+}
+.results	{
+	display:none;
+}
+a#question, div.quiz p	{
+	margin: 0.2em;
+}
