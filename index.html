@@ -1,36 +1,29 @@
 <!DOCTYPE HTML>
 <html lang="en-GB">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Homepage for my mysterious, non-functional website experiment">
-<meta name="author" content="Ryan Flanagan">
-<meta name="keywords" content="HTML, website, rookie, experiment">
-<title>HomePage</title>
-<link rel="stylesheet" href="./css/Ultimate.css">
-</head>
-<div class="main">
-<body>
-<ul class="topMenu">
-<li><a href="#SignUp" class="topMenu">Signup</li></a>
-<li><a href="Login.html" class="topMenu">Login</li></a>
-<li><a href="Contact Us.html" class="topMenu">Contact Us</li></a>
-<li><a href="JavaScript Testing.html" class="topMenu">Downloads</li></a>
-<li><a href="#MainMenu" class="topMenu">Main Menu</li></a>
-<li class="topLogo"><a href="Homepage.html"><canvas height="38px" width="140px" id="topLogo">Computering</canvas></a></li>
-</ul>
-<nav class="navigate">
-<a class="navigate" href="Animal Cognition.html">Animal Cognition</a>
-<a class="navigate" href="#page2">Genetically Modified Organisms</a>
-<a class="navigate" href="#page3">Evolution and Radiometric Dating</a>
-<a class="navigate" href="Phobia Quiz.html">Phobia Quiz</a>
-<a class="navigate" href="PassCrack.html">PassCrack</a>
-</nav>
-<script src="./js/Logo.js"></script>
-<article class="main">
-<p id="testing"></p>
-</article>
-</div>
-<footer><p>Ryan Flanagan 2021</p></footer>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Homepage for my mysterious, non-functional website experiment">
+		<meta name="author" content="Ryan Flanagan">
+		<meta name="keywords" content="HTML, website, rookie, experiment">
+		<title>HomePage</title>
+		<link rel="stylesheet" href="./css/Ultimate.css">
+		<script src="./js/jquery.js"></script> 
+		<script> 
+			$(function(){
+			  $("#header").load("./html/TopBar.html"); 
+			  $("#footer").load("./html/Footer.html"); 
+			});
+		</script> 
+	</head>
+	<body>
+		<div class="main">
+			<div id="header"></div>
+			<script src="./js/Logo.js"></script>
+			<article class="main">
+				<p id="testing"></p>
+			</article>
+		</div>
+		<div id="footer"></div>
+	</body>
 </html>
