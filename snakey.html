@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="description" content="A simple snakey game - only your browser required!">
+<meta name="author" content="Ryan Flanagan">
+<meta charset="UTF-8">
+    <title>BrowserSnake</title>
+<link rel="icon" type="image/x-icon" href="./images/logobasic.ico">
+<link rel="stylesheet" href="./css/style.css"></link>
+<script src="./js/game.js"></script>
+<script src="./js/entity.js"></script>
+<script src="./js/powerup.js"></script>
+<script src="./js/effects.js"></script>
+<script src="./js/snake.js"></script>
+<script src="./js/snakesegment.js"></script>
+<script src="./js/bullet.js"></script>
+<script src="./js/enemy.js"></script>
+<!-- <script data-ad-client="ca-pub-1942138227110242" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+</head>
+<body>
+<div id="background"></div>
+<div id="playable">
+<p id="info"></p>
+<table class='scoreboard'>
+<tr class="scoreLabels">
+<th class='scoreboard'>Your Best</th>
+<th class='scoreboard'>Top Score</th>
+</tr >
+<tr class="scores">
+<th class='scoreboard pershighscore'>0</th>
+<th class='scoreboard servhighscore'>0</th>
+</tr >
+</table >
+<div id="topSectionVisible" class="section">Up</div>
+<div id="bottomSectionVisible" class="section">Down</div>
+<div id="leftSectionVisible" class="section">Left</div>
+<div id="rightSectionVisible" class="section">Right</div>
+</div>
+<button type="button" id="settings">Settings</button>
+<div id="topSection" class="section"></div>
+<div id="bottomSection" class="section"></div>
+<div id="leftSection" class="section"></div>
+<div id="rightSection" class="section"></div>
+</body>
+</html>

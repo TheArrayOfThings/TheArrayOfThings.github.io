@@ -1,0 +1,93 @@
+* {
+    padding : 0;
+    margin : 0;
+	overflow:hidden;
+}
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+    background : white;
+    color : black;
+}
+div#background{
+	height: 100%;
+	width:100%;
+	background: powderblue;
+	position: absolute;
+}
+div#playable{
+    height: 100%;
+    width: 100%;
+    background: black;
+    position: relative;
+}
+div#powerUp {
+    position: absolute;
+    background: yellow;
+    top:0px;
+    left:0px;
+    border-radius: 100px;
+}
+div.section {
+	position:absolute;
+}
+div#topSectionVisible {
+	text-align:center;
+}
+div#bottomSectionVisible {
+	text-align:center;
+}
+div#leftSectionVisible {
+	text-align:left;
+}
+div#rightSectionVisible {
+	text-align:right;
+}
+div#topSectionVisible, div#bottomSectionVisible, div#leftSectionVisible, div#rightSectionVisible {
+	color:powderblue;
+	outline:1px solid powderblue;
+	display:none;
+}
+table.scoreboard {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+	padding:1%;
+}
+tr, td, th {
+    border: 1px solid powderblue;
+    color: powderblue;
+    font-size: 20px;
+}
+button#settings {
+	position:absolute;
+	bottom:0px;
+	right:0px;
+}
+div.eye {
+	width:35%;
+	height:35%;
+	position:absolute;
+	border-radius: 100px;
+}
+div.bullet {
+	background: red;
+	border-radius: 100px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+div.enemy {
+	background: pink;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+p#info {
+	color: powderblue;
+	opacity: 0.5;
+	filter: alpha(opacity=50); /* For IE8 and earlier */
+	text-align: center;
+}
