@@ -1,55 +1,45 @@
 <!DOCTYPE HTML>
 <html lang="en-GB">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Test your knowledge on the strangest phobias!">
-	<meta name="author" content="Ryan Flanagan">
-	<meta name="keywords" content="Quiz, phobias, fear, questions">
-	<title>Phobia Quiz</title>
-	<link rel="stylesheet" href="./css/Ultimate.css">
-</head>
-<div class="main">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Homepage for my mysterious, non-functional website experiment">
+		<meta name="author" content="Ryan Flanagan">
+		<meta name="keywords" content="HTML, website, rookie, experiment">
+		<title>HomePage</title>
+		<link rel="stylesheet" href="/css/Ultimate.css">
+		<script src="/js/jquery.js"></script> 
+		<script> 
+			$(function(){
+			  $("#header").load("/html/TopBar.html"); 
+			  $("#footer").load("/html/Footer.html"); 
+			});
+		</script> 
+	</head>
 	<body>
-		<ul class="topMenu">
-			<li><a href="#SignUp" class="topMenu">Signup</li></a>
-			<li><a href="Login.html" class="topMenu">Login</li></a>
-			<li><a href="Contact Us.html" class="topMenu">Contact Us</li></a>
-			<li><a href="JavaScript Testing.html" class="topMenu">Downloads</li></a>
-			<li><a href="#MainMenu" class="topMenu">Main Menu</li></a>
-			<li class="topLogo"><a href="Homepage.html"><canvas height="38px" width="140px" id="topLogo">Computering</canvas></a></li>
-		</ul>
-		<nav class="navigate">
-			<a class="navigate" href="Animal Cognition.html">Animal Cognition</a>
-			<a class="navigate" href="#page2">Genetically Modified Organisms</a>
-			<a class="navigate" href="#page3">Evolution and Radiometric Dating</a>
-			<a class="navigate" href="Phobia Quiz.html">Phobia Quiz</a>
-			<a class="navigate" href="PassCrack.html">PassCrack</a>
-		</nav>
-		<script src="./js/Logo.js"></script>
-		<article class="main">
-			<h1 id="quizTitle">The Definitive Phobia Quiz!</h1>
-			<div class="quiz">
-				<a id="question">Question goes here</a>
-				<ul class="quiz" style="list-style-type: none">
-				<li><input class="answerButton" type="radio" onclick="answered(1)"></input><a class="answer"></a></li><br />
-				<li><input class="answerButton" type="radio" onclick="answered(2)"></input><a class="answer"></a></li><br />
-				<li><input class="answerButton" type="radio" onclick="answered(3)"></input><a class="answer"></a></li><br />
-				<li><input class="answerButton" type="radio" onclick="answered(4)"></input><a class="answer"></a></li>
-				</ul>
-				<p>Score: <a class="score"></a></p>
+		<div class="main">
+			<div id="header"></div>
+				<article class="main">
+					<h1 id="quizTitle">The Definitive Phobia Quiz!</h1>
+					<div class="quiz">
+						<a id="question">Question goes here</a>
+						<ul class="quiz" style="list-style-type: none">
+						<li><input class="answerButton" type="radio" onclick="answered(1)"></input><a class="answer"></a></li><br />
+						<li><input class="answerButton" type="radio" onclick="answered(2)"></input><a class="answer"></a></li><br />
+						<li><input class="answerButton" type="radio" onclick="answered(3)"></input><a class="answer"></a></li><br />
+						<li><input class="answerButton" type="radio" onclick="answered(4)"></input><a class="answer"></a></li>
+						</ul>
+						<p>Score: <a class="score"></a></p>
+					</div>
+					<div class="results">
+						<p>Your final score is: <br/>
+						<a class="score"></a>/<a id="totQuestions"></a>
+						</p>
+					</div>
+					<script src="/Quiz/js/Quiz.js"></script>
+					<script>nextQuestion()</script>
+				</article>
 			</div>
-			<div class="results">
-				<p>Your final score is: <br/>
-				<a class="score"></a>/<a id="totQuestions"></a>
-				</p>
-			</div>
-			<script src="./Quiz/js/Quiz.js"></script>
-			<script>nextQuestion()</script>
-		</article>
-	</div>
-	<footer>
-		<p>Copyright&#169; Ryan Flanagan 2017</p>
-	</footer>
-</body>
+		<div id="footer"></div>
+	</body>
 </html>
