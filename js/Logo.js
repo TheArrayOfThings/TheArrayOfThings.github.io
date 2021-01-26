@@ -12,3 +12,4 @@ function drawLogo() {
 	ctx.font = "italic bold 22px calibri";
 	ctx.fillText("Computering",12,25);
 }
+drawLogo();
