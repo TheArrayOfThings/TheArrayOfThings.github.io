@@ -200,3 +200,6 @@ h1#quizTitle	{
 a#question, div.quiz p	{
 	margin: 0.2em;
 }
+table, tr, td {
+	text-align: left;
+}
