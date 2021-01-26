@@ -2,6 +2,11 @@ html, body	{
 	padding:0;
 	margin:0;
 	font-family:calibri;
+	height:100%;
+	overflow:hidden;
+}
+body {
+	height:100%;
 }
 div.container	{
 	min-height:100vh;
@@ -16,6 +21,7 @@ ul.topMenu, nav.navigate	{
 	border:1px solid black;
 	overflow:hidden;
 	margin:0em;
+	height:10%;
 }
 ul.topMenu	{
 	border-radius:0em;
@@ -23,6 +29,7 @@ ul.topMenu	{
 canvas#topLogo	{
 	border:1px solid black;
 	border-radius:0.5em;
+	vertical-align: middle; 
 }
 a.topMenu	{	
 	text-decoration:none;
@@ -47,7 +54,7 @@ footer	{
 	background-color:lightskyblue;
 	text-align:center;
 	font-size:22px;
-	height:1.6em;
+	height:10%;
 	border-radius:0.2em;
 	border-top:1px solid black;
 	overflow:hidden;
@@ -72,8 +79,7 @@ div.main	{
 	margin-left:15%;
 	margin-right:15%;
 	overflow:hidden;
-	padding:0.2em;
-	padding-bottom:3em;
+	height:90%;
 }
 div#leftColour, div#rightColour	{
 	background-color:#e7f5fe;

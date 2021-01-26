@@ -6,10 +6,10 @@ function drawLogo() {
 	grad.addColorStop(1,"#f44e42");
 
 	ctx.fillStyle = grad;
-	ctx.fillRect(0,0,140,38);
+	ctx.fillRect(0,0,c.clientWidth,c.clientHeight);
 
 	ctx.fillStyle = "black";
 	ctx.font = "italic bold 22px calibri";
-	ctx.fillText("Ryan Flanagan",12,25);
+	ctx.fillText("Ryan Flanagan",c.clientWidth/4,c.clientHeight*0.7);
 }
 drawLogo();
