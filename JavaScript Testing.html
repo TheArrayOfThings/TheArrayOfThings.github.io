@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Homepage for my mysterious, non-functional website experiment">
+<meta name="author" content="Ryan Flanagan">
+<meta name="keywords" content="HTML, website, rookie, experiment">
+<title>JavaScript</title>
+<link rel="stylesheet" href="Ultimate.css">
+<script>
+function	paraChange()	{
+	document.getElementById('paraChange').innerHTML = 'You clicked it :(';
+}
+</script>
+</head>
+<div class="main">
+<body>
+<ul class="topMenu">
+<li><a href="#SignUp" class="topMenu">Signup</li></a>
+<li><a href="Login.html" class="topMenu">Login</li></a>
+<li><a href="Contact Us.html" class="topMenu">Contact Us</li></a>
+<li><a href="JavaScript Testing.html" class="topMenu">Downloads</li></a>
+<li><a href="#MainMenu" class="topMenu">Main Menu</li></a>
+<li class="topLogo"><a href="Homepage.html"><canvas height="38px" width="140px" id="topLogo">Computering</canvas></a></li>
+</ul>
+<nav class="navigate">
+<a class="navigate" href="Animal Cognition.html">Animal Cognition</a>
+<a class="navigate" href="#page2">Genetically Modified Organisms</a>
+<a class="navigate" href="#page3">Evolution and Radiometric Dating</a>
+<a class="navigate" href="#page4">Vaccinations</a>
+<a class="navigate" href="PassCrack.html">PassCrack</a>
+</nav>
+<script src="Logo.js"></script>
+<script src="Test.js"></script>
+<!-- Main page starts here -->
+<article class="main">
+
+<button type="button" onclick="document.getElementById('date').innerHTML = Date();">*Click*</button>
+<p id="date"></p>
+
+<img id="change" src="images/green.png"></img> <br/>
+<button type="button" onclick="document.getElementById('change').src = 'images/red.png';">Make me red!</button>
+<button style="margin-left:0.5em;" type="button" onclick="document.getElementById('change').src = 'images/orange.png';">Make me orange!</button>
+<button style="margin-left:0.5em;" type="button" onclick="document.getElementById('change').style.display = 'none';">Hide me!</button>
+<button style="margin-left:0.5em;" type="button" onclick="document.getElementById('change').style.display = 'unset';">Show me!</button>
+<br />
+<p id="paraChange">Don't click this button: <button type="button" onclick="paraChange()">Don't do it...</button> </p>
+<button type="button" onclick="document.write('You animal, you deleted it all!');">DO NOT click this button</button>
+<p>If you click this button it will produce an alert:<br />
+<button type="button" onclick="window.alert('Go Away');">Alert Test</button> <!-- Alert button -->
+</p>
+<p id="testing"></p>
+<button type="button" onclick="arrays()">Name?</button> <br />
+<p>Secondary testing below:</p> 
+<button type="button" onclick="document.getElementById('secondTest').innerHTML = mult(8, 34);">Multiply</button> <br />
+<button type="button" onclick="document.getElementById('secondTest').innerHTML = ordInd(document.getElementById('ordinalInput').value);">Indicate Ordinal</button> <br />
+<input type="text" id="ordinalInput"></input> <br/>
+<button type="button" onclick="objectTest();">Print balloon Object</button> <br />
+<button type="button" onclick="changeBalloon();">Change balloon Object</button> <br />
+Results here: <a id="secondTest"></a> <br/>
+<img src="kitten.jpg" alt="Kitten" title="Kitten" onmousemove="this.src = 'ScaryFace.jpg';" onmouseleave="this.src = 'Kitten.jpg';"></img>
+<p>Enter Search term: </p>
+<input type="text" id="searchTerm">
+<p>Enter string to search:</p>
+<input type="text" id="stringLocate"><button type="button" onclick="document.getElementById('stringSearchResult').innerHTML = locateString();">Locate String</button>
+<p>Result:</p>
+<p id="stringSearchResult"></p>
+<button type="button" onclick="promptFunction();">Prompt Button</button>
+<button type="button" onclick="document.getElementById('round').innerHTML = globalMethods();">Rounding</button>
+<p id="round">Rounding Here</p>
+</article>
+</div>
+<footer>
+<p>Copyright&#169; Ryan Flanagan 2017</p>
+</footer>
+</body>
+</html>

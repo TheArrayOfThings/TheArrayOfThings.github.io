@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en-GB"
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Homepage for my mysterious, non-functional website experiment">
+<meta name="author" content="Ryan Flanagan">
+<meta name="keywords" content="HTML, website, rookie, experiment">
+<title>HomePage</title>
+</head>
+<body>
+<ul class="topMenu">
+<li><a href="#SignUp" class="topMenu">Signup</li></a>
+<li><a href="#Login" class="topMenu">Login</li></a>
+<li><a href="#Contact" class="topMenu">Contact Us</li></a>
+<li><a href="#Downloads" class="topMenu">Downloads</li></a>
+<li><a href="#MainMenu" class="topMenu">Main Menu</li></a>
+<li class="topLogo">Computering</canvas></li>
+</ul>
+<canvas id="topLogo" style="width:200px; height:100px; border:2px solid orange;"></canvas>
+<script>
+var c = document.getElementById("topLogo");
+var ctx = c.getContext("2d");
+ctx.font = "30px Arial";
+ctx.fillText("Hello World",10,50);
+</script>
+</body>
+</html>
