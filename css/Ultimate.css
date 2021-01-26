@@ -3,10 +3,6 @@ html, body	{
 	margin:0;
 	font-family:calibri;
 	height:100%;
-	overflow:hidden;
-}
-body {
-	height:100%;
 }
 div.container	{
 	min-height:100vh;
@@ -49,15 +45,17 @@ li.topLogo	{
 	font-size:24px;
 	font-weight:bold;
 }
-footer	{	
+div#footer	{	
 	position:relative;
 	background-color:lightskyblue;
 	text-align:center;
 	font-size:22px;
-	height:10%;
+	height:4.9%;
 	border-radius:0.2em;
 	border-top:1px solid black;
-	overflow:hidden;
+}
+div#footer div {
+	margin-top:0.5%;
 }
 a.navigate, a:hover.navigate, a.current, a:hover.current	{
 	text-decoration:unset;
@@ -79,7 +77,7 @@ div.main	{
 	margin-left:15%;
 	margin-right:15%;
 	overflow:hidden;
-	height:90%;
+	height:95%;
 }
 div#leftColour, div#rightColour	{
 	background-color:#e7f5fe;
@@ -176,7 +174,7 @@ textArea	{
 		min-width:5%;
 		max-width:5%;
 	}
-	footer	{
+	div#footer	{
 		font-size:14px;
 	}
 	#hidden	{
