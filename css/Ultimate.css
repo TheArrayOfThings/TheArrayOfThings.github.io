@@ -20,7 +20,9 @@ ul.topMenu, nav.navigate	{
 	height:10%;
 }
 li.topLogoContainer	{
-	float:left;
+	/*float:left;*/
+	font-size:24px;
+	font-weight:bold;
 }
 canvas#topLogo	{
 	border:1px solid black;
