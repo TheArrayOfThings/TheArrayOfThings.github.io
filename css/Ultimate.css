@@ -55,7 +55,7 @@ div#footer	{
 	background-color:lightskyblue;
 	text-align:center;
 	font-size:22px;
-	height:4.9%;
+	height:4.9vh;
 	border-radius:0.2em;
 	border-top:1px solid black;
 	overflow:hidden;
@@ -84,7 +84,7 @@ div.main	{
 	margin-left:15%;
 	margin-right:15%;
 	overflow:hidden;
-	min-height:95%;
+	min-height:95vh;
 }
 div#leftColour, div#rightColour	{
 	background-color:#e7f5fe;
