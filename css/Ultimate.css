@@ -21,8 +21,6 @@ ul.topMenu, nav.navigate	{
 }
 li.topLogoContainer	{
 	float:left;
-	font-size:24px;
-	font-weight:bold;
 }
 canvas#topLogo	{
 	border:1px solid black;
