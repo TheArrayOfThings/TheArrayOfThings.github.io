@@ -18,14 +18,15 @@
 	</head>
 	<body>
 		<div class="main">
-			<article class="main">
-				<script src="./js/PassCrack.js"></script>
-				<p>Write your password here :</p>
-				<input id="passInput" type="text"></input>
-				<input type="button" onclick="passCrack();" value="PassCrack"></input>
-				<P id="passCrack">This program will attempt to guess the input password. <br />The guessing function only knows the length of your password.</p>
-			</article>
-		</div>
+			<div id="header"></div>
+				<article class="main">
+					<script src="./js/PassCrack.js"></script>
+					<p>Write your password here :</p>
+					<input id="passInput" type="text"></input>
+					<input type="button" onclick="passCrack();" value="PassCrack"></input>
+					<P id="passCrack">This program will attempt to guess the input password. <br />The guessing function only knows the length of your password.</p>
+				</article>
+			</div>
 		<div id="footer"></div>
 	</body>
 </html>
