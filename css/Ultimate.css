@@ -123,7 +123,7 @@ textArea	{
 	div.container	{
 		margin-bottom:-1.45em;
 	}
-	nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover, div.main	{
+	nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover	{
 		float:unset;
 		border:unset;
 		border-radius:unset;
@@ -133,6 +133,15 @@ textArea	{
 		position:unset;
 		min-height:unset;
 		max-height:unset;
+	}
+	div.main {
+		float:unset;
+		border:unset;
+		border-radius:unset;
+		width:unset;
+		font-size:14px;
+		float:none;
+		position:unset;
 	}
 	li.topMenu, li.topLogo, ul.topMenu, a.topMenu, a.topMenu:hover	{
 		padding:0;
