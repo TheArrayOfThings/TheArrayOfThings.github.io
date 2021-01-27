@@ -27,7 +27,7 @@ canvas#topLogo	{
 	border-radius:0.5em;
 	vertical-align: middle; 
 }
-a.topMenu	{	
+a.topMenu, a.topMenuCurrent, a:hover.topMenuCurrent	{	
 	text-decoration:none;
 	color:black;
 	float:right;
@@ -40,15 +40,9 @@ a:hover.topMenu	{
 	color:white;
 	border-radius:5px;
 }
-a.topMenuCurrent, a:hover.topMenuCurrent {
-	text-decoration:none;
-	color:black;
-	float:right;
-	padding:0.25em;
-	margin:0.5em;
-	margin-top:0.1em;
-	background-color:black;
+a.topMenuCurrent, a:hover.topMenuCurrent	{
 	color:white;
+	background-color:black;
 	border-radius:5px;
 }
 li.topLogo	{
