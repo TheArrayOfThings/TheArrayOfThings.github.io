@@ -26,7 +26,7 @@ div.topMenuRight	{
 	margin:0.5em;
 	margin-top:0.1em;
 }
-a.topMenuRight	{	
+a.topMenuLink {
 	text-decoration:none;
 	color:black;
 }
@@ -35,7 +35,7 @@ canvas#topLogo	{
 	border-radius:0.5em;
 	vertical-align: middle; 
 }
-a:hover.topMenuRight, a.topMenuCurrent, a:hover.topMenuCurrent	{
+a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
 	text-decoration:none;
 	color:white;
 	background-color:black;
