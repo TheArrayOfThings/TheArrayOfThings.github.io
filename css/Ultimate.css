@@ -84,7 +84,7 @@ div.main	{
 	margin-left:15%;
 	margin-right:15%;
 	overflow:hidden;
-	height:95%;
+	min-height:95%;
 }
 div#leftColour, div#rightColour	{
 	background-color:#e7f5fe;
