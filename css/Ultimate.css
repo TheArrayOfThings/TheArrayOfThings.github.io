@@ -40,6 +40,17 @@ a:hover.topMenu	{
 	color:white;
 	border-radius:5px;
 }
+a.topMenuCurrent, a:hover.topMenuCurrent {
+	text-decoration:none;
+	color:black;
+	float:right;
+	padding:0.25em;
+	margin:0.5em;
+	margin-top:0.1em;
+	background-color:black;
+	color:white;
+	border-radius:5px;
+}
 li.topLogo	{
 	float:left;
 	font-size:24px;
