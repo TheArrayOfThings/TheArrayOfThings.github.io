@@ -164,12 +164,12 @@ textArea	{
 		padding:0.2em;
 		display:block;
 	}
-	canvas#topLogo	{
+	/*canvas#topLogo	{
 		border:1px solid black;
 		border-radius:1em;
 		height:30px;
 		width:100px;
-	}
+	}*/
 	div#leftDiv, div#rightDiv, #hidden	{
 		float:unset;
 		padding:unset;
