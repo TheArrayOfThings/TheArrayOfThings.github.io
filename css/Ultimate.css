@@ -54,7 +54,7 @@ div#footer	{
 	border-radius:0.2em;
 	border-top:1px solid black;
 	overflow:hidden;
-	min-height:40px;
+	min-height:20px;
 }
 div#footer div {
 	margin-top:0.5%;
@@ -123,7 +123,7 @@ textArea	{
 	div.container	{
 		margin-bottom:-1.45em;
 	}
-	/*nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover, div.main	{
+	nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover	{
 		float:unset;
 		border:unset;
 		border-radius:unset;
@@ -133,7 +133,7 @@ textArea	{
 		position:unset;
 		min-height:unset;
 		max-height:unset;
-	}*/
+	}
 	li.topMenu, li.topLogo, ul.topMenu, a.topMenu, a.topMenu:hover	{
 		padding:0;
 		margin:0;
