@@ -3,6 +3,7 @@ html, body	{
 	margin:0;
 	font-family:calibri;
 	min-height:100%;
+	display: flex;
 }
 div.container	{
 	min-height:100vh;
