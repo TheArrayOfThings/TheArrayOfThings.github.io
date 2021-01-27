@@ -157,8 +157,8 @@ textArea	{
 		bottom:unset;
 		top:unset;
 		border:1px solid black;
-		border-right:unset;
-		border-left:unset;
+		/*border-right:unset;
+		border-left:unset;*/
 		min-height:unset;
 		height:auto;
 		min-width:unset;
