@@ -27,7 +27,7 @@ canvas#topLogo	{
 	border-radius:0.5em;
 	vertical-align: middle; 
 }
-a.topMenu, a.topMenuCurrent, a:hover.topMenuCurrent	{	
+a.topMenu	{	
 	text-decoration:none;
 	color:black;
 	float:right;
@@ -35,13 +35,13 @@ a.topMenu, a.topMenuCurrent, a:hover.topMenuCurrent	{
 	margin:0.5em;
 	margin-top:0.1em;
 }
-a:hover.topMenu	{
-	background-color:black;
+a:hover.topMenu, a.topMenuCurrent, a:hover.topMenuCurrent	{
+	text-decoration:none;
 	color:white;
-	border-radius:5px;
-}
-a.topMenuCurrent, a:hover.topMenuCurrent	{
-	color:white;
+	float: right;
+	padding:0.25em;
+	margin:0.5em;
+	margin-top:0.1em;
 	background-color:black;
 	border-radius:5px;
 }
@@ -148,7 +148,7 @@ textArea	{
 		float:none;
 		position:unset;
 	}
-	li.topMenu, li.topLogo, ul.topMenu, a.topMenu, a.topMenu:hover	{
+	li.topMenu, li.topLogo, ul.topMenu, a.topMenu, a.topMenu:hover, a.topMenuCurrent, a:hover.topMenuCurrent	{
 		padding:0;
 		margin:0;
 		float:unset;
@@ -170,7 +170,7 @@ textArea	{
 		max-width:unset;
 		text-align:center;
 	}
-	a.navigate, a.topMenu, li.topMenu, li.topLogo, a:hover.navigate, a:hover.topMenu, a.current, a.current:hover	{
+	a.navigate, a.topMenu, li.topMenu, li.topLogo, a:hover.navigate, a:hover.topMenu, a.topMenuCurrent, a:hover.topMenuCurrent, a.current, a.current:hover	{
 		padding:0.2em;
 		display:block;
 	}
