@@ -15,10 +15,10 @@ div.topMenu, nav.navigate	{
 	margin:0em;
 }
 
-div.topMenuLeft	{
-	font-size:24px;
-	font-weight:bold;
+div.logoContainer	{
 	float: left;
+		padding:0;
+	margin:0;
 }
 div.topMenuRight	{
 	float:right;
@@ -30,11 +30,22 @@ a.topMenuLink {
 	text-decoration:none;
 	color:black;
 }
-canvas#topLogo	{
+div.logoContainer	{
+	margin-top:0.2%;
+	margin-left:0.2%;
 	border:1px solid black;
 	border-radius:0.5em;
 	vertical-align: middle; 
+	overflow:hidden;
+	height:3%;
 }
+canvas#topLogo	{
+	padding:0;
+	margin:0;
+	height:100%;
+	width:100%;
+}
+
 a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
 	text-decoration:none;
 	color:white;
@@ -137,11 +148,11 @@ textArea	{
 		float:none;
 		position:unset;
 	}
-	div.topMenu, div.topLogo, div.topMenuLeft, div.topMenuRight	{
+	div.topMenu, div.topLogo, div.logoContainer, div.topMenuRight	{
 		padding:0;
 		margin:0;
 		float:unset;
-		padding:0.2em;
+		/*padding:0.2em;*/
 		display:block;
 	}
 	div.main	{
