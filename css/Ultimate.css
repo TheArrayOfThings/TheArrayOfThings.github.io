@@ -19,13 +19,17 @@ ul.topMenu, nav.navigate	{
 	margin:0em;
 	height:10%;
 }
-ul.topMenu	{
-	border-radius:0em;
+li.topLogoContainer	{
+	float:left;
+	font-size:24px;
+	font-weight:bold;
 }
 canvas#topLogo	{
 	border:1px solid black;
 	border-radius:0.5em;
 	vertical-align: middle; 
+	margin:0.5em;
+	margin-top:2.5%;
 }
 a.topMenu	{	
 	text-decoration:none;
@@ -44,11 +48,6 @@ a:hover.topMenu, a.topMenuCurrent, a:hover.topMenuCurrent	{
 	margin-top:0.1em;
 	background-color:black;
 	border-radius:5px;
-}
-li.topLogo	{
-	float:left;
-	font-size:24px;
-	font-weight:bold;
 }
 div#footer	{	
 	position:relative;

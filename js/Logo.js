@@ -10,6 +10,6 @@ function drawLogo() {
 
 	ctx.fillStyle = "black";
 	ctx.font = "italic bold 22px calibri";
-	ctx.fillText("Ryan Flanagan",c.clientWidth/4,c.clientHeight*0.7);
+	ctx.fillText("Ryan Flanagan",c.clientWidth/3.5,c.clientHeight*0.5);
 }
 drawLogo();
