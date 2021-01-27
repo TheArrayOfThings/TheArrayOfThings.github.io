@@ -193,7 +193,7 @@ textArea	{
 	}
 }
 
-h1#quizTitle, div.quiz, ul.quiz li	{
+h1, div.quiz, ul.quiz li	{
 	padding: 0.2em;
 	border: 1px solid black;
 	border-radius: 10px;
@@ -202,7 +202,7 @@ h1#quizTitle, div.quiz, ul.quiz li	{
 ul.quiz li	{
 	background-color: white;
 }
-h1#quizTitle	{
+h1	{
 	text-align:center;
 }
 .results	{
