@@ -125,7 +125,7 @@ textArea	{
 	}
 	nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover	{
 		float:unset;
-		border:unset;
+		/*border:unset;*/
 		border-radius:unset;
 		width:unset;
 		font-size:14px;
