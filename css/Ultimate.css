@@ -4,11 +4,7 @@ html, body	{
 	font-family:calibri;
 	height:100vh;
 }
-div.container	{
-	min-height:100vh;
-	margin-bottom:-2.25em;
-}
-ul.topMenu, nav.navigate	{	
+div.topMenu, nav.navigate	{	
 	position:relative;
 	list-style-type:none;
 	background-color:lightskyblue;
@@ -17,45 +13,42 @@ ul.topMenu, nav.navigate	{
 	border:1px solid black;
 	overflow:hidden;
 	margin:0em;
-	height:10%;
 }
-li.topLogoContainer	{
-	/*float:left;*/
+
+div.topMenuLeft	{
 	font-size:24px;
 	font-weight:bold;
+	float: left;
 }
-canvas#topLogo	{
-	border:1px solid black;
-	border-radius:0.5em;
-	vertical-align: middle; 
-	margin:0.5em;
-	margin-top:2.5%;
-}
-a.topMenu	{	
-	text-decoration:none;
-	color:black;
+div.topMenuRight	{
 	float:right;
 	padding:0.25em;
 	margin:0.5em;
 	margin-top:0.1em;
 }
-a:hover.topMenu, a.topMenuCurrent, a:hover.topMenuCurrent	{
+a.topMenuRight	{	
+	text-decoration:none;
+	color:black;
+}
+canvas#topLogo	{
+	border:1px solid black;
+	border-radius:0.5em;
+	vertical-align: middle; 
+}
+a:hover.topMenuRight, a.topMenuCurrent, a:hover.topMenuCurrent	{
 	text-decoration:none;
 	color:white;
-	float: right;
-	padding:0.25em;
-	margin:0.5em;
-	margin-top:0.1em;
 	background-color:black;
 	border-radius:5px;
 }
+
 div#footer	{	
 	position:relative;
 	background-color:lightskyblue;
 	text-align:center;
 	font-size:22px;
 	height:4.9vh;
-	border-radius:0.2em;
+	/*border-radius:0.2em;*/
 	border-top:1px solid black;
 	overflow:hidden;
 	min-height:20px;
@@ -124,9 +117,6 @@ textArea	{
 	font-size:6em;
 }
 @media screen and (orientation:portrait) {
-	div.container	{
-		margin-bottom:-1.45em;
-	}
 	nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover	{
 		float:unset;
 		/*border:unset;*/
@@ -147,7 +137,7 @@ textArea	{
 		float:none;
 		position:unset;
 	}
-	li.topMenu, li.topLogo, ul.topMenu, a.topMenu, a.topMenu:hover, a.topMenuCurrent, a:hover.topMenuCurrent	{
+	div.topMenu, div.topLogo, div.topMenuLeft, div.topMenuRight	{
 		padding:0;
 		margin:0;
 		float:unset;
