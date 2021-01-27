@@ -193,7 +193,7 @@ textArea	{
 	}
 }
 
-h1, div.quiz, ul.quiz li	{
+h1, div.quiz, ul.quiz li, table	{
 	padding: 0.2em;
 	border: 1px solid black;
 	border-radius: 10px;
