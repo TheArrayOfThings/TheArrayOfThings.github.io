@@ -2,7 +2,7 @@ html, body	{
 	padding:0;
 	margin:0;
 	font-family:calibri;
-	height:100%;
+	min-height:100%;
 }
 div.container	{
 	min-height:100vh;
@@ -17,7 +17,7 @@ ul.topMenu, nav.navigate	{
 	border:1px solid black;
 	overflow:hidden;
 	margin:0em;
-	height:10%;
+	min-height:10%;
 }
 ul.topMenu	{
 	border-radius:0em;
@@ -50,11 +50,10 @@ div#footer	{
 	background-color:lightskyblue;
 	text-align:center;
 	font-size:22px;
-	height:4.9%;
+	min-height:4.9%;
 	border-radius:0.2em;
 	border-top:1px solid black;
 	overflow:hidden;
-	min-height:40px;
 }
 div#footer div {
 	margin-top:0.5%;
@@ -79,7 +78,7 @@ div.main	{
 	margin-left:15%;
 	margin-right:15%;
 	overflow:hidden;
-	height:95%;
+	min-height:95%;
 }
 div#leftColour, div#rightColour	{
 	background-color:#e7f5fe;
