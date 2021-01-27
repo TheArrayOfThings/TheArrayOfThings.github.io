@@ -152,6 +152,8 @@ textArea	{
 		padding:0;
 		margin:0;
 		float:unset;
+		padding:0.2em;
+		display:block;
 	}
 	div.main	{
 		margin-left:10%;
@@ -169,10 +171,6 @@ textArea	{
 		min-width:unset;
 		max-width:unset;
 		text-align:center;
-	}
-	a.navigate, a.topMenu, li.topMenu, li.topLogo, a:hover.navigate, a:hover.topMenu, a.topMenuCurrent, a:hover.topMenuCurrent, a.current, a.current:hover	{
-		padding:0.2em;
-		display:block;
 	}
 	/*canvas#topLogo	{
 		border:1px solid black;
