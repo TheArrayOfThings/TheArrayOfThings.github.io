@@ -2,6 +2,11 @@ html, body	{
 	padding:0;
 	margin:0;
 	font-family:calibri;
+}
+html {
+	height:100%;
+}
+body {
 	min-height:100%;
 }
 div.container	{
