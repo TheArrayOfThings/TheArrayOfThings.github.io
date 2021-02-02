@@ -31,13 +31,12 @@ a.topMenuLink {
 	color:black;
 }
 div.logoContainer	{
-	margin-top:0.2%;
-	margin-left:0.2%;
+	margin:0.2%;
 	border:1px solid black;
 	border-radius:0.5em;
 	vertical-align: middle; 
 	overflow:hidden;
-	height:3%;
+	height:5vh;
 }
 canvas#topLogo	{
 	padding:0;

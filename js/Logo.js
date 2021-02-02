@@ -11,11 +11,14 @@ function drawLogo() {
 	ctx.fillRect(0,0,c.width,c.height);
 
 	ctx.fillStyle = "black";
-	ctx.font = "bold 22px calibri";
-	ctx.fillText("Ryan Flanagan",c.width/10,c.height*0.75);
-	console.log("Logo drawn!");
+	ctx.font = "bold " + (c.width + c.height)/20 + "px calibri";
+	ctx.fillText("Ryan Flanagan",c.width/10,c.height*0.65);
+	console.log("Redrawn!");
 }
-drawLogo();
-window.onresize = function(event) {
+
+window.onload = function () {
 	drawLogo();
-};
+}
+window.onresize = function () {
+	drawLogo();
+}
