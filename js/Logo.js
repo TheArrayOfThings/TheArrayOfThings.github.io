@@ -1,24 +1,45 @@
 function drawLogo() {
-	var c = document.getElementById("topLogo");
-	c.height = c.clientHeight;
-	c.width = c.clientWidth;
-	var ctx = c.getContext("2d");
+	var canvas = document.getElementById("topLogo");
+	var container = document.getElementsByClassName("logoContainer")[0];
+	canvas.height = container.clientHeight;
+	canvas.width = container.clientWidth;
+	var ctx = canvas.getContext("2d");
 	var grad = ctx.createLinearGradient(0,0,140,0);
 	grad.addColorStop(0,"orange");
 	grad.addColorStop(1,"#f44e42");
 
 	ctx.fillStyle = grad;
-	ctx.fillRect(0,0,c.width,c.height);
+	ctx.fillRect(0,0,canvas.width,canvas.height);
 
 	ctx.fillStyle = "black";
-	ctx.font = "bold " + (c.width + c.height)/20 + "px calibri";
-	ctx.fillText("Ryan Flanagan",c.width/10,c.height*0.65);
+	ctx.font = "bold " + (canvas.height/2) + "px calibri";
+	ctx.textAlign = "center";
+	ctx.fillText("The Array Of Things", canvas.width/2, canvas.height/1.5);
 	console.log("Redrawn!");
 }
 
 window.onload = function () {
 	drawLogo();
 }
-window.onresize = function () {
-	drawLogo();
+
+//Draw the logo after finished resizing
+
+var rtime;
+var timeout = false;
+var delta = 200;
+window.onresize = function() {
+    rtime = new Date();
+    if (timeout === false) {
+        timeout = true;
+        setTimeout(resizeend, delta);
+    }
+}
+
+function resizeend() {
+    if (new Date() - rtime < delta) {
+        setTimeout(resizeend, delta);
+    } else {
+        timeout = false;
+        drawLogo();
+    }               
 }

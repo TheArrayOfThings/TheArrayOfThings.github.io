@@ -2,41 +2,51 @@ html, body	{
 	padding:0;
 	margin:0;
 	font-family:calibri;
-	height:100vh;
+	min-height:100vh;
 }
+/*div {
+	border: 1px solid red;
+}*/
 div.topMenu, nav.navigate	{	
+	box-sizing: border-box;
 	position:relative;
 	list-style-type:none;
 	background-color:lightskyblue;
 	text-align:center;
 	border-radius:0.4em;
 	border:1px solid black;
+	border-top:unset;
 	overflow:hidden;
 	margin:0em;
 }
-
-div.logoContainer	{
+div.topMenu {
+	height:5vh;
+	border-radius:0em;
+	border-right:unset;
+	border-left:unset;
+}
+div.logoContainer, div.topMenuRight	{
+	padding:0;
+	margin:0.2%;
+	border-radius:0.5em;
+	vertical-align: middle; 
+	overflow:hidden;
+}
+div.logoContainer {
+	box-sizing: border-box;
 	float: left;
-		padding:0;
-	margin:0;
+	border:1px solid black;
+	width:18vw;
+	height:4vh;
+	min-width:100px;
 }
 div.topMenuRight	{
 	float:right;
-	padding:0.25em;
-	margin:0.5em;
-	margin-top:0.1em;
+	margin-top:0.5%;
 }
 a.topMenuLink {
 	text-decoration:none;
 	color:black;
-}
-div.logoContainer	{
-	margin:0.2%;
-	border:1px solid black;
-	border-radius:0.5em;
-	vertical-align: middle; 
-	overflow:hidden;
-	height:5vh;
 }
 canvas#topLogo	{
 	padding:0;
@@ -50,28 +60,28 @@ a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
 	color:white;
 	background-color:black;
 	border-radius:5px;
+	font-size:1vh;
 }
 
 div#footer	{	
+	box-sizing: border-box;
 	position:relative;
 	background-color:lightskyblue;
 	text-align:center;
-	font-size:22px;
-	height:4.9vh;
-	/*border-radius:0.2em;*/
+	font-size:2vh;
+	height:3vh;
 	border-top:1px solid black;
 	overflow:hidden;
-	min-height:20px;
 }
 div#footer div {
-	margin-top:0.5%;
+	overflow: hidden;
 }
 a.navigate, a:hover.navigate, a.current, a:hover.current	{
 	text-decoration:unset;
 	color:black;
 	padding:0.5em;
 	display:block;
-	font-size:16px;
+	font-size:1vh;
 	float:left;
 }
 a:hover.navigate	{
@@ -86,7 +96,7 @@ div.main	{
 	margin-left:15%;
 	margin-right:15%;
 	overflow:hidden;
-	min-height:95vh;
+	min-height:92vh;
 }
 div#leftColour, div#rightColour	{
 	background-color:#e7f5fe;
@@ -127,7 +137,7 @@ textArea	{
 	font-size:6em;
 }
 @media screen and (orientation:portrait) {
-	nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover	{
+	nav.navigate, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover, a.topMenuLink, a.topMenuLink:hover	{
 		float:unset;
 		/*border:unset;*/
 		border-radius:unset;
@@ -149,10 +159,15 @@ textArea	{
 	}
 	div.topMenu, div.topLogo, div.logoContainer, div.topMenuRight	{
 		padding:0;
-		margin:0;
+		/*margin:0.2%;*/
 		float:unset;
 		/*padding:0.2em;*/
 		display:block;
+		width:unset;
+	}
+	div.logoContainer, div.topMenuRight {
+		height:2vh;
+		margin-top:0;
 	}
 	div.main	{
 		margin-left:10%;
@@ -163,20 +178,13 @@ textArea	{
 		bottom:unset;
 		top:unset;
 		border:1px solid black;
-		/*border-right:unset;
-		border-left:unset;*/
+		border-top:unset;
 		min-height:unset;
 		height:auto;
 		min-width:unset;
 		max-width:unset;
 		text-align:center;
 	}
-	/*canvas#topLogo	{
-		border:1px solid black;
-		border-radius:1em;
-		height:30px;
-		width:100px;
-	}*/
 	div#leftDiv, div#rightDiv, #hidden	{
 		float:unset;
 		padding:unset;
