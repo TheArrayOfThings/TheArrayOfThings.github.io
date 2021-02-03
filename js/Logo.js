@@ -1,28 +1,44 @@
 function drawLogo() {
 	try {
+		var fontString = "bold 2vmin calibri";
 		var canvas = document.getElementById("topLogo");
 		var container = document.getElementsByClassName("logoContainer")[0];
 		canvas.height = container.clientHeight;
 		var ctx = canvas.getContext("2d");
-		ctx.font = "bold  1vw calibri";
-		//canvas.width = ctx.measureText("ArrayThings").width;
-		container.width = ctx.measureText("ArrayThings").width;
-		var grad = ctx.createLinearGradient(0,0,140,0);
-		grad.addColorStop(0,"orange");
-		grad.addColorStop(1,"#f44e42");
+		if(window.innerHeight > window.innerWidth){ //Portrait mode
+			ctx.font = fontString;
+			canvas.width = ctx.measureText("    THINGS    ").width;
+			container.width = canvas.width;
+			var grad = ctx.createLinearGradient(0,0,140,0);
+			grad.addColorStop(0,"orange");
+			grad.addColorStop(1,"#f44e42");
 
-		ctx.fillStyle = grad;
-		ctx.fillRect(0,0,canvas.width,canvas.height);
+			ctx.fillStyle = grad;
+			ctx.fillRect(0,0,canvas.width,canvas.height);
 
-		ctx.fillStyle = "black";
-		ctx.textAlign = "center";
-		ctx.font = "bold  1vw calibri";
-		ctx.fillText("Array", (canvas.width/2) - (ctx.measureText("Array").width/1.2), canvas.height*0.3);
-		ctx.fillText("of", (canvas.width/2) - (ctx.measureText("of").width/2), (canvas.height*0.6));
-		ctx.fillText("Things", (canvas.width/2) + (ctx.measureText("Things").width/2), (canvas.height*0.9));
-		console.log("Success!");
+			ctx.fillStyle = "black";
+			ctx.textAlign = "center";
+			ctx.font = fontString;
+			ctx.fillText("ARRAY", (canvas.width/2), canvas.height/3.5);
+			ctx.fillText("OF", (canvas.width/2), canvas.height/1.7);
+			ctx.fillText("THINGS", (canvas.width/2), canvas.height/1.1);
+		} else { //Landscape mode
+			ctx.font = fontString;
+			canvas.width = ctx.measureText(" ARRAY OF THINGS ").width;
+			container.width = canvas.width;
+			var grad = ctx.createLinearGradient(0,0,140,0);
+			grad.addColorStop(0,"orange");
+			grad.addColorStop(1,"#f44e42");
+
+			ctx.fillStyle = grad;
+			ctx.fillRect(0,0,canvas.width,canvas.height);
+
+			ctx.fillStyle = "black";
+			ctx.textAlign = "center";
+			ctx.font = fontString;
+			ctx.fillText("ARRAY OF THINGS", (canvas.width/2), canvas.height/1.5);
+		}
 	} catch (err) {
-		console.log("Failed...");
 		setTimeout(drawLogo, 10);
 	}
 }

@@ -1,3 +1,7 @@
+@font-face { 
+	font-family: BebasNeue; 
+	src: url('/fonts/BebasNeue-Regular.ttf'); 
+} 
 html, body	{
 	padding:0;
 	margin:0;
@@ -104,6 +108,7 @@ canvas#topLogo	{
 	margin-top:0;
 	height:100%;
 	width:100%;
+	min-width:7.5%;
 }
 
 a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
