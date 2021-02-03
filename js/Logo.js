@@ -40,6 +40,6 @@ function resizeend() {
     }               
 }
 
-//Draw the logo after loading the page has finished
-
-window.addEventListener ? window.addEventListener("load",drawLogo,false) : window.attachEvent && window.attachEvent("onload",drawLogo);
+window.addEventListener("load", function(){
+    drawLogo();
+});
