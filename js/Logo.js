@@ -40,6 +40,6 @@ function resizeend() {
     }               
 }
 
-window.addEventListener("load", function(){
-    drawLogo();
+$(function() {
+	drawLogo();
 });
