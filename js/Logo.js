@@ -18,10 +18,6 @@ function drawLogo() {
 	console.log("Redrawn!");
 }
 
-window.onload = function () {
-	drawLogo();
-}
-
 //Draw the logo after finished resizing
 
 var rtime;
@@ -43,3 +39,7 @@ function resizeend() {
         drawLogo();
     }               
 }
+
+//Draw the logo after loading the page has finished
+
+window.addEventListener ? window.addEventListener("load",drawLogo,false) : window.attachEvent && window.attachEvent("onload",drawLogo);
