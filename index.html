@@ -10,14 +10,16 @@
 		<script src="/js/jquery.js"></script> 
 		<script> 
 			$(function(){
-			  $("#header").load("/html/TopBar.html"); 
+			  $("#topBar").load("/html/TopBar.html"); 
+			  $("#navBar").load("/html/NavBar.html"); 
 			  $("#footer").load("/html/Footer.html"); 
 			});
 		</script> 
 	</head>
 	<body>
+		<div id="topBar"></div>
 		<div class="main">
-			<div id="header"></div>
+			<div id="navBar"></div>
 			<article class="main">
 				<p id="testing">Hello</p>
 			</article>
