@@ -3,8 +3,10 @@ function drawLogo() {
 		var canvas = document.getElementById("topLogo");
 		var container = document.getElementsByClassName("logoContainer")[0];
 		canvas.height = container.clientHeight;
-		canvas.width = container.clientWidth;
 		var ctx = canvas.getContext("2d");
+		ctx.font = "bold  1vw calibri";
+		//canvas.width = ctx.measureText("ArrayThings").width;
+		container.width = ctx.measureText("ArrayThings").width;
 		var grad = ctx.createLinearGradient(0,0,140,0);
 		grad.addColorStop(0,"orange");
 		grad.addColorStop(1,"#f44e42");
@@ -13,11 +15,14 @@ function drawLogo() {
 		ctx.fillRect(0,0,canvas.width,canvas.height);
 
 		ctx.fillStyle = "black";
-		ctx.font = "bold " + (canvas.height/2) + "px calibri";
 		ctx.textAlign = "center";
-		ctx.fillText("The Array Of Things", canvas.width/2, canvas.height/1.5);
+		ctx.font = "bold  1vw calibri";
+		ctx.fillText("Array", (canvas.width/2) - (ctx.measureText("Array").width/1.2), canvas.height*0.3);
+		ctx.fillText("of", (canvas.width/2) - (ctx.measureText("of").width/2), (canvas.height*0.6));
+		ctx.fillText("Things", (canvas.width/2) + (ctx.measureText("Things").width/2), (canvas.height*0.9));
 		console.log("Success!");
 	} catch (err) {
+		console.log("Failed...");
 		setTimeout(drawLogo, 10);
 	}
 }

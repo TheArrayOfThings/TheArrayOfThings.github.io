@@ -4,10 +4,31 @@ html, body	{
 	font-family:calibri;
 	min-height:100vh;
 }
-/*div {
+/** {
 	box-sizing: border-box;
 	border: 1px solid red;
 }*/
+h1, div.quiz, ul.quiz li, table	{
+	padding: 0.2em;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color:lightskyblue;
+}
+ul.quiz li	{
+	background-color: white;
+}
+h1	{
+	text-align:center;
+}
+.results	{
+	display:none;
+}
+a#question, div.quiz p	{
+	margin: 0.2em;
+}
+table, tr, td {
+	text-align: left;
+}
 div.topMenu, nav.navigate	{	
 	box-sizing: border-box;
 	position:relative;
@@ -27,24 +48,43 @@ div.topMenu {
 	border-right:unset;
 	border-left:unset;
 }
+div.marginTenPercent {
+	height:10%;
+}
+
 div.logoContainer {
 	box-sizing: border-box;
 	float: left;
 	border:1px solid black;
 	border-radius:0.5em;
-	width:18vw;
-	height:4vh;
-	min-width:150px;
+	/*width:15%;*/
+	height:80%;
+	/*min-width:200px;*/
 	min-height:20px;
-	padding:0;
-	margin:0.2%;
 	vertical-align: middle; 
 	overflow:hidden;
+}
+div.topTitleContainer {
+	float:left;
+	height:80%;
+	margin-left:2vw;
+}
+div.topTitleContainer h1 {
+	box-sizing: border-box;
+	margin:0;
+	padding: 0;
+	border: unset;
+	border-radius: 0;
+	background-color:unset;
+	text-align:unset;
+	float:left;
+	font-size:calc(10px + 1vh);	
+	border-left:1px solid black;
 }
 div.topMenuRight	{
 	float: right;
 	border-radius:0.5em;
-	height:4vh;
+	height:80%;
 	min-height:20px;
 	padding:0;
 	margin-right:0.2%;
@@ -58,11 +98,10 @@ a.topMenuLink {
 	margin:0;
 	padding:0;
 	float:left;
-	margin-top:10%;
 }
 canvas#topLogo	{
 	padding:0;
-	margin:0;
+	margin-top:0;
 	height:100%;
 	width:100%;
 }
@@ -196,26 +235,4 @@ textArea	{
 	#hidden	{
 		font-size:4em;
 	}
-}
-
-h1, div.quiz, ul.quiz li, table	{
-	padding: 0.2em;
-	border: 1px solid black;
-	border-radius: 10px;
-	background-color:lightskyblue;
-}
-ul.quiz li	{
-	background-color: white;
-}
-h1	{
-	text-align:center;
-}
-.results	{
-	display:none;
-}
-a#question, div.quiz p	{
-	margin: 0.2em;
-}
-table, tr, td {
-	text-align: left;
 }
