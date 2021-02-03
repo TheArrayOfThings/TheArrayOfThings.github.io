@@ -15,7 +15,7 @@ function drawLogo() {
 	ctx.font = "bold " + (canvas.height/2) + "px calibri";
 	ctx.textAlign = "center";
 	ctx.fillText("The Array Of Things", canvas.width/2, canvas.height/1.5);
-	console.log("Redrawn!");
+	console.log("Success!");
 }
 
 //Draw the logo after finished resizing
@@ -40,6 +40,15 @@ function resizeend() {
     }               
 }
 
-$(function() {
-	drawLogo();
-});
+//I think jQuery is overwriting the onload function. So I'm just going to keep trying to redraw the logo until it works.
+
+function tryDrawLogo() {
+	try {
+		console.log("Trying to draw the logo...");
+		drawLogo();
+	} catch (error) {
+		setTimeout(drawLogo, 10);
+	}
+}
+
+tryDrawLogo();
