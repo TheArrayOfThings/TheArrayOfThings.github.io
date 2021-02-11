@@ -12,6 +12,7 @@ function attachEvent () {
 				menu.style.display = "unset";
 			}
 		}
+		setSelected();
 	}
 	catch (err) {
 		setTimeout(attachEvent, 10);
