@@ -1,10 +1,12 @@
-var menu;
-var visible = false;
-try {
-	attachEvent();
-}
-catch (err) {
-	setTimeout(attachEvent, 10);
+function startupFunction () {
+	var menu;
+	var visible = false;
+	try {
+		attachEvent();
+	}
+	catch (err) {
+		setTimeout(attachEvent, 10);
+	}
 }
 
 function attachEvent() {
@@ -19,3 +21,5 @@ function attachEvent() {
 		}
 	};
 }
+
+startupFunction();
