@@ -3,7 +3,7 @@ var visible = false;
 try {
 	attachEvent();
 }
-catch {
+catch (err) {
 	setTimeout(attachEvent, 10);
 }
 
