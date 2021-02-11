@@ -154,6 +154,7 @@ nav.navContainer	{
 	height:92vh;
 	overflow:hidden;
 	display:none;
+	border-bottom:unset;
 }
 a.navigate, a:hover.navigate, a.current, a:hover.current	{
 	text-decoration:unset;
