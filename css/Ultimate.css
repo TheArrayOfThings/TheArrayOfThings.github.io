@@ -8,6 +8,9 @@ html, body	{
 	font-family:calibri;
 	min-height:100vh;
 }
+body {
+	background-color:#0E0B16;
+}
 /* * {
 	box-sizing: border-box;
 	border: 1px solid red;
@@ -53,13 +56,14 @@ div.topMenu, nav.navContainer	{
 	box-sizing: border-box;
 	position:relative;
 	list-style-type:none;
-	background-color:lightskyblue;
+	background-color:black;
 	text-align:center;
 	border-radius:0.4em;
 	border:1px solid black;
 	border-top:unset;
 	margin:0em;
 	min-height:25px;
+	border-bottom:1px solid darkgrey;
 }
 div.topMenu {
 	height:5vh;
@@ -101,6 +105,7 @@ div.topTitleContainer h1 {
 	text-align:unset;
 	float:left;
 	font-size:calc(10px + 1vh);	
+	color:white;
 }
 button.topMenuRight	{
 	/*box-sizing: border-box;
@@ -111,7 +116,18 @@ button.topMenuRight	{
 	min-height:20px;
 	overflow:hidden;
 	display:inline-block;
-	width:50%;
+	font-size:calc(10px + 0.20vh + 0.20vw);
+	float:right;
+	background-color:#4717F6;
+	color:white;
+	border:2px solid #A239CA;
+}
+button.topMenuRight:active {
+	/*background-color:#A239CA;
+	border:2px solid #4717F6;*/
+}
+button.topMenuRight:hover {
+	/*background-color:#A239CA;*/
 }
 a.topMenuLink {
 	text-decoration:none;
@@ -137,12 +153,13 @@ a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
 div#footer	{	
 	box-sizing: border-box;
 	position:relative;
-	background-color:lightskyblue;
+	background-color:black;
 	text-align:center;
 	height:3vh;
 	min-height:15px;
-	border-top:1px solid black;
+	border-top:1px solid lightgrey;
 	overflow:hidden;
+	color:white;
 }
 div#footer div {
 	overflow: hidden;
@@ -151,21 +168,39 @@ div#footer div {
 nav.navContainer	{
 	width:10%;
 	float:right;
-	height:92vh;
+	/*height:92vh;*/
 	overflow:hidden;
 	display:none;
 	border-bottom:unset;
+	background-color:#4717F6;
+	min-width:90px;
 }
 a.navigate, a:hover.navigate, a.current, a:hover.current	{
 	text-decoration:unset;
-	color:black;
+	color:white;
 	padding:0.5em;
 	display:block;
 	font-size:calc(10px + 1vh);	
 	border-bottom:1px solid black;
 }
+a:visited {
+	color:#A239CA;
+}
+a:hover {
+	color:white;
+}
+a:active {
+	color:#4717F6;
+}
+a:visited.navigate	{
+	background-color:black;
+	color:white;
+}
 a:hover.navigate	{
 	background-color:black;
+	color:white;
+}
+a:active.navigate	{
 	color:white;
 }
 a.current, a:hover.current	{
@@ -177,6 +212,8 @@ div.main	{
 	margin-right:15%;
 	overflow:hidden;
 	min-height:92vh;
+	background-color:#0E0B16;
+	color:white;
 }
 div#leftColour, div#rightColour	{
 	background-color:#e7f5fe;
@@ -243,8 +280,6 @@ textArea	{
 	}
 	nav.navContainer	{
 		position:relative;
-		bottom:unset;
-		top:unset;
 		border:1px solid black;
 		border-top:unset;
 		min-height:unset;
@@ -252,6 +287,7 @@ textArea	{
 		min-width:unset;
 		max-width:unset;
 		text-align:center;
+		float:left;
 	}
 	div#leftDiv, div#rightDiv, #hidden	{
 		float:unset;

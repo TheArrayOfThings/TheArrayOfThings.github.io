@@ -10,13 +10,13 @@ function drawLogo() {
 			canvas.width = ctx.measureText("    THINGS    ").width;
 			container.width = canvas.width;
 			var grad = ctx.createLinearGradient(0,0,140,0);
-			grad.addColorStop(0,"orange");
-			grad.addColorStop(1,"#f44e42");
+			grad.addColorStop(0,"#A239CA");
+			grad.addColorStop(1,"#4717F6");
 
 			ctx.fillStyle = grad;
 			ctx.fillRect(0,0,canvas.width,canvas.height);
 
-			ctx.fillStyle = "black";
+			ctx.fillStyle = "white";
 			ctx.textAlign = "center";
 			ctx.font = fontString;
 			ctx.fillText("ARRAY", (canvas.width/2), canvas.height/3.5);
@@ -27,13 +27,13 @@ function drawLogo() {
 			canvas.width = ctx.measureText(" ARRAY OF THINGS ").width;
 			container.width = canvas.width;
 			var grad = ctx.createLinearGradient(0,0,140,0);
-			grad.addColorStop(0,"orange");
-			grad.addColorStop(1,"#f44e42");
+			grad.addColorStop(0,"#A239CA");
+			grad.addColorStop(1,"#4717F6");
 
 			ctx.fillStyle = grad;
 			ctx.fillRect(0,0,canvas.width,canvas.height);
 
-			ctx.fillStyle = "black";
+			ctx.fillStyle = "white";
 			ctx.textAlign = "center";
 			ctx.font = fontString;
 			ctx.fillText("ARRAY OF THINGS", (canvas.width/2), canvas.height/1.5);
