@@ -7,6 +7,7 @@ html, body	{
 	margin:0;
 	font-family:calibri;
 	min-height:100vh;
+	box-sizing: border-box;
 }
 body {
 	background-color:#0E0B16;
@@ -20,7 +21,7 @@ h1, div.quiz, ul.quiz li, table	{
 	border: 1px solid black;
 	padding: 0.2em;
 	border-radius: 10px;
-	background-color:lightskyblue;
+	background-color:#4717F6;
 }
 ul.quiz li	{
 	background-color: white;
@@ -64,6 +65,7 @@ div.topMenu, nav.navContainer	{
 	margin:0em;
 	min-height:25px;
 	border-bottom:1px solid darkgrey;
+	z-index: 10;
 }
 div.topMenu {
 	height:5vh;
@@ -163,6 +165,7 @@ div#footer	{
 div#footer div {
 	overflow: hidden;
 	font-size:calc(10px + 1vh);	
+	overflow:hidden;
 }
 nav.navContainer	{
 	width:10%;
@@ -213,6 +216,7 @@ div.main	{
 	min-height:92vh;
 	background-color:#0E0B16;
 	color:white;
+	display:block;
 }
 div#leftColour, div#rightColour	{
 	background-color:#e7f5fe;
@@ -256,10 +260,10 @@ textArea	{
 
 div#background{
 	height: 70vh;
-	width: 100%;
-	background: powderblue;
+	width: 70%;
 	position: absolute;
-	margin-left:-15%
+	/*margin-left:-15%*/
+	overflow:hidden;
 }
 div#playable{
     height: 100%;
@@ -292,7 +296,7 @@ div#rightSectionVisible {
 }
 div#topSectionVisible, div#bottomSectionVisible, div#leftSectionVisible, div#rightSectionVisible {
 	color:powderblue;
-	outline:1px solid powderblue;
+	outline:1px solid #A239CA;
 	display:none;
 }
 table.scoreboard {
@@ -300,11 +304,12 @@ table.scoreboard {
     left: 0px;
     top: 0px;
 	padding:1%;
+	border-spacing: 10px 0;
 }
-tr, td, th {
-    border: 1px solid powderblue;
-    color: powderblue;
-    font-size: 20px;
+tr.scoreLabels, tr.scores, th.scoreboard {
+    color: white;
+	font-size:calc(10px + 1vh);	
+	text-align: center;
 }
 button#settings {
 	position:absolute;
@@ -365,7 +370,9 @@ p#info {
 		width:10%;
 	}
 	nav.navContainer	{
-		position:relative;
+		left:0px;
+		top:5vh;
+		position:absolute;
 		border:1px solid black;
 		border-top:unset;
 		min-height:unset;
@@ -373,7 +380,6 @@ p#info {
 		min-width:unset;
 		max-width:unset;
 		text-align:center;
-		float:left;
 	}
 	div#leftDiv, div#rightDiv, #hidden	{
 		float:unset;
@@ -390,6 +396,7 @@ p#info {
 	}
 	/*Browsersnake*/
 	div#background{
-		margin-left:-10%
+		margin-left:-10%;
+		width:100%;
 	}
 }

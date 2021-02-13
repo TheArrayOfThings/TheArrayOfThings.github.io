@@ -20,6 +20,8 @@ function Enemy() {
 		enemy.enemyFace.innerHTML = "'-'";
 		enemy.enemyFace.style.textAlign = 'center';
 		enemy.enemyFace.style.fontSize = entitySize/1.5 + 'px';
+		enemy.enemyFace.style.margin = "0px";
+		enemy.enemyFace.style.color = "black";
 		enemy.collisionDiv.appendChild(enemy.enemyFace);
 		playable.appendChild(enemy.collisionDiv);
 		enemy.allDivs.push(enemy.collisionDiv);

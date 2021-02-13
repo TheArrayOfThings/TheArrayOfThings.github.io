@@ -70,7 +70,7 @@ function pageLoaded() {
 	background = document.getElementById('background');
 	playable = document.getElementById('playable');
 	persHighScoreBox = document.getElementsByClassName('pershighscore')[0];
-	servHighScoreBox = document.getElementsByClassName('servhighscore')[0];
+	//servHighScoreBox = document.getElementsByClassName('servhighscore')[0];
 	scoreLabels = document.getElementsByClassName('scoreLabels')[0];
 	scores = document.getElementsByClassName('scores')[0];
 	topSection = document.getElementById('topSection');
@@ -86,7 +86,7 @@ function pageLoaded() {
 			persHighScore = parseInt(localStorage.getItem("PersonalHighScore"));
 			persHighScoreBox.innerHTML = persHighScore + " (" + localStorage.getItem("PersonalHighScoreName") + ")";
 			//Post the high score in case the server has been restarted
-			postHighScore(localStorage.getItem("PersonalHighScoreName"), parseInt(localStorage.getItem("PersonalHighScore")));
+			//postHighScore(localStorage.getItem("PersonalHighScoreName"), parseInt(localStorage.getItem("PersonalHighScore")));
 		}
 	}
 
