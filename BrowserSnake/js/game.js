@@ -90,9 +90,10 @@ function pageLoaded() {
 		}
 	}
 
-	getHighScore();
+	//The following was used on a server verstion that cached high scores
+	/*getHighScore();
 	//Call getHighScore every 5 minutes to keep the server highscore up to date
-	setInterval(getHighScore, 300000);
+	setInterval(getHighScore, 300000);*/
 	setup(false);
 	//Add settings event to settings button
 	addEvent("click", document.getElementById("settings"), function() {setup(true);});
