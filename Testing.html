@@ -1,41 +1,61 @@
 <!DOCTYPE HTML>
-<html lang="en-GB">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="Portfolio site for Ryan Flanagan">
-		<meta name="author" content="Ryan Flanagan">
-		<meta name="keywords" content="Portfolio, html, css, javascript, c#, java, ServiceNow, Dynamics">
-		<title>HomePage</title>
-		<script src="./js/jquery.js"></script> 
-		<link rel="stylesheet" href="./css/Ultimate.css">
-		<script src="./js/Logo.js"></script>
-		<script src="./js/Selected.js"></script>
-		<script src="./js/MenuBurger.js"></script>
-	</head>
-	<body>
-		<div class="topMenu">
-		<div class="topBarLeft">
-		<div class="logoContainer"><a href="./index.html"><canvas id="topLogo"></canvas></a></div>
+<html>
+<head>
+<!-- <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="description" content="A simple snakey game - only your browser required!">
+<meta name="author" content="Ryan Flanagan">
+<meta charset="UTF-8">
+    <title>BrowserSnake</title>
+<link rel="icon" type="image/x-icon" href="./BrowserSnake/images/logobasic.ico">
+<script src="./BrowserSnake/js/game.js"></script>
+<script src="./BrowserSnake/js/entity.js"></script>
+<script src="./BrowserSnake/js/powerup.js"></script>
+<script src="./BrowserSnake/js/effects.js"></script>
+<script src="./BrowserSnake/js/snake.js"></script>
+<script src="./BrowserSnake/js/snakesegment.js"></script>
+<script src="./BrowserSnake/js/bullet.js"></script>
+<script src="./BrowserSnake/js/enemy.js"></script>
+<script src="./js/jquery.js"></script> 
+<script> 
+	$(function(){
+	  $("#topBar").load("./html/TopBar.html"); 
+	  $("#navBar").load("./html/NavBar.html"); 
+	  $("#footer").load("./html/Footer.html"); 
+	});
+</script> 
+<link rel="stylesheet" href="./css/Ultimate.css">
+<script src="./js/Logo.js"></script>
+<script src="./js/Selected.js"></script>
+<script src="./js/MenuBurger.js"></script>
+</head>
+<body>
+<div id="topBar"></div>
+	<div class="main">
+		<div id="background"></div>
+		<div id="playable">
+			<p id="info"></p>
+			<table class='scoreboard'>
+				<tr class="scoreLabels">
+				<th class='scoreboard'>Your Best</th>
+				<th class='scoreboard'>Top Score</th>
+				</tr >
+				<tr class="scores">
+				<th class='scoreboard pershighscore'>0</th>
+				<th class='scoreboard servhighscore'>0</th>
+				</tr >
+			</table >
+			<div id="topSectionVisible" class="section">Up</div>
+			<div id="bottomSectionVisible" class="section">Down</div>
+			<div id="leftSectionVisible" class="section">Left</div>
+			<div id="rightSectionVisible" class="section">Right</div>
 		</div>
-		<div class="topBarMiddle">
-		<div class="topTitleContainer"><h1>Portfolio</h1></div>
-		</div>
-		<div class="topBarRight">
-		<button class="topMenuRight">Menu</button>
-		</div>
-			<nav class="navContainer">
-				<a class="navigate" href="./index.html">Homepage</a> 
-				<a class="navigate" href="./BrowserSnake/snakey.html">BrowserSnake</a>
-				<a class="navigate" href="./PassCrack/PassCrack.html">PassCrack</a>
-				<a class="navigate" href="./Quiz/Phobia Quiz.html">Phobia Quiz</a>
-				<a class="navigate" href="./html/ContactMe.html">Contact Me</a>
-			</nav>
-		</div>
-		<div class="main">
-			<p id="testing">Hello</p>
-			<p><a href="#test">Link!</a></p>
-		</div>
-		<div id="footer"><div>Ryan Flanagan 2021</div></div>
-	</body>
+		<button type="button" id="settings">Settings</button>
+		<div id="topSection" class="section"></div>
+		<div id="bottomSection" class="section"></div>
+		<div id="leftSection" class="section"></div>
+		<div id="rightSection" class="section"></div>
+	</div>
+	<div id="footer"></div>
+</body>
 </html>
