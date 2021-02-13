@@ -155,7 +155,7 @@ div#footer	{
 	background-color:black;
 	text-align:center;
 	height:3vh;
-	min-height:15px;
+	min-height:20px;
 	border-top:1px solid lightgrey;
 	overflow:hidden;
 	color:white;
@@ -255,10 +255,11 @@ textArea	{
 /*Browsersnake*/
 
 div#background{
-	height: 92vh;
-	width:70%;
+	height: 70vh;
+	width: 100%;
 	background: powderblue;
 	position: absolute;
+	margin-left:-15%
 }
 div#playable{
     height: 100%;
@@ -386,5 +387,9 @@ p#info {
 	}
 	#hidden	{
 		font-size:4em;
+	}
+	/*Browsersnake*/
+	div#background{
+		margin-left:-10%
 	}
 }
