@@ -2,12 +2,14 @@
 	font-family: BebasNeue; 
 	src: url('/fonts/BebasNeue-Regular.ttf'); 
 } 
+* {
+	box-sizing: border-box;
+}
 html, body	{
 	padding:0;
 	margin:0;
 	font-family:calibri;
 	min-height:100vh;
-	box-sizing: border-box;
 }
 body {
 	background-color:#0E0B16;
@@ -264,6 +266,8 @@ div#background{
 	position: absolute;
 	/*margin-left:-15%*/
 	overflow:hidden;
+	margin:0px;
+	padding:0px;
 }
 div#playable{
     height: 100%;
@@ -271,6 +275,8 @@ div#playable{
     background: black;
     position: absolute;
 	overflow:hidden;
+	margin:0px;
+	padding:0px;
 }
 div#powerUp {
     position: absolute;
@@ -278,9 +284,13 @@ div#powerUp {
     top:0px;
     left:0px;
     border-radius: 100px;
+	margin:0px;
+	padding:0px;
 }
 div.section {
 	position:absolute;
+	margin:0px;
+	padding:0px;
 }
 div#topSectionVisible {
 	text-align:center;
@@ -295,9 +305,11 @@ div#rightSectionVisible {
 	text-align:right;
 }
 div#topSectionVisible, div#bottomSectionVisible, div#leftSectionVisible, div#rightSectionVisible {
-	color:powderblue;
-	outline:1px solid #A239CA;
+	color:white;
+	border:1px solid #4717F6;
 	display:none;
+	margin:0px;
+	padding:0px;
 }
 table.scoreboard {
     position: absolute;
@@ -305,16 +317,22 @@ table.scoreboard {
     top: 0px;
 	padding:1%;
 	border-spacing: 10px 0;
+	margin:0px;
+	padding:0px;
 }
 tr.scoreLabels, tr.scores, th.scoreboard {
     color: white;
 	font-size:calc(10px + 1vh);	
 	text-align: center;
+	margin:0px;
+	padding:0px;
 }
 button#settings {
 	position:absolute;
 	bottom:0px;
 	right:0px;
+	margin:0px;
+	padding:0px;
 }
 div.eye {
 	width:35%;
@@ -328,18 +346,24 @@ div.bullet {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	margin:0px;
+	padding:0px;
 }
 div.enemy {
 	background: pink;
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	margin:0px;
+	padding:0px;
 }
 p#info {
 	color: powderblue;
 	opacity: 0.5;
 	filter: alpha(opacity=50); /* For IE8 and earlier */
 	text-align: center;
+	margin:0px;
+	padding:0px;
 }
 
 /*End of browsersnake*/

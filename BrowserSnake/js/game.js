@@ -278,17 +278,20 @@ function scaleButtons() {
 		sectionButtons[i].style.width = sectionWidth;
 		sectionButtons[i].style.height = sectionHeight;
 		if (sectionButtons[i].id.indexOf('bottomSection') != -1) {
-			sectionButtons[i].style.bottom = '0px';
+			sectionButtons[i].style.bottom = '5px';
 			sectionButtons[i].style.left = ((pixelWidth/2) - (parseInt(sectionWidth.replace('px', ''))/2)) + 'px';
 		} else if (sectionButtons[i].id.indexOf('topSection') != -1) {
-			sectionButtons[i].style.bottom = ((parseInt(sectionHeight.replace('px', ''))*2)) + 'px';
+			sectionButtons[i].style.bottom = ((parseInt(sectionHeight.replace('px', ''))*2)) + 5 + 'px';
 			sectionButtons[i].style.left = ((pixelWidth/2) - (parseInt(sectionWidth.replace('px', ''))/2)) + 'px';
 		} else if (sectionButtons[i].id.indexOf('leftSection') != -1) {
-			sectionButtons[i].style.bottom = (parseInt(sectionHeight.replace('px', ''))) + 'px';
+			sectionButtons[i].style.bottom = (parseInt(sectionHeight.replace('px', ''))) + 5 + 'px';
 			sectionButtons[i].style.left = ((pixelWidth/2) - parseInt(sectionWidth.replace('px', ''))) + 'px';
 		} else if (sectionButtons[i].id.indexOf('rightSection') != -1) {
-			sectionButtons[i].style.bottom = (parseInt(sectionHeight.replace('px', ''))) + 'px';
+			sectionButtons[i].style.bottom = (parseInt(sectionHeight.replace('px', ''))) + 5 + 'px';
 			sectionButtons[i].style.left = (pixelWidth/2) + 'px';
+		}
+		if (sectionButtons[i].id.indexOf('Visible') == -1) {
+			sectionButtons[i].style.left = (getLeft(sectionButtons[i]) + lostHorizontalPixels/2) + "px";
 		}
 	}
 }
