@@ -24,27 +24,25 @@
 	<body>
 		<div id="topBar"></div>
 		<div class="main">
-				<article class="main">
-					<h1 id="quizTitle">The Definitive Phobia Quiz!</h1>
-					<div class="quiz">
-						<a id="question">Question goes here</a>
-						<ul class="quiz" style="list-style-type: none">
-						<li><input class="answerButton" type="radio" onclick="answered(1)"></input><a class="answer"></a></li><br />
-						<li><input class="answerButton" type="radio" onclick="answered(2)"></input><a class="answer"></a></li><br />
-						<li><input class="answerButton" type="radio" onclick="answered(3)"></input><a class="answer"></a></li><br />
-						<li><input class="answerButton" type="radio" onclick="answered(4)"></input><a class="answer"></a></li>
-						</ul>
-						<p>Score: <a class="score"></a></p>
-					</div>
-					<div class="results">
-						<p>Your final score is: <br/>
-						<a class="score"></a>/<a id="totQuestions"></a>
-						</p>
-					</div>
-					<script src="/Quiz/js/Quiz.js"></script>
-					<script>nextQuestion()</script>
-				</article>
+			<h1 id="quizTitle">The Definitive Phobia Quiz!</h1>
+			<div class="quiz">
+				<a id="question">Question goes here</a>
+				<ul class="quiz" style="list-style-type: none">
+				<li><input class="answerButton" type="radio" onclick="answered(1)"></input><a class="answer"></a></li><br />
+				<li><input class="answerButton" type="radio" onclick="answered(2)"></input><a class="answer"></a></li><br />
+				<li><input class="answerButton" type="radio" onclick="answered(3)"></input><a class="answer"></a></li><br />
+				<li><input class="answerButton" type="radio" onclick="answered(4)"></input><a class="answer"></a></li>
+				</ul>
+				<p>Score: <a class="score"></a></p>
 			</div>
+			<div class="results">
+				<p>Your final score is: <br/>
+				<a class="score"></a>/<a id="totQuestions"></a>
+				</p>
+			</div>
+			<script src="/Quiz/js/Quiz.js"></script>
+			<script>nextQuestion()</script>
+		</div>
 		<div id="footer"></div>
 	</body>
 </html>
