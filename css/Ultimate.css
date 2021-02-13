@@ -97,7 +97,7 @@ div.topTitleContainer {
 	display:inline-block;
 	
 }
-div.topTitleContainer h1 {
+h1.topTitle {
 	box-sizing: border-box;
 	margin:0;
 	padding: 0;
