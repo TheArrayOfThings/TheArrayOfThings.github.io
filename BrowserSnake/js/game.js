@@ -19,7 +19,9 @@ var servHighScore = 0;
 var servHighScoreBox;
 var scoreLabels;
 var scores;
-var resizeId;
+var resizeSnakeyRtime;
+var resizeSnakeyTimeout = false;
+var resizeSnakeyDelta = 200;
 var infoLog;
 var logTimeout1;
 var logTimeout2;
@@ -100,9 +102,12 @@ function pageLoaded() {
 	//Add my keyparse event
 	addEvent("keydown", document, keyParse);
 	//Handle resize of window
-	window.onresize = (function() {
-		clearTimeout(resizeId);
-		resizeId = setTimeout(resetEverything, 500);
+	window.addEventListener("resize", function() {
+		resizeSnakeyRtime = new Date();
+		if (resizeSnakeyTimeout === false) {
+			resizeSnakeyTimeout = true;
+			setTimeout(snakeyResizeend, resizeSnakeyDelta);
+		}
 	});
 }
 function setup(showAllParm) {
@@ -294,6 +299,14 @@ function scaleButtons() {
 			sectionButtons[i].style.left = (getLeft(sectionButtons[i]) + lostHorizontalPixels/2) + "px";
 		}
 	}
+}
+function snakeyResizeend() {
+	if (new Date() - resizeSnakeyRtime < resizeSnakeyDelta) {
+		setTimeout(snakeyResizeend, resizeSnakeyDelta);
+	} else {
+		resizeSnakeyTimeout = false;
+		resetEverything();
+	}               
 }
 function keyParse(e) {
 	if (e.code) {

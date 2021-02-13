@@ -86,11 +86,13 @@ div.logoContainer {
 	border:1px solid black;
 	border-radius:0.5em;
 	height:4vh;
+	min-width:40px;
 	margin:0.5vh;
 	min-height:20px;
 	overflow:hidden;
 	display:inline-block;
 	float:left;
+	width:80%;
 }
 div.topTitleContainer {
 	height:4vh;
@@ -100,6 +102,7 @@ div.topTitleContainer {
 	
 }
 h1.topTitle {
+	position:relative;
 	box-sizing: border-box;
 	margin:0;
 	padding: 0;
@@ -108,16 +111,16 @@ h1.topTitle {
 	background-color:unset;
 	text-align:unset;
 	float:left;
-	font-size:calc(10px + 1vh);	
+	font-size:calc(10px + 0.20vh + 0.20vw);
 	color:white;
+	z-index: 20;
 }
 button.topMenuRight	{
-	/*box-sizing: border-box;
-	border:1px solid black;*/
 	border-radius:0.5em;
 	height:4vh;
 	margin:0.5vh;
 	min-height:20px;
+	min-width:40px;
 	overflow:hidden;
 	display:inline-block;
 	font-size:calc(10px + 0.20vh + 0.20vw);
@@ -145,7 +148,7 @@ canvas#topLogo	{
 	margin-top:0;
 	height:100%;
 	width:100%;
-	min-width:7.5%;
+	min-width:40px;
 }
 
 a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
@@ -166,7 +169,7 @@ div#footer	{
 }
 div#footer div {
 	overflow: hidden;
-	font-size:calc(10px + 1vh);	
+	font-size:calc(10px + 0.20vh + 0.20vw);
 	overflow:hidden;
 }
 nav.navContainer	{
@@ -184,7 +187,7 @@ a.navigate, a:hover.navigate, a.current, a:hover.current	{
 	color:white;
 	padding:0.5em;
 	display:block;
-	font-size:calc(10px + 1vh);	
+	font-size:calc(10px + 0.20vh + 0.20vw);
 	border-bottom:1px solid black;
 }
 a:visited {
