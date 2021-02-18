@@ -20,19 +20,18 @@ function passCrack ()	{
 	var pass = document.getElementById("passInput").value;
 	var passElement = document.getElementById('passCrack');
 	var guessString = "";
-	var guesses = "";
+	var guesses = 0;
 	var time;
 	while (pass != guessString)	{
-		guesses += guessString + " ";
+		++guesses;
 		guessString = "";
 		while (guessString.length < pass.length)	{
 			guessString += returnRandChar();
 		}
 	}
 	time = ((new Date().getTime()) - startTime);
-	guesses += guessString;
 	if (pass != "")	{
-		passElement.innerHTML = "Final guess is: " + guessString + "<br / > This took " + (guesses.length / (pass.length + 1)) + " tries." + "<br />This took " + (time / 1000) + " seconds" + "<br/> Here are the guesses: <br />" + plain(guesses);
+		passElement.innerHTML = "Final guess is: " + guessString + "<br / > This took " + guesses + " tries." + "<br />This took " + (time / 1000) + " seconds" + "<br/> Here are the guesses: <br />" + plain(guesses);
 	}
 	else	{
 		passElement.innerHTML = "You did not enter a password :(";
