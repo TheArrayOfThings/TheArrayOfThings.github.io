@@ -31,7 +31,7 @@ function passCrack ()	{
 	}
 	time = ((new Date().getTime()) - startTime);
 	if (pass != "")	{
-		passElement.innerHTML = "Final guess is: " + guessString + "<br / > This took " + guesses + " tries." + "<br />This took " + (time / 1000) + " seconds" + "<br/> Here are the guesses: <br />" + plain(guesses);
+		passElement.innerHTML = "Final guess is: " + guessString + "<br / > This took " + guesses + " tries." + "<br />This took " + (time / 1000) + " seconds.";
 	}
 	else	{
 		passElement.innerHTML = "You did not enter a password :(";
