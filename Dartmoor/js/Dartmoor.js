@@ -13,7 +13,7 @@ function initMap() {
         fillColor: 'green',
         strokeWeight: 1
     });
-	console.log("Attempting to load geoJSON");
+	console.log("Attempting to load geoJSON 1");
 	map.data.loadGeoJson('https://thearrayofthings.github.io/Dartmoor/Resources/camping_webmap.geojson');
 	map.data.setMap(map);
 	console.log(map);
