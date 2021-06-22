@@ -1,5 +1,3 @@
-window.onload = initMap;
-
 function initMap() {
 	var map;
 	console.log("Starting to render map...");
@@ -16,7 +14,7 @@ function initMap() {
         strokeWeight: 1
     });
 	console.log("Attempting to load geoJSON");
-	map.data.loadGeoJson('/Dartmoor/Resources/camping_webmap.json');
+	map.data.loadGeoJson('https://thearrayofthings.github.io/Dartmoor/Resources/camping_webmap.json');
 	map.data.setMap(map);
 	console.log(map);
 }
