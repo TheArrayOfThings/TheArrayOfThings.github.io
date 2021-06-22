@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Portfolio website for Ryan Flanagan">
+		<meta name="author" content="Ryan Flanagan">
+		<meta name="keywords" content="HTML, website, portfolio">
+		<title>HomePage</title>
+		<link rel="stylesheet" href="/css/Ultimate.css">
+		<script src="/js/jquery.js"></script> 
+		<script> 
+			$(function(){
+			  $("#topBar").load("/html/TopBar.html"); 
+			  $("#navBar").load("/html/NavBar.html"); 
+			  $("#footer").load("/html/Footer.html"); 
+			});
+		</script> 
+		<link rel="stylesheet" href="/css/Ultimate.css">
+		<script src="/js/Logo.js"></script>
+		<script src="/js/Selected.js"></script>
+		<script src="/js/MenuBurger.js"></script>
+		<script src="/js/SetTitle.js"></script>
+	</head>
+	<body>
+		<div id="topBar"></div>
+		<div class="main">
+			<script src="/Dartmoor/js/Dartmoor.js"></script>
+			<h1>Purpose</h1>
+			<p>This webpage has a version of the wild camping map of dartmoor, taken from government data.</p>
+			<div id="map"></div>
+		</div>
+		<div id="footer"></div>
+	</body>
+</html>
