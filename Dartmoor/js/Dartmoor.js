@@ -11,13 +11,13 @@ function initMap() {
 			lng: -3.925963623267205
 		}
 	});
-	console.log("Attempting to load geoJSON");
-	map.data.loadGeoJson('https://thearrayofthings.github.io/Dartmoor/Resources/camping_webmap.json');
 	
 	map.data.setStyle({
         fillColor: 'green',
         strokeWeight: 1
     });
+	console.log("Attempting to load geoJSON");
+	map.data.loadGeoJson('https://thearrayofthings.github.io/Dartmoor/Resources/camping_webmap.json');
 }
 
 //50.574043351632646, -3.925963623267205
