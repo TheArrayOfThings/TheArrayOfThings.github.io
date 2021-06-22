@@ -18,4 +18,5 @@ function initMap() {
 	console.log("Attempting to load geoJSON");
 	map.data.loadGeoJson('/Dartmoor/Resources/camping_webmap.json');
 	map.data.setMap(map);
+	console.log(map);
 }
