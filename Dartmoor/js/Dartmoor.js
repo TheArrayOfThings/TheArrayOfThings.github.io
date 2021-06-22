@@ -14,7 +14,7 @@ function initMap() {
         strokeWeight: 1
     });
 	console.log("Attempting to load geoJSON 3");
-	map.data.loadGeoJson('https://thearrayofthings.github.io/Dartmoor/Resources/camping_webmap.json');
+	map.data.loadGeoJson('https://thearrayofthings.github.io/Dartmoor/Resources/camping_webmap.geojson');
 	map.data.setMap(map);
 	console.log(map);
 }
