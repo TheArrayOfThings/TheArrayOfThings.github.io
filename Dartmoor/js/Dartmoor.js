@@ -1,8 +1,7 @@
-var map;
-
 window.onload = initMap;
 
 function initMap() {
+	var map;
 	console.log("Starting to render map...");
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 10,
@@ -17,7 +16,6 @@ function initMap() {
         strokeWeight: 1
     });
 	console.log("Attempting to load geoJSON");
-	map.data.loadGeoJson('https://thearrayofthings.github.io/Dartmoor/Resources/camping_webmap.json');
+	map.data.loadGeoJson('/Dartmoor/Resources/camping_webmap.json');
+	map.data.setMap(map);
 }
-
-//50.574043351632646, -3.925963623267205

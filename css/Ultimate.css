@@ -13,8 +13,7 @@ html, body	{
 }
 div#map {
 	height: 80vh;
-	width: 70%;
-	position: absolute;
+	width: 100%;
 	/*margin-left:-15%*/
 	overflow:hidden;
 	margin:0px;
