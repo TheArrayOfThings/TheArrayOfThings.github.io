@@ -52,18 +52,24 @@ table, tr, td {
 }
 div.topBarLeft {
 	width:15%;
-	height:5vh;
+	height:100%;
 	float:left;
+	padding:0;
+	margin:0;
 }
 div.topBarMiddle {
 	width:70%;
-	height:5vh;
+	height:100%;
 	float:left;
+	padding:0;
+	margin:0;
 }
 div.topBarRight {
 	width:15%;
-	height:5vh;
+	height:100%;
 	float:left;
+	padding:0;
+	margin:0;
 }
 div.topMenu, nav.navContainer	{	
 	box-sizing: border-box;
@@ -84,6 +90,8 @@ div.topMenu {
 	border-radius:0em;
 	border-right:unset;
 	border-left:unset;
+	padding:0;
+	margin:0;
 }
 div.marginTenPercent {
 	height:10%;
@@ -95,18 +103,37 @@ div.logoContainer {
 	box-sizing: border-box;
 	border:1px solid black;
 	border-radius:0.5em;
-	height:4vh;
+	height:100%;
 	min-width:40px;
-	margin:0.5vh;
+	padding:0;
+	margin:0;
 	min-height:20px;
 	overflow:hidden;
 	display:inline-block;
-	float:left;
 	width:80%;
+	position:relative;
+}
+canvas#topLogo	{
+	padding:0;
+	margin:0;
+	height:100%;
+	width:100%;
+	min-width:40px;
+	float:left;
+}
+div.topLogoText {
+	position:absolute;
+	left:0;
+	top:0;
+	text-decoration:none;
+	color:white;
+	float:left;
+	white-space: nowrap;
 }
 div.topTitleContainer {
 	height:4vh;
-	margin:0.5vh;
+	padding:0;
+	margin:0;
 	min-height:20px;
 	display:inline-block;
 	
@@ -152,13 +179,6 @@ a.topMenuLink {
 	margin:0;
 	padding:0;
 	float:left;
-}
-canvas#topLogo	{
-	padding:0;
-	margin-top:0;
-	height:100%;
-	width:100%;
-	min-width:40px;
 }
 
 a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
