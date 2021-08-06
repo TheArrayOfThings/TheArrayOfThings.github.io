@@ -1,4 +1,4 @@
-/** {
+* {
     padding : 0;
     margin : 0;
 	overflow:hidden;
@@ -47,4 +47,4 @@ button#settings {
 	position:absolute;
 	bottom:0px;
 	right:0px;
-}*/
+}

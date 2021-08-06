@@ -366,6 +366,12 @@ div#topSectionVisible, div#bottomSectionVisible, div#leftSectionVisible, div#rig
 	margin:0px;
 	padding:0px;
 }
+div.centre {
+	text-align: center;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
 table.scoreboard {
     position: absolute;
     left: 0px;
