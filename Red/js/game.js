@@ -117,7 +117,7 @@ function pageLoaded() {
 }
 function initialSetup() {
    	//On mobile device?
-	//if(/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
+	if(/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
 		//Yes - so add touch control
 		document.getElementById("topSectionVisible").style.display = "unset";
 		document.getElementById("bottomSectionVisible").style.display = "unset";
@@ -133,7 +133,7 @@ function initialSetup() {
 		addEvent("touchstart", aButton, pressedA);
 		addEvent("touchstart", bButton, pressedB);
 		addEvent("touchstart", startButton, pressedStart);
-	//}
+	}
 	//Load all images
 	boxImage = loadImage("/Red/gfx/text_box.png");
 	playerSprite = loadImage("/Red/gfx/sprites/red.png");
