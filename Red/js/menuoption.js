@@ -6,7 +6,6 @@ function MenuOption(parentParam) {
 		parent: parentParam,
 		displayText: "Needs a string Ryan...",
 		textBuffer: "",
-		parent: undefined,
 		functionToRun: undefined,
 		count: 1,
 		isItem: false,
