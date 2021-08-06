@@ -21,7 +21,6 @@ function Map(tileSetParam, tlXParam, tlYParam, widthParam, heightParam) {
 			this.canvas.style.transition = "all " + ((tickRate) * animationDelay) + "ms linear";
 			//Create the context
 			this.context = this.canvas.getContext('2d');
-			//this.context.mozImageSmoothingEnabled = false;  // firefox
 			this.context.imageSmoothingEnabled = false;
 			//Append canvas to playable area
 			playable.appendChild(this.canvas);
