@@ -21,6 +21,9 @@ function Box(bWidthParam, bHeightParam, bXParam, bYParam) {
             this.bCanvas.style.overflow = "hidden";
             //Create the background context
             this.bContext = this.bCanvas.getContext('2d');
+			this.bContext.mozImageSmoothingEnabled = false;
+			this.bContext.webkitImageSmoothingEnabled = false;
+			this.bContext.msImageSmoothingEnabled = false;
 			this.bContext.imageSmoothingEnabled = false;
             this.bCanvas.style.left = this.bX * tileSize + "px";
             this.bCanvas.style.top = this.bY * tileSize + "px";

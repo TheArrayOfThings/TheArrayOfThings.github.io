@@ -25,6 +25,9 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
         textbox.tCanvas.height = (textbox.bHeight * tileSize - tileSize * 1.5);
         //Create the background context
 		textbox.context = textbox.tCanvas.getContext('2d');
+		textbox.context.mozImageSmoothingEnabled = false;
+		textbox.context.webkitImageSmoothingEnabled = false;
+		textbox.context.msImageSmoothingEnabled = false;
 		textbox.context.imageSmoothingEnabled = false;
         textbox.tCanvas.style.left = (textbox.bX * tileSize + tileSize / 2.25) + "px";
         textbox.tCanvas.style.top = (textbox.bY * tileSize + tileSize / 1.5) + "px";

@@ -22,6 +22,9 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.canvas.style.transition = "all " + ((tickRate) * animationDelay) + "ms linear";
 		//Create the context
 		sprite.context = sprite.canvas.getContext('2d');
+		sprite.context.mozImageSmoothingEnabled = false;
+		sprite.context.webkitImageSmoothingEnabled = false;
+		sprite.context.msImageSmoothingEnabled = false;
 		sprite.context.imageSmoothingEnabled = false;
 		sprite.draw();
 		//Append canvas to playable area
