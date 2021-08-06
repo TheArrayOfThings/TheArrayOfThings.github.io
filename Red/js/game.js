@@ -135,10 +135,10 @@ function initialSetup() {
 		addEvent("touchstart", startButton, pressedStart);
 	}
 	//Load all images
-	boxImage = loadImage("./gfx/text_box.png");
-	playerSprite = loadImage("./gfx/sprites/red.png");
-	redsHouse = loadImage("./gfx/tilesets/reds_house.png");
-	font = loadImage("./gfx/font.png");
+	boxImage = loadImage("/Red/gfx/text_box.png");
+	playerSprite = loadImage("/Red/gfx/sprites/red.png");
+	redsHouse = loadImage("/Red/gfx/tilesets/reds_house.png");
+	font = loadImage("/Red/gfx/font.png");
 	//Next step is imagesLoaded (which is called once all images are loaded) - eventually 'loadingComplete' called
 }
 function loadingComplete() {

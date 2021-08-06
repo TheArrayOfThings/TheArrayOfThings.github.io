@@ -2,7 +2,7 @@
 //Enable strict mode
 
 function Sprite(resourceLocationParam, startingXParam, startingYParam, selectionXParam, selectionYParam, collidableParam) {
-    let sprite = new Object(startingXParam, startingYParam, collidableParam);
+    let sprite = new BaseObject(startingXParam, startingYParam, collidableParam);
 	sprite.entityClass = "sprite";
 	sprite.sourceImage = resourceLocationParam;
 	sprite.selectionX = selectionXParam;

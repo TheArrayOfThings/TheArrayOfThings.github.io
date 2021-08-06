@@ -15,10 +15,10 @@ function resizeLogoText() {
 		//Scale it as big as I can without overflow
 		for (var i = 0; i < fontScaleMaxTries; ++i) {
 			logoText.style.fontSize = (currentFontSize * fontScale) + "px";
-				console.log("Text width: " + logoText.clientWidth + ", canvas width: " + container.clientWidth + ", text height: " + logoText.clientHeight + ", canvas height: " + container.clientHeight + ", final font size: " + logoText.style.fontSize);
+				//console.log("Text width: " + logoText.clientWidth + ", canvas width: " + container.clientWidth + ", text height: " + logoText.clientHeight + ", canvas height: " + container.clientHeight + ", final font size: " + logoText.style.fontSize);
 			if (logoText.clientWidth >= container.clientWidth - (container.clientWidth*0.05) || logoText.clientHeight >= container.clientHeight - (container.clientHeight*0.05)) {
 				logoText.style.fontSize = (currentFontSize * (fontScale - fontStep)) + "px";
-				console.log("Dying...");
+				//console.log("Dying...");
 				break;
 			}
 			fontScale = fontScale + fontStep;

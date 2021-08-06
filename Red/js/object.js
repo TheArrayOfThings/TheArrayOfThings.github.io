@@ -1,9 +1,9 @@
 'use strict';
 //Enable strict mode
 
-function Object(startingXParam, startingYParam) {
-	let object = {
-		entityClass: "object",
+function BaseObject(startingXParam, startingYParam) {
+	let baseObject = {
+		entityClass: "baseObject",
 		startingX: startingXParam,
 		startingY: startingYParam,
 		currentX: startingXParam,
@@ -30,7 +30,7 @@ function Object(startingXParam, startingYParam) {
 			this.currentY = this.currentY + verticalIncrement;
         }
 	};
-	//object.enableDebug();
-	allObjects.push(object);
-	return object;
+	//baseObject.enableDebug();
+	allObjects.push(baseObject);
+	return baseObject;
 }

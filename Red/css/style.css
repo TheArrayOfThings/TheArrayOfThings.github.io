@@ -1,4 +1,4 @@
-* {
+/** {
     padding : 0;
     margin : 0;
 	overflow:hidden;
@@ -15,7 +15,7 @@ div#background{
 	height: 100%;
 	width:100%;
 	background: black;
-	position: absolute;
+	position: relative;
 }
 div#playable{
     height: 100%;
@@ -47,4 +47,4 @@ button#settings {
 	position:absolute;
 	bottom:0px;
 	right:0px;
-}
+}*/

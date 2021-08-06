@@ -359,7 +359,7 @@ div#leftSectionVisible {
 div#rightSectionVisible {
 	text-align:right;
 }
-div#topSectionVisible, div#bottomSectionVisible, div#leftSectionVisible, div#rightSectionVisible {
+div#topSectionVisible, div#bottomSectionVisible, div#leftSectionVisible, div#rightSectionVisible,div#aButtonVisible, div#bButtonVisible, div#startButtonVisible {
 	color:white;
 	border:1px solid #4717F6;
 	display:none;
