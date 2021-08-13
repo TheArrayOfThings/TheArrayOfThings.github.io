@@ -210,15 +210,9 @@ nav.navBackground	{
 }
 @keyframes fade {
   from {
-    /*opacity: 0;*/
-    /*visibility: hidden;*/
-	height:0%;
-    /*transform: translateY(10px);*/
+	height:0vh;
   }
   to { 
-    /*opacity: 1;*/
-	/*visibility: visible;*/
-    /*transform: translateY(0);*/
 	height:92vh;
   }
 }
@@ -229,7 +223,7 @@ div.navContainer/*, a.navigate*/ {
 	min-width:90px;
 	display:none;
 	overflow:hidden;
-	animation: fade 2s linear forwards;
+	animation: fade 1s linear forwards;
 }
 a.navigate, a:hover.navigate, a.current, a:hover.current	{
 	text-decoration:unset;
@@ -451,7 +445,7 @@ p#info {
 /*End of browsersnake*/
 
 @media screen and (orientation:portrait) {
-	nav.navBackground, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover	{
+	nav.navBackground, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover, div.navContainer	{
 		width:100%;
 	}
 	div.main {
@@ -475,9 +469,8 @@ p#info {
 	div.topBarRight {
 		width:10%;
 	}
-	nav.navBackground	{
+	nav.navBackground, div.navContainer	{
 		left:0px;
-		top:5vh;
 		position:absolute;
 		border:1px solid black;
 		border-top:unset;
@@ -486,6 +479,9 @@ p#info {
 		min-width:unset;
 		max-width:unset;
 		text-align:center;
+	}
+	div.navContainer {
+		top:5vh;
 	}
 	div#leftDiv, div#rightDiv, #hidden	{
 		float:unset;
