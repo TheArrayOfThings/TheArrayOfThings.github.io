@@ -24,10 +24,62 @@ div#map {
 body {
 	background-color:#0E0B16;
 }
-/* * {
-	box-sizing: border-box;
-	border: 1px solid red;
-} */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 4; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: black;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	overflow:hidden;
+	color:white;
+}
+/* The Close Button */
+.closeSpan {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	display:none;
+}
+button.modalSubmit {
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	display:none;
+}
+#modalInput, #modalInputLabel {
+	display:none;
+}
+div#modalOverlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  background-color: #4d4b46;
+  opacity:0.5;
+  display:none;
+}
+.closeSpan:hover, .closeSpan:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 h1, div.quiz, ul.quiz li, table	{
 	box-sizing: border-box;
 	border: 1px solid black;
@@ -83,7 +135,7 @@ div.topMenu, nav.navBackground	{
 	margin:0em;
 	min-height:25px;
 	border-bottom:1px solid darkgrey;
-	z-index: 10;
+	z-index: 1;
 }
 div.topMenu {
 	height:5vh;
@@ -154,7 +206,7 @@ h1.topTitle {
 	float:left;
 	font-size:calc(10px + 0.20vh + 0.20vw);
 	color:white;
-	z-index: 20;
+	z-index: 2;
 }
 a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
 	text-decoration:none;

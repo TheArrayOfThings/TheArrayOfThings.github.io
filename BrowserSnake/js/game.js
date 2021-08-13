@@ -44,6 +44,7 @@ var powerUp;
 var powerUpColour = 'orange';
 var effects;
 var snakeResults = "";
+var showAllSettings = true;
 
 //Snakes
 var playerOne;
@@ -64,7 +65,7 @@ var toKill = [];
 //Compatibility
 var storagePresent = false;
 
-window.onload = pageLoaded;
+window.addEventListener("load", pageLoaded);
 function pageLoaded() {
 	effects = new Effects();
 	runCompatibility();
@@ -96,9 +97,10 @@ function pageLoaded() {
 	/*getHighScore();
 	//Call getHighScore every 5 minutes to keep the server highscore up to date
 	setInterval(getHighScore, 300000);*/
-	setup(false);
+	showAllSettings = false;
+	setupStart();
 	//Add settings event to settings button
-	addEvent("click", document.getElementById("settings"), function() {setup(true);});
+	addEvent("click", document.getElementById("settings"), function() {showAllSettings = true;setupStart();});
 	//Add my keyparse event
 	addEvent("keydown", document, keyParse);
 	//Handle resize of window
@@ -110,44 +112,44 @@ function pageLoaded() {
 		}
 	});
 }
-function setup(showAllParm) {
+function setupStart() {
 	if (storagePresent) {
 		//Sort out player names
-		if (localStorage.getItem("PlayerOneName") != null && showAllParm == false) {
+		if (localStorage.getItem("PlayerOneName") != null && showAllSettings == false) {
 			//Grab playerOneName from cookie
 			playerOneName = localStorage.getItem("PlayerOneName");
+			mobileSetup();
 		} else {
 			//Get player 1 name from user
 			if (localStorage.getItem("PlayerOneName") != null) {
-				playerOneName = prompt("Enter player 1 name", localStorage.getItem("PlayerOneName"));
+				startPromptModal("Player 1", "Choose a name for player 1!", "Player 1 Name: ", localStorage.getItem("PlayerOneName"), playerOneNameReceived);
 			} else {
-				playerOneName = prompt("Enter player 1 name", "Player 1");
-			}
-			if (playerOneName == '' || playerOneName == null) {
-				playerOneName = "Player 1";
-			} else {
-				//Easter egg for cousin
-				if (playerOneName.toLowerCase() == 'lucas' || playerOneName.toLowerCase() == 'luketheduke147') {
-					alert("Lucas! Ryan says Hi :)");
-				}
-				//Easter egg end
-				localStorage.setItem("PlayerOneName", playerOneName);
+				startPromptModal("Player 1", "Choose a name for player 1!", "Player 1 Name: ", "Player 1", playerOneNameReceived);
 			}
 		}
 	} else {
-		playerOneName = prompt("Enter player 1 name", "Player 1");
-		if (playerOneName == '' || playerOneName == null) {
-			playerOneName = "Player 1";
-		} else {
-			//Easter egg for cousin
-			if (playerOneName.toLowerCase() == 'lucas' || playerOneName.toLowerCase() == 'luketheduke147') {
-				alert("Lucas! Ryan says Hi :)");
-			}
-		}
+		startPromptModal("Player 1", "Choose a name for player 1!", "Player 1 Name: ", "Player 1", playerOneNameReceived);
 	}
+}
+
+function playerOneNameReceived() {
+	playerOneName = modalInput.value;
 	//Trim playerOneName
 	playerOneName = playerOneName.trim();
+	if (playerOneName == '' || playerOneName == null) {
+		playerOneName = "Player 1";
+	} else {
+		//Easter egg for cousin
+		if (playerOneName.toLowerCase() == 'lucas' || playerOneName.toLowerCase() == 'luketheduke147') {
+			alert("Lucas! Ryan says Hi :)");
+		}
+		//Easter egg end
+		localStorage.setItem("PlayerOneName", playerOneName);
+	}
+	mobileSetup(true);
+}
 
+function mobileSetup() {
 	//On mobile device?
 	if(/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
 		//Yes - so add touch control
@@ -162,83 +164,93 @@ function setup(showAllParm) {
 		} else {
 			if (storagePresent) {
 				//No - offer two players?
-				if (localStorage.getItem("TwoPlayers") == null || showAllParm == true) {
+				if (localStorage.getItem("TwoPlayers") == null || showAllSettings == true) {
 					twoPlayers = confirm("Do you want to enable two players?");
+					localStorage.setItem("TwoPlayers", twoPlayers);
 				} else if (localStorage.getItem("TwoPlayers") != null) {
 					twoPlayers = localStorage.getItem("TwoPlayers") == "true" ? true:false;
 				}
 				if (twoPlayers) {
-					if (localStorage.getItem("PlayerTwoName") == null || showAllParm == true) {
+					if (localStorage.getItem("PlayerTwoName") == null || showAllSettings == true) {
 						if (localStorage.getItem("PlayerTwoName") != null) {
-							playerTwoName = prompt("Enter player 2 name", localStorage.getItem("PlayerTwoName"));
+							console.log("Getting player 2 name...");
+							startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", localStorage.getItem("PlayerTwoName"), playerTwoNameReceived);
+							console.log("Gone past the modal prompt...");
 						} else {
-							playerTwoName = prompt("Enter player 2 name", "Player 2");
+							startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", "Player 2", playerTwoNameReceived);
 						}
 					} else if (localStorage.getItem("PlayerTwoName") != null) {
 						playerTwoName = localStorage.getItem("PlayerTwoName");
+						selectAI();
 					}
-					if (playerTwoName == '' || playerTwoName == null) {
-						playerTwoName = "Player 2";
-					}
-					if (playerOneName == playerTwoName) {
-						playerOneName += " 1";
-						playerTwoName += " 2";
-					}
-					localStorage.setItem("PlayerTwoName", playerTwoName);
 				}
-				localStorage.setItem("TwoPlayers", twoPlayers);
 			} else {
 				twoPlayers = confirm("Do you want to enable two players?");
+				localStorage.setItem("TwoPlayers", twoPlayers);
 				if (twoPlayers) {
-					playerTwoName = prompt("Enter player 2 name", "Player 2");
-					if (playerTwoName == '' || playerTwoName == null) {
-						playerTwoName = "Player 2";
-					}
-					if (playerOneName == playerTwoName) {
-						playerOneName += " 1";
-						playerTwoName += " 2";
-					}
+					startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", "Player 2", playerTwoNameReceived);
 				}
 			}
 		}
-		//Trim playerTwoName
-		playerTwoName = playerTwoName.trim();
-		//How many AIs? RE-ENABLE FOR AIs
-		var tempAIs ;
-		if (storagePresent) {
-			if (localStorage.getItem("AINumber") == null || showAllParm == true) {
-				tempAIs = prompt("How many AI snakes do you want to play with (max 5!)?", "5");
-			} else if (localStorage.getItem("AINumber") != null) {
-				tempAIs = parseInt(localStorage.getItem("AINumber"));
-			}
+}
+function playerTwoNameReceived() {
+	console.log("Player 2 name received...");
+	playerTwoName = modalInput.value;
+	//Trim playerTwoName
+	playerTwoName = playerTwoName.trim();
+	if (playerTwoName == '' || playerTwoName == null) {
+		playerTwoName = "Player 2";
+	}
+	if (playerOneName == playerTwoName) {
+		playerOneName += " 1";
+		playerTwoName += " 2";
+	}
+	localStorage.setItem("PlayerTwoName", playerTwoName);
+	selectAI();
+}
+function selectAI() {
+	console.log("Select AI started....");
+	if (storagePresent && localStorage.getItem("AINumber") != null) {
+		if (showAllSettings == true) {
+			startPromptModal("Play with AI?", "How many AI snakes do you want to play with (max 5!)?", "How many : ", localStorage.getItem("AINumber"), aiNumberReceived);
 		} else {
-			tempAIs = prompt("How many AI snakes do you want to play with (max 5!)?", "5");
+			aiNumber = localStorage.getItem("AINumber");
+			resetColours();
 		}
-		
-		if (!tempAIs || isNaN(parseInt(tempAIs))) {
-			aiNumber = 0;
-		} else {
-			if (tempAIs > 5) {
-				tempAIs = 5;
+	} else {
+		startPromptModal("Play with AI?", "How many AI snakes do you want to play with (max 5!)?", "How many : ", "5", aiNumberReceived);
+	}	
+}
+
+function aiNumberReceived() {
+	var tempAIs = modalInput.value;
+	if (!tempAIs || isNaN(parseInt(tempAIs))) {
+		aiNumber = 0;
+	} else {
+		if (tempAIs > 5) {
+			tempAIs = 5;
+		}
+		aiNumber = parseInt(tempAIs);
+	}
+	resetColours();
+}
+
+function resetColours() {
+	if (storagePresent) {
+		//Offer the ability to reset colours
+		if (showAllSettings) {
+			if (confirm("Do you want reset your colours?")) {
+				localStorage.removeItem("SnakePrimary" + playerOneName);
+				localStorage.removeItem("SnakeSecondary" + playerOneName);
+				localStorage.removeItem("SnakeEye" + playerOneName);
+				localStorage.removeItem("SnakePrimary" + playerTwoName);
+				localStorage.removeItem("SnakeSecondary" + playerTwoName);
+				localStorage.removeItem("SnakeEye" + playerTwoName);
 			}
-			aiNumber = parseInt(tempAIs);
 		}
-		
-		if (storagePresent) {
-			//Offer the ability to reset colours
-			if (showAllParm) {
-				if (confirm("Do you want reset your colours?")) {
-					localStorage.removeItem("SnakePrimary" + playerOneName);
-					localStorage.removeItem("SnakeSecondary" + playerOneName);
-					localStorage.removeItem("SnakeEye" + playerOneName);
-					localStorage.removeItem("SnakePrimary" + playerTwoName);
-					localStorage.removeItem("SnakeSecondary" + playerTwoName);
-					localStorage.removeItem("SnakeEye" + playerTwoName);
-				}
-			}
-			localStorage.setItem("AINumber", aiNumber);
-		}
-		resetEverything();
+		localStorage.setItem("AINumber", aiNumber);
+	}
+	resetEverything();
 }
 function startMove(moveDirection, whichSnake) {
 	whichSnake.travelDirection = moveDirection;
@@ -309,6 +321,9 @@ function snakeyResizeend() {
 	}               
 }
 function keyParse(e) {
+	if (modalVisible) {
+		return;
+	}
 	if (e.code) {
 		if (e.code == "KeyW") {
 			startMove('up', playerOne);
@@ -398,6 +413,9 @@ function gameLost(whichSnake) {
 }
 function nextFrame() {
 	if (resetting) {
+		return;
+	}
+	if (modalVisible) {
 		return;
 	}
 	var tempArray = [];
@@ -770,6 +788,7 @@ function removeElement(target) { //IE compatibility...
 	try {
 		target.remove();
 	}	catch (error) {
+		console.log(error);
 		target.parentNode.removeChild(target);
 	}
 }
