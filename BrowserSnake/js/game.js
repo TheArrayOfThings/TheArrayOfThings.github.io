@@ -593,6 +593,7 @@ function entityDied(theEntity) {
 	}
 }
 function resetEverything() {
+	paused = false;
 	resetting = true;
 	//Start
 	if (frameInterval != undefined) {
@@ -710,7 +711,7 @@ function getHighScore() {
 	}
 }
 function postLog(toPost) {
-	if (logTimeout1 != undefined) {
+	/*if (logTimeout1 != undefined) {
 		clearTimeout(logTimeout1);
 	}
 	if (logTimeout2 != undefined) {
@@ -724,14 +725,16 @@ function postLog(toPost) {
 	}
 	if (logTimeout5 != undefined) {
 		clearTimeout(logTimeout5);
-	}
+	}*/
 	infoLog.innerHTML = toPost;
-	infoLog.style.opacity = '0.5';
+	infoLog.style.animation = "none";
+	setTimeout(function() {infoLog.style.animation = "";}, 100);
+	/*infoLog.style.opacity = '0.5';
 	logTimeout1 = setTimeout(function() {infoLog.style.opacity = '0.4';}, 1000);
 	logTimeout2 = setTimeout(function() {infoLog.style.opacity = '0.3';}, 2000);
 	logTimeout3 = setTimeout(function() {infoLog.style.opacity = '0.2';}, 3000);
 	logTimeout4 = setTimeout(function() {infoLog.style.opacity = '0.1';}, 4000);
-	logTimeout5 = setTimeout(function() {infoLog.style.opacity = '0'; liveLog = false;}, 5000);
+	logTimeout5 = setTimeout(function() {infoLog.style.opacity = '0'; liveLog = false;}, 5000);*/
 }
 function runCompatibility() {
 	if (typeof document.getElementsByClassName!='function') {

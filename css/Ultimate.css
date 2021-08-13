@@ -260,12 +260,20 @@ nav.navBackground	{
 	background: linear-gradient(#A239CA, #4717F6);
 	min-width:90px;
 }
-@keyframes fade {
+@keyframes expand {
   from {
 	height:0vh;
   }
   to { 
 	height:92vh;
+  }
+}
+@keyframes fade {
+  from {
+	opacity:1;
+  }
+  to { 
+	opacity:0;
   }
 }
 div.navContainer/*, a.navigate*/ {
@@ -275,7 +283,7 @@ div.navContainer/*, a.navigate*/ {
 	min-width:90px;
 	display:none;
 	overflow:hidden;
-	animation: fade 1s linear forwards;
+	animation: expand 1s linear forwards;
 }
 a.navigate, a:hover.navigate, a.current, a:hover.current	{
 	text-decoration:unset;
@@ -396,7 +404,7 @@ div#playable{
     width: 100%;
     background: black;
     position: absolute;
-	overflow:hidden;
+	/*overflow:hidden;*/
 	margin:0px;
 	padding:0px;
 }
@@ -499,6 +507,7 @@ p#info {
 	text-align: center;
 	margin:0px;
 	padding:0px;
+	animation: fade 2s linear forwards;
 }
 
 /*End of browsersnake*/
@@ -539,7 +548,9 @@ p#info {
 		max-width:unset;
 		text-align:center;
 	}
-	div.navContainer {
+	div.navContainer,div.navContainer:focus {
+		border:none;
+		outline: none;
 		top:5vh;
 	}
 	div#leftDiv, div#rightDiv, #hidden	{
