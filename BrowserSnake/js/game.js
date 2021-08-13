@@ -391,7 +391,7 @@ function enemyKilled(whichBullet) {
 		if (storagePresent) {
 			localStorage.setItem("PersonalHighScore", persHighScore);
 			localStorage.setItem("PersonalHighScoreName", whichBullet.parentSnake.snakeName);
-			postHighScore(whichBullet.parentSnake.snakeName, whichBullet.parentSnake.internalScore);
+			//postHighScore(whichBullet.parentSnake.snakeName, whichBullet.parentSnake.internalScore);
 		}
 	}
 }
