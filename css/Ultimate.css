@@ -462,6 +462,13 @@ button#settings {
 	margin:0px;
 	padding:0px;
 }
+button#pause {
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	margin:0px;
+	padding:0px;
+}
 div.eye {
 	width:35%;
 	height:35%;

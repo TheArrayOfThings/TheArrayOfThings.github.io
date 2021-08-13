@@ -45,6 +45,7 @@ var powerUpColour = 'orange';
 var effects;
 var snakeResults = "";
 var showAllSettings = true;
+var paused = false;
 
 //Snakes
 var playerOne;
@@ -101,6 +102,8 @@ function pageLoaded() {
 	setupStart();
 	//Add settings event to settings button
 	addEvent("click", document.getElementById("settings"), function() {showAllSettings = true;setupStart();});
+	//Add pause functionality to Pause
+	addEvent("click", document.getElementById("pause"), pauseGame);
 	//Add my keyparse event
 	addEvent("keydown", document, keyParse);
 	//Handle resize of window
@@ -196,7 +199,6 @@ function mobileSetup() {
 		selectAI();
 }
 function playerTwoNameReceived() {
-	console.log("Player 2 name received...");
 	playerTwoName = modalInput.value;
 	//Trim playerTwoName
 	playerTwoName = playerTwoName.trim();
@@ -211,7 +213,6 @@ function playerTwoNameReceived() {
 	selectAI();
 }
 function selectAI() {
-	console.log("Select AI started....");
 	if (storagePresent && localStorage.getItem("AINumber") != null) {
 		if (showAllSettings == true) {
 			startPromptModal("Play with AI?", "How many AI snakes do you want to play with (max 5!)?", "How many : ", localStorage.getItem("AINumber"), aiNumberReceived);
@@ -264,6 +265,11 @@ function startMove(moveDirection, whichSnake) {
 function setPlayable() {
 	lostVerticalPixels = pixelHeight % entitySize;
 	lostHorizontalPixels = pixelWidth % entitySize;
+	console.log("PixelHeight = " + pixelHeight);
+	console.log("PixelWidth = " + pixelWidth);
+	console.log("LostVertical = " + lostVerticalPixels);
+	console.log("LostHorizontal = " + lostHorizontalPixels);
+	console.log("EntitySize = " + entitySize);
 	if (lostVerticalPixels % 2 != 0) {
 		--lostVerticalPixels;
 	}
@@ -323,7 +329,7 @@ function snakeyResizeend() {
 	}               
 }
 function keyParse(e) {
-	if (modalVisible) {
+	if (modalVisible || paused) {
 		return;
 	}
 	if (e.code) {
@@ -414,10 +420,17 @@ function gameLost(whichSnake) {
 	resetEverything();
 }
 function nextFrame() {
+	if (getLeft(playerOne.collisionDiv) % entitySize > 0) {
+		console.log("Snake is out of sync! Left coordinate = " + getLeft(playerOne.collisionDiv) + " out of sync by = " + getLeft(playerOne.collisionDiv) % entitySize);
+	}
+	if (getTop(playerOne.collisionDiv) % entitySize > 0) {
+		console.log("Snake is out of sync! Top coordinate = " + getTop(playerOne.collisionDiv) + " out of sync by = " + getTop(playerOne.collisionDiv) % entitySize);
+	}
+	//console.log(getLeft(playerOne.collisionDiv));
 	if (resetting) {
 		return;
 	}
-	if (modalVisible) {
+	if (modalVisible || paused) {
 		return;
 	}
 	var tempArray = [];
@@ -550,7 +563,7 @@ function randomiseProper(theElement) {
 	} else {
 		theElement.style.left = Math.floor(Math.random() * (playableWidth - entitySize)/entitySize)*entitySize + 'px';
 	}
-	theElement.style.top = Math.floor(Math.random() * (playableHeight - entitySize)/entitySize)*entitySize+ 'px';
+	theElement.style.top = (Math.floor(Math.random() * (playableHeight - entitySize)/entitySize)*entitySize) + 'px';
 }
 function entityDied(theEntity) {
 	if (resetting) {
@@ -587,7 +600,13 @@ function resetEverything() {
 		frameInterval = undefined;
 	}
 	pixelWidth = background.clientWidth;
+	if (pixelWidth % 2 != 0) {
+		--pixelWidth;
+	}
 	pixelHeight = background.clientHeight;
+	if (pixelHeight % 2 != 0) {
+		--pixelHeight;
+	}
 	entitySize = Math.ceil((Math.sqrt(pixelHeight*pixelWidth)/100)*scale);
 	if (entitySize % 2 != 0) {
 		--entitySize;
@@ -648,6 +667,15 @@ function resetEverything() {
 	setScoreBoard();
 	resetting = false;
 }
+function pauseGame() {
+	if (paused) {
+		document.getElementById("pause").innerHTML = "Pause";
+		paused = false;
+	} else {
+		document.getElementById("pause").innerHTML = "Resume";
+		paused = true;
+	}
+}
 function getTop(theElement) {
 	return parseInt(theElement.style.top.replace('px', ''));
 }
@@ -655,12 +683,12 @@ function getLeft(theElement) {
 	return parseInt(theElement.style.left.replace('px', ''));
 }
 function postHighScore(snakeName, snakeScore) {
-	var reqObject = new XMLHttpRequest();
+	/*var reqObject = new XMLHttpRequest();
 	reqObject.open("PUT", "/hsm", true);
 	reqObject.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	reqObject.send(JSON.stringify({snakeName: snakeName, snakeHighScore: snakeScore}));
 	//Call getHighScore again just in case we have topped it!
-	setTimeout(getHighScore, 4000);
+	setTimeout(getHighScore, 4000);*/
 }
 function getHighScore() {
 	try {
