@@ -189,6 +189,8 @@ function mobileSetup() {
 				localStorage.setItem("TwoPlayers", twoPlayers);
 				if (twoPlayers) {
 					startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", "Player 2", playerTwoNameReceived);
+				} else {
+					selectAI();
 				}
 			}
 		}
