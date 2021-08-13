@@ -173,11 +173,11 @@ function mobileSetup() {
 				if (twoPlayers) {
 					if (localStorage.getItem("PlayerTwoName") == null || showAllSettings == true) {
 						if (localStorage.getItem("PlayerTwoName") != null) {
-							console.log("Getting player 2 name...");
 							startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", localStorage.getItem("PlayerTwoName"), playerTwoNameReceived);
-							console.log("Gone past the modal prompt...");
+							return;
 						} else {
 							startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", "Player 2", playerTwoNameReceived);
+							return;
 						}
 					} else if (localStorage.getItem("PlayerTwoName") != null) {
 						playerTwoName = localStorage.getItem("PlayerTwoName");
@@ -189,11 +189,11 @@ function mobileSetup() {
 				localStorage.setItem("TwoPlayers", twoPlayers);
 				if (twoPlayers) {
 					startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", "Player 2", playerTwoNameReceived);
-				} else {
-					selectAI();
+					return;
 				}
 			}
 		}
+		selectAI();
 }
 function playerTwoNameReceived() {
 	console.log("Player 2 name received...");
