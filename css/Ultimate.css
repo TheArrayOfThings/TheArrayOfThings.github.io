@@ -71,7 +71,7 @@ div.topBarRight {
 	padding:0;
 	margin:0;
 }
-div.topMenu, nav.navContainer	{	
+div.topMenu, nav.navBackground	{	
 	box-sizing: border-box;
 	position:relative;
 	list-style-type:none;
@@ -156,6 +156,11 @@ h1.topTitle {
 	color:white;
 	z-index: 20;
 }
+a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
+	text-decoration:none;
+	color:white;
+	background-color:black;
+}
 button.topMenuRight	{
 	position:relative;
 	top:5%;
@@ -181,7 +186,7 @@ button.topMenuRight	{
 	box-shadow: -1px 1px 0 #802ba1, 0 2px 0 #802ba1, 0 6px 6px rgba(0,0,0,0.6);
 	float:right;
 	overflow:hidden;
-}	
+}
 button.topMenuRight:active {
 	color: #fff;
 	text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
@@ -193,19 +198,53 @@ button.topMenuRight:hover, button.topMenuRight:focus {
 	background-color:#633af8;
 	background: linear-gradient(#b35ed4, #633af8);
 }
-
+nav.navBackground	{
+	width:100%;
+	float:right;
+	/*height:92vh;*/
+	overflow:hidden;
+	/*display:none;*/
+	border-bottom:unset;
+	background: linear-gradient(#A239CA, #4717F6);
+	min-width:90px;
+}
+@keyframes fade {
+  from {
+    /*opacity: 0;*/
+    /*visibility: hidden;*/
+	height:0%;
+    /*transform: translateY(10px);*/
+  }
+  to { 
+    /*opacity: 1;*/
+	/*visibility: visible;*/
+    /*transform: translateY(0);*/
+	height:92vh;
+  }
+}
+div.navContainer/*, a.navigate*/ {
+	width:10%;
+	float:right;
+	border-bottom:unset;
+	min-width:90px;
+	display:none;
+	overflow:hidden;
+	animation: fade 2s linear forwards;
+}
+a.navigate, a:hover.navigate, a.current, a:hover.current	{
+	text-decoration:unset;
+	color:white;
+	padding:0.5em;
+	display:block;
+	font-size:calc(10px + 0.20vh + 0.20vw);
+	border-bottom:1px solid black;
+}
 a.topMenuLink {
 	text-decoration:none;
 	color:black;
 	margin:0;
 	padding:0;
 	float:left;
-}
-
-a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
-	text-decoration:none;
-	color:white;
-	background-color:black;
 }
 div#footer	{	
 	box-sizing: border-box;
@@ -222,24 +261,6 @@ div#footer div {
 	overflow: hidden;
 	font-size:calc(10px + 0.20vh + 0.20vw);
 	overflow:hidden;
-}
-nav.navContainer	{
-	width:10%;
-	float:right;
-	/*height:92vh;*/
-	overflow:hidden;
-	display:none;
-	border-bottom:unset;
-	background: linear-gradient(#A239CA, #4717F6);
-	min-width:90px;
-}
-a.navigate, a:hover.navigate, a.current, a:hover.current	{
-	text-decoration:unset;
-	color:white;
-	padding:0.5em;
-	display:block;
-	font-size:calc(10px + 0.20vh + 0.20vw);
-	border-bottom:1px solid black;
 }
 a:visited {
 	color:#A239CA;
@@ -430,7 +451,7 @@ p#info {
 /*End of browsersnake*/
 
 @media screen and (orientation:portrait) {
-	nav.navContainer, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover	{
+	nav.navBackground, a.navigate, a.navigate:hover, p.footer, a.current, a.current:hover	{
 		width:100%;
 	}
 	div.main {
@@ -454,7 +475,7 @@ p#info {
 	div.topBarRight {
 		width:10%;
 	}
-	nav.navContainer	{
+	nav.navBackground	{
 		left:0px;
 		top:5vh;
 		position:absolute;
