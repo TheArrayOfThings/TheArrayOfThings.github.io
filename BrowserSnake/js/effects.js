@@ -130,7 +130,8 @@ function Effects() {
 					}
 				}, 10000);
 			});
-			//Moving powerup
+			/*//Moving powerup 
+			//This one breaks the game if the powerup happens to enter the snake!
 			this.effectsArray.push(function() {
 				if (powerUp.movementEnabled) {
 					return effects.getRandomEffect();
@@ -138,7 +139,7 @@ function Effects() {
 				postLog("Chase me!");
 				powerUp.movementEnabled = true;
 				setTimeout(function() {powerUp.movementEnabled = false;}, 10000);
-			});
+			});*/
 		}
 	};
 	effects.initialise();
