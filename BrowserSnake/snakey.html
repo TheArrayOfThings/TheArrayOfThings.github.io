@@ -17,6 +17,8 @@
 			});
 		</script> 
 		<link rel="stylesheet" href="/css/Ultimate.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 	</head>
 	<body>
 		<div id="modalOverlay"></div>
@@ -86,78 +88,79 @@
 		<img src="/BrowserSnake/images/Grid-Visualised.png" alt="Image showing the grid of squares that makes up the playable area of the game" title	="Image showing the grid of squares that makes up the playable area of the game">
 		<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a bass Javascript object called 'Entity'. 
 		This entity object contains functions for handling collision, movement, and some AI functionality - and these functions are inherited by the game objects.</p>
-		<code>
-		function Entity() {
-		var entity = {
-		visibleDiv: undefined,
-		collisionDiv: undefined,
-		isDead: false,
-		travelDirection: 'none',
-		beforeMoveTop: undefined,
-		beforeMoveLeft: undefined,
-		entityClass: 'unknown',
-		aiDriven: false,
-		aiTargetClass: undefined,
-		aiTargetEntity: undefined,
-		allDivs: [],
-		movementEnabled: false,
-		movementDelay: 1,
-		currentMoveStep: 0,
-		visibleOffSet: 0,
-		fireDelay: 0,
-		hasTeleported: false,
-		moveStep: function() {
-			//Check if movement has been disabled by the gamestate
-			if (this.movementEnabled == false) {
-				//Yes, then do not move
-				return;
+		<pre>
+			<code>
+	function Entity() {
+	var entity = {
+	visibleDiv: undefined,
+	collisionDiv: undefined,
+	isDead: false,
+	travelDirection: 'none',
+	beforeMoveTop: undefined,
+	beforeMoveLeft: undefined,
+	entityClass: 'unknown',
+	aiDriven: false,
+	aiTargetClass: undefined,
+	aiTargetEntity: undefined,
+	allDivs: [],
+	movementEnabled: false,
+	movementDelay: 1,
+	currentMoveStep: 0,
+	visibleOffSet: 0,
+	fireDelay: 0,
+	hasTeleported: false,
+	moveStep: function() {
+		//Check if movement has been disabled by the gamestate
+		if (this.movementEnabled == false) {
+			//Yes, then do not move
+			return;
+		}
+		//If an entity has just teleported, it needs to wait a frame before moving to keep everything in sync
+		if (this.hasTeleported) {
+			//Entity just teleported, do not move
+			this.hasTeleported = false;
+			return;
+		}
+		//If every entity moved on every frame, then everything would move very very fast
+		//The currentMoveStep and moveDelay mean that the entity will wait a number of frames (moveDelay) before actually moving each time
+		if (this.currentMoveStep &lt; this.movementDelay) {
+			//Entity hasn't waited enough frames, wait until next frame
+			++this.currentMoveStep;
+			return;
+		}
+		this.currentMoveStep = 0;
+		//Store the position of the entity before it moved, this is used in child classes
+		this.beforeMoveTop = this.collisionDiv.style.top;
+		this.beforeMoveLeft = this.collisionDiv.style.left;
+		var increment = 0;
+		//aiDriven is something that can be specified in child classes
+		if (this.aiDriven) {
+			//The entity is AI driven, so the movement direction is chosen from the autoChooseDirection function
+			this.autoChooseDirection();
+		}
+		//Travel direction has either been selected by the player using touch or computer arrows, or by the autoChooseDirection function
+		//The following calculates where to move the div elements (as increment - which can be positive or negative) and then moves them
+		if (this.travelDirection == 'right' ||  this.travelDirection == 'down') {
+			increment = Math.abs(entitySize);
+		} else if (this.travelDirection == 'left' || this.travelDirection =='up') {
+			increment = -Math.abs(entitySize);
+		}
+		if (this.travelDirection == 'left' || this.travelDirection == 'right') {
+			if (this.visibleDiv != undefined) {
+				this.visibleDiv.style.left = getLeft(this.visibleDiv) + increment + "px";
 			}
-			//If an entity has just teleported, it needs to wait a frame before moving to keep everything in sync
-			if (this.hasTeleported) {
-				//Entity just teleported, do not move
-				this.hasTeleported = false;
-				return;
+			this.collisionDiv.style.left = getLeft(this.collisionDiv) + increment + "px";
+		} else {
+			if (this.visibleDiv != undefined) {
+				this.visibleDiv.style.top = getTop(this.visibleDiv) + increment + "px";
 			}
-			//If every entity moved on every frame, then everything would move very very fast
-			//The currentMoveStep and moveDelay mean that the entity will wait a number of frames (moveDelay) before actually moving each time
-			if (this.currentMoveStep &lt; this.movementDelay) {
-				//Entity hasn't waited enough frames, wait until next frame
-				++this.currentMoveStep;
-				return;
-			}
-			this.currentMoveStep = 0;
-			//Store the position of the entity before it moved, this is used in child classes
-			this.beforeMoveTop = this.collisionDiv.style.top;
-			this.beforeMoveLeft = this.collisionDiv.style.left;
-			var increment = 0;
-			//aiDriven is something that can be specified in child classes
-			if (this.aiDriven) {
-				//The entity is AI driven, so the movement direction is chosen from the autoChooseDirection function
-				this.autoChooseDirection();
-			}
-			//Travel direction has either been selected by the player using touch or computer arrows, or by the autoChooseDirection function
-			//The following calculates where to move the div elements (as increment - which can be positive or negative) and then moves them
-			if (this.travelDirection == 'right' ||  this.travelDirection == 'down') {
-				increment = Math.abs(entitySize);
-			} else if (this.travelDirection == 'left' || this.travelDirection =='up') {
-				increment = -Math.abs(entitySize);
-			}
-			if (this.travelDirection == 'left' || this.travelDirection == 'right') {
-				if (this.visibleDiv != undefined) {
-					this.visibleDiv.style.left = getLeft(this.visibleDiv) + increment + "px";
-				}
-				this.collisionDiv.style.left = getLeft(this.collisionDiv) + increment + "px";
-			} else {
-				if (this.visibleDiv != undefined) {
-					this.visibleDiv.style.top = getTop(this.visibleDiv) + increment + "px";
-				}
-				this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
-			}
-			this.alternativeAction();
-		},
-		</code>
-		
-		</div>
+			this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
+		}
+		this.alternativeAction();
+	},
+			</code>
+		</pre>
+	</div>
 		<div id="footer"></div>
 		<script src="/js/Logo.js"></script>
 		<script src="/js/Selected.js"></script>
