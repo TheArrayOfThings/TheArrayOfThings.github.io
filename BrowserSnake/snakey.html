@@ -89,25 +89,6 @@
 		This entity object contains functions for handling collision, movement, and some AI functionality - and these functions are inherited by the game objects.</p>
 		<pre>
 			<code>
-	function Entity() {
-	var entity = {
-	visibleDiv: undefined,
-	collisionDiv: undefined,
-	isDead: false,
-	travelDirection: 'none',
-	beforeMoveTop: undefined,
-	beforeMoveLeft: undefined,
-	entityClass: 'unknown',
-	aiDriven: false,
-	aiTargetClass: undefined,
-	aiTargetEntity: undefined,
-	allDivs: [],
-	movementEnabled: false,
-	movementDelay: 1,
-	currentMoveStep: 0,
-	visibleOffSet: 0,
-	fireDelay: 0,
-	hasTeleported: false,
 	moveStep: function() {
 		//Check if movement has been disabled by the gamestate
 		if (this.movementEnabled == false) {
@@ -155,8 +136,9 @@
 			}
 			this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
 		}
+		//Lastly, an action can be assigned to the Entity that will be performed after the move
 		this.alternativeAction();
-	},
+	}
 			</code>
 		</pre>
 	</div>

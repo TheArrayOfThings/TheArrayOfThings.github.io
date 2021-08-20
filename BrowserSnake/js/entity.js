@@ -29,17 +29,25 @@ function Entity() {
 				this.hasTeleported = false;
 				return;
 			}
+			//If every entity moved on every frame, then everything would move very very fast
+			//The currentMoveStep and moveDelay mean that the entity will wait a number of frames (moveDelay) before actually moving each time
 			if (this.currentMoveStep < this.movementDelay) {
+				//Entity hasn't waited enough frames, wait until next frame
 				++this.currentMoveStep;
 				return;
 			}
 			this.currentMoveStep = 0;
+			//Store the position of the entity before it moved, this is used in child classes
 			this.beforeMoveTop = this.collisionDiv.style.top;
 			this.beforeMoveLeft = this.collisionDiv.style.left;
 			var increment = 0;
+			//aiDriven is something that can be specified in child classes
 			if (this.aiDriven) {
+				//The entity is AI driven, so the movement direction is chosen from the autoChooseDirection function
 				this.autoChooseDirection();
 			}
+			//Travel direction has either been selected by the player using touch or computer arrows, or by the autoChooseDirection function
+			//The following calculates where to move the div elements (as increment - which can be positive or negative) and then moves them
 			if (this.travelDirection == 'right' ||  this.travelDirection == 'down') {
 				increment = Math.abs(entitySize);
 			} else if (this.travelDirection == 'left' || this.travelDirection =='up') {
@@ -56,6 +64,7 @@ function Entity() {
 				}
 				this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
 			}
+			//Lastly, an action can be assigned to the Entity that will be performed after the move
 			this.alternativeAction();
 		},
 		autoChooseDirection: function() {
