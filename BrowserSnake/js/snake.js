@@ -191,11 +191,6 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		
 		//Round the corners of the snake heads top-left, top-right, bottom-right, bottom-left
 		
-		snake.rightHead.style.borderRadius = "0px 15% 15% 0px";
-		snake.leftHead.style.borderRadius = "15% 0px 0px 15%";
-		snake.upHead.style.borderRadius = "15% 15% 0px 0px";
-		snake.downHead.style.borderRadius = "0px 0px 15% 15%";
-		
 		snake.setSnakeCss(snake.rightHead);
 		snake.setSnakeCss(snake.leftHead);
 		snake.setSnakeCss(snake.upHead);

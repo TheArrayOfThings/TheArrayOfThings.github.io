@@ -23,14 +23,9 @@ var resizeSnakeyRtime;
 var resizeSnakeyTimeout = false;
 var resizeSnakeyDelta = 200;
 var infoLog;
-var logTimeout1;
-var logTimeout2;
-var logTimeout3;
-var logTimeout4;
-var logTimeout5;
 
 //Game settings
-var scale = 2;
+var scale = 4;
 var twoPlayers = false;
 var aiNumber = 0;
 var aliveAI = 0;
@@ -235,6 +230,7 @@ function aiNumberReceived() {
 		}
 		aiNumber = parseInt(tempAIs);
 	}
+	localStorage.setItem("AINumber", aiNumber);
 	resetColours();
 }
 
@@ -251,9 +247,8 @@ function resetColours() {
 				localStorage.removeItem("SnakeEye" + playerTwoName);
 			}
 		}
-		localStorage.setItem("AINumber", aiNumber);
 	}
-	resetEverything();
+	setTimeout(resetEverything,100);
 }
 function startMove(moveDirection, whichSnake) {
 	whichSnake.travelDirection = moveDirection;
@@ -264,12 +259,12 @@ function startMove(moveDirection, whichSnake) {
 }
 function setPlayable() {
 	lostVerticalPixels = pixelHeight % entitySize;
-	lostHorizontalPixels = pixelWidth % entitySize;
-	console.log("PixelHeight = " + pixelHeight);
+	lostHorizontalPixels = pixelWidth % entitySize;	
+	/*console.log("PixelHeight = " + pixelHeight);
 	console.log("PixelWidth = " + pixelWidth);
 	console.log("LostVertical = " + lostVerticalPixels);
 	console.log("LostHorizontal = " + lostHorizontalPixels);
-	console.log("EntitySize = " + entitySize);
+	console.log("EntitySize = " + entitySize);*/
 	if (lostVerticalPixels % 2 != 0) {
 		--lostVerticalPixels;
 	}
@@ -286,16 +281,16 @@ function setPlayable() {
 function setScoreBoard() {
 	var scoreBoard = document.getElementsByClassName('scoreboard');
 	for (var i = 0; i <  scoreBoard.length; ++i) {
-		scoreBoard[i].style.fontSize = entitySize + 'px';
+		scoreBoard[i].style.fontSize = entitySize/2 + 'px';
 		scoreBoard[i].style.overflow = 'hidden';
 	}
 }
 function scaleButtons() {
 	var buttons = document.getElementsByTagName('button');
-	for (var i = 0; i < buttons.length; ++i) {
+	/*for (var i = 0; i < buttons.length; ++i) {
 		buttons[i].style.fontSize = entitySize + 'px';
 		buttons[i].style.overflow = 'hidden';
-	}
+	}*/
 	var sectionButtons = document.getElementsByClassName('section');
 	var sectionHeight = parseInt(pixelHeight/10) + 'px'	;
 	var sectionWidth = parseInt(sectionHeight.replace('px', '')) * 2 + 'px';
@@ -321,6 +316,18 @@ function scaleButtons() {
 	}
 }
 function snakeyResizeend() {
+	var newPixelWidth = background.clientWidth;
+	if (newPixelWidth % 2 != 0) {
+		--newPixelWidth;
+	}
+	var newPixelHeight = background.clientHeight;
+	if (newPixelHeight % 2 != 0) {
+		--newPixelHeight;
+	}
+	if (newPixelHeight == pixelHeight && pixelWidth == playableWidth) {
+		return;
+	}
+	
 	if (new Date() - resizeSnakeyRtime < resizeSnakeyDelta) {
 		setTimeout(snakeyResizeend, resizeSnakeyDelta);
 	} else {
@@ -593,8 +600,8 @@ function entityDied(theEntity) {
 	}
 }
 function resetEverything() {
-	paused = false;
 	resetting = true;
+	paused = false;
 	//Start
 	if (frameInterval != undefined) {
 		clearInterval(frameInterval);
@@ -616,7 +623,7 @@ function resetEverything() {
 	setPlayable();
 	scaleButtons();
 	infoLog.style.paddingTop = playableHeight/3 + 'px';
-	infoLog.style.fontSize = entitySize*5 + 'px';
+	infoLog.style.fontSize = entitySize*2 + 'px';
 	postLog('Welcome to BrowerSnake!');
 	//Reset colour array and AI Name array
 	colorArray =  ["DeepPink", "MediumVioletRed", "Crimson", "Red ", "DarkOliveGreen", "Lime", "MediumSpringGreen ", "Green", "BlueViolet", "Purple", "Indigo", "MediumSlateBlue ", "OrangeRed", "Orange", "DarkOrange", "Yellow", "Gold", "Aqua", "Teal", "LightSeaGreen", "Blue", "DeepSkyBlue", "Maroon", "MidnightBlue", "DimGray", "Honeydew"];
@@ -677,6 +684,24 @@ function pauseGame() {
 		paused = true;
 	}
 }
+function debug() {
+	var tempSquare;
+	var verticalTiles = playableHeight/entitySize;
+	var horizontalTiles = playableWidth/entitySize;
+	for (var h = 0; h < horizontalTiles; ++h) {
+		for (var v = 0; v < verticalTiles; ++v) {
+			tempSquare = document.createElement('div');
+			tempSquare.style.boxSizing = "border-box";
+			tempSquare.style.border = "1px solid red";
+			tempSquare.style.width = entitySize + "px";
+			tempSquare.style.height = entitySize + "px";
+			tempSquare.style.position = "absolute";
+			tempSquare.style.left = (h * entitySize) + "px";
+			tempSquare.style.top = (v * entitySize) + "px";
+			playable.appendChild(tempSquare);
+		}
+	}
+}
 function getTop(theElement) {
 	return parseInt(theElement.style.top.replace('px', ''));
 }
@@ -711,30 +736,9 @@ function getHighScore() {
 	}
 }
 function postLog(toPost) {
-	/*if (logTimeout1 != undefined) {
-		clearTimeout(logTimeout1);
-	}
-	if (logTimeout2 != undefined) {
-		clearTimeout(logTimeout2);
-	}
-	if (logTimeout3 != undefined) {
-		clearTimeout(logTimeout3);
-	}
-	if (logTimeout4 != undefined) {
-		clearTimeout(logTimeout4);
-	}
-	if (logTimeout5 != undefined) {
-		clearTimeout(logTimeout5);
-	}*/
 	infoLog.innerHTML = toPost;
 	infoLog.style.animation = "none";
 	setTimeout(function() {infoLog.style.animation = "";}, 100);
-	/*infoLog.style.opacity = '0.5';
-	logTimeout1 = setTimeout(function() {infoLog.style.opacity = '0.4';}, 1000);
-	logTimeout2 = setTimeout(function() {infoLog.style.opacity = '0.3';}, 2000);
-	logTimeout3 = setTimeout(function() {infoLog.style.opacity = '0.2';}, 3000);
-	logTimeout4 = setTimeout(function() {infoLog.style.opacity = '0.1';}, 4000);
-	logTimeout5 = setTimeout(function() {infoLog.style.opacity = '0'; liveLog = false;}, 5000);*/
 }
 function runCompatibility() {
 	if (typeof document.getElementsByClassName!='function') {
