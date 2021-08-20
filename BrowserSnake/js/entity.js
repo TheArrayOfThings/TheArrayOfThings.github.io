@@ -18,10 +18,14 @@ function Entity() {
 		fireDelay: 0,
 		hasTeleported: false,
 		moveStep: function() {
+			//Check if movement has been disabled by the gamestate
 			if (this.movementEnabled == false) {
+				//Yes, then do not move
 				return;
 			}
+			//If an entity has just teleported, it needs to wait a frame before moving to keep everything in sync
 			if (this.hasTeleported) {
+				//Entity just teleported, do not move
 				this.hasTeleported = false;
 				return;
 			}

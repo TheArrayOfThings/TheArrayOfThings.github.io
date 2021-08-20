@@ -452,95 +452,103 @@ function nextFrame() {
 	allEntities = tempArray;
 	//First, check if any entities have collided
 	for (var i = 0; i < allEntities.length; ++i) {
-		//Check if collided with another entity
-		for (var e = 0; e < allEntities.length; ++e) {
-			if (allEntities[i] == allEntities[e]) {
-				continue;
-			}
-			if (getLeft(allEntities[i].collisionDiv) == getLeft(allEntities[e].collisionDiv)) {
-				if (getTop(allEntities[i].collisionDiv) == getTop(allEntities[e].collisionDiv)) {
-					//Something is colliding
-					var firstCollided = allEntities[i];
-					var secondCollided = allEntities[e];
-					//Snake hit powerup
-					if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'powerup') {
-						powerUpHit(firstCollided);
+		try {
+			//Check if collided with another entity
+			for (var e = 0; e < allEntities.length; ++e) {
+				try {
+					if (allEntities[i] == allEntities[e]) {
 						continue;
 					}
-					if (firstCollided.entityClass == 'powerup' && secondCollided.entityClass == 'snake') {
-						powerUpHit(secondCollided);
-						continue;
+					if (getLeft(allEntities[i].collisionDiv) == getLeft(allEntities[e].collisionDiv)) {
+						if (getTop(allEntities[i].collisionDiv) == getTop(allEntities[e].collisionDiv)) {
+							//Something is colliding
+							var firstCollided = allEntities[i];
+							var secondCollided = allEntities[e];
+							//Snake hit powerup
+							if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'powerup') {
+								powerUpHit(firstCollided);
+								continue;
+							}
+							if (firstCollided.entityClass == 'powerup' && secondCollided.entityClass == 'snake') {
+								powerUpHit(secondCollided);
+								continue;
+							}
+							//Bullet hit enemy
+							if (firstCollided.entityClass == 'bullet' && secondCollided.entityClass == 'enemy') {
+								enemyKilled(firstCollided);
+								secondCollided.kill();
+								continue;
+							}
+							if (firstCollided.entityClass == 'enemy' && secondCollided.entityClass == 'bullet') {
+								enemyKilled(secondCollided);
+								firstCollided.kill();
+								continue;
+							}
+							//Save snakes from bullets
+							if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'bullet') {
+								secondCollided.kill();
+								continue;
+							}
+							//Save snakes from bullets
+							if (secondCollided.entityClass == 'snake' && firstCollided.entityClass == 'bullet') {
+								firstCollided.kill();
+								continue;
+							}
+							//Teleport powerup when collide with snakesegment (it happens... somehow)
+							if (firstCollided.entityClass == 'snakesegment' && secondCollided.entityClass == 'powerup' || firstCollided.entityClass == 'powerup' && secondCollided.entityClass == 'snakesegment') {
+								randomiseLocation(powerUp.collisionDiv);
+								continue;
+							}
+							//Do not kill powerups or snake segments
+							if (firstCollided.entityClass != 'powerup' && firstCollided.entityClass != 'snakesegment') {
+								firstCollided.kill();
+							}
+							if (secondCollided.entityClass != 'powerup' && secondCollided.entityClass != 'snakesegment') {
+								secondCollided.kill();
+							}
+						}
 					}
-					//Bullet hit enemy
-					if (firstCollided.entityClass == 'bullet' && secondCollided.entityClass == 'enemy') {
-						enemyKilled(firstCollided);
-						secondCollided.kill();
-						continue;
-					}
-					if (firstCollided.entityClass == 'enemy' && secondCollided.entityClass == 'bullet') {
-						enemyKilled(secondCollided);
-						firstCollided.kill();
-						continue;
-					}
-					//Save snakes from bullets
-					if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'bullet') {
-						secondCollided.kill();
-						continue;
-					}
-					//Save snakes from bullets
-					if (secondCollided.entityClass == 'snake' && firstCollided.entityClass == 'bullet') {
-						firstCollided.kill();
-						continue;
-					}
-					//Teleport powerup when collide with snakesegment (it happens... somehow)
-					if (firstCollided.entityClass == 'snakesegment' && secondCollided.entityClass == 'powerup' || firstCollided.entityClass == 'powerup' && secondCollided.entityClass == 'snakesegment') {
-						randomiseLocation(powerUp.collisionDiv);
-						continue;
-					}
-					//Do not kill powerups or snake segments
-					if (firstCollided.entityClass != 'powerup' && firstCollided.entityClass != 'snakesegment') {
-						firstCollided.kill();
-					}
-					if (secondCollided.entityClass != 'powerup' && secondCollided.entityClass != 'snakesegment') {
-						secondCollided.kill();
-					}
+				}  catch {
+					continue;
 				}
 			}
-		}
-	//Check if hit edge (if not snakesegment!
-    if (allEntities[i].entityClass != 'snakesegment') {
-		//if(allEntities[i].entityClass != 'snakesegment') {
-			if (getLeft(allEntities[i].collisionDiv) >= playableWidth) {
-				//Has hit the right wall
-				allEntities[i].collisionDiv.style.left = 0 + "px";
-				if (allEntities[i].visibleDiv != undefined) {
-					allEntities[i].visibleDiv.style.left = (allEntities[i].visibleOffSet) + "px";
+		//Check if hit edge (if not snakesegment!
+		if (allEntities[i].entityClass != 'snakesegment') {
+			//if(allEntities[i].entityClass != 'snakesegment') {
+				if (getLeft(allEntities[i].collisionDiv) >= playableWidth) {
+					//Has hit the right wall
+					allEntities[i].collisionDiv.style.left = 0 + "px";
+					if (allEntities[i].visibleDiv != undefined) {
+						allEntities[i].visibleDiv.style.left = (allEntities[i].visibleOffSet) + "px";
+					}
+					allEntities[i].hasTeleported = true;
+				} else if (getLeft(allEntities[i].collisionDiv) <= -entitySize) {
+					//Has hit the left wall
+					allEntities[i].collisionDiv.style.left = (playableWidth - entitySize) + "px";
+					if (allEntities[i].visibleDiv != undefined) {
+						allEntities[i].visibleDiv.style.left = ((playableWidth - entitySize) + (allEntities[i].visibleOffSet)) + "px";
+					}
+					allEntities[i].hasTeleported = true;
+				} else if (getTop(allEntities[i].collisionDiv) <= -entitySize)  {
+					//Has hit the top wall
+					allEntities[i].collisionDiv.style.top = (playableHeight - entitySize) + "px";
+					if (allEntities[i].visibleDiv != undefined) {
+						allEntities[i].visibleDiv.style.top = ((playableHeight - entitySize) + (allEntities[i].visibleOffSet)) + "px";
+					}
+					allEntities[i].hasTeleported = true;
+				}else if (getTop(allEntities[i].collisionDiv) >= playableHeight) {
+					//Has hit the bottom wall
+					allEntities[i].collisionDiv.style.top = 0 + "px";
+					if (allEntities[i].visibleDiv != undefined) {
+						allEntities[i].visibleDiv.style.top = (allEntities[i].visibleOffSet) + "px";
+					}
+					allEntities[i].hasTeleported = true;
 				}
-				allEntities[i].hasTeleported = true;
-			} else if (getLeft(allEntities[i].collisionDiv) <= -entitySize) {
-				//Has hit the left wall
-				allEntities[i].collisionDiv.style.left = (playableWidth - entitySize) + "px";
-				if (allEntities[i].visibleDiv != undefined) {
-					allEntities[i].visibleDiv.style.left = ((playableWidth - entitySize) + (allEntities[i].visibleOffSet)) + "px";
-				}
-				allEntities[i].hasTeleported = true;
-			} else if (getTop(allEntities[i].collisionDiv) <= -entitySize)  {
-				//Has hit the top wall
-				allEntities[i].collisionDiv.style.top = (playableHeight - entitySize) + "px";
-				if (allEntities[i].visibleDiv != undefined) {
-					allEntities[i].visibleDiv.style.top = ((playableHeight - entitySize) + (allEntities[i].visibleOffSet)) + "px";
-				}
-				allEntities[i].hasTeleported = true;
-			}else if (getTop(allEntities[i].collisionDiv) >= playableHeight) {
-				//Has hit the bottom wall
-				allEntities[i].collisionDiv.style.top = 0 + "px";
-				if (allEntities[i].visibleDiv != undefined) {
-					allEntities[i].visibleDiv.style.top = (allEntities[i].visibleOffSet) + "px";
-				}
-				allEntities[i].hasTeleported = true;
+				//Move all entities
+				allEntities[i].moveStep();
 			}
-			//Move all entities
-			allEntities[i].moveStep();
+		} catch {
+			continue;
 		}
 	}
 }
