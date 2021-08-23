@@ -437,6 +437,9 @@ div#leftSectionVisible {
 div#rightSectionVisible {
 	text-align:right;
 }
+div#topSection, div#bottomSection, div#leftSection, div#rightSection {
+	z-index:1;
+}
 div#topSectionVisible, div#bottomSectionVisible, div#leftSectionVisible, div#rightSectionVisible,div#aButtonVisible, div#bButtonVisible, div#startButtonVisible {
 	color:white;
 	border:1px solid #4717F6;
