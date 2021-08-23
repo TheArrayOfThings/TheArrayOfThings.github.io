@@ -3,24 +3,21 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="Homepage for my mysterious, non-functional website experiment">
+		<meta name="description" content="My Contact Details">
 		<meta name="author" content="Ryan Flanagan">
-		<meta name="keywords" content="HTML, website, rookie, experiment">
-		<title>HomePage</title>
-		<link rel="stylesheet" href="/css/Ultimate.css">
+		<meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
+		<title>Contact me</title>
 		<script src="/js/jquery.js"></script> 
-		<script> 
+		<script>
+			var topBarLoaded;
 			$(function(){
-			  $("#topBar").load("/html/TopBar.html"); 
-			  //$("#navBar").load("/html/NavBar.html"); 
-			  $("#footer").load("/html/Footer.html"); 
+			  $("#topBar").load("/html/TopBar.html", function () {
+				topBarLoaded = true;
+			  }); 
+			  $("#footer").load("/html/Footer.html");
 			});
 		</script> 
 		<link rel="stylesheet" href="/css/Ultimate.css">
-		<script src="/js/Logo.js"></script>
-		<script src="/js/Selected.js"></script>
-		<script src="/js/MenuBurger.js"></script>
-		<script src="/js/SetTitle.js"></script>
 	</head>
 	<body>
 		<div id="topBar"></div>
@@ -46,5 +43,11 @@
 			</table>
 		</div>
 		<div id="footer"></div>
+		<script src="/js/ExpandableSection.js"></script>
+		<script src="/js/Logo.js"></script>
+		<script src="/js/Selected.js"></script>
+		<script src="/js/MenuBurger.js"></script>
+		<script src="/js/SetTitle.js"></script>
+		<script src="/js/ModalBox.js"></script>
 	</body>
 </html>

@@ -63,6 +63,10 @@ var storagePresent = false;
 
 window.addEventListener("load", pageLoaded);
 function pageLoaded() {
+	if (topBarLoaded != true) {
+		setTimeout(pageLoaded, 100);
+		return;
+	}
 	effects = new Effects();
 	runCompatibility();
 	//Grab required elements from page
@@ -248,7 +252,7 @@ function resetColours() {
 			}
 		}
 	}
-	setTimeout(resetEverything,100);
+	resetEverything();
 }
 function startMove(moveDirection, whichSnake) {
 	whichSnake.travelDirection = moveDirection;

@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta name="description" content="A simple snakey game - only your browser required!">
 		<meta name="author" content="Ryan Flanagan">
+		<meta name="keywords" content="Portfolio, html, css, javascript, c#, java, snake, game">
 		<meta charset="UTF-8">
 			<title>BrowserSnake</title>
 		<link rel="icon" type="image/x-icon" href="/BrowserSnake/images/logobasic.ico">
@@ -36,61 +37,61 @@
 		  </div>
 		</div>
 		<div class="main">
-		<h1>Welcome</h1>
-		<p>This is BrowserSnake! A game made entirely in pure Javascript, HTML, and CSS!</p>
-		<div id="background">
-			<div id="playable">
-				<p id="info"></p>
-				<table class='scoreboard'>
-					<tr class="scoreLabels">
-					<th class='scoreboard'>Your Best</th>
-					<!-- <th class='scoreboard'>Top Score</th> -->
-					</tr >
-					<tr class="scores">
-					<th class='scoreboard pershighscore'>0</th>
-					<!-- <th class='scoreboard servhighscore'>0</th> -->
-					</tr >
-				</table >
-				<div id="topSectionVisible" class="section">Up</div>
-				<div id="bottomSectionVisible" class="section">Down</div>
-				<div id="leftSectionVisible" class="section">Left</div>
-				<div id="rightSectionVisible" class="section">Right</div>
-				<button type="button" id="pause">Pause</button>
-				<button type="button" id="settings">Settings</button>
-				<div id="topSection" class="section"></div>
-				<div id="bottomSection" class="section"></div>
-				<div id="leftSection" class="section"></div>
-				<div id="rightSection" class="section"></div>
+			<h1>Welcome</h1>
+			<p>This is BrowserSnake! A game made entirely in pure Javascript, HTML, and CSS!</p>
+			<div id="background">
+				<div id="playable">
+					<p id="info"></p>
+					<table class='scoreboard'>
+						<tr class="scoreLabels">
+						<th class='scoreboard'>Your Best</th>
+						<!-- <th class='scoreboard'>Top Score</th> -->
+						</tr >
+						<tr class="scores">
+						<th class='scoreboard pershighscore'>0</th>
+						<!-- <th class='scoreboard servhighscore'>0</th> -->
+						</tr >
+					</table >
+					<div id="topSectionVisible" class="section">Up</div>
+					<div id="bottomSectionVisible" class="section">Down</div>
+					<div id="leftSectionVisible" class="section">Left</div>
+					<div id="rightSectionVisible" class="section">Right</div>
+					<button type="button" id="pause">Pause</button>
+					<button type="button" id="settings">Settings</button>
+					<div id="topSection" class="section"></div>
+					<div id="bottomSection" class="section"></div>
+					<div id="leftSection" class="section"></div>
+					<div id="rightSection" class="section"></div>
+				</div>
 			</div>
-		</div>
-		<div class="expandableSection">
-			<h1>What went into this</h1>
-				<div class="expandableContent">
-					<h2>Premise</h2>
-					<p>I wanted to get better at Javascript, CSS, and DOM manipulation so I decided the best way to do that would be to create a simple game.</p>
-					<p>As as kid, I remember playing a lot of Snake 2 on my dad's Nokia phone. I figured this would be an easy game to recreate in the Browser!</p>
-					<p>I didn't stop there, adding more and more features until I created the game as it is now.</p>
-					<h2>Features</h2>
-					<ul>
-						<li>Customisable settings, including name, colours, AI number</li>
-						<li>Two player mode (not supported on mobile)</li>
-						<li>Touch controls (mobile only)</li>
-						<li>AI controlled snakes</li>
-						<li>Powerups with random effects</li>
-						<li>AI controlled enemies</li>
-						<li>Score board and scoring system</li>
-						<li>Custom modal box for prompts, alerts, and confirmations</li>
-						<li>Fully scaleable to any size display</li>
-						<li>Compatible with most browsers and devices</li>
-						<li>Pause button</li>
-					</ul>
-					<h2>Technical Details</h2>
-					<p>At a basic level, there is a background div element and a playable area div element. 
-					The playable area is dynamically scaled so that it exactly fits a grid of squares, these squares acting as tiles in a game. 
-					Every element in the game, such as a snake segment, an enemy, or a powerup, takes up exactly one of these tiles.</p>
-					<img src="/BrowserSnake/images/Grid-Visualised.png" alt="Image showing the grid of squares that makes up the playable area of the game" title	="Image showing the grid of squares that makes up the playable area of the game">
-					<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a bass Javascript object called 'Entity'. 
-					This entity object contains functions for handling collision, movement, and some AI functionality - and these functions are inherited by the game objects.</p>
+			<div class="expandableSection">
+				<h1 class="expandableHeader">What went into this</h1>
+					<div class="expandableContent">
+						<h2>Premise</h2>
+						<p>I wanted to get better at Javascript, CSS, and DOM manipulation so I decided the best way to do that would be to create a simple game.</p>
+						<p>As as kid, I remember playing a lot of Snake 2 on my dad's Nokia phone. I figured this would be an easy game to recreate in the Browser!</p>
+						<p>I didn't stop there, adding more and more features until I created the game as it is now.</p>
+						<h2>Features</h2>
+						<ul>
+							<li>Customisable settings, including name, colours, AI number</li>
+							<li>Two player mode (not supported on mobile)</li>
+							<li>Touch controls (mobile only)</li>
+							<li>AI controlled snakes</li>
+							<li>Powerups with random effects</li>
+							<li>AI controlled enemies</li>
+							<li>Score board and scoring system</li>
+							<li>Custom modal box for prompts, alerts, and confirmations</li>
+							<li>Fully scaleable to any size display</li>
+							<li>Compatible with most browsers and devices</li>
+							<li>Pause button</li>
+						</ul>
+						<h2>Technical Details</h2>
+						<p>At a basic level, there is a background div element and a playable area div element. 
+						The playable area is dynamically scaled so that it exactly fits a grid of squares, these squares acting as tiles in a game. 
+						Every element in the game, such as a snake segment, an enemy, or a powerup, takes up exactly one of these tiles.</p>
+						<img src="/BrowserSnake/images/Grid-Visualised.png" alt="Image showing the grid of squares that makes up the playable area of the game" title	="Image showing the grid of squares that makes up the playable area of the game">
+						<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a bass Javascript object called 'Entity'. 
+						This entity object contains functions for handling collision, movement, and some AI functionality - and these functions are inherited by the game objects.</p>
 <pre>
 <code class="language-javascript">
 moveStep: function() {
@@ -145,9 +146,9 @@ moveStep: function() {
 }
 </code>
 </pre>
-				</div>
+					</div>
+			</div>
 		</div>
-	</div>
 		<div id="footer"></div>
 		<script src="/Highlight/highlight.min.js"></script>
 		<script>hljs.highlightAll();</script>

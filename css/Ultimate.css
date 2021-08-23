@@ -24,9 +24,79 @@ div#map {
 body {
 	background-color:#0E0B16;
 }
+/*Buttons*/
+button {
+	color: white;
+	font-size:calc(10px + 0.20vh + 0.20vw);
+	background-color: #4717F6;
+	background: linear-gradient(#A239CA, #4717F6);
+	border: 0;
+	border-radius: 3px;
+	text-shadow: 0 -1px 0 #000;
+	box-shadow: -1px 1px 0 #802ba1, 0 2px 0 #802ba1, 0 6px 6px rgba(0,0,0,0.6);
+	float:right;
+	overflow:hidden;
+	text-transform: uppercase;
+}
+button.topMenuRight	{
+	position:relative;
+	top:5%;
+	right:2%;
+	margin:0;
+	padding: 0;
+	min-height:20px;
+	min-width:40px;
+	height: 80%;
+	width:40%;
+}
+button:active {
+	color: #fff;
+	text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+	box-shadow: 0 1px 0 #802ba1, 0 1px 0 #802ba1, 0 2px 2px rgba(0,0,0,0.9);
+	transform: translate(-2px, 1px);
+	animation: none;
+}
+button:hover, button:focus {
+	background-color:#633af8;
+	background: linear-gradient(#b35ed4, #633af8);
+}
+button.modalSubmit {
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	display:none;
+}
+button.expandableHeader {
+	all:unset;
+	box-sizing: border-box;
+	border: 0;
+	border-radius: 10px;
+	text-shadow: 0 -1px 0 #000;
+	box-shadow: -1px 1px 0 #802ba1, 0 2px 0 #802ba1, 0 6px 6px rgba(0,0,0,0.6);
+	padding: 0.5em;
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+	background-color: #4717F6;
+	background: linear-gradient(#A239CA, #4717F6);
+	text-align:center;
+	width:100%;
+}
+button.expandableHeader:active {
+	color: #fff;
+	text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+	box-shadow: 0 1px 0 #802ba1, 0 1px 0 #802ba1, 0 2px 2px rgba(0,0,0,0.9);
+	transform: translate(-2px, 1px);
+	animation: none;
+}
+button.expandableHeader:hover, button.expandableHeader:focus {
+	background-color:#633af8;
+	background: linear-gradient(#b35ed4, #633af8);
+}
+/*Expandable components*/
 .expandableContent {
 	display:none;
 }
+/*End of expandable components*/
 img {
 	
 }
@@ -63,12 +133,7 @@ img {
 	font-weight: bold;
 	display:none;
 }
-button.modalSubmit {
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-	display:none;
-}
+
 #modalInput, #modalInputLabel {
 	display:none;
 }
@@ -219,45 +284,7 @@ a:hover.topMenuLink, a.topMenuCurrent, a:hover.topMenuCurrent	{
 	color:white;
 	background-color:black;
 }
-button {
-	color: white;
-	font-size:calc(10px + 0.20vh + 0.20vw);
-	background-color: #4717F6;
-	background: linear-gradient(#A239CA, #4717F6);
-	border: 0;
-	border-radius: 3px;
-	text-shadow: 0 -1px 0 #000;
-	box-shadow: -1px 1px 0 #802ba1, 0 2px 0 #802ba1, 0 6px 6px rgba(0,0,0,0.6);
-	float:right;
-	overflow:hidden;
-	text-transform: uppercase;
-}
-button.topMenuRight	{
-	position:relative;
-	top:5%;
-	right:2%;
-	/*display: block;*/
-	/*font-size: 1.1em;
-	font-weight: bold;*/
-	/*padding: 10px 15px;*/
-	margin:0;
-	padding: 0;
-	min-height:20px;
-	min-width:40px;
-	height: 80%;
-	width:40%;
-}
-button:active {
-	color: #fff;
-	text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
-	box-shadow: 0 1px 0 #802ba1, 0 1px 0 #802ba1, 0 2px 2px rgba(0,0,0,0.9);
-	transform: translate(-2px, 1px);
-	animation: none;
-}
-button:hover, button:focus {
-	background-color:#633af8;
-	background: linear-gradient(#b35ed4, #633af8);
-}
+
 nav.navBackground	{
 	width:100%;
 	float:right;

@@ -38,14 +38,6 @@ function setupModal () {
 			modal.style.display = "none";
 			modalVisible = false;
 		});
-		//Clicking anywhere on the page should also close the modal popup
-		/*window.onclick = function(event) {
-		  if (event.target == modal) {
-			modal.style.display = "none";
-		  }
-		}*/
-	  //Finally, open the modal popup
-	  //modal.style.display = "block";
 	}
 	catch (err) {
 		console.log(err);

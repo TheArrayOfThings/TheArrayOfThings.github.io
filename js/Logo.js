@@ -1,6 +1,5 @@
 function resizeLogoText() {
 	try {
-		console.log("Started...");
 		var logoText = document.getElementsByClassName("topLogoTextContainer")[0];
 		var fontScale = 1;
 		var fontScaleMaxTries = 1000;

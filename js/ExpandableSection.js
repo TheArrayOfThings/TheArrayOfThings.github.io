@@ -1,17 +1,22 @@
 function initialiseExpandableSection() {
+	if (topBarLoaded != true) {
+		setTimeout(initialiseExpandableSection, 100);
+		return;
+	}
 	var expandableSetions = document.getElementsByClassName("expandableSection");
 	for (var e = 0; e < expandableSetions.length; ++e) {
 		//Get the h1 element and add the event
-		expandableSetions[e].getElementsByTagName("h1")[0].addEventListener("click", toggleSection);
+		expandableSetions[e].getElementsByClassName("expandableHeader")[0].addEventListener("click", toggleSection);
 	}
 }
 
 function toggleSection () {
 	var sectionContent = this.parentElement.getElementsByClassName("expandableContent")[0];
-	if (sectionContent.style.display == "none") {
-		sectionContent.style.display = "unset";
+	if (!!( sectionContent.offsetWidth || sectionContent.offsetHeight || sectionContent.getClientRects().length )) {
+		sectionContent.style.display = "none";
 	} else {
-		sectionContent.style.display ="none";
+		sectionContent.style.display ="unset";
+		sectionContent.scrollIntoView(); 
 	}
 }
 

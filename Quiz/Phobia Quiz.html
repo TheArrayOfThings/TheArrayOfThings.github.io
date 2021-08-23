@@ -5,22 +5,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="Homepage for my mysterious, non-functional website experiment">
 		<meta name="author" content="Ryan Flanagan">
-		<meta name="keywords" content="HTML, website, rookie, experiment">
-		<title>HomePage</title>
-		<link rel="stylesheet" href="/css/Ultimate.css">
+		<meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
+		<title>Phobia Quiz</title>
 		<script src="/js/jquery.js"></script> 
-		<script> 
+		<script>
+			var topBarLoaded;
 			$(function(){
-			  $("#topBar").load("/html/TopBar.html"); 
-			  //$("#navBar").load("/html/NavBar.html"); 
-			  $("#footer").load("/html/Footer.html"); 
+			  $("#topBar").load("/html/TopBar.html", function () {
+				topBarLoaded = true;
+			  }); 
+			  $("#footer").load("/html/Footer.html");
 			});
-		</script> 
+		</script>
 		<link rel="stylesheet" href="/css/Ultimate.css">
-		<script src="/js/Logo.js"></script>
-		<script src="/js/Selected.js"></script>
-		<script src="/js/MenuBurger.js"></script>
-		<script src="/js/SetTitle.js"></script>
 	</head>
 	<body>
 		<div id="topBar"></div>
@@ -29,21 +26,27 @@
 			<div class="quiz">
 				<a id="question">Question goes here</a>
 				<ul class="quiz" style="list-style-type: none">
-				<li><input class="answerButton" type="radio" onclick="answered(1)"></input><a class="answer"></a></li><br />
-				<li><input class="answerButton" type="radio" onclick="answered(2)"></input><a class="answer"></a></li><br />
-				<li><input class="answerButton" type="radio" onclick="answered(3)"></input><a class="answer"></a></li><br />
-				<li><input class="answerButton" type="radio" onclick="answered(4)"></input><a class="answer"></a></li>
+					<li><input class="answerButton" type="radio" onclick="answered(1)"></input><a class="answer"></a></li><br />
+					<li><input class="answerButton" type="radio" onclick="answered(2)"></input><a class="answer"></a></li><br />
+					<li><input class="answerButton" type="radio" onclick="answered(3)"></input><a class="answer"></a></li><br />
+					<li><input class="answerButton" type="radio" onclick="answered(4)"></input><a class="answer"></a></li>
 				</ul>
 				<p>Score: <a class="score"></a></p>
 			</div>
 			<div class="results">
 				<p>Your final score is: <br/>
-				<a class="score"></a>/<a id="totQuestions"></a>
+					<a class="score"></a>/<a id="totQuestions"></a>
 				</p>
 			</div>
-			<script src="/Quiz/js/Quiz.js"></script>
 			<script>nextQuestion()</script>
 		</div>
 		<div id="footer"></div>
+		<script src="/js/ExpandableSection.js"></script>
+		<script src="/js/Logo.js"></script>
+		<script src="/js/Selected.js"></script>
+		<script src="/js/MenuBurger.js"></script>
+		<script src="/js/SetTitle.js"></script>
+		<script src="/js/ModalBox.js"></script>
+		<script src="/Quiz/js/Quiz.js"></script>
 	</body>
 </html>
