@@ -8,18 +8,16 @@
 		<meta name="keywords" content="Portfolio, html, css, javascript, c#, java, ServiceNow, Dynamics">
 		<title>HomePage</title>
 		<script src="/js/jquery.js"></script> 
-		<script> 
+		<script>
+			var topBarLoaded;
 			$(function(){
-			  $("#topBar").load("/html/TopBar.html"); 
-			  //$("#navBar").load("/html/NavBar.html"); 
-			  $("#footer").load("/html/Footer.html"); 
+			  $("#topBar").load("/html/TopBar.html", function () {
+				topBarLoaded = true;
+			  }); 
+			  $("#footer").load("/html/Footer.html");
 			});
 		</script> 
 		<link rel="stylesheet" href="/css/Ultimate.css">
-		<script src="/js/Logo.js"></script>
-		<script src="/js/Selected.js"></script>
-		<script src="/js/MenuBurger.js"></script>
-		<script src="/js/SetTitle.js"></script>
 	</head>
 	<body>
 		<div id="topBar"></div>
@@ -27,5 +25,11 @@
 			<p id="testing">Hello</p>
 		</div>
 		<div id="footer"></div>
+		<script src="/js/ExpandableSection.js"></script>
+		<script src="/js/Logo.js"></script>
+		<script src="/js/Selected.js"></script>
+		<script src="/js/MenuBurger.js"></script>
+		<script src="/js/SetTitle.js"></script>
+		<script src="/js/ModalBox.js"></script>
 	</body>
 </html>

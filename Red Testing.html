@@ -1,71 +1,73 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<!-- <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge"> -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<meta name="description" content="A simple snakey game - only your browser required!">
-<meta name="author" content="Ryan Flanagan">
-<meta charset="UTF-8">
-    <title>BrowserSnake</title>
-<link rel="icon" type="image/x-icon" href="./BrowserSnake/images/logobasic.ico">
-<script src="./Red/js/game.js"></script>
-<script src="./Red/js/map.js"></script>
-<script src="./Red/js/object.js"></script>
-<script src="./Red/js/cobject.js"></script>
-<script src="./Red/js/sobject.js"></script>
-<script src="./Red/js/iobject.js"></script>
-<script src="./Red/js/box.js"></script>
-<script src="./Red/js/textbox.js"></script>
-<script src="./Red/js/menu.js"></script>
-<script src="./Red/js/submenu.js"></script>
-<script src="./Red/js/quantitymenu.js"></script>
-<script src="./Red/js/confirmmenu.js"></script>
-<script src="./Red/js/computer.js"></script>
-<script src="./Red/js/startmenu.js"></script>
-<script src="./Red/js/menuoption.js"></script>
-<script src="./Red/js/item.js"></script>
-<script src="./Red/js/playerbedroom.js"></script>
-<script src="./Red/js/sprite.js"></script>
-<script src="./Red/js/charactersprite.js"></script>
-<script src="./Red/js/player.js"></script>
-<script src="./js/jquery.js"></script> 
-<script> 
-	$(function(){
-	  $("#topBar").load("./html/TopBar.html"); 
-	  $("#navBar").load("./html/NavBar.html"); 
-	  $("#footer").load("./html/Footer.html"); 
-	});
-</script> 
-<link rel="stylesheet" href="./Red/css/style.css"></link>
-<link rel="stylesheet" href="./css/Ultimate.css">
-<script src="./js/Logo.js"></script>
-<script src="./js/Selected.js"></script>
-<script src="./js/MenuBurger.js"></script>
-<script src="./js/SetTitle.js"></script>
-</head>
-<body>
-<div id="topBar"></div>
-	<div class="main">
-		<div id="hidden" style="display: none;"></div>
-		<div id="background"><div id="playable"></div></div>
-		<div id="menu"></div>
-		<div id="frontmenu"></div>
-		<div id="topSectionVisible" class="section"><div class="centre">Up</div></div>
-		<div id="bottomSectionVisible" class="section"><div class="centre">Down</div></div>
-		<div id="leftSectionVisible" class="section"><div class="centre">Left</div></div>
-		<div id="rightSectionVisible" class="section"><div class="centre">Right</div></div>
-		<div id="aButtonVisible" class="section"><div class="centre">A Button</div></div>
-		<div id="bButtonVisible" class="section"><div class="centre">B Button</div></div>
-		<div id="startButtonVisible" class="section"><div class="centre">Start</div></div>
-		<button type="button" id="settings">Settings</button>
-		<div id="topSection" class="section"></div>
-		<div id="bottomSection" class="section"></div>
-		<div id="leftSection" class="section"></div>
-		<div id="rightSection" class="section"></div>
-		<div id="aButton" class="section"></div>
-		<div id="bButton" class="section"></div>
-		<div id="startButton" class="section"></div>
-	</div>
-	<div id="footer"></div>
-</body>
+	<head>
+		<!-- <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<meta name="description" content="Pokemon Red remake (WIP)!">
+		<meta name="author" content="Ryan Flanagan">
+		<meta charset="UTF-8">
+			<title>Pokemon Red Remake</title>
+		<script src="./js/jquery.js"></script> 
+		<script>
+			var topBarLoaded;
+			$(function(){
+			  $("#topBar").load("./html/TopBar.html", function () {
+				topBarLoaded = true;
+			  }); 
+			  $("#footer").load("./html/Footer.html");
+			});
+		</script> 
+		<link rel="stylesheet" href="./css/Ultimate.css">
+	</head>
+	<body>
+	<div id="topBar"></div>
+		<div class="main">
+			<div id="hidden" style="display: none;"></div>
+			<div id="background"><div id="playable"></div></div>
+			<div id="menu"></div>
+			<div id="frontmenu"></div>
+			<div id="topSectionVisible" class="section"><div class="centre">Up</div></div>
+			<div id="bottomSectionVisible" class="section"><div class="centre">Down</div></div>
+			<div id="leftSectionVisible" class="section"><div class="centre">Left</div></div>
+			<div id="rightSectionVisible" class="section"><div class="centre">Right</div></div>
+			<div id="aButtonVisible" class="section"><div class="centre">A Button</div></div>
+			<div id="bButtonVisible" class="section"><div class="centre">B Button</div></div>
+			<div id="startButtonVisible" class="section"><div class="centre">Start</div></div>
+			<button type="button" id="settings">Settings</button>
+			<div id="topSection" class="section"></div>
+			<div id="bottomSection" class="section"></div>
+			<div id="leftSection" class="section"></div>
+			<div id="rightSection" class="section"></div>
+			<div id="aButton" class="section"></div>
+			<div id="bButton" class="section"></div>
+			<div id="startButton" class="section"></div>
+		</div>
+		<div id="footer"></div>
+		<script src="./js/ExpandableSection.js"></script>
+		<script src="./js/Logo.js"></script>
+		<script src="./js/Selected.js"></script>
+		<script src="./js/MenuBurger.js"></script>
+		<script src="./js/SetTitle.js"></script>
+		<script src="./js/ModalBox.js"></script>
+		<script src="./Red/js/game.js"></script>
+		<script src="./Red/js/map.js"></script>
+		<script src="./Red/js/object.js"></script>
+		<script src="./Red/js/cobject.js"></script>
+		<script src="./Red/js/sobject.js"></script>
+		<script src="./Red/js/iobject.js"></script>
+		<script src="./Red/js/box.js"></script>
+		<script src="./Red/js/textbox.js"></script>
+		<script src="./Red/js/menu.js"></script>
+		<script src="./Red/js/submenu.js"></script>
+		<script src="./Red/js/quantitymenu.js"></script>
+		<script src="./Red/js/confirmmenu.js"></script>
+		<script src="./Red/js/computer.js"></script>
+		<script src="./Red/js/startmenu.js"></script>
+		<script src="./Red/js/menuoption.js"></script>
+		<script src="./Red/js/item.js"></script>
+		<script src="./Red/js/playerbedroom.js"></script>
+		<script src="./Red/js/sprite.js"></script>
+		<script src="./Red/js/charactersprite.js"></script>
+		<script src="./Red/js/player.js"></script>
+	</body>
 </html>

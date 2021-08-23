@@ -9,11 +9,13 @@
 			<title>BrowserSnake</title>
 		<link rel="icon" type="image/x-icon" href="/BrowserSnake/images/logobasic.ico">
 		<script src="/js/jquery.js"></script> 
-		<script> 
+		<script>
+			var topBarLoaded;
 			$(function(){
-			  $("#topBar").load("/html/TopBar.html"); 
-			  //$("#navBar").load("/html/NavBar.html"); 
-			  $("#footer").load("/html/Footer.html"); 
+			  $("#topBar").load("/html/TopBar.html", function () {
+				topBarLoaded = true;
+			  }); 
+			  $("#footer").load("/html/Footer.html");
 			});
 		</script> 
 		<link rel="stylesheet" href="/css/Ultimate.css">
@@ -34,117 +36,122 @@
 		  </div>
 		</div>
 		<div class="main">
-			<h1>What is this</h1>
-			<p>Welcome to BrowserSnake! A game made entirely in pure Javascript, HTML, and CSS!</p>
-			<div id="background">
-				<div id="playable">
-					<p id="info"></p>
-					<table class='scoreboard'>
-						<tr class="scoreLabels">
-						<th class='scoreboard'>Your Best</th>
-						<!-- <th class='scoreboard'>Top Score</th> -->
-						</tr >
-						<tr class="scores">
-						<th class='scoreboard pershighscore'>0</th>
-						<!-- <th class='scoreboard servhighscore'>0</th> -->
-						</tr >
-					</table >
-					<div id="topSectionVisible" class="section">Up</div>
-					<div id="bottomSectionVisible" class="section">Down</div>
-					<div id="leftSectionVisible" class="section">Left</div>
-					<div id="rightSectionVisible" class="section">Right</div>
-					<button type="button" id="pause">Pause</button>
-					<button type="button" id="settings">Settings</button>
-					<div id="topSection" class="section"></div>
-					<div id="bottomSection" class="section"></div>
-					<div id="leftSection" class="section"></div>
-					<div id="rightSection" class="section"></div>
-				</div>
+		<h1>Welcome</h1>
+		<p>This is BrowserSnake! A game made entirely in pure Javascript, HTML, and CSS!</p>
+		<div id="background">
+			<div id="playable">
+				<p id="info"></p>
+				<table class='scoreboard'>
+					<tr class="scoreLabels">
+					<th class='scoreboard'>Your Best</th>
+					<!-- <th class='scoreboard'>Top Score</th> -->
+					</tr >
+					<tr class="scores">
+					<th class='scoreboard pershighscore'>0</th>
+					<!-- <th class='scoreboard servhighscore'>0</th> -->
+					</tr >
+				</table >
+				<div id="topSectionVisible" class="section">Up</div>
+				<div id="bottomSectionVisible" class="section">Down</div>
+				<div id="leftSectionVisible" class="section">Left</div>
+				<div id="rightSectionVisible" class="section">Right</div>
+				<button type="button" id="pause">Pause</button>
+				<button type="button" id="settings">Settings</button>
+				<div id="topSection" class="section"></div>
+				<div id="bottomSection" class="section"></div>
+				<div id="leftSection" class="section"></div>
+				<div id="rightSection" class="section"></div>
 			</div>
-		<h1>What went into this</h1>
-		<h2>Premise</h2>
-		<p>I wanted to get better at Javascript, CSS, and DOM manipulation so I decided the best way to do that would be to create a simple game.</p>
-		<p>As as kid, I remember playing a lot of Snake 2 on my dad's Nokia phone. I figured this would be an easy game to recreate in the Browser!</p>
-		<p>I didn't stop there, adding more and more features until I created the game as it is now.</p>
-		<h2>Features</h2>
-		<ul>
-			<li>Customisable settings, including name, colours, AI number</li>
-			<li>Two player mode (not supported on mobile)</li>
-			<li>Touch controls (mobile only)</li>
-			<li>AI controlled snakes</li>
-			<li>Powerups with random effects</li>
-			<li>AI controlled enemies</li>
-			<li>Score board and scoring system</li>
-			<li>Custom modal box for prompts, alerts, and confirmations</li>
-			<li>Fully scaleable to any size display</li>
-			<li>Compatible with most browsers and devices</li>
-			<li>Pause button</li>
-		</ul>
-		<h2>Technical Details</h2>
-		<p>At a basic level, there is a background div element and a playable area div element. 
-		The playable area is dynamically scaled so that it exactly fits a grid of squares, these squares acting as tiles in a game. 
-		Every element in the game, such as a snake segment, an enemy, or a powerup, takes up exactly one of these tiles.</p>
-		<img src="/BrowserSnake/images/Grid-Visualised.png" alt="Image showing the grid of squares that makes up the playable area of the game" title	="Image showing the grid of squares that makes up the playable area of the game">
-		<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a bass Javascript object called 'Entity'. 
-		This entity object contains functions for handling collision, movement, and some AI functionality - and these functions are inherited by the game objects.</p>
-		<pre>
-			<code>
-	moveStep: function() {
-		//Check if movement has been disabled by the gamestate
-		if (this.movementEnabled == false) {
-			//Yes, then do not move
-			return;
-		}
-		//If an entity has just teleported, it needs to wait a frame before moving to keep everything in sync
-		if (this.hasTeleported) {
-			//Entity just teleported, do not move
-			this.hasTeleported = false;
-			return;
-		}
-		//If every entity moved on every frame, then everything would move very very fast
-		//The currentMoveStep and moveDelay mean that the entity will wait a number of frames (moveDelay) before actually moving each time
-		if (this.currentMoveStep &lt; this.movementDelay) {
-			//Entity hasn't waited enough frames, wait until next frame
-			++this.currentMoveStep;
-			return;
-		}
-		this.currentMoveStep = 0;
-		//Store the position of the entity before it moved, this is used in child classes
-		this.beforeMoveTop = this.collisionDiv.style.top;
-		this.beforeMoveLeft = this.collisionDiv.style.left;
-		var increment = 0;
-		//aiDriven is something that can be specified in child classes
-		if (this.aiDriven) {
-			//The entity is AI driven, so the movement direction is chosen from the autoChooseDirection function
-			this.autoChooseDirection();
-		}
-		//Travel direction has either been selected by the player using touch or computer arrows, or by the autoChooseDirection function
-		//The following calculates where to move the div elements (as increment - which can be positive or negative) and then moves them
-		if (this.travelDirection == 'right' ||  this.travelDirection == 'down') {
-			increment = Math.abs(entitySize);
-		} else if (this.travelDirection == 'left' || this.travelDirection =='up') {
-			increment = -Math.abs(entitySize);
-		}
-		if (this.travelDirection == 'left' || this.travelDirection == 'right') {
-			if (this.visibleDiv != undefined) {
-				this.visibleDiv.style.left = getLeft(this.visibleDiv) + increment + "px";
-			}
-			this.collisionDiv.style.left = getLeft(this.collisionDiv) + increment + "px";
-		} else {
-			if (this.visibleDiv != undefined) {
-				this.visibleDiv.style.top = getTop(this.visibleDiv) + increment + "px";
-			}
-			this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
-		}
-		//Lastly, an action can be assigned to the Entity that will be performed after the move
-		this.alternativeAction();
+		</div>
+		<div class="expandableSection">
+			<h1>What went into this</h1>
+				<div class="expandableContent">
+					<h2>Premise</h2>
+					<p>I wanted to get better at Javascript, CSS, and DOM manipulation so I decided the best way to do that would be to create a simple game.</p>
+					<p>As as kid, I remember playing a lot of Snake 2 on my dad's Nokia phone. I figured this would be an easy game to recreate in the Browser!</p>
+					<p>I didn't stop there, adding more and more features until I created the game as it is now.</p>
+					<h2>Features</h2>
+					<ul>
+						<li>Customisable settings, including name, colours, AI number</li>
+						<li>Two player mode (not supported on mobile)</li>
+						<li>Touch controls (mobile only)</li>
+						<li>AI controlled snakes</li>
+						<li>Powerups with random effects</li>
+						<li>AI controlled enemies</li>
+						<li>Score board and scoring system</li>
+						<li>Custom modal box for prompts, alerts, and confirmations</li>
+						<li>Fully scaleable to any size display</li>
+						<li>Compatible with most browsers and devices</li>
+						<li>Pause button</li>
+					</ul>
+					<h2>Technical Details</h2>
+					<p>At a basic level, there is a background div element and a playable area div element. 
+					The playable area is dynamically scaled so that it exactly fits a grid of squares, these squares acting as tiles in a game. 
+					Every element in the game, such as a snake segment, an enemy, or a powerup, takes up exactly one of these tiles.</p>
+					<img src="/BrowserSnake/images/Grid-Visualised.png" alt="Image showing the grid of squares that makes up the playable area of the game" title	="Image showing the grid of squares that makes up the playable area of the game">
+					<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a bass Javascript object called 'Entity'. 
+					This entity object contains functions for handling collision, movement, and some AI functionality - and these functions are inherited by the game objects.</p>
+<pre>
+<code class="language-javascript">
+moveStep: function() {
+	//Check if movement has been disabled by the gamestate
+	if (this.movementEnabled == false) {
+		//Yes, then do not move
+		return;
 	}
-			</code>
-		</pre>
+	//If an entity has just teleported, it needs to wait a frame before moving to keep everything in sync
+	if (this.hasTeleported) {
+		//Entity just teleported, do not move
+		this.hasTeleported = false;
+		return;
+	}
+	//If every entity moved on every frame, then everything would move very very fast
+	//The currentMoveStep and moveDelay mean that the entity will wait a number of frames (moveDelay) before actually moving each time
+	if (this.currentMoveStep &lt; this.movementDelay) {
+		//Entity hasn't waited enough frames, wait until next frame
+		++this.currentMoveStep;
+		return;
+	}
+	this.currentMoveStep = 0;
+	//Store the position of the entity before it moved, this is used in child classes
+	this.beforeMoveTop = this.collisionDiv.style.top;
+	this.beforeMoveLeft = this.collisionDiv.style.left;
+	var increment = 0;
+	//aiDriven is something that can be specified in child classes
+	if (this.aiDriven) {
+		//The entity is AI driven, so the movement direction is chosen from the autoChooseDirection function
+		this.autoChooseDirection();
+	}
+	//Travel direction has either been selected by the player using touch or computer arrows, or by the autoChooseDirection function
+	//The following calculates where to move the div elements (as increment - which can be positive or negative) and then moves them
+	if (this.travelDirection == 'right' ||  this.travelDirection == 'down') {
+		increment = Math.abs(entitySize);
+	} else if (this.travelDirection == 'left' || this.travelDirection =='up') {
+		increment = -Math.abs(entitySize);
+	}
+	if (this.travelDirection == 'left' || this.travelDirection == 'right') {
+		if (this.visibleDiv != undefined) {
+			this.visibleDiv.style.left = getLeft(this.visibleDiv) + increment + "px";
+		}
+		this.collisionDiv.style.left = getLeft(this.collisionDiv) + increment + "px";
+	} else {
+		if (this.visibleDiv != undefined) {
+			this.visibleDiv.style.top = getTop(this.visibleDiv) + increment + "px";
+		}
+		this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
+	}
+	//Lastly, an action can be assigned to the Entity that will be performed after the move
+	this.alternativeAction();
+}
+</code>
+</pre>
+				</div>
+		</div>
 	</div>
 		<div id="footer"></div>
 		<script src="/Highlight/highlight.min.js"></script>
 		<script>hljs.highlightAll();</script>
+		<script src="/js/ExpandableSection.js"></script>
 		<script src="/js/Logo.js"></script>
 		<script src="/js/Selected.js"></script>
 		<script src="/js/MenuBurger.js"></script>

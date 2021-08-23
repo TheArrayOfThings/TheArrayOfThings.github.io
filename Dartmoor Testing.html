@@ -1,37 +1,41 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<!-- <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge"> -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<meta name="description" content="A simple snakey game - only your browser required!">
-<meta name="author" content="Ryan Flanagan">
-<meta charset="UTF-8">
-    <title>BrowserSnake</title>
-<link rel="icon" type="image/x-icon" href="./BrowserSnake/images/logobasic.ico">
+	<head>
+		<!-- <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<meta name="description" content="A simple snakey game - only your browser required!">
+		<meta name="author" content="Ryan Flanagan">
+		<meta charset="UTF-8">
+			<title>BrowserSnake</title>
+		<link rel="icon" type="image/x-icon" href="./BrowserSnake/images/logobasic.ico">
 
-<script src="./js/jquery.js"></script> 
-<script> 
-	$(function(){
-	  $("#topBar").load("./html/TopBar.html"); 
-	  $("#navBar").load("./html/NavBar.html"); 
-	  $("#footer").load("./html/Footer.html"); 
-	});
-</script> 
-<link rel="stylesheet" href="./css/Ultimate.css">
-<script src="./js/Logo.js"></script>
-<script src="./js/Selected.js"></script>
-<script src="./js/MenuBurger.js"></script>
-<script src="./js/SetTitle.js"></script>
-</head>
-<body>
-<div id="topBar"></div>
-	<div class="main">
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD82Y97n7A_rouMcx2clbLCH2TifSEWfgU&callback=initMap" type="text/javascript"></script>
-		<script src="./Dartmoor/js/Dartmoor.js"></script>
-		<h1>Purpose</h1>
-		<p>This webpage has a version of the wild camping map of dartmoor, taken from government data.</p>
-		<div id="map"></div>
-	</div>
-	<div id="footer"></div>
-</body>
+		<script src="./js/jquery.js"></script> 
+		<script>
+			var topBarLoaded;
+			$(function(){
+			  $("#topBar").load("./html/TopBar.html", function () {
+				topBarLoaded = true;
+			  }); 
+			  $("#footer").load("./html/Footer.html");
+			});
+		</script> 
+		<link rel="stylesheet" href="./css/Ultimate.css">
+		<script src="./js/ExpandableSection.js"></script>
+		<script src="./js/Logo.js"></script>
+		<script src="./js/Selected.js"></script>
+		<script src="./js/MenuBurger.js"></script>
+		<script src="./js/SetTitle.js"></script>
+		<script src="./js/ModalBox.js"></script>
+	</head>
+	<body>
+	<div id="topBar"></div>
+		<div class="main">
+			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD82Y97n7A_rouMcx2clbLCH2TifSEWfgU&callback=initMap" type="text/javascript"></script>
+			<script src="./Dartmoor/js/Dartmoor.js"></script>
+			<h1>Purpose</h1>
+			<p>This webpage has a version of the wild camping map of dartmoor, taken from government data.</p>
+			<div id="map"></div>
+		</div>
+		<div id="footer"></div>
+	</body>
 </html>

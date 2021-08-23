@@ -1,12 +1,11 @@
 function setTitle () {
+	if (topBarLoaded != true) {
+		setTimeout(setTitle, 100);
+		return;
+	}
 	var topTitle;
-	try {
-		topTitle = topTitle = document.getElementsByClassName("topTitle")[0];
-		topTitle.innerText = document.title;
-	}
-	catch (err) {
-		setTimeout(setTitle, 10);
-	}
+	topTitle = topTitle = document.getElementsByClassName("topTitle")[0];
+	topTitle.innerText = document.title;
 }
 
-setTitle();
+window.addEventListener("load", setTitle);

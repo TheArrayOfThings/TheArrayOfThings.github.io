@@ -3,21 +3,20 @@ var visible = false;
 var htmlTag;
 
 function attachEvent () {
-	try {
-		htmlTag = document.getElementsByTagName("html")[0];
-		menu = document.getElementsByClassName("navContainer")[0];
-		document.getElementsByClassName("topMenuRight")[0].onclick = function () {
-			if (visible) {
-				hideNavMenu();
-			} else {
-				showNavMenu();
-			}
+	if (topBarLoaded != true) {
+		setTimeout(attachEvent, 100);
+		return;
+	}
+	htmlTag = document.getElementsByTagName("html")[0];
+	menu = document.getElementsByClassName("navContainer")[0];
+	document.getElementsByClassName("topMenuRight")[0].onclick = function () {
+		if (visible) {
+			hideNavMenu();
+		} else {
+			showNavMenu();
 		}
-		setSelected();
 	}
-	catch (err) {
-		setTimeout(attachEvent, 10);
-	}
+	setSelected();
 }
 
 function showNavMenu() {
@@ -36,4 +35,4 @@ function hideNavMenu() {
 	htmlTag.onclick = null;
 }
 
-attachEvent();
+window.addEventListener("load", attachEvent);
