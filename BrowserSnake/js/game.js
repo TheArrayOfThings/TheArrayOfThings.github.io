@@ -23,6 +23,7 @@ var resizeSnakeyRtime;
 var resizeSnakeyTimeout = false;
 var resizeSnakeyDelta = 200;
 var infoLog;
+var pauseButton;
 
 //Game settings
 var scale = 4;
@@ -41,6 +42,7 @@ var effects;
 var snakeResults = "";
 var showAllSettings = true;
 var paused = false;
+var classicSnake = false;
 
 //Snakes
 var playerOne;
@@ -73,6 +75,7 @@ function pageLoaded() {
 	background = document.getElementById('background');
 	playable = document.getElementById('playable');
 	persHighScoreBox = document.getElementsByClassName('pershighscore')[0];
+	pauseButton = document.getElementById("pause");
 	//servHighScoreBox = document.getElementsByClassName('servhighscore')[0];
 	scoreLabels = document.getElementsByClassName('scoreLabels')[0];
 	scores = document.getElementsByClassName('scores')[0];
@@ -102,7 +105,7 @@ function pageLoaded() {
 	//Add settings event to settings button
 	addEvent("click", document.getElementById("settings"), function() {showAllSettings = true;setupStart();});
 	//Add pause functionality to Pause
-	addEvent("click", document.getElementById("pause"), pauseGame);
+	addEvent("click", pauseButton, pauseGame);
 	//Add my keyparse event
 	addEvent("keydown", document, keyParse);
 	//Handle resize of window
@@ -141,11 +144,6 @@ function playerOneNameReceived() {
 	if (playerOneName == '' || playerOneName == null) {
 		playerOneName = "Player 1";
 	} else {
-		//Easter egg for cousin
-		if (playerOneName.toLowerCase() == 'lucas' || playerOneName.toLowerCase() == 'luketheduke147') {
-			alert("Lucas! Ryan says Hi :)");
-		}
-		//Easter egg end
 		localStorage.setItem("PlayerOneName", playerOneName);
 	}
 	mobileSetup(true);
@@ -163,41 +161,46 @@ function mobileSetup() {
 		addEvent("touchstart", bottomSection, function() {startMove('down', playerOne);});
 		addEvent("touchstart", leftSection, function() {startMove('left', playerOne);});
 		addEvent("touchstart", rightSection, function() {startMove('right', playerOne);});
+		selectAI();
 		} else {
-			if (storagePresent) {
-				//No - offer two players?
-				if (localStorage.getItem("TwoPlayers") == null || showAllSettings == true) {
-					twoPlayers = confirm("Do you want to enable two players?");
-					localStorage.setItem("TwoPlayers", twoPlayers);
-				} else if (localStorage.getItem("TwoPlayers") != null) {
-					twoPlayers = localStorage.getItem("TwoPlayers") == "true" ? true:false;
-				}
-				if (twoPlayers) {
-					if (localStorage.getItem("PlayerTwoName") == null || showAllSettings == true) {
-						if (localStorage.getItem("PlayerTwoName") != null) {
-							startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", localStorage.getItem("PlayerTwoName"), playerTwoNameReceived);
-							return;
-						} else {
-							startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", "Player 2", playerTwoNameReceived);
-							return;
-						}
-					} else if (localStorage.getItem("PlayerTwoName") != null) {
-						playerTwoName = localStorage.getItem("PlayerTwoName");
-						selectAI();
-					}
-				}
+			if (showAllSettings || !storagePresent || localStorage.getItem("TwoPlayers") == null) {
+				startConfirmModal("Two players?", "Do you want to enable two players?", twoPlayerTurnedOn, twoPlayerTurnedOff);
+				return;
 			} else {
-				twoPlayers = confirm("Do you want to enable two players?");
-				localStorage.setItem("TwoPlayers", twoPlayers);
-				if (twoPlayers) {
-					startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", "Player 2", playerTwoNameReceived);
-					return;
-				}
+				twoPlayers = localStorage.getItem("TwoPlayers") == "true" ? true:false;
+			}
+			if (twoPlayers) {
+				twoPlayerTurnedOn();
+				return;
+			} else {
+				selectAI();
+				return;
 			}
 		}
-		selectAI();
 }
-function playerTwoNameReceived() {
+function twoPlayerTurnedOn() {
+	twoPlayers = true;
+	localStorage.setItem("TwoPlayers", twoPlayers);
+	if (localStorage.getItem("PlayerTwoName") == null || showAllSettings == true) {
+		if (localStorage.getItem("PlayerTwoName") != null) {
+			startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", localStorage.getItem("PlayerTwoName"), playerTwoNameReceivedFromModal);
+			return;
+		} else {
+			startPromptModal("Player 2", "Choose a name for player 2!", "Player 2 Name: ", "Player 2", playerTwoNameReceivedFromModal);
+			return;
+		}
+	} else if (localStorage.getItem("PlayerTwoName") != null) {
+		playerTwoName = localStorage.getItem("PlayerTwoName");
+		selectAI();
+		return;
+	}
+}
+function twoPlayerTurnedOff() {
+	twoPlayers = false;
+	localStorage.setItem("TwoPlayers", false);
+	selectAI();
+}
+function playerTwoNameReceivedFromModal() {
 	playerTwoName = modalInput.value;
 	//Trim playerTwoName
 	playerTwoName = playerTwoName.trim();
@@ -214,17 +217,20 @@ function playerTwoNameReceived() {
 function selectAI() {
 	if (storagePresent && localStorage.getItem("AINumber") != null) {
 		if (showAllSettings == true) {
-			startPromptModal("Play with AI?", "How many AI snakes do you want to play with (max 5!)?", "How many : ", localStorage.getItem("AINumber"), aiNumberReceived);
+			startPromptModal("Play with AI?", "How many AI snakes do you want to play with (max 5!)?", "How many : ", localStorage.getItem("AINumber"), aiNumberReceivedFromModal);
+			return;
 		} else {
 			aiNumber = localStorage.getItem("AINumber");
 			resetColours();
+			return;
 		}
 	} else {
-		startPromptModal("Play with AI?", "How many AI snakes do you want to play with (max 5!)?", "How many : ", "5", aiNumberReceived);
-	}	
+		startPromptModal("Play with AI?", "How many AI snakes do you want to play with (max 5!)?", "How many : ", "5", aiNumberReceivedFromModal);
+		return;
+	}
 }
 
-function aiNumberReceived() {
+function aiNumberReceivedFromModal() {
 	var tempAIs = modalInput.value;
 	if (!tempAIs || isNaN(parseInt(tempAIs))) {
 		aiNumber = 0;
@@ -242,16 +248,41 @@ function resetColours() {
 	if (storagePresent) {
 		//Offer the ability to reset colours
 		if (showAllSettings) {
-			if (confirm("Do you want reset your colours?")) {
-				localStorage.removeItem("SnakePrimary" + playerOneName);
-				localStorage.removeItem("SnakeSecondary" + playerOneName);
-				localStorage.removeItem("SnakeEye" + playerOneName);
-				localStorage.removeItem("SnakePrimary" + playerTwoName);
-				localStorage.removeItem("SnakeSecondary" + playerTwoName);
-				localStorage.removeItem("SnakeEye" + playerTwoName);
-			}
+			startConfirmModal("Reset Colours?", "Do you want reset your colours?", doResetColours, chooseClassic);
+			return
 		}
+	} 
+	chooseClassic();
+}
+function doResetColours() {
+	localStorage.removeItem("SnakePrimary" + playerOneName);
+	localStorage.removeItem("SnakeSecondary" + playerOneName);
+	localStorage.removeItem("SnakeEye" + playerOneName);
+	localStorage.removeItem("SnakePrimary" + playerTwoName);
+	localStorage.removeItem("SnakeSecondary" + playerTwoName);
+	localStorage.removeItem("SnakeEye" + playerTwoName);
+	chooseClassic();
+}
+function chooseClassic() {
+	if (showAllSettings || !storagePresent || localStorage.getItem("ClassicSnake") == null) {
+		classicSnake = false;
+		localStorage.setItem("ClassicSnake", false);
+		startConfirmModal("Classic Snake?", "Do you want to enable classic-style Snake?", classicSnakeTurnedOn, classicSnakeTurnedOff);
+		return;
+	} else {
+		classicSnake = localStorage.getItem("ClassicSnake") == "true" ? true:false;
+		resetEverything();
+		return;
 	}
+}
+function classicSnakeTurnedOn() {
+	classicSnake = true;
+	localStorage.setItem("ClassicSnake", classicSnake);
+	resetEverything();
+}
+function classicSnakeTurnedOff() {
+	classicSnake = false;
+	localStorage.setItem("ClassicSnake", classicSnake);
 	resetEverything();
 }
 function startMove(moveDirection, whichSnake) {
@@ -392,11 +423,24 @@ function powerUpHit(whichSnake) {
 	if (resetting) {
 		return;
 	}
+	whichSnake.internalScore = whichSnake.internalScore + 1;
+	whichSnake.scoreBox.innerHTML = whichSnake.internalScore;
+	if (whichSnake.internalScore > persHighScore && whichSnake.aiDriven == false) {
+		persHighScore = whichSnake.internalScore;
+		persHighScoreBox.innerHTML = persHighScore + " (" + whichSnake.snakeName + ")";
+		if (storagePresent) {
+			localStorage.setItem("PersonalHighScore", persHighScore);
+			localStorage.setItem("PersonalHighScoreName", whichSnake.snakeName);
+			//postHighScore(whichSnake.snakeName, whichSnake.internalScore);
+		}
+	}
 	whichSnake.appendSegment().style.display = 'none';
-	effects.getRandomEffect()(whichSnake);
+	if (!classicSnake) {
+		effects.getRandomEffect()(whichSnake);
+	}
 	randomiseLocation(powerUp.collisionDiv);
 }
-function enemyKilled(whichBullet) {
+/*function enemyKilled(whichBullet) {
 	if (resetting) {
 		return;
 	}
@@ -411,24 +455,25 @@ function enemyKilled(whichBullet) {
 			//postHighScore(whichBullet.parentSnake.snakeName, whichBullet.parentSnake.internalScore);
 		}
 	}
-}
+}*/
 
 function gameLost(whichSnake) {
 	if (resetting) {
 		return;
 	}
-	var resultString = "Round over - " + whichSnake.snakeName + " died!\n";
+	var resultString = "Round over - " + whichSnake.snakeName + " died!<br>";
 	for (var i = 0; i < allEntities.length; ++i) {
 		if (allEntities[i].entityClass == 'snake') {
-			if (snakeResults.indexOf(allEntities[i].snakeName + " scored " + allEntities[i].internalScore + "\n") == -1) {
-				resultString += allEntities[i].snakeName + " scored " + allEntities[i].internalScore + "\n";
+			if (snakeResults.indexOf(allEntities[i].snakeName + " scored " + allEntities[i].internalScore + "<br>") == -1) {
+				resultString += allEntities[i].snakeName + " scored " + allEntities[i].internalScore + "<br>";
 			}
 		}
 	}
 	resultString += snakeResults;
 	snakeResults = "";
-	alert(resultString);
-	resetEverything();
+	startAlertModal("Game over!", resultString, function () {
+		resetEverything();
+	});
 }
 function nextFrame() {
 	if (getLeft(playerOne.collisionDiv) % entitySize > 0) {
@@ -479,12 +524,13 @@ function nextFrame() {
 							}
 							//Bullet hit enemy
 							if (firstCollided.entityClass == 'bullet' && secondCollided.entityClass == 'enemy') {
-								enemyKilled(firstCollided);
+								//enemyKilled(firstCollided);
 								secondCollided.kill();
 								continue;
 							}
+							//Enemy hit bullet
 							if (firstCollided.entityClass == 'enemy' && secondCollided.entityClass == 'bullet') {
-								enemyKilled(secondCollided);
+								//enemyKilled(secondCollided);
 								firstCollided.kill();
 								continue;
 							}
@@ -507,6 +553,7 @@ function nextFrame() {
 							if (firstCollided.entityClass != 'powerup' && firstCollided.entityClass != 'snakesegment') {
 								firstCollided.kill();
 							}
+							//Do not kill powerups or snake segments
 							if (secondCollided.entityClass != 'powerup' && secondCollided.entityClass != 'snakesegment') {
 								secondCollided.kill();
 							}
@@ -568,6 +615,13 @@ function randomiseLocation(theElement) {
 			if (theElement == allEntities[i].collisionDiv) {
 				continue;
 			}
+			if (theElement.className.indexOf("snake head") != -1) {
+				//It was easier to just make it so that snakes don't spawn on the same vertical axis
+				if (topPos == getTop(allEntities[i].collisionDiv)) {
+					randomiseProper(theElement);
+					continue randomCheckStart;
+				}
+			}
 			if (leftPos == getLeft(allEntities[i].collisionDiv) && topPos == getTop(allEntities[i].collisionDiv)) {
 				randomiseProper(theElement);
 				continue randomCheckStart;
@@ -614,6 +668,7 @@ function entityDied(theEntity) {
 function resetEverything() {
 	resetting = true;
 	paused = false;
+	pauseButton.innerHTML = "Pause";
 	//Start
 	if (frameInterval != undefined) {
 		clearInterval(frameInterval);
@@ -636,7 +691,12 @@ function resetEverything() {
 	scaleButtons();
 	infoLog.style.paddingTop = playableHeight/3 + 'px';
 	infoLog.style.fontSize = entitySize*2 + 'px';
-	postLog('Welcome to BrowerSnake!');
+	if (classicSnake) {
+		postLog('Welcome to Snake!');
+	} else {
+		postLog('Welcome to BrowerSnake!');
+	}
+	
 	//Reset colour array and AI Name array
 	colorArray =  ["DeepPink", "MediumVioletRed", "Crimson", "Red ", "DarkOliveGreen", "Lime", "MediumSpringGreen ", "Green", "BlueViolet", "Purple", "Indigo", "MediumSlateBlue ", "OrangeRed", "Orange", "DarkOrange", "Yellow", "Gold", "Aqua", "Teal", "LightSeaGreen", "Blue", "DeepSkyBlue", "Maroon", "MidnightBlue", "DimGray", "Honeydew"];
 	aiNameArray = ['Squish', 'Squash', 'Slither', 'Slide', 'Slugo', 'Mush', 'Fluffy', 'Geoff', 'Sid', 'Splashy', 'Splat'];
@@ -656,8 +716,12 @@ function resetEverything() {
 	allEntities = [];
 	
 	//Reset game settings
+	if (classicSnake) {
+		enemyCount = 0;
+	} else {
+		enemyCount = 1;
+	}
 	enemyMovementDelay = 16;
-	enemyCount = 1;
 	aliveEnemies = 0;
 	aliveAI = 0;
 	
@@ -667,7 +731,6 @@ function resetEverything() {
 	//Initialise snakes
 	//PlayerOne
 	if (!twoPlayers && playerOneName.toLowerCase() == "aime") {
-		alert("Cheat code enabled - you are an AI!");
 		playerOne = new Snake(playerOneName, true);
 	} else {
 		playerOne = new Snake(playerOneName, false);
@@ -681,18 +744,37 @@ function resetEverything() {
 	for (var i = 0; i < aiNumber; ++i) {
 		tempSnake = new Snake(aiNameArray.splice(Math.floor(Math.random() * aiNameArray.length), 1), true);
 	}
+	
 	//Setup initial enemy
-	new Enemy();
+	if (!classicSnake) {
+		new Enemy();
+	}
 	
 	setScoreBoard();
-	resetting = false;
+	//Cheats and easter eggs are handled here
+	if (playerOne.aiDriven) {
+		startAlertModal("Cheat enabled!", "Cheat code accepted. You are now an AI!", function () {
+			resetting = false;
+		});
+	} else if (playerOneName.toLowerCase() == "lucas") {
+		startAlertModal("Hi Cousin!", "Hi Lucas, from Ryan! :)", function () {
+			resetting = false;
+		});
+	}  else if (playerOneName.toLowerCase() == "brandon") {
+		startAlertModal("Hi Brandon!", "Lots of love from Ryan! <3", function () {
+			resetting = false;
+		});
+	} else {
+		resetting = false;
+	}
+	
 }
 function pauseGame() {
 	if (paused) {
-		document.getElementById("pause").innerHTML = "Pause";
+		pauseButton.innerHTML = "Pause";
 		paused = false;
 	} else {
-		document.getElementById("pause").innerHTML = "Resume";
+		pauseButton.innerHTML = "Resume";
 		paused = true;
 	}
 }

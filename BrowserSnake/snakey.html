@@ -28,12 +28,12 @@
 		<div id="modalBox" class="modal">
 		  <!-- Modal popup content -->
 		  <div class="modal-content">
-			<span class="closeSpan">&times;</span>
 			<h1 id="modalTitle"></h1>
 			<p id="modalTextContent">Default content</p>
 			<label id="modalInputLabel" for="modalInput">Input:</label>
 			<input type="text" id="modalInput" name="modalInput">
 			<button class="modalSubmit">Submit</button>
+			<span class="closeSpan">&times;</span>
 		  </div>
 		</div>
 		<div class="main">
@@ -142,6 +142,7 @@ moveStep: function() {
 		this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
 	}
 	//Lastly, an action can be assigned to the Entity that will be performed after the move
+	//In this base entity, it does nothing - but derived objects can override the alternativeAction function
 	this.alternativeAction();
 }
 </code>

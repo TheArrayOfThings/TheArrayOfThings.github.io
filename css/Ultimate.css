@@ -37,6 +37,7 @@ button {
 	float:right;
 	overflow:hidden;
 	text-transform: uppercase;
+	cursor: pointer;
 }
 button.topMenuRight	{
 	position:relative;
@@ -60,11 +61,15 @@ button:hover, button:focus {
 	background-color:#633af8;
 	background: linear-gradient(#b35ed4, #633af8);
 }
-button.modalSubmit {
+button.modalButton, button.modalNo {
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
-	display:none;
+}
+button.modalYes {
+	float: left;
+	font-size: 28px;
+	font-weight: bold;
 }
 button.expandableHeader {
 	text-transform: unset;
@@ -82,10 +87,6 @@ button.expandableHeader:active {
 	transform: translate(-2px, 1px);
 	animation: none;
 }
-button.expandableHeader:hover, button.expandableHeader:focus {
-	background-color:#633af8;
-	background: linear-gradient(#b35ed4, #633af8);
-}
 /*End of Buttons*/
 /*Expandable components*/
 .expandableContent {
@@ -100,50 +101,39 @@ pre, code {
 }
 /*Modal components*/
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 4; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 4; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 .modal-content {
 	background-color: black;
 	margin: auto;
 	padding: 20px;
-	border: 1px solid #888;
+	border: 2px solid #4717F6;
+	border-radius:0.5em;
 	width: 80%;
 	overflow:hidden;
 	color:white;
-}
-.closeSpan {
-	color: #aaaaaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-	display:none;
 }
 #modalInput, #modalInputLabel {
 	display:none;
 }
 div#modalOverlay {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  z-index: 3;
-  background-color: #4d4b46;
-  opacity:0.5;
-  display:none;
-}
-.closeSpan:hover, .closeSpan:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 3;
+	background-color: #4d4b46;
+	opacity:0.5;
+	display:none;
 }
 /*End of Modal Components*/
 h1, div.quiz, ul.quiz li, table	{

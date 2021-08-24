@@ -285,6 +285,9 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			snake.beforeMoveLeft = tempLeft;
 			snake.childSegments[i].collisionDiv.style.display = 'inline';
 		}
+		if (classicSnake) {
+			return;
+		}
 		if (snake.fireTiming >= snake.fireDelay) {
 			snake.fireTiming = 0;
 			snake.fire();

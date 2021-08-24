@@ -1,6 +1,8 @@
 var modal;
 var closeSpan;
-var modalSubmit;
+var modalButton;
+var modalYes;
+var modalNo;
 var modalInput;
 var modalInputLabel;
 var modalOverlay;
@@ -8,14 +10,17 @@ var modalTextContent;
 var modalTitle;
 var modalVisible = false;
 var modalCallback;
-var callbackEventListener;
+var yesCallback;
+var noCallback;
 function setupModal () {
 	//Modal Div 
 	modal = document.getElementById("modalBox");
-	//Span closes the modal popup
-	closeSpan = document.getElementsByClassName("closeSpan")[0];
-	//Modal submit closes the modal popup too, but is a button!
-	modalSubmit = document.getElementsByClassName("modalSubmit")[0];
+	//Modal button closes the modal popup and performs a follow-up function
+	modalButton = document.getElementsByClassName("modalButton")[0];	
+	//Modal button closes the modal popup and performs a follow-up function
+	modalYes = document.getElementsByClassName("modalYes")[0];	
+	//Modal button closes the modal popup and performs a follow-up function
+	modalNo = document.getElementsByClassName("modalNo")[0];
 	//Input box for when the modal is in prompt mode
 	modalInput = document.getElementById("modalInput");
 	//Label for the input box
@@ -28,12 +33,19 @@ function setupModal () {
 	modalTitle = document.getElementById("modalTitle");
 	try {
 		//Clicking the Span or Submit button should close the modal popup
-		closeSpan.onclick = function() {
+		modalButton.addEventListener("click", function() {
 			modalOverlay.style.display = "none";
 			modal.style.display = "none";
 			modalVisible = false;
-		}
-		modalSubmit.addEventListener("click", function() {
+		});
+		//Clicking the Yes button should close the modal popup
+		modalYes.addEventListener("click", function() {
+			modalOverlay.style.display = "none";
+			modal.style.display = "none";
+			modalVisible = false;
+		});
+		//Clicking the Yes button should close the modal popup
+		modalNo.addEventListener("click", function() {
 			modalOverlay.style.display = "none";
 			modal.style.display = "none";
 			modalVisible = false;
@@ -50,26 +62,66 @@ function startPromptModal(modalTitleText, displayText, labelText, defaultInputTe
 	modalCallback = modalCallbackParam;
 	modalOverlay.style.display = "unset";
 	modal.style.display = "block";
-	closeSpan.style.display = "none";
-	modalSubmit.style.display = "unset";
+	modalButton.style.display = "unset";
+	modalButton.textContent = "Submit";
+	modalYes.style.display = "none";	
+	modalNo.style.display = "none";
 	modalInput.style.display = "unset";
 	modalInput.value = defaultInputText;
 	modalInputLabel.style.display = "unset";
 	modalInputLabel.innerHTML = labelText;
 	modalTextContent.innerHTML = displayText;
 	modalTitle.innerHTML = modalTitleText;
-	callbackEventListener = modalSubmit.addEventListener("click", modalCallbackFunction);
+	modalButton.addEventListener("click", modalCallbackFunction);
+}
+
+function startAlertModal(modalTitleText, displayText, modalCallbackParam) {
+	modalVisible = true;
+	modalCallback = modalCallbackParam;
+	modalOverlay.style.display = "unset";
+	modal.style.display = "block";
+	modalButton.style.display = "unset";
+	modalButton.textContent = "OK";
+	modalYes.style.display = "none";	
+	modalNo.style.display = "none";
+	modalInput.style.display = "none";
+	modalInputLabel.style.display = "none";
+	modalTextContent.innerHTML = displayText;
+	modalTitle.innerHTML = modalTitleText;
+	modalButton.addEventListener("click", modalCallbackFunction);
+}
+
+function startConfirmModal(modalTitleText, displayText, yesCallbackParam, noCallbackParam) {
+	modalVisible = true;
+	yesCallback = yesCallbackParam;
+	noCallback = noCallbackParam;
+	modalOverlay.style.display = "unset";
+	modal.style.display = "block";
+	modalButton.style.display = "none";
+	modalYes.style.display = "unset";	
+	modalNo.style.display = "unset";
+	modalInput.style.display = "none";
+	modalInputLabel.style.display = "none";
+	modalTextContent.innerHTML = displayText;
+	modalTitle.innerHTML = modalTitleText;
+	modalYes.addEventListener("click", yesCallbackFunction);
+	modalNo.addEventListener("click", noCallbackFunction);
 }
 
 function modalCallbackFunction() {
-	console.log("Modal callback: " + modalCallback);
 	if (modalCallback) {
-		console.log("removing event listener");
-		//modalSubmit.removeEventListener("click", callbackEventListener);
 		modalCallback();
-		//modalCallback = null;
 	}
-	//callbackEventListener = null;
+}
+function yesCallbackFunction() {
+	if (yesCallback) {
+		yesCallback();
+	}
+}
+function noCallbackFunction() {
+	if (noCallback) {
+		noCallback();
+	}
 }
 
 setupModal();

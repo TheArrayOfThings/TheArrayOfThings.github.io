@@ -65,6 +65,7 @@ function Entity() {
 				this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
 			}
 			//Lastly, an action can be assigned to the Entity that will be performed after the move
+			//In this base entity, it does nothing - but derived objects can override the alternativeAction function
 			this.alternativeAction();
 		},
 		autoChooseDirection: function() {
