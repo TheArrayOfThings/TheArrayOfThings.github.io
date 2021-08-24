@@ -362,10 +362,9 @@ function snakeyResizeend() {
 	if (newPixelHeight % 2 != 0) {
 		--newPixelHeight;
 	}
-	if (newPixelHeight == pixelHeight && pixelWidth == playableWidth) {
+	if (newPixelHeight == pixelHeight && newPixelWidth == pixelWidth) {
 		return;
 	}
-	
 	if (new Date() - resizeSnakeyRtime < resizeSnakeyDelta) {
 		setTimeout(snakeyResizeend, resizeSnakeyDelta);
 	} else {
