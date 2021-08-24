@@ -35,7 +35,7 @@ var aiNameArray = [];
 var initialPieces = 10;
 var tickRate = 50;
 var frameInterval;
-var resetting = false;
+var resetting = true;
 var powerUp;
 var powerUpColour = 'orange';
 var effects;
@@ -110,6 +110,9 @@ function pageLoaded() {
 	addEvent("keydown", document, keyParse);
 	//Handle resize of window
 	window.addEventListener("resize", function() {
+		if (resetting) {
+			return;
+		}
 		resizeSnakeyRtime = new Date();
 		if (resizeSnakeyTimeout === false) {
 			resizeSnakeyTimeout = true;
