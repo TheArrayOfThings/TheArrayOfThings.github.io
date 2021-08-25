@@ -40,6 +40,7 @@
 		<div class="main">
 			<h1>Welcome</h1>
 			<p>This is BrowserSnake! A game made entirely in pure Javascript, HTML, and CSS!</p>
+			<ul class="contentMenu"></ul>
 			<div id="background">
 				<div id="playable">
 					<p id="info"></p>
@@ -66,7 +67,7 @@
 				</div>
 			</div>
 			<div class="expandableSection">
-				<h1 class="expandableHeader">What went into this</h1>
+				<button class="expandableHeader">Overview</button>
 					<div class="expandableContent">
 						<h2>Premise</h2>
 						<p>I wanted to get better at Javascript, CSS, and DOM manipulation so I decided the best way to do that would be to create a simple game.</p>
@@ -86,7 +87,12 @@
 							<li>Compatible with most browsers and devices</li>
 							<li>Pause button</li>
 						</ul>
-						<h2>Technical Details</h2>
+					</div>
+			</div>
+			<div class="expandableSection">
+				<button class="expandableHeader">Technical Details</button>
+					<div class="expandableContent">
+									<h2>Technical Details</h2>
 						<p>At a basic level, there is a background div element and a playable area div element. 
 						The playable area is dynamically scaled so that it exactly fits a grid of squares, these squares acting as tiles in a game. 
 						Every element in the game, such as a snake segment, an enemy, or a powerup, takes up exactly one of these tiles.</p>
@@ -148,8 +154,8 @@ moveStep: function() {
 }
 </code>
 </pre>
-					</div>
-			</div>
+				</div>
+			</div>	
 		</div>
 		<div id="footer"></div>
 		<script src="/Highlight/highlight.min.js"></script>
