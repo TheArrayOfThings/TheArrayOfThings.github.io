@@ -1,72 +1,72 @@
 "use strict";
 
 //Fundamental variable declaration
-var topSection;
-var bottomSection;
-var leftSection;
-var rightSection;
-var background;
-var playable;
-var pixelWidth;
-var pixelHeight;
-var playableWidth;
-var playableHeight;
-var lostHorizontalPixels;
-var lostVerticalPixels;
-var entitySize = 10;
-var currentPowerUp;
-var persHighScore = 0;
-var persHighScoreBox;
-var servHighScore = 0;
-var servHighScoreBox;
-var scoreLabels;
-var scores;
-var resizeSnakeyRtime;
-var resizeSnakeyTimeout = false;
-var resizeSnakeyDelta = 200;
-var infoLog;
-var pauseButton;
+let topSection;
+let bottomSection;
+let leftSection;
+let rightSection;
+let background;
+let playable;
+let pixelWidth;
+let pixelHeight;
+let playableWidth;
+let playableHeight;
+let lostHorizontalPixels;
+let lostVerticalPixels;
+let entitySize = 10;
+let currentPowerUp;
+let persHighScore = 0;
+let persHighScoreBox;
+let servHighScore = 0;
+let servHighScoreBox;
+let scoreLabels;
+let scores;
+let resizeSnakeyRtime;
+let resizeSnakeyTimeout = false;
+let resizeSnakeyDelta = 200;
+let infoLog;
+let pauseButton;
 
 //Game settings
-var scale = 4;
-var twoPlayers = false;
-var aiNumber = 0;
-var aliveAI = 0;
-var colorArray =  [];
-var aiNameArray = [];
-var initialPieces = 10;
-var tickRate = 50;
-var frameInterval;
-var resetting = true;
-var powerUp;
-var powerUpColour = 'orange';
-var effects;
-var snakeResults = "";
-var showAllSettings = true;
-var paused = false;
-var classicSnake = false;
+let scale = 4;
+let twoPlayers = false;
+let aiNumber = 0;
+let aliveAI = 0;
+let colorArray =  [];
+let aiNameArray = [];
+let initialPieces = 10;
+let tickRate = 50;
+let frameInterval;
+let resetting = true;
+let powerUp;
+let powerUpColour = 'orange';
+let effects;
+let snakeResults = "";
+let showAllSettings = true;
+let paused = false;
+let classicSnake = false;
 
 //Snakes
-var playerOne;
-var playerTwo;
-var playerOneName = "Player 1";
-var playerTwoName = "Player 2";
+let playerOne;
+let playerTwo;
+let playerOneName = "Player 1";
+let playerTwoName = "Player 2";
 
 //Enemies
-var enemyCount = 1;
-var aliveEnemies = 0;
-var moveDirections = ['left', 'right', 'up', 'down', 'none'];
-var enemyMovementDelay = 16;
+let enemyCount = 1;
+let aliveEnemies = 0;
+let moveDirections = ['left', 'right', 'up', 'down', 'none'];
+let enemyMovementDelay = 16;
 
 //Entities
-var allEntities = [];
-var toKill = [];
+let allEntities = [];
+let toKill = [];
 
 addEvent("load", window, pageLoaded);
 
 function pageLoaded() {
 	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
-		setTimeout(pageLoaded, 100);
+		setTimeout(pageLoaded, 10);
 	}
 	effects = new Effects();
 	//Grab required elements from page
@@ -234,7 +234,7 @@ function selectAI() {
 }
 
 function aiNumberReceivedFromModal() {
-	var tempAIs = modalInput.value;
+	let tempAIs = modalInput.value;
 	if (!tempAIs || isNaN(parseInt(tempAIs))) {
 		aiNumber = 0;
 	} else {
@@ -286,6 +286,7 @@ function classicSnakeTurnedOn() {
 	resetEverything();
 }
 function classicSnakeTurnedOff() {
+	alert("Browsersnake activated!");
 	classicSnake = false;
 	if (!isInternetExplorer) {
 		localStorage.setItem("ClassicSnake", classicSnake);
@@ -321,22 +322,22 @@ function setPlayable() {
 	playable.style.top = lostVerticalPixels/2 + 'px';
 }
 function setScoreBoard() {
-	var scoreBoard = document.getElementsByClassName('scoreboard');
-	for (var i = 0; i <  scoreBoard.length; ++i) {
+	let scoreBoard = document.getElementsByClassName('scoreboard');
+	for (let i = 0; i <  scoreBoard.length; ++i) {
 		scoreBoard[i].style.fontSize = entitySize/2 + 'px';
 		scoreBoard[i].style.overflow = 'hidden';
 	}
 }
 function scaleButtons() {
-	//var buttons = document.getElementsByTagName('button');
-	/*for (var i = 0; i < buttons.length; ++i) {
+	//let buttons = document.getElementsByTagName('button');
+	/*for (let i = 0; i < buttons.length; ++i) {
 		buttons[i].style.fontSize = entitySize + 'px';
 		buttons[i].style.overflow = 'hidden';
 	}*/
-	var sectionButtons = document.getElementsByClassName('section');
-	var sectionHeight = parseInt(pixelHeight/10) + 'px'	;
-	var sectionWidth = parseInt(sectionHeight.replace('px', '')) * 2 + 'px';
-	for (var i = 0; i < sectionButtons.length; ++i) {
+	let sectionButtons = document.getElementsByClassName('section');
+	let sectionHeight = parseInt(pixelHeight/10) + 'px'	;
+	let sectionWidth = parseInt(sectionHeight.replace('px', '')) * 2 + 'px';
+	for (let i = 0; i < sectionButtons.length; ++i) {
 		sectionButtons[i].style.width = sectionWidth;
 		sectionButtons[i].style.height = sectionHeight;
 		if (sectionButtons[i].id.indexOf('bottomSection') != -1) {
@@ -358,11 +359,11 @@ function scaleButtons() {
 	}
 }
 function snakeyResizeend() {
-	var newPixelWidth = background.clientWidth;
+	let newPixelWidth = background.clientWidth;
 	if (newPixelWidth % 2 != 0) {
 		--newPixelWidth;
 	}
-	var newPixelHeight = background.clientHeight;
+	let newPixelHeight = background.clientHeight;
 	if (newPixelHeight % 2 != 0) {
 		--newPixelHeight;
 	}
@@ -467,8 +468,8 @@ function gameLost(whichSnake) {
 	if (resetting) {
 		return;
 	}
-	var resultString = "Round over - " + whichSnake.snakeName + " died!<br>";
-	for (var i = 0; i < allEntities.length; ++i) {
+	let resultString = "Round over - " + whichSnake.snakeName + " died!<br>";
+	for (let i = 0; i < allEntities.length; ++i) {
 		if (allEntities[i].entityClass == 'snake') {
 			if (snakeResults.indexOf(allEntities[i].snakeName + " scored " + allEntities[i].internalScore + "<br>") == -1) {
 				resultString += allEntities[i].snakeName + " scored " + allEntities[i].internalScore + "<br>";
@@ -495,9 +496,9 @@ function nextFrame() {
 	if (modalVisible || paused) {
 		return;
 	}
-	var tempArray = [];
+	let tempArray = [];
 	//Cleanup killed objects
-	for (var i = 0; i < allEntities.length; ++i) {
+	for (let i = 0; i < allEntities.length; ++i) {
 		if (allEntities[i].isDead == false) {
 			tempArray.push(allEntities[i]);
 		} else {
@@ -506,10 +507,10 @@ function nextFrame() {
 	}
 	allEntities = tempArray;
 	//First, check if any entities have collided
-	for (var i = 0; i < allEntities.length; ++i) {
+	for (let i = 0; i < allEntities.length; ++i) {
 		try {
 			//Check if collided with another entity
-			for (var e = 0; e < allEntities.length; ++e) {
+			for (let e = 0; e < allEntities.length; ++e) {
 				try {
 					if (allEntities[i] == allEntities[e]) {
 						continue;
@@ -517,8 +518,8 @@ function nextFrame() {
 					if (getLeft(allEntities[i].collisionDiv) == getLeft(allEntities[e].collisionDiv)) {
 						if (getTop(allEntities[i].collisionDiv) == getTop(allEntities[e].collisionDiv)) {
 							//Something is colliding
-							var firstCollided = allEntities[i];
-							var secondCollided = allEntities[e];
+							let firstCollided = allEntities[i];
+							let secondCollided = allEntities[e];
 							//Snake hit powerup
 							if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'powerup') {
 								powerUpHit(firstCollided);
@@ -612,12 +613,12 @@ function nextFrame() {
 function randomiseLocation(theElement) {
 	randomiseProper(theElement);
 	//Check for collisions from random location
-	var collisionDetected = true;
+	let collisionDetected = true;
 	randomCheckStart:
 	while (collisionDetected) {
-		var leftPos = getLeft(theElement);
-		var topPos = getTop(theElement);
-		for (var i = 0; i < allEntities.length; ++i) {
+		let leftPos = getLeft(theElement);
+		let topPos = getTop(theElement);
+		for (let i = 0; i < allEntities.length; ++i) {
 			if (theElement == allEntities[i].collisionDiv) {
 				continue;
 			}
@@ -665,7 +666,7 @@ function entityDied(theEntity) {
 			if (aliveEnemies == 0) {
 				enemyCount = enemyCount + 2;
 				postLog(enemyCount + " enemies spawned!");
-				for (var i = 0; i < enemyCount; ++i) {
+				for (let i = 0; i < enemyCount; ++i) {
 					new Enemy();
 				}
 			}
@@ -746,8 +747,8 @@ function resetEverything() {
 		playerTwo = new Snake(playerTwoName, false);
 	}
 	//AI snakes
-	var tempSnake;
-	for (var i = 0; i < aiNumber; ++i) {
+	let tempSnake;
+	for (let i = 0; i < aiNumber; ++i) {
 		tempSnake = new Snake(aiNameArray.splice(Math.floor(Math.random() * aiNameArray.length), 1), true);
 	}
 	
@@ -785,11 +786,11 @@ function pauseGame() {
 	}
 }
 function debug() {
-	var tempSquare;
-	var verticalTiles = playableHeight/entitySize;
-	var horizontalTiles = playableWidth/entitySize;
-	for (var h = 0; h < horizontalTiles; ++h) {
-		for (var v = 0; v < verticalTiles; ++v) {
+	let tempSquare;
+	let verticalTiles = playableHeight/entitySize;
+	let horizontalTiles = playableWidth/entitySize;
+	for (let h = 0; h < horizontalTiles; ++h) {
+		for (let v = 0; v < verticalTiles; ++v) {
 			tempSquare = document.createElement('div');
 			tempSquare.style.boxSizing = "border-box";
 			tempSquare.style.border = "1px solid red";
@@ -809,7 +810,7 @@ function getLeft(theElement) {
 	return parseInt(theElement.style.left.replace('px', ''));
 }
 function postHighScore(snakeName, snakeScore) {
-	/*var reqObject = new XMLHttpRequest();
+	/*let reqObject = new XMLHttpRequest();
 	reqObject.open("PUT", "/hsm", true);
 	reqObject.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	reqObject.send(JSON.stringify({snakeName: snakeName, snakeHighScore: snakeScore}));
@@ -819,13 +820,13 @@ function postHighScore(snakeName, snakeScore) {
 function getHighScore() {
 	try {
 		//alert("Trying to get high score...");
-		var reqObject = new XMLHttpRequest();
+		let reqObject = new XMLHttpRequest();
 		reqObject.open("GET", "/hsm", true);
 		reqObject.setRequestHeader("Content-Type", "text/plain");
 		reqObject.onreadystatechange = function () {
 			if (reqObject.readyState === 4 && reqObject.status === 200) {
 				//Response received grab the highscore
-				var receivedJSON = JSON.parse(reqObject.responseText);
+				let receivedJSON = JSON.parse(reqObject.responseText);
 				servHighScore = receivedJSON.snakeHighScore;
 				servHighScoreBox.innerHTML = servHighScore + " (" + receivedJSON.snakeName + ")";
 			} 

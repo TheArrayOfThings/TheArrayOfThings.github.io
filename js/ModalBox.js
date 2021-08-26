@@ -13,10 +13,7 @@ let modalCallback;
 let yesCallback;
 let noCallback;
 function setupModal () {
-	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
-		setTimeout(setupModal, 100);
-		return;
-	}
+
 	//Modal Div 
 	modal = document.getElementById("modalBox");
 	//Modal button closes the modal popup and performs a follow-up function
@@ -48,8 +45,8 @@ function setupModal () {
 			modal.style.display = "none";
 			modalVisible = false;
 		});
-		//Clicking the Yes button should close the modal popup
-		addEvent("click", modalYes, function() {
+		//Clicking the No button should close the modal popup
+		addEvent("click", modalNo, function() {
 			modalOverlay.style.display = "none";
 			modal.style.display = "none";
 			modalVisible = false;
