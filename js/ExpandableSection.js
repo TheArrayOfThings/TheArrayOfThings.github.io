@@ -17,7 +17,7 @@ function initialiseExpandableSection() {
 		//Add the event listener to expand the section when clicked
 		tempHeader.addEventListener("click", toggleSection);
 		//Set the ID of the expandable section to the header text, with some parsing
-		expandableSetions[e].id = parseInternalLink(tempHeader.innerText);
+		expandableSetions[e].classList += " " + parseInternalLink(tempHeader.innerText);
 		//Create the list item for the content menu
 		tempListItem = document.createElement("li");
 		//Create the link used in said list item
@@ -27,7 +27,7 @@ function initialiseExpandableSection() {
 		//Set the link text to the header text, for consistency
 		tempLink.innerHTML = expandableSetions[e].innerText;
 		
-		tempLink.href = "#" + expandableSetions[e].id;
+		tempLink.href = "#" + parseInternalLink(tempHeader.innerText);
 		//You might be asking yourself "why is he doing something so convoluted here with the anchor redirect? Shouldn't the browser redirect internally without needing all this?"
 		//Well, to that I say that internal links are broken in the current version of FireFox mobile - so I'm overwriting the default behaviour.
 		//Also, I guess this allows me to use smooth scrollIntoView? That's a more valid reason to do this I suppose!
@@ -38,14 +38,12 @@ function initialiseExpandableSection() {
 }
 
 function openContent () {
-	var idToFind = parseInternalLink(this.innerText);
-	console.log(idToFind);
-	var expandableSection = document.getElementById(idToFind);
+	var classNameToFind = parseInternalLink(this.innerText);
+	var expandableSection = document.getElementsByClassName(classNameToFind)[0];
 	var sectionContent = expandableSection.getElementsByClassName("expandableContent")[0];
 	sectionContent.style.display ="unset";
 	expandableSection.style.display ="unset";
 	expandableSection.scrollIntoView({behavior: "smooth"}); 
-	return false;
 }
 
 function toggleSection () {
