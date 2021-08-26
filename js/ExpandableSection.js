@@ -28,7 +28,7 @@ function initialiseExpandableSection() {
 		tempLink.innerHTML = expandableSetions[e].innerText;
 		
 		tempLink.href = "#" + expandableSetions[e].id;
-		tempLink.addEventListener("click", openContent);
+		tempLink.onclick = openContent;
 		tempListItem.appendChild(tempLink);
 		contentMenu.appendChild(tempListItem);
 	}
@@ -40,7 +40,6 @@ function openContent () {
 	var expandableSection = document.getElementById(idToFind);
 	var sectionContent = expandableSection.getElementsByClassName("expandableContent")[0];
 	sectionContent.style.display ="unset";
-	sectionContent.scrollIntoView(); 
 }
 
 function toggleSection () {
