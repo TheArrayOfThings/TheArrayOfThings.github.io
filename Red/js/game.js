@@ -375,10 +375,10 @@ function setPlayable() {
    }
 }
 function scaleButtons() {
-	/*let buttons = document.getElementsByTagName('button');
+	//let buttons = document.getElementsByTagName('button');
 	let sectionWidth, sectionHeight;
 	let sectionButtons = document.getElementsByClassName('section');
-	for (let i = 0; i < buttons.length; ++i) {
+	/*for (let i = 0; i < buttons.length; ++i) {
 		buttons[i].style.fontSize = (scale*1.5) + 'px';
 		buttons[i].style.overflow = 'hidden';
 	}*/
