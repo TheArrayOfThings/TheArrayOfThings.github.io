@@ -328,7 +328,7 @@ function setScoreBoard() {
 	}
 }
 function scaleButtons() {
-	var buttons = document.getElementsByTagName('button');
+	//var buttons = document.getElementsByTagName('button');
 	/*for (var i = 0; i < buttons.length; ++i) {
 		buttons[i].style.fontSize = entitySize + 'px';
 		buttons[i].style.overflow = 'hidden';
