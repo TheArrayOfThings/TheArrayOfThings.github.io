@@ -162,9 +162,21 @@ moveStep: function() {
 		<script src="./Highlight/highlight.min.js"></script>
 		<script>
 			//Check for IE
-			if (!isInternetExplorer) {
-				hljs.highlightAll();
-			}
+			//if (!isInternetExplorer) {
+				//$(function(){
+				//	$.getScript("./Highlight/highlight.min.js")
+				//	.done(function( script, textStatus ) {
+						hljs.highlightAll();
+				//	})
+				//	});
+			
+			
+			
+				/*let highlightScript = document.createElement("script");
+				highlightScript.setAttribute("src", "./Highlight/highlight.min.js");
+				document.body.appendChild(highlightScript);
+				hljs.highlightAll();*/
+			//}
 		</script>
 		<script src="./js/ExpandableSection.js"></script>
 		<script src="./js/Logo.js"></script>
