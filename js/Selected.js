@@ -3,7 +3,6 @@ function setSelected() {
 	let windowURL = window.location.href;
 	if (windowURL.search(interalLinkRegex) != -1) {
 		windowURL = windowURL.split(interalLinkRegex)[0];
-		alert(windowURL);
 	}
 	let navigation = document.getElementsByClassName('navigate');
 	for (let i = 0; i < navigation.length; ++i) {
