@@ -7,4 +7,4 @@ function setTitle () {
 	topTitle.innerText = document.title;
 }
 
-window.addEventListener("load", setTitle);
+addEvent("load", window, setTitle);

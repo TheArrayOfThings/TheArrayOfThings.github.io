@@ -1,3 +1,5 @@
+"use strict";
+
 //Fundamental variable declaration
 var topSection;
 var bottomSection;
@@ -60,17 +62,13 @@ var enemyMovementDelay = 16;
 var allEntities = [];
 var toKill = [];
 
-//Compatibility
-var storagePresent = false;
+addEvent("load", window, pageLoaded);
 
-window.addEventListener("load", pageLoaded);
 function pageLoaded() {
-	if (topBarLoaded != true) {
+	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
 		setTimeout(pageLoaded, 100);
-		return;
 	}
 	effects = new Effects();
-	runCompatibility();
 	//Grab required elements from page
 	background = document.getElementById('background');
 	playable = document.getElementById('playable');
@@ -86,7 +84,7 @@ function pageLoaded() {
 	infoLog = document.getElementById('info');
 	
 	//Run compatibility checks/fixes
-	if (storagePresent) {
+	if (!isInternetExplorer) {
 		//If PersonalHighScore present, set to this!
 		if (localStorage.getItem("PersonalHighScore") != null) {
 			persHighScore = parseInt(localStorage.getItem("PersonalHighScore"));
@@ -109,7 +107,7 @@ function pageLoaded() {
 	//Add my keyparse event
 	addEvent("keydown", document, keyParse);
 	//Handle resize of window
-	window.addEventListener("resize", function() {
+	addEvent("resize", window, function() {
 		if (resetting) {
 			return;
 		}
@@ -121,7 +119,7 @@ function pageLoaded() {
 	});
 }
 function setupStart() {
-	if (storagePresent) {
+	if (!isInternetExplorer) {
 		//Sort out player names
 		if (localStorage.getItem("PlayerOneName") != null && showAllSettings == false) {
 			//Grab playerOneName from cookie
@@ -147,7 +145,9 @@ function playerOneNameReceived() {
 	if (playerOneName == '' || playerOneName == null) {
 		playerOneName = "Player 1";
 	} else {
-		localStorage.setItem("PlayerOneName", playerOneName);
+		if (!isInternetExplorer) {
+			localStorage.setItem("PlayerOneName", playerOneName);
+		}
 	}
 	mobileSetup(true);
 }
@@ -166,7 +166,7 @@ function mobileSetup() {
 		addEvent("touchstart", rightSection, function() {startMove('right', playerOne);});
 		selectAI();
 		} else {
-			if (showAllSettings || !storagePresent || localStorage.getItem("TwoPlayers") == null) {
+			if (showAllSettings || !!isInternetExplorer || localStorage.getItem("TwoPlayers") == null) {
 				startConfirmModal("Two players?", "Do you want to enable two players?", twoPlayerTurnedOn, twoPlayerTurnedOff);
 				return;
 			} else {
@@ -218,7 +218,7 @@ function playerTwoNameReceivedFromModal() {
 	selectAI();
 }
 function selectAI() {
-	if (storagePresent && localStorage.getItem("AINumber") != null) {
+	if (!isInternetExplorer && localStorage.getItem("AINumber") != null) {
 		if (showAllSettings == true) {
 			startPromptModal("Play with AI?", "How many AI snakes do you want to play with (max 5!)?", "How many : ", localStorage.getItem("AINumber"), aiNumberReceivedFromModal);
 			return;
@@ -248,7 +248,7 @@ function aiNumberReceivedFromModal() {
 }
 
 function resetColours() {
-	if (storagePresent) {
+	if (!isInternetExplorer) {
 		//Offer the ability to reset colours
 		if (showAllSettings) {
 			startConfirmModal("Reset Colours?", "Do you want reset your colours?", doResetColours, chooseClassic);
@@ -267,7 +267,7 @@ function doResetColours() {
 	chooseClassic();
 }
 function chooseClassic() {
-	if (showAllSettings || !storagePresent || localStorage.getItem("ClassicSnake") == null) {
+	if (showAllSettings || !!isInternetExplorer || localStorage.getItem("ClassicSnake") == null) {
 		classicSnake = false;
 		localStorage.setItem("ClassicSnake", false);
 		startConfirmModal("Classic Snake?", "Do you want to enable classic-style Snake?", classicSnakeTurnedOn, classicSnakeTurnedOff);
@@ -280,12 +280,16 @@ function chooseClassic() {
 }
 function classicSnakeTurnedOn() {
 	classicSnake = true;
-	localStorage.setItem("ClassicSnake", classicSnake);
+	if (!isInternetExplorer) {
+		localStorage.setItem("ClassicSnake", classicSnake);
+	}
 	resetEverything();
 }
 function classicSnakeTurnedOff() {
 	classicSnake = false;
-	localStorage.setItem("ClassicSnake", classicSnake);
+	if (!isInternetExplorer) {
+		localStorage.setItem("ClassicSnake", classicSnake);
+	}
 	resetEverything();
 }
 function startMove(moveDirection, whichSnake) {
@@ -430,7 +434,7 @@ function powerUpHit(whichSnake) {
 	if (whichSnake.internalScore > persHighScore && whichSnake.aiDriven == false) {
 		persHighScore = whichSnake.internalScore;
 		persHighScoreBox.innerHTML = persHighScore + " (" + whichSnake.snakeName + ")";
-		if (storagePresent) {
+		if (!isInternetExplorer) {
 			localStorage.setItem("PersonalHighScore", persHighScore);
 			localStorage.setItem("PersonalHighScoreName", whichSnake.snakeName);
 			//postHighScore(whichSnake.snakeName, whichSnake.internalScore);
@@ -451,7 +455,7 @@ function powerUpHit(whichSnake) {
 	if (whichBullet.parentSnake.internalScore > persHighScore && whichBullet.parentSnake.aiDriven == false) {
 		persHighScore = whichBullet.parentSnake.internalScore;
 		persHighScoreBox.innerHTML = persHighScore + " (" + whichBullet.parentSnake.snakeName + ")";
-		if (storagePresent) {
+		if (!isInternetExplorer) {
 			localStorage.setItem("PersonalHighScore", persHighScore);
 			localStorage.setItem("PersonalHighScoreName", whichBullet.parentSnake.snakeName);
 			//postHighScore(whichBullet.parentSnake.snakeName, whichBullet.parentSnake.internalScore);
@@ -561,7 +565,7 @@ function nextFrame() {
 							}
 						}
 					}
-				}  catch {
+				}  catch (err) {
 					continue;
 				}
 			}
@@ -600,7 +604,7 @@ function nextFrame() {
 				//Move all entities
 				allEntities[i].moveStep();
 			}
-		} catch {
+		} catch (err) {
 			continue;
 		}
 	}
@@ -836,98 +840,4 @@ function postLog(toPost) {
 	infoLog.style.animation = "none";
 	setTimeout(function() {infoLog.style.animation = "";}, 100);
 }
-function runCompatibility() {
-	if (typeof document.getElementsByClassName!='function') {
-		document.getElementsByClassName = function() {
-			var elms = document.getElementsByTagName('*');
-			var ei = [];
-			for (i=0;i<elms.length;i++) {
-				if (elms[i].getAttribute('class')) {
-					ecl = elms[i].getAttribute('class').split(' ');
-					for (j=0;j<ecl.length;j++) {
-						if (ecl[j].toLowerCase() == arguments[0].toLowerCase()) {
-							ei.push(elms[i]);
-						}
-					}
-				} else if (elms[i].className) {
-					ecl = elms[i].className.split(' ');
-					for (j=0;j<ecl.length;j++) {
-						if (ecl[j].toLowerCase() == arguments[0].toLowerCase()) {
-							ei.push(elms[i]);
-						}
-					}
-				}
-			}
-			return ei;
-		};
-	}
-	//Polyfill for Array.indexOf
-	if (!Array.prototype.indexOf) {
-		Array.prototype.indexOf = function(obj, start) {
-			for (var i = (start || 0), j = this.length; i < j; i++) {
-				if (this[i] === obj) {
-					return i; 
-				}
-			}
-			return -1;
-		};
-	}
-	//Polyfill for Function.bind (from Mozilla!)
-	if (!Function.prototype.bind) {
-		Function.prototype.bind = function(oThis) {
-		if (typeof this !== 'function') {
-		  // closest thing possible to the ECMAScript 5
-		  // internal IsCallable function
-		  throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
-		}
-
-		var aArgs   = Array.prototype.slice.call(arguments, 1),
-			fToBind = this,
-			fNOP    = function() {},
-			fBound  = function() {
-			  return fToBind.apply(this instanceof fNOP && oThis
-					 ? this
-					 : oThis,
-					 aArgs.concat(Array.prototype.slice.call(arguments)));
-			};
-
-		fNOP.prototype = this.prototype;
-		fBound.prototype = new fNOP();
-
-		return fBound;
-	  };
-	}
-	//Polyfill for trim
-	if(typeof String.prototype.trim !== 'function') {
-		String.prototype.trim = function() {
-			return this.replace(/^\s+|\s+$/g, '');
-		};
-	}
-	if(window.localStorage) {
-		storagePresent = true;
-	}
-}
-function addEvent(evnt, elem, func) { //IE compatibility...
-   if (elem.addEventListener)  // W3C DOM
-      elem.addEventListener(evnt,func,false);
-   else if (elem.attachEvent) { // IE DOM
-      elem.attachEvent("on"+evnt, func);
-   }
-   else { // No much to do
-      elem["on"+evnt] = func;
-   }
-}
-function removeElement(target) { //IE compatibility...
-	try {
-		target.remove();
-	}	catch (error) {
-		console.log(error);
-		target.parentNode.removeChild(target);
-	}
-}
-
-
-	
-
-
 //End

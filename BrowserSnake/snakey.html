@@ -9,6 +9,7 @@
 		<meta charset="UTF-8">
 			<title>BrowserSnake</title>
 		<link rel="icon" type="image/x-icon" href="/BrowserSnake/images/logobasic.ico">
+		<script src="/js/compatibility.js"></script> 
 		<script src="/js/jquery.js"></script> 
 		<script>
 			var topBarLoaded;
@@ -159,7 +160,12 @@ moveStep: function() {
 		</div>
 		<div id="footer"></div>
 		<script src="/Highlight/highlight.min.js"></script>
-		<script>hljs.highlightAll();</script>
+		<script>
+			//Check for IE
+			if (!isInternetExplorer) {
+				hljs.highlightAll();
+			}
+		</script>
 		<script src="/js/ExpandableSection.js"></script>
 		<script src="/js/Logo.js"></script>
 		<script src="/js/Selected.js"></script>

@@ -1,15 +1,6 @@
 'use strict';
 //Enable strict mode
 
-/*window.addEventListener("error", handleError, true); 
-function handleError(evt) {
-	if (evt.message) { // Chrome sometimes provides this
-		alert("error: "+evt.message +" at linenumber: "+evt.lineno+" of file: "+evt.filename); 
-	} else { 
-		alert("error: "+evt.type+" from element: "+(evt.srcElement || evt.target)); 
-	} 
-}*/
-
 //Fundamental variable declaration
 var topSection;
 var bottomSection;
@@ -90,9 +81,12 @@ var aiMoveDelay = 0;
 //Compatibility
 var storagePresent = false;
 
-window.onload = pageLoaded;
+addEvent("load", window, pageLoaded);
+
 function pageLoaded() {
-	runCompatibility();
+	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
+		setTimeout(pageLoaded, 100);
+	}
 	//Grab required elements from page
 	background = document.getElementById('background');
 	playable = document.getElementById('playable');
@@ -520,94 +514,6 @@ function getTop(theElement) {
 }
 function getLeft(theElement) {
 	return parseInt(theElement.style.left.replace('px', ''));
-}
-function removeElement(target) { //IE compatibility...
-	try {
-		target.remove();
-	}	catch (error) {
-		target.parentNode.removeChild(target);
-	}
-}
-function runCompatibility() {
-	if (typeof document.getElementsByClassName!='function') {
-		document.getElementsByClassName = function() {
-			let elms = document.getElementsByTagName('*');
-			let ei = [];
-			for (i=0;i<elms.length;i++) {
-				if (elms[i].getAttribute('class')) {
-					ecl = elms[i].getAttribute('class').split(' ');
-					for (j=0;j<ecl.length;j++) {
-						if (ecl[j].toLowerCase() == arguments[0].toLowerCase()) {
-							ei.push(elms[i]);
-						}
-					}
-				} else if (elms[i].className) {
-					ecl = elms[i].className.split(' ');
-					for (j=0;j<ecl.length;j++) {
-						if (ecl[j].toLowerCase() == arguments[0].toLowerCase()) {
-							ei.push(elms[i]);
-						}
-					}
-				}
-			}
-			return ei;
-		};
-	}
-	//Polyfill for Array.indexOf
-	if (!Array.prototype.indexOf) {
-		Array.prototype.indexOf = function(obj, start) {
-			for (let i = (start || 0), j = this.length; i < j; i++) {
-				if (this[i] === obj) {
-					return i; 
-				}
-			}
-			return -1;
-		};
-	}
-	//Polyfill for Function.bind (from Mozilla!)
-	if (!Function.prototype.bind) {
-		Function.prototype.bind = function(oThis) {
-		if (typeof this !== 'function') {
-		  // closest thing possible to the ECMAScript 5
-		  // internal IsCallable function
-		  throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
-		}
-
-		let aArgs   = Array.prototype.slice.call(arguments, 1),
-			fToBind = this,
-			fNOP    = function() {},
-			fBound  = function() {
-			  return fToBind.apply(this instanceof fNOP && oThis
-					 ? this
-					 : oThis,
-					 aArgs.concat(Array.prototype.slice.call(arguments)));
-			};
-
-		fNOP.prototype = this.prototype;
-		fBound.prototype = new fNOP();
-
-		return fBound;
-	  };
-	}
-	//Polyfill for trim
-	if(typeof String.prototype.trim !== 'function') {
-		String.prototype.trim = function() {
-			return this.replace(/^\s+|\s+$/g, '');
-		};
-	}
-	if(window.localStorage) {
-		storagePresent = true;
-	}
-}
-function addEvent(evnt, elem, func) { //IE compatibility...
-   if (elem.addEventListener)  // W3C DOM
-      elem.addEventListener(evnt,func,false);
-   else if (elem.attachEvent) { // IE DOM
-      elem.attachEvent("on"+evnt, func);
-   }
-   else { // No much to do
-      elem["on"+evnt] = func;
-   }
 }
 function enableDebug() {
 	for (let i = 0; i < xTiles*2; ++i) {

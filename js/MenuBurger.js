@@ -35,4 +35,4 @@ function hideNavMenu() {
 	htmlTag.onclick = null;
 }
 
-window.addEventListener("load", attachEvent);
+addEvent("load", window, attachEvent);

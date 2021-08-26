@@ -1,5 +1,5 @@
 function initialiseExpandableSection() {
-	if (topBarLoaded != true) {
+	if (topBarLoaded != true || typeof internalURL == "undefined") {
 		setTimeout(initialiseExpandableSection, 100);
 		return;
 	}
@@ -8,22 +8,18 @@ function initialiseExpandableSection() {
 	let tempHeader;
 	let tempListItem;
 	let tempLink;
-	let windowURL = window.location.href;
-	let interalLinkRegex = /#\w*$/g;
-	let internalURL;
-	if (window.location.href.search(interalLinkRegex) != -1) {
-		internalURL = windowURL.substring(windowURL.search(interalLinkRegex) + 1);
-	}
 	for (let e = 0; e < expandableSetions.length; ++e) {
 		//Get the header used in the expandable section
 		tempHeader = expandableSetions[e].getElementsByClassName("expandableHeader")[0];
 		//Add the event listener to expand the section when clicked
-		tempHeader.addEventListener("click", toggleSection);
+		addEvent("click", tempHeader, toggleSection);
 		//Add a class to the expandable section, so we can easily find it later.
 		expandableSetions[e].classList += " " + parseInternalLink(tempHeader.innerText);
 		//Create the list item for the content menu
 		tempListItem = document.createElement("li");
 		//Create the link used in said list item
+		//Add the custom bullet point replacement
+		tempListItem.innerText = "»";
 		tempLink = document.createElement("a");
 		//Add the class to the link
 		tempLink.classList += "contentLink";
@@ -42,7 +38,7 @@ function initialiseExpandableSection() {
 		tempListItem.appendChild(tempLink);
 		contentMenu.appendChild(tempListItem);
 		//Now, we can try and open/navigate to the relevant section on page load, if the URL points to a particular section!
-		if (typeof internalURL != 'undefined') {
+		if (baseURL != internalURL) {
 			if (parseInternalLink(tempHeader.innerText) == internalURL) {
 				//The internal URL in the link is one of our expandable sections! Now open and scroll to it
 				let expandableContent = expandableSetions[e].getElementsByClassName("expandableContent")[0];
@@ -64,7 +60,10 @@ function openContent (classNameToFind) {
 function toggleSection () {
 	let sectionContent = this.parentElement.getElementsByClassName("expandableContent")[0];
 	if (!!( sectionContent.offsetWidth || sectionContent.offsetHeight || sectionContent.getClientRects().length )) {
+		//Hide the section
 		sectionContent.style.display = "none";
+		//Redirect to only the base URL
+		window.location.href = baseURL;
 	} else {
 		sectionContent.style.display ="unset";
 		sectionContent.scrollIntoView({behavior: "smooth"}); 
@@ -76,4 +75,4 @@ function parseInternalLink(internalLinkToParse) {
 	return returnString;
 }
 
-window.addEventListener("load", initialiseExpandableSection);
+addEvent("load", window, initialiseExpandableSection);

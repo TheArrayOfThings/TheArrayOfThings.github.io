@@ -51,7 +51,7 @@ let logoResizeRtime;
 let logoResizeTimeout = false;
 let logoResizeDelta = 100;
 
-window.addEventListener("resize", function() {
+addEvent("resize", window, function() {
     logoResizeRtime = new Date();
     if (logoResizeTimeout === false) {
         logoResizeTimeout = true;

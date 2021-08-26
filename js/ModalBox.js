@@ -13,6 +13,10 @@ let modalCallback;
 let yesCallback;
 let noCallback;
 function setupModal () {
+	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
+		setTimeout(setupModal, 100);
+		return;
+	}
 	//Modal Div 
 	modal = document.getElementById("modalBox");
 	//Modal button closes the modal popup and performs a follow-up function
@@ -33,19 +37,19 @@ function setupModal () {
 	modalTitle = document.getElementById("modalTitle");
 	try {
 		//Clicking the Span or Submit button should close the modal popup
-		modalButton.addEventListener("click", function() {
+		addEvent("click", modalButton, function() {
 			modalOverlay.style.display = "none";
 			modal.style.display = "none";
 			modalVisible = false;
 		});
 		//Clicking the Yes button should close the modal popup
-		modalYes.addEventListener("click", function() {
+		addEvent("click", modalYes, function() {
 			modalOverlay.style.display = "none";
 			modal.style.display = "none";
 			modalVisible = false;
 		});
 		//Clicking the Yes button should close the modal popup
-		modalNo.addEventListener("click", function() {
+		addEvent("click", modalYes, function() {
 			modalOverlay.style.display = "none";
 			modal.style.display = "none";
 			modalVisible = false;
@@ -72,7 +76,7 @@ function startPromptModal(modalTitleText, displayText, labelText, defaultInputTe
 	modalInputLabel.innerHTML = labelText;
 	modalTextContent.innerHTML = displayText;
 	modalTitle.innerHTML = modalTitleText;
-	modalButton.addEventListener("click", modalCallbackFunction);
+	addEvent("click", modalButton, modalCallbackFunction);
 }
 
 function startAlertModal(modalTitleText, displayText, modalCallbackParam) {
@@ -88,7 +92,7 @@ function startAlertModal(modalTitleText, displayText, modalCallbackParam) {
 	modalInputLabel.style.display = "none";
 	modalTextContent.innerHTML = displayText;
 	modalTitle.innerHTML = modalTitleText;
-	modalButton.addEventListener("click", modalCallbackFunction);
+	addEvent("click", modalButton, modalCallbackFunction);
 }
 
 function startConfirmModal(modalTitleText, displayText, yesCallbackParam, noCallbackParam) {
@@ -104,8 +108,8 @@ function startConfirmModal(modalTitleText, displayText, yesCallbackParam, noCall
 	modalInputLabel.style.display = "none";
 	modalTextContent.innerHTML = displayText;
 	modalTitle.innerHTML = modalTitleText;
-	modalYes.addEventListener("click", yesCallbackFunction);
-	modalNo.addEventListener("click", noCallbackFunction);
+	addEvent("click", modalYes, yesCallbackFunction);
+	addEvent("click", modalNo, noCallbackFunction);
 }
 
 function modalCallbackFunction() {
@@ -124,4 +128,4 @@ function noCallbackFunction() {
 	}
 }
 
-setupModal();
+addEvent("load", window, setupModal);

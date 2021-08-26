@@ -231,7 +231,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		snake.collisionDiv.style.display = 'inline';
 	};
 	snake.randomiseColors = function() {
-		if (storagePresent) {
+		if (!isInternetExplorer) {
 			if (localStorage.getItem("SnakePrimary" + snake.snakeName) != null) {
 				snake.primaryColor = colorArray.splice(colorArray.indexOf(localStorage.getItem("SnakePrimary" + snake.snakeName)), 1);
 				snake.secondaryColor = colorArray.splice(colorArray.indexOf(localStorage.getItem("SnakeSecondary" + snake.snakeName)), 1);
@@ -242,7 +242,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			snake.primaryColor = colorArray.splice(Math.floor(Math.random() * colorArray.length), 1);
 			snake.secondaryColor = colorArray.splice(Math.floor(Math.random() * colorArray.length), 1);
 			snake.eyeColor = colorArray.splice(Math.floor(Math.random() * colorArray.length), 1);
-			if (storagePresent) {
+			if (!isInternetExplorer) {
 				localStorage.setItem("SnakePrimary" + snake.snakeName, snake.primaryColor);
 				localStorage.setItem("SnakeSecondary" + snake.snakeName, snake.secondaryColor);
 				localStorage.setItem("SnakeEye" + snake.snakeName, snake.eyeColor);
