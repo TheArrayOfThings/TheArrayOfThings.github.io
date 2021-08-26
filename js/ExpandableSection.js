@@ -28,6 +28,9 @@ function initialiseExpandableSection() {
 		tempLink.innerHTML = expandableSetions[e].innerText;
 		
 		tempLink.href = "#" + expandableSetions[e].id;
+		//You might be asking yourself "why is he doing something so convoluted here with the anchor redirect? Shouldn't the browser redirect internally without needing all this?"
+		//Well, to that I say that internal links are broken in the current version of FireFox mobile - so I'm overwriting the default behaviour.
+		//Also, I guess this allows me to use smooth scrollIntoView? That's a more valid reason to do this I suppose!
 		tempLink.onclick = openContent;
 		tempListItem.appendChild(tempLink);
 		contentMenu.appendChild(tempListItem);
@@ -40,14 +43,9 @@ function openContent () {
 	var expandableSection = document.getElementById(idToFind);
 	var sectionContent = expandableSection.getElementsByClassName("expandableContent")[0];
 	sectionContent.style.display ="unset";
-	setTimeout(function() {goToId(idToFind);}, 10);
+	expandableSection.style.display ="unset";
+	expandableSection.scrollIntoView({behavior: "smooth"}); 
 	return false;
-}
-
-function goToId(toGoToID) {
-	var toGoToElement = document.getElementById(toGoToID);
-	toGoToElement.style.display ="unset";
-	toGoToElement.scrollIntoView(); 
 }
 
 function toggleSection () {
@@ -56,7 +54,7 @@ function toggleSection () {
 		sectionContent.style.display = "none";
 	} else {
 		sectionContent.style.display ="unset";
-		sectionContent.scrollIntoView(); 
+		sectionContent.scrollIntoView({behavior: "smooth"}); 
 	}
 }
 
