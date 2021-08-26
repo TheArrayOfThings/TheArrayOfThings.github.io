@@ -22,6 +22,8 @@ function initialiseExpandableSection() {
 		tempListItem = document.createElement("li");
 		//Create the link used in said list item
 		tempLink = document.createElement("a");
+		//Add the class to the link
+		tempLink.classList += "contentLink";
 		//Set the link text to the header text, for consistency
 		tempLink.innerHTML = expandableSetions[e].innerText;
 		
@@ -38,6 +40,7 @@ function openContent () {
 	var expandableSection = document.getElementById(idToFind);
 	var sectionContent = expandableSection.getElementsByClassName("expandableContent")[0];
 	sectionContent.style.display ="unset";
+	sectionContent.scrollIntoView(); 
 }
 
 function toggleSection () {
