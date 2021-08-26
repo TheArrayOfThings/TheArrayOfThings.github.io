@@ -40,6 +40,14 @@ function openContent () {
 	var expandableSection = document.getElementById(idToFind);
 	var sectionContent = expandableSection.getElementsByClassName("expandableContent")[0];
 	sectionContent.style.display ="unset";
+	setTimeout(function() {goToId(idToFind);}, 10);
+	return false;
+}
+
+function goToId(toGoToID) {
+	var toGoToElement = document.getElementById(toGoToID);
+	toGoToElement.style.display ="unset";
+	toGoToElement.scrollIntoView(); 
 }
 
 function toggleSection () {
