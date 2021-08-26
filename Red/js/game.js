@@ -78,9 +78,6 @@ var pokemon = [];
 var moveDirections = ["up", "down", "left", "right", "none"];
 var aiMoveDelay = 0;
 
-//Compatibility
-var storagePresent = false;
-
 addEvent("load", window, pageLoaded);
 
 function pageLoaded() {

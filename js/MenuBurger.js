@@ -9,16 +9,15 @@ function attachEvent () {
 	}
 	htmlTag = document.getElementsByTagName("html")[0];
 	menu = document.getElementsByClassName("navContainer")[0];
-	document.getElementsByClassName("topMenuRight")[0].onclick = function () {
+	addEvent("click", document.getElementsByClassName("topMenuRight")[0], function () {
 		if (visible) {
 			hideNavMenu();
 		} else {
 			showNavMenu();
 		}
-	}
+	});
 	setSelected();
 }
-
 function showNavMenu() {
 	visible = true;
 	menu.style.display = "unset";
