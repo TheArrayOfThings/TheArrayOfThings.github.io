@@ -74,6 +74,20 @@ function runCompatibility() {
 			return this.replace(/^\s+|\s+$/g, '');
 		};
 	}
+	//Polyfill for replaceAll
+	if (!String.prototype.replaceAll) {
+		String.prototype.replaceAll = function(str, newStr){
+
+			// If a regex pattern
+			if (Object.prototype.toString.call(str).toLowerCase() === '[object regexp]') {
+				return this.replace(str, newStr);
+			}
+
+			// If a string
+			return this.replace(new RegExp(str, 'g'), newStr);
+
+		};
+	}
 }
 function addEvent(evnt, elem, func) { //IE compatibility...
    if (elem.addEventListener)  // W3C DOM
