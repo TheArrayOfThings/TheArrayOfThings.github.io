@@ -1,6 +1,6 @@
-var menu;
-var visible = false;
-var htmlTag;
+let menu;
+let visible = false;
+let htmlTag;
 
 function attachEvent () {
 	if (topBarLoaded != true) {

@@ -1,18 +1,18 @@
 function resizeLogoText() {
 	try {
-		var logoText = document.getElementsByClassName("topLogoTextContainer")[0];
-		var fontScale = 1;
-		var fontScaleMaxTries = 1000;
-		var currentFontSize = 1;
-		var fontStep = 0.2;
-		var container = document.getElementsByClassName("logoContainer")[0];
+		let logoText = document.getElementsByClassName("topLogoTextContainer")[0];
+		let fontScale = 1;
+		let fontScaleMaxTries = 1000;
+		let currentFontSize = 1;
+		let fontStep = 0.2;
+		let container = document.getElementsByClassName("logoContainer")[0];
 		if(window.innerHeight > window.innerWidth){ 	//Portrait mode
 			logoText.innerHTML = "ARRAY<br>OF<br>THINGS";
 		} else {	//Landscape mode
 			logoText.innerHTML = "ARRAY OF THINGS";
 		}
 		//Scale it as big as I can without overflow
-		for (var i = 0; i < fontScaleMaxTries; ++i) {
+		for (let i = 0; i < fontScaleMaxTries; ++i) {
 			logoText.style.fontSize = (currentFontSize * fontScale) + "px";
 				//console.log("Text width: " + logoText.clientWidth + ", canvas width: " + container.clientWidth + ", text height: " + logoText.clientHeight + ", canvas height: " + container.clientHeight + ", final font size: " + logoText.style.fontSize);
 			if (logoText.clientWidth >= container.clientWidth - (container.clientWidth*0.05) || logoText.clientHeight >= container.clientHeight - (container.clientHeight*0.05)) {
@@ -32,9 +32,9 @@ function resizeLogoText() {
 
 
 function getFontHeight() {
-	var returnHeight;
+	let returnHeight;
 	pa = document.body;
-	var who= document.createElement('div');
+	let who= document.createElement('div');
 
 	who.style.cssText='display:inline-block; padding:0; line-height:1; position:absolute; visibility:hidden; font-size:' + currentFontSize + 'vw; font-family:calibri';
 
@@ -47,9 +47,9 @@ function getFontHeight() {
 
 //Draw the logo after finished resizing
 
-var logoResizeRtime;
-var logoResizeTimeout = false;
-var logoResizeDelta = 100;
+let logoResizeRtime;
+let logoResizeTimeout = false;
+let logoResizeDelta = 100;
 
 window.addEventListener("resize", function() {
     logoResizeRtime = new Date();

@@ -3,8 +3,7 @@ function setTitle () {
 		setTimeout(setTitle, 100);
 		return;
 	}
-	var topTitle;
-	topTitle = topTitle = document.getElementsByClassName("topTitle")[0];
+	let topTitle = document.getElementsByClassName("topTitle")[0];
 	topTitle.innerText = document.title;
 }
 

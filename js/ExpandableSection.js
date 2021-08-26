@@ -1,22 +1,25 @@
-var expandableSetions;
-var contentMenu;
-
 function initialiseExpandableSection() {
 	if (topBarLoaded != true) {
 		setTimeout(initialiseExpandableSection, 100);
 		return;
 	}
-	expandableSetions = document.getElementsByClassName("expandableSection");
-	contentMenu = document.getElementsByClassName("contentMenu")[0];
-	var tempHeader;
-	var tempListItem;
-	var tempLink;
-	for (var e = 0; e < expandableSetions.length; ++e) {
+	let expandableSetions = document.getElementsByClassName("expandableSection");
+	let contentMenu = document.getElementsByClassName("contentMenu")[0];
+	let tempHeader;
+	let tempListItem;
+	let tempLink;
+	let windowURL = window.location.href;
+	let interalLinkRegex = /#\w*$/g;
+	let internalURL;
+	if (window.location.href.search(interalLinkRegex) != -1) {
+		internalURL = windowURL.substring(windowURL.search(interalLinkRegex) + 1);
+	}
+	for (let e = 0; e < expandableSetions.length; ++e) {
 		//Get the header used in the expandable section
 		tempHeader = expandableSetions[e].getElementsByClassName("expandableHeader")[0];
 		//Add the event listener to expand the section when clicked
 		tempHeader.addEventListener("click", toggleSection);
-		//Set the ID of the expandable section to the header text, with some parsing
+		//Add a class to the expandable section, so we can easily find it later.
 		expandableSetions[e].classList += " " + parseInternalLink(tempHeader.innerText);
 		//Create the list item for the content menu
 		tempListItem = document.createElement("li");
@@ -26,28 +29,40 @@ function initialiseExpandableSection() {
 		tempLink.classList += "contentLink";
 		//Set the link text to the header text, for consistency
 		tempLink.innerHTML = expandableSetions[e].innerText;
-		
+		//I want the internal links to appear to append to the end of the url, even if I'm not really using the functionality as intended
 		tempLink.href = "#" + parseInternalLink(tempHeader.innerText);
 		//You might be asking yourself "why is he doing something so convoluted here with the anchor redirect? Shouldn't the browser redirect internally without needing all this?"
 		//Well, to that I say that internal links are broken in the current version of FireFox mobile - so I'm overwriting the default behaviour.
 		//Also, I guess this allows me to use smooth scrollIntoView? That's a more valid reason to do this I suppose!
-		tempLink.onclick = openContent;
+		tempLink.onclick = function() {
+			let expandableContent = expandableSetions[e].getElementsByClassName("expandableContent")[0];
+			expandableContent.style.display ="unset";
+			expandableContent.scrollIntoView({behavior: "smooth"}); 
+		};
 		tempListItem.appendChild(tempLink);
 		contentMenu.appendChild(tempListItem);
+		//Now, we can try and open/navigate to the relevant section on page load, if the URL points to a particular section!
+		if (typeof internalURL != 'undefined') {
+			if (parseInternalLink(tempHeader.innerText) == internalURL) {
+				//The internal URL in the link is one of our expandable sections! Now open and scroll to it
+				let expandableContent = expandableSetions[e].getElementsByClassName("expandableContent")[0];
+				expandableContent.style.display ="unset";
+				expandableContent.scrollIntoView({behavior: "smooth"}); 
+			}
+		}
 	}
 }
 
-function openContent () {
-	var classNameToFind = parseInternalLink(this.innerText);
-	var expandableSection = document.getElementsByClassName(classNameToFind)[0];
-	var sectionContent = expandableSection.getElementsByClassName("expandableContent")[0];
+function openContent (classNameToFind) {
+	let expandableSection = document.getElementsByClassName(classNameToFind)[0];
+	let sectionContent = expandableSection.getElementsByClassName("expandableContent")[0];
 	sectionContent.style.display ="unset";
 	expandableSection.style.display ="unset";
 	expandableSection.scrollIntoView({behavior: "smooth"}); 
 }
 
 function toggleSection () {
-	var sectionContent = this.parentElement.getElementsByClassName("expandableContent")[0];
+	let sectionContent = this.parentElement.getElementsByClassName("expandableContent")[0];
 	if (!!( sectionContent.offsetWidth || sectionContent.offsetHeight || sectionContent.getClientRects().length )) {
 		sectionContent.style.display = "none";
 	} else {
@@ -57,7 +72,7 @@ function toggleSection () {
 }
 
 function parseInternalLink(internalLinkToParse) {
-	var returnString = internalLinkToParse.replaceAll(" ", "");
+	let returnString = internalLinkToParse.replaceAll(" ", "");
 	return returnString;
 }
 

@@ -1,17 +1,17 @@
-var modal;
-var closeSpan;
-var modalButton;
-var modalYes;
-var modalNo;
-var modalInput;
-var modalInputLabel;
-var modalOverlay;
-var modalTextContent;
-var modalTitle;
-var modalVisible = false;
-var modalCallback;
-var yesCallback;
-var noCallback;
+let modal;
+let closeSpan;
+let modalButton;
+let modalYes;
+let modalNo;
+let modalInput;
+let modalInputLabel;
+let modalOverlay;
+let modalTextContent;
+let modalTitle;
+let modalVisible = false;
+let modalCallback;
+let yesCallback;
+let noCallback;
 function setupModal () {
 	//Modal Div 
 	modal = document.getElementById("modalBox");
