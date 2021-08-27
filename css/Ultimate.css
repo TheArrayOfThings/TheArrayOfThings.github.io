@@ -83,7 +83,7 @@ button.modalYes {
 	font-weight: bold;
 }
 button.expandableHeader {
-	text-transform: block;
+	text-transform: none;
 	border-radius: 10px;
 	padding: 0.5em;
 	margin-top:0.5em;
@@ -198,7 +198,7 @@ div.topMenu, nav.navBackground	{
 	text-align:center;
 	border-radius:0.4em;
 	border:1px solid black;
-	border-top:block;
+	border-top:none;
 	margin:0em;
 	min-height:25px;
 	border-bottom:1px solid darkgrey;
@@ -208,8 +208,8 @@ div.topMenu {
 	height:5vh;
 	max-height:5vh;
 	border-radius:0em;
-	border-right:block;
-	border-left:block;
+	border-right:none;
+	border-left:none;
 	padding:0;
 	margin:0;
 }
@@ -266,10 +266,10 @@ h1.topTitle {
 	box-sizing: border-box;
 	margin:0;
 	padding: 0;
-	border: block;
+	border: none;
 	border-radius: 0;
-	background:block;
-	text-align:block;
+	background:none;
+	text-align:none;
 	float:left;
 	font-size:calc(10px + 0.20vh + 0.20vw);
 	color:white;
@@ -287,7 +287,7 @@ nav.navBackground	{
 	/*height:92vh;*/
 	overflow:hidden;
 	/*display:none;*/
-	border-bottom:block;
+	border-bottom:none;
 	background: linear-gradient(#A239CA, #4717F6);
 	min-width:90px;
 }
@@ -310,14 +310,14 @@ nav.navBackground	{
 div.navContainer/*, a.navigate*/ {
 	width:10%;
 	float:right;
-	border-bottom:block;
+	border-bottom:none;
 	min-width:90px;
 	display:none;
 	overflow:hidden;
 	animation: expand 1s linear forwards;
 }
 a.navigate, a:hover.navigate, a.current, a:hover.current	{
-	text-decoration:block;
+	text-decoration:none;
 	color:white;
 	padding:0.5em;
 	display:block;
@@ -572,12 +572,12 @@ p#info {
 		width:100%;
 	}
 	div.main {
-		float:block;
-		border:block;
-		border-radius:block;
-		width:block;
 		float:none;
-		position:block;
+		border:none;
+		border-radius:none;
+		width:none;
+		float:none;
+		position:none;
 	}
 	div.main	{
 		margin-left:10%;
@@ -596,11 +596,11 @@ p#info {
 		left:0px;
 		position:absolute;
 		border:1px solid black;
-		border-top:block;
-		min-height:block;
+		border-top:none;
+		min-height:none;
 		height:auto;
-		min-width:block;
-		max-width:block;
+		min-width:none;
+		max-width:none;
 		text-align:center;
 	}
 	div.navContainer,div.navContainer:focus {
@@ -609,10 +609,10 @@ p#info {
 		top:5vh;
 	}
 	div#leftDiv, div#rightDiv, #hidden	{
-		float:block;
-		padding:block;
-		position:block;
-		width:block;
+		float:none;
+		padding:none;
+		position:none;
+		width:none;
 	}
 	div#leftColour, div#rightColour	{
 		min-width:5%;
