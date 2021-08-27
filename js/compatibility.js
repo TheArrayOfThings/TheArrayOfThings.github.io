@@ -100,10 +100,9 @@ function addEvent(evnt, elem, func) { //IE compatibility...
    }
 }
 function removeElement(target) { //IE compatibility...
-	try {
+	if (target.remove) {
 		target.remove();
-	}	catch (error) {
-		console.log(error);
+	} else {
 		target.parentNode.removeChild(target);
 	}
 }
