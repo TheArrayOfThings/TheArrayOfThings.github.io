@@ -105,10 +105,10 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.currentY = y;
 	};
 	sprite.hide = function() {
-		sprite.canvas.style.display = 'none';
+		sprite.canvas.style.visibility = 'hidden';
 	};
 	sprite.show = function() {
-		sprite.canvas.style.display = 'block';
+		sprite.canvas.style.visibility = 'visible';
 	};
 	sprite.changeSelection = function(x,y) {
 		sprite.selectionX = x;
