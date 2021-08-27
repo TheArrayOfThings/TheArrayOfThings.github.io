@@ -159,24 +159,21 @@ moveStep: function() {
 			</div>	
 		</div>
 		<div id="footer"></div>
-		<script src="./Highlight/highlight.min.js"></script>
 		<script>
-			//Check for IE
-			//if (!isInternetExplorer) {
-				//$(function(){
-				//	$.getScript("./Highlight/highlight.min.js")
-				//	.done(function( script, textStatus ) {
-						hljs.highlightAll();
-				//	})
-				//	});
-			
-			
-			
-				/*let highlightScript = document.createElement("script");
-				highlightScript.setAttribute("src", "./Highlight/highlight.min.js");
-				document.body.appendChild(highlightScript);
-				hljs.highlightAll();*/
-			//}
+			//Check for IE and load only if not IE
+			if (!isInternetExplorer) {
+				$(function(){
+					$.ajax({
+						url: "./Highlight/highlight.min.js",
+						dataType: "script",
+						contentType: "text/javascript",
+						beforeSend: function(xhr){  xhr.overrideMimeType( "text/javascript; charset=x-user-defined" );},
+						success: function() {
+							hljs.highlightAll();
+						}
+					});
+				});
+			}
 		</script>
 		<script src="./js/ExpandableSection.js"></script>
 		<script src="./js/Logo.js"></script>

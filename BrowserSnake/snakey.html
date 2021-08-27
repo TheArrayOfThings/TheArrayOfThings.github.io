@@ -159,11 +159,20 @@ moveStep: function() {
 			</div>	
 		</div>
 		<div id="footer"></div>
-		<script src="/Highlight/highlight.min.js"></script>
 		<script>
-			//Check for IE
+			//Check for IE and load only if not IE
 			if (!isInternetExplorer) {
-				hljs.highlightAll();
+				$(function(){
+					$.ajax({
+						url: "/Highlight/highlight.min.js",
+						dataType: "script",
+						contentType: "text/javascript",
+						beforeSend: function(xhr){  xhr.overrideMimeType( "text/javascript; charset=x-user-defined" );},
+						success: function() {
+							hljs.highlightAll();
+						}
+					});
+				});
 			}
 		</script>
 		<script src="/js/ExpandableSection.js"></script>
