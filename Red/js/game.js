@@ -110,13 +110,13 @@ function initialSetup() {
    	//On mobile device?
 	if(/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
 		//Yes - so add touch control
-		document.getElementById("topSectionVisible").style.display = "unset";
-		document.getElementById("bottomSectionVisible").style.display = "unset";
-		document.getElementById("leftSectionVisible").style.display = "unset";
-		document.getElementById("rightSectionVisible").style.display = "unset";
-		document.getElementById("aButtonVisible").style.display = "unset";
-		document.getElementById("bButtonVisible").style.display = "unset";
-		document.getElementById("startButtonVisible").style.display = "unset";
+		document.getElementById("topSectionVisible").style.display = "block";
+		document.getElementById("bottomSectionVisible").style.display = "block";
+		document.getElementById("leftSectionVisible").style.display = "block";
+		document.getElementById("rightSectionVisible").style.display = "block";
+		document.getElementById("aButtonVisible").style.display = "block";
+		document.getElementById("bButtonVisible").style.display = "block";
+		document.getElementById("startButtonVisible").style.display = "block";
 		addEvent("touchstart", topSection, upPressed);
 		addEvent("touchstart", bottomSection, downPressed);
 		addEvent("touchstart", leftSection, leftPressed);

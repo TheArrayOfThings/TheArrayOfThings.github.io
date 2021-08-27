@@ -101,10 +101,10 @@ function SubImage(sourceImageParam, startingXParam, startingYParam, sectionXPara
 			this.currentY = y;
 		},
 		hide: function() {
-			this.canvas.style.visibility = 'hidden';
+			this.canvas.style.display = 'none';
 		},
 		show: function() {
-			this.canvas.style.visibility = 'unset';
+			this.canvas.style.display = 'block';
 		}
     };
 	subImage.initialise();

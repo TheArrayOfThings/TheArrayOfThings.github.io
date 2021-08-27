@@ -60,7 +60,7 @@ function Box(bWidthParam, bHeightParam, bXParam, bYParam) {
             document.getElementById('menu').appendChild(this.bCanvas);
         },
         show: function() {
-            this.bCanvas.style.display = "unset";
+            this.bCanvas.style.display = "block";
             this.showContents();
         },
         hide: function() {

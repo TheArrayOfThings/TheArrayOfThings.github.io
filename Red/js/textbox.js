@@ -37,10 +37,10 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
         //textbox.tCanvas.style.border = "2px solid red";
     };
     textbox.showContents = function() {
-        textbox.tCanvas.style.display = "unset";
+        textbox.tCanvas.style.display = "block";
     };
     textbox.hideContents = function() {
-        textbox.tCanvas.style.display = "none";
+        textbox.tCanvas.style.display = "block";
     };
     textbox.clear = function() {
         textbox.context.clearRect(0, 0, textbox.tCanvas.width, textbox.tCanvas.height);
