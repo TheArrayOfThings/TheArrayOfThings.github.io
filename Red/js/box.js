@@ -27,7 +27,7 @@ function Box(bWidthParam, bHeightParam, bXParam, bYParam) {
 			this.bContext.imageSmoothingEnabled = false;
             this.bCanvas.style.left = this.bX * tileSize + "px";
             this.bCanvas.style.top = this.bY * tileSize + "px";
-            this.bCanvas.style.display = "none";
+            this.bCanvas.style.visibility = "hidden";
             this.draw();
         },
         draw: function() {

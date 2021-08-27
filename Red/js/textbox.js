@@ -32,7 +32,7 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
         textbox.tCanvas.style.left = (textbox.bX * tileSize + tileSize / 2.25) + "px";
         textbox.tCanvas.style.top = (textbox.bY * tileSize + tileSize / 1.5) + "px";
         document.getElementById('menu').appendChild(textbox.tCanvas);
-        textbox.tCanvas.style.display = "none";
+        textbox.tCanvas.style.visibility = "hidden";
         //Debug
         //textbox.tCanvas.style.border = "2px solid red";
     };
