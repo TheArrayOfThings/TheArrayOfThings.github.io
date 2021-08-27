@@ -344,12 +344,7 @@ function imageLoaded() {
 function setPlayable() {
 	lostVerticalPixels = pixelHeight % tileSize;
 	lostHorizontalPixels = pixelWidth % tileSize;
-	/*if (lostVerticalPixels % 2 != 0) {
-		--lostVerticalPixels;
-	}
-	if (lostHorizontalPixels % 2 != 0) {
-		--lostHorizontalPixels;
-	}*/
+	/*
 	playableHeight = Math.floor(pixelHeight - lostVerticalPixels);
 	playableWidth = Math.floor(pixelWidth - lostHorizontalPixels);
    if ((playableHeight/tileSize) % 2 == 0) {
@@ -361,7 +356,15 @@ function setPlayable() {
        //Even number of horizontal tiles
        playableWidth = playableWidth - tileSize;
        lostHorizontalPixels = lostHorizontalPixels + tileSize;
-   } 
+   } */
+	if (lostVerticalPixels % 2 != 0) {
+		--lostVerticalPixels;
+	}
+	if (lostHorizontalPixels % 2 != 0) {
+		--lostHorizontalPixels;
+	}
+	playableHeight = (pixelHeight - lostVerticalPixels);
+	playableWidth = (pixelWidth - lostHorizontalPixels);
 	playable.style.height = playableHeight + 'px';
 	playable.style.width = playableWidth + 'px';
 	playable.style.left = lostHorizontalPixels/2 + 'px';
