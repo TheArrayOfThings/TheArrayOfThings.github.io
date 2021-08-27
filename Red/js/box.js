@@ -27,7 +27,7 @@ function Box(bWidthParam, bHeightParam, bXParam, bYParam) {
 			this.bContext.imageSmoothingEnabled = false;
             this.bCanvas.style.left = this.bX * tileSize + "px";
             this.bCanvas.style.top = this.bY * tileSize + "px";
-            this.bCanvas.style.visibility = "hidden";
+            this.bCanvas.style.display = "none";
             this.draw();
         },
         draw: function() {
@@ -60,11 +60,11 @@ function Box(bWidthParam, bHeightParam, bXParam, bYParam) {
             document.getElementById('menu').appendChild(this.bCanvas);
         },
         show: function() {
-            this.bCanvas.style.visibility = "visible";
+            this.bCanvas.style.display = "block"; 
             this.showContents();
         },
         hide: function() {
-            this.bCanvas.style.visibility = "hidden";
+            this.bCanvas.style.display = "none";
             this.hideContents();
         },
         showContents: function() {},

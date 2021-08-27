@@ -32,15 +32,15 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
         textbox.tCanvas.style.left = (textbox.bX * tileSize + tileSize / 2.25) + "px";
         textbox.tCanvas.style.top = (textbox.bY * tileSize + tileSize / 1.5) + "px";
         document.getElementById('menu').appendChild(textbox.tCanvas);
-        textbox.tCanvas.style.visibility = "hidden";
+        textbox.tCanvas.style.display = "none";
         //Debug
         //textbox.tCanvas.style.border = "2px solid red";
     };
     textbox.showContents = function() {
-        textbox.tCanvas.style.visibility = "visible";
+        textbox.tCanvas.style.display = "block";
     };
     textbox.hideContents = function() {
-        textbox.tCanvas.style.visibility = "hidden";
+        textbox.tCanvas.style.display = "none";
     };
     textbox.clear = function() {
         textbox.context.clearRect(0, 0, textbox.tCanvas.width, textbox.tCanvas.height);
