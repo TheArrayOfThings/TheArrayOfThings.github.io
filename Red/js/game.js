@@ -101,10 +101,13 @@ function pageLoaded() {
 	//Add my keyparse event
 	addEvent("keydown", document, keyParse);
 	//Handle resize of window
-	window.onresize = (function() {
+	/*addEvent("resize", window, function() {
+		if (resetting) {
+			return;
+		}
 		clearTimeout(resizeId);
 		resizeId = setTimeout(screenSetup, 500);
-	});
+	});*/
 }
 function initialSetup() {
    	//On mobile device?
