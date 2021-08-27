@@ -20,7 +20,7 @@ function attachEvent () {
 }
 function showNavMenu() {
 	visible = true;
-	menu.style.display = "unset";
+	menu.style.display = "block";
 	htmlTag.onclick = function(event) {
 		if (event.target.className.indexOf("topMenuRight") == -1) {
 			hideNavMenu();

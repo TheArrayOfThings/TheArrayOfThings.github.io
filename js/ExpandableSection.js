@@ -32,7 +32,7 @@ function initialiseExpandableSection() {
 		//Also, I guess this allows me to use smooth scrollIntoView? That's a more valid reason to do this I suppose!
 		tempLink.onclick = function() {
 			let expandableContent = expandableSetions[e].getElementsByClassName("expandableContent")[0];
-			expandableContent.style.display ="unset";
+			expandableContent.style.display ="block";
 			expandableContent.scrollIntoView({behavior: "smooth"}); 
 		};
 		tempListItem.appendChild(tempLink);
@@ -42,7 +42,7 @@ function initialiseExpandableSection() {
 			if (parseInternalLink(tempHeader.innerText) == internalURL) {
 				//The internal URL in the link is one of our expandable sections! Now open and scroll to it
 				let expandableContent = expandableSetions[e].getElementsByClassName("expandableContent")[0];
-				expandableContent.style.display ="unset";
+				expandableContent.style.display ="block";
 				expandableContent.scrollIntoView({behavior: "smooth"}); 
 			}
 		}
@@ -52,8 +52,8 @@ function initialiseExpandableSection() {
 function openContent (classNameToFind) {
 	let expandableSection = document.getElementsByClassName(classNameToFind)[0];
 	let sectionContent = expandableSection.getElementsByClassName("expandableContent")[0];
-	sectionContent.style.display ="unset";
-	expandableSection.style.display ="unset";
+	sectionContent.style.display ="block";
+	expandableSection.style.display ="block";
 	expandableSection.scrollIntoView({behavior: "smooth"}); 
 }
 
@@ -65,7 +65,7 @@ function toggleSection () {
 		//Redirect to only the base URL
 		window.location.href = baseURL;
 	} else {
-		sectionContent.style.display ="unset";
+		sectionContent.style.display ="block";
 		sectionContent.scrollIntoView({behavior: "smooth"}); 
 	}
 }

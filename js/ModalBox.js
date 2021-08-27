@@ -61,15 +61,15 @@ function setupModal () {
 function startPromptModal(modalTitleText, displayText, labelText, defaultInputText, modalCallbackParam) {
 	modalVisible = true;
 	modalCallback = modalCallbackParam;
-	modalOverlay.style.display = "unset";
+	modalOverlay.style.display = "block";
 	modal.style.display = "block";
-	modalButton.style.display = "unset";
+	modalButton.style.display = "block";
 	modalButton.textContent = "Submit";
 	modalYes.style.display = "none";	
 	modalNo.style.display = "none";
-	modalInput.style.display = "unset";
+	modalInput.style.display = "block";
 	modalInput.value = defaultInputText;
-	modalInputLabel.style.display = "unset";
+	modalInputLabel.style.display = "block";
 	modalInputLabel.innerHTML = labelText;
 	modalTextContent.innerHTML = displayText;
 	modalTitle.innerHTML = modalTitleText;
@@ -79,9 +79,9 @@ function startPromptModal(modalTitleText, displayText, labelText, defaultInputTe
 function startAlertModal(modalTitleText, displayText, modalCallbackParam) {
 	modalVisible = true;
 	modalCallback = modalCallbackParam;
-	modalOverlay.style.display = "unset";
+	modalOverlay.style.display = "block";
 	modal.style.display = "block";
-	modalButton.style.display = "unset";
+	modalButton.style.display = "block";
 	modalButton.textContent = "OK";
 	modalYes.style.display = "none";	
 	modalNo.style.display = "none";
@@ -96,11 +96,11 @@ function startConfirmModal(modalTitleText, displayText, yesCallbackParam, noCall
 	modalVisible = true;
 	yesCallback = yesCallbackParam;
 	noCallback = noCallbackParam;
-	modalOverlay.style.display = "unset";
+	modalOverlay.style.display = "block";
 	modal.style.display = "block";
 	modalButton.style.display = "none";
-	modalYes.style.display = "unset";	
-	modalNo.style.display = "unset";
+	modalYes.style.display = "block";	
+	modalNo.style.display = "block";
 	modalInput.style.display = "none";
 	modalInputLabel.style.display = "none";
 	modalTextContent.innerHTML = displayText;
