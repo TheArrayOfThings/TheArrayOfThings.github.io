@@ -428,7 +428,13 @@ function scaleButtons() {
 function screenSetup() {
 	resettingScreen = true;
 	pixelWidth = background.clientWidth;
+	if (pixelWidth % 2 != 0) {
+		--pixelWidth;
+	}
 	pixelHeight = background.clientHeight;
+	if (pixelHeight % 2 != 0) {
+		--pixelHeight;
+	}
 	tileSize = Math.ceil((Math.sqrt(pixelHeight*pixelWidth)/16)/16)*16;
 	scale = tileSize/16;
 	//Setup playing field
