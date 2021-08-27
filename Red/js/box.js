@@ -60,11 +60,11 @@ function Box(bWidthParam, bHeightParam, bXParam, bYParam) {
             document.getElementById('menu').appendChild(this.bCanvas);
         },
         show: function() {
-            this.bCanvas.style.display = "block";
+            this.bCanvas.style.visibility = "visible";
             this.showContents();
         },
         hide: function() {
-            this.bCanvas.style.display = "none";
+            this.bCanvas.style.visibility = "hidden";
             this.hideContents();
         },
         showContents: function() {},
