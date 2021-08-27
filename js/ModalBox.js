@@ -13,7 +13,10 @@ let modalCallback;
 let yesCallback;
 let noCallback;
 function setupModal () {
-
+	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
+		setTimeout(setupModal, 10);
+		return;
+	}
 	//Modal Div 
 	modal = document.getElementById("modalBox");
 	//Modal button closes the modal popup and performs a follow-up function

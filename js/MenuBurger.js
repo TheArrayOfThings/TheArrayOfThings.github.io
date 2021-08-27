@@ -3,8 +3,8 @@ let visible = false;
 let htmlTag;
 
 function attachEvent () {
-	if (topBarLoaded != true) {
-		setTimeout(attachEvent, 100);
+	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
+		setTimeout(attachEvent, 10);
 		return;
 	}
 	htmlTag = document.getElementsByTagName("html")[0];

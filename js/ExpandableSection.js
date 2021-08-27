@@ -1,6 +1,6 @@
 function initialiseExpandableSection() {
-	if (topBarLoaded != true || typeof internalURL == "undefined") {
-		setTimeout(initialiseExpandableSection, 100);
+	if (topBarLoaded != true || typeof isInternetExplorer == "undefined" || typeof internalURL == "undefined") {
+		setTimeout(initialiseExpandableSection, 10);
 		return;
 	}
 	let expandableSetions = document.getElementsByClassName("expandableSection");

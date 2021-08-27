@@ -67,6 +67,7 @@ addEvent("load", window, pageLoaded);
 function pageLoaded() {
 	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
 		setTimeout(pageLoaded, 10);
+		return;
 	}
 	effects = new Effects();
 	//Grab required elements from page

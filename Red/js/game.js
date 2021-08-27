@@ -18,7 +18,10 @@ var playableHeight;
 var lostHorizontalPixels;
 var lostVerticalPixels;
 var tileSize = 16;
-var resizeId;
+let resizeRedRtime;
+let resizeRedTimeout = false;
+let resizeRedDelta = 200;
+let loadingCompleted = false;
 
 //Game settings
 var scale = 2;
@@ -83,6 +86,7 @@ addEvent("load", window, pageLoaded);
 function pageLoaded() {
 	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
 		setTimeout(pageLoaded, 100);
+		return;
 	}
 	//Grab required elements from page
 	background = document.getElementById('background');
@@ -100,14 +104,16 @@ function pageLoaded() {
 	//addEvent("click", document.getElementById("settings"), function() {setup();});
 	//Add my keyparse event
 	addEvent("keydown", document, keyParse);
-	//Handle resize of window
-	/*addEvent("resize", window, function() {
-		if (resetting) {
+	addEvent("resize", window, function() {
+		if (resettingScreen) {
 			return;
 		}
-		clearTimeout(resizeId);
-		resizeId = setTimeout(screenSetup, 500);
-	});*/
+		resizeRedRtime = new Date();
+		if (resizeRedTimeout === false) {
+			resizeRedTimeout = true;
+			setTimeout(redResizeend, resizeRedDelta);
+		}
+	});
 }
 function initialSetup() {
    	//On mobile device?
@@ -136,6 +142,8 @@ function initialSetup() {
 	//Next step is imagesLoaded (which is called once all images are loaded) - eventually 'loadingComplete' called
 }
 function loadingComplete() {
+	if (loadingCompleted) {return};
+	loadingCompleted = true;
 	computerItems = [new Item("POTION", 12)];
 	currentMap = new PlayerBedroom(redsHouse, middleX - 3, middleY - 6, 8, 8);
 	currentMap.load();
@@ -347,19 +355,6 @@ function imageLoaded() {
 function setPlayable() {
 	lostVerticalPixels = pixelHeight % tileSize;
 	lostHorizontalPixels = pixelWidth % tileSize;
-	/*
-	playableHeight = Math.floor(pixelHeight - lostVerticalPixels);
-	playableWidth = Math.floor(pixelWidth - lostHorizontalPixels);
-   if ((playableHeight/tileSize) % 2 == 0) {
-       //Even number of horizontal tiles
-       playableHeight = playableHeight - tileSize;
-       lostVerticalPixels = lostVerticalPixels + tileSize;
-   } 
-   if ((playableWidth/tileSize) % 2 == 0) {
-       //Even number of horizontal tiles
-       playableWidth = playableWidth - tileSize;
-       lostHorizontalPixels = lostHorizontalPixels + tileSize;
-   } */
 	if (lostVerticalPixels % 2 != 0) {
 		--lostVerticalPixels;
 	}
@@ -468,6 +463,25 @@ function nextFrame() {
 	for (let i = 0; i < frameQueue.length; ++i) {
 		frameQueue.shift()();
 	}
+}
+function redResizeend() {
+	let newPixelWidth = background.clientWidth;
+	if (newPixelWidth % 2 != 0) {
+		--newPixelWidth;
+	}
+	let newPixelHeight = background.clientHeight;
+	if (newPixelHeight % 2 != 0) {
+		--newPixelHeight;
+	}
+	if (newPixelHeight == pixelHeight && newPixelWidth == pixelWidth) {
+		return;
+	}
+	if (new Date() - resizeRedRtime < resizeRedDelta) {
+		setTimeout(redResizeend, resizeRedDelta);
+	} else {
+		resizeRedTimeout = false;
+		screenSetup();
+	}               
 }
 function keyParse(e) {
 	if (e.code) {
