@@ -39,7 +39,7 @@ let yTiles;
 let middleX;
 let middleY;
 let currentMap;
-let debugEnabled = true;
+let debugEnabled = false;
 
 //Entities
 let aiCharacters = [];
@@ -383,7 +383,6 @@ function setPlayable() {
 		currentMap.recentreMap();
 	}
 	if (typeof player != "undefined") {
-		console.log("Resetting player");
 		player.resetCanvas();
 		player.changeLoc(player.currentX, player.currentY);
 	}

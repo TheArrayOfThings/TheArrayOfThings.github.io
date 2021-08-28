@@ -18,7 +18,7 @@ function BaseObject(startingXParam, startingYParam) {
 			this.visibleDiv.style.left = (this.startingX*tileSize) + "px";
 			this.visibleDiv.style.top = (this.startingY*tileSize) + "px";
 			this.visibleDiv.style.zIndex = "999";
-			this.visibleDiv.classList += "debugDiv";
+			this.visibleDiv.id = "debugDiv";
 			if (document.getElementById("debugDivs")) {
 				document.getElementById("debugDivs").appendChild(this.visibleDiv);
 			}

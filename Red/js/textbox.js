@@ -24,7 +24,6 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 		textbox.resetTextBox();
     };
 	textbox.resetTextBox = function() {
-		console.log("Resetting textbox");
         textbox.tCanvas.style.width = (textbox.bWidth * tileSize - tileSize) + "px";
         textbox.tCanvas.width = (textbox.bWidth * tileSize - tileSize);
         textbox.tCanvas.style.height = (textbox.bHeight * tileSize - tileSize * 1.5) + "px";
@@ -141,7 +140,6 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 		textbox.writeNextLetter();
 	};
 	textbox.writeLineInstant = function(toWrite) {
-		console.log("Writing...");
 		let characters = toWrite.split("");
 		for (let i = 0;i < characters.length; ++i) {
 			textbox.writeLetter(characters[i]);
@@ -214,7 +212,6 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 		}
 	};
 	textbox.writeLetter = function(whichLetter) {
-		console.log("trying to write letter!");
 		textbox.fontScale = Math.round(tileSize / 3);
 		if (textbox.fontScale % 2 != 0) {
 			++textbox.fontScale;
