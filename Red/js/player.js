@@ -4,6 +4,10 @@
 function Player(resourceLocationParam, startingXParam, startingYParam) {
 	let player = new CharacterSprite(resourceLocationParam, startingXParam, startingYParam);
 	player.entityClass = "player";
+	if (typeof player.visibleDiv != "undefined") {
+		player.visibleDiv.style.outline = "2px solid purple";
+		document.getElementById("mapContainerDiv").appendChild(player.visibleDiv);
+	}
     player.moveStep = function() {
 		let willCollide = false;
         switch (player.direction) {
@@ -16,8 +20,8 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
                     player.flipBit = 0;
                 }
                 player.showBackRunning();
-                player.move(0, 0);
-				if (player.currentY == (currentMap.tlY)) {
+                //player.move(0, 0);
+				if (player.currentY == 0) {
 					willCollide = true;
 					break;
 				}
@@ -36,8 +40,8 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
                     player.flipBit = 0;
                 }
                 player.showFrontRunning();
-                player.move(0, 0);
-				if (player.currentY + 1 == (currentMap.tlY + currentMap.cHeight)) {
+                //player.move(0, 0);
+				if (player.currentY == currentMap.cHeight - 1) {
 					willCollide = true;
 					break;
 				}
@@ -49,8 +53,8 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
                 break;
             case 'left':
                 player.showLeftRunning();
-                player.move(0, 0);
-				if (player.currentX == currentMap.tlX) {
+                //player.move(0, 0);
+				if (player.currentX == 0) {
 					willCollide = true;
 					break;
 				}
@@ -62,8 +66,8 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
                 break;
             case 'right':
                 player.showRightRunning();
-                player.move(0, 0);
-				if (player.currentX + 1 == currentMap.tlX + currentMap.cWidth) {
+                //player.move(0, 0);
+				if (player.currentX == currentMap.cWidth - 1) {
 					willCollide = true;
 					break;
 				}
@@ -80,24 +84,19 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
 		setTimeout(player.afterMove.bind(player), ((tickRate*animationDelay)));
     };
 	player.shiftScreen = function() {
-		for (let i = 0; i < allObjects.length; ++i) {
-			if (allObjects[i] == player) {
-				continue;
-			}
-			switch (player.direction) {
-				case 'up':
-				allObjects[i].move(0, (1));
-				break;
-				case 'down':
-				allObjects[i].move(0, (-1));
-				break;
-				case 'left':
-				allObjects[i].move((1), 0);
-				break;
-				case 'right':
-				allObjects[i].move((-1), 0);
-				break;
-			}
+		switch (player.direction) {
+			case 'up':
+				player.move(0, (-1));
+			break;
+			case 'down':
+				player.move(0, (1));
+			break;
+			case 'left':
+				player.move(-1, (0));
+			break;
+			case 'right':
+				player.move(1, (0));
+			break;
 		}
 		switch (player.direction) {
 			case 'up':

@@ -10,8 +10,10 @@ function MenuOption(parentParam) {
 		count: 1,
 		isItem: false,
 		load: function(displayTextParam, functionToRunParam) {
+			console.log("loading...");
 			this.displayText = displayTextParam;
 			this.parent = parentParam;
+			console.log(this.parent);
 			var tempDisplayText;
 			if (this.isItem) {
 				tempDisplayText = displayTextParam + " x " + this.count;

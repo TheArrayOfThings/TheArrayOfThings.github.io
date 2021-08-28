@@ -9,9 +9,7 @@ function BaseObject(startingXParam, startingYParam) {
 		currentX: startingXParam,
 		currentY: startingYParam,
 		visibleDiv: undefined,
-		debugEnabled: false,
 		enableDebug: function() {
-			this.debugEnabled = true;
 			this.visibleDiv = document.createElement('div');
 			this.visibleDiv.style.width = tileSize + "px";
 			this.visibleDiv.style.height = tileSize + "px";
@@ -19,18 +17,36 @@ function BaseObject(startingXParam, startingYParam) {
 			this.visibleDiv.style.position = "absolute";
 			this.visibleDiv.style.left = (this.startingX*tileSize) + "px";
 			this.visibleDiv.style.top = (this.startingY*tileSize) + "px";
-			playable.appendChild(this.visibleDiv);
+			this.visibleDiv.style.zIndex = "999";
+			this.visibleDiv.classList += "debugDiv";
+			if (document.getElementById("debugDivs")) {
+				document.getElementById("debugDivs").appendChild(this.visibleDiv);
+			}
 		},
         move: function(horizontalIncrement, verticalIncrement) {
-			if (this.debugEnabled) {
+			if (typeof this.visibleDiv != "undefined") {
+				this.visibleDiv.id = this.entityClass;
+			}
+			if (typeof this.visibleDiv != "undefined") {
 				this.visibleDiv.style.top = (getTop(this.visibleDiv) + (verticalIncrement*tileSize)) + 'px';
 				this.visibleDiv.style.left = (getLeft(this.visibleDiv) + (horizontalIncrement*tileSize)) + 'px';
 			}
 			this.currentX = this.currentX + horizontalIncrement;
 			this.currentY = this.currentY + verticalIncrement;
-        }
+        },
+		unload: function() {
+			if (typeof this.visibleDiv != "undefined") {
+				this.visibleDiv.parentNode.removeChild(this.visibleDiv);
+			}
+			let index = allObjects.indexOf(this);
+			if (index > -1) {
+				allObjects.splice(index, 1);
+			}
+		}
 	};
-	//baseObject.enableDebug();
+	if (debugEnabled) {
+		baseObject.enableDebug();
+	}
 	allObjects.push(baseObject);
 	return baseObject;
 }

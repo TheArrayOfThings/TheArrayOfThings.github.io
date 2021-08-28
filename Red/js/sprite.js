@@ -11,15 +11,24 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 	sprite.context =  undefined;
 	sprite.flippedHorizontally =  false;
 	sprite.flippedVertically =  false;
+	sprite.flipBit = 0;
 	sprite.initialise = function() {
 		//Create the canvas
 		sprite.canvas = document.createElement('canvas');
 		sprite.canvas.style.position = "absolute";
+		sprite.canvas.style.transition = "all " + ((tickRate) * animationDelay) + "ms linear";
+		sprite.canvas.style.zIndex = "2";
+		sprite.resetCanvas();
+		//Append canvas to playable area
+		currentMap.containerDiv.appendChild(sprite.canvas);
+		//Move canvas to correct location
+		sprite.changeLoc(sprite.startingX, sprite.startingY);
+	};
+	sprite.resetCanvas = function() {
 		sprite.canvas.style.width = tileSize + "px";
 		sprite.canvas.width = tileSize;
 		sprite.canvas.style.height = tileSize + "px";
 		sprite.canvas.height = tileSize;
-		sprite.canvas.style.transition = "all " + ((tickRate) * animationDelay) + "ms linear";
 		//Create the context
 		sprite.context = sprite.canvas.getContext('2d');
 		sprite.context.mozImageSmoothingEnabled = false;
@@ -27,10 +36,10 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.context.msImageSmoothingEnabled = false;
 		sprite.context.imageSmoothingEnabled = false;
 		sprite.draw();
-		//Append canvas to playable area
-		playable.appendChild(sprite.canvas);
-		//Move canvas to correct location
-		sprite.changeLoc(sprite.startingX, sprite.startingY);
+		if (sprite.flippedHorizontally) {
+			sprite.flippedHorizontally =  false;
+			sprite.flipHorz();
+		}
 	};
 	sprite.draw = function () {
 		sprite.context.clearRect(0, 0, sprite.canvas.width,sprite.canvas.height);
@@ -93,14 +102,22 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.context.drawImage(sprite.sourceImage, sprite.selectionX*16, sprite.selectionY*16, 16, 16, 0, 0, tileSize, tileSize);
 	};
 	sprite.move = function(horizontalIncrement, verticalIncrement) {
-		sprite.canvas.style.top = (getTop(sprite.canvas) + (verticalIncrement*tileSize)) + 'px';
+		if (typeof this.visibleDiv != "undefined") {
+			this.visibleDiv.style.top = (getTop(sprite.canvas) + (verticalIncrement*tileSize)) + 'px';
+			this.visibleDiv.style.left = (getLeft(sprite.canvas) + (horizontalIncrement*tileSize)) + 'px';
+		}
 		sprite.canvas.style.left = (getLeft(sprite.canvas) + (horizontalIncrement*tileSize)) + 'px';
+		sprite.canvas.style.top = (getTop(sprite.canvas) + (verticalIncrement*tileSize)) + 'px';
 		sprite.currentX = sprite.currentX + horizontalIncrement;
 		sprite.currentY = sprite.currentY + verticalIncrement;
 	};
 	sprite.changeLoc = function(x, y) {
-		sprite.canvas.style.left = x*tileSize + "px";
-		sprite.canvas.style.top = y*tileSize + "px";
+		if (typeof this.visibleDiv != "undefined") {
+			this.visibleDiv.style.top = y*tileSize + 'px';
+			this.visibleDiv.style.left = x*tileSize + 'px';
+		}
+		sprite.canvas.style.left = (x*tileSize) + "px";
+		sprite.canvas.style.top = (y*tileSize) + "px";
 		sprite.currentX = x;
 		sprite.currentY = y;
 	};

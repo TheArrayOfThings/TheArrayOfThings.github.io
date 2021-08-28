@@ -59,11 +59,11 @@ function Menu(widthParam, heightParam, xParam, yParam) {
 	menu.showSelectionArrow = function() {
 		//menu.arrowOn = true;
 		menu.hideSelectionArrow();
-		menu.bContext.drawImage(font, 13 * 8, 6 * 8, 8, 8, /*dx*/tileSize/2, /*dy*/(((menu.currentOption+2)*tileSize) - tileSize)-tileSize/3, /*dWidth*/tileSize / 3, /*dHeight*/tileSize / 3);	
+		menu.bContext.drawImage(font, 13 * 8, 6 * 8, 8, 8, /*dx*/menu.fontScale, /*dy*/(((menu.currentOption+2)*tileSize) - tileSize)-tileSize/3, /*dWidth*/tileSize / 3, /*dHeight*/tileSize / 3);	
 	};
 	menu.hideSelectionArrow = function() {
 		//menu.arrowOn = false;
-		menu.bContext.drawImage(font, 0 * 8, 4 * 8, 8, 8, /*dx*/tileSize/2, /*dy*/tileSize/2, /*dWidth*/tileSize / 3, /*dHeight*/(menu.height*tileSize)-tileSize);
+		menu.bContext.drawImage(font, 0 * 8, 4 * 8, 8, 8, /*dx*/menu.fontScale, /*dy*/tileSize/2, /*dWidth*/tileSize / 3, /*dHeight*/(menu.height*tileSize)-tileSize);
 	};
 	menu.stop = function () {
 		menu.hide();
@@ -71,6 +71,7 @@ function Menu(widthParam, heightParam, xParam, yParam) {
 		currentState = states.INOVERWORLD;
 	};
 	menu.fullReset = function() {
+		menu.resetBox();
 		menu.options = [];
 		menu.loadedOptions = 0;
 		menu.currentOption = 0;

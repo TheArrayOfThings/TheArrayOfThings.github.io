@@ -2,65 +2,68 @@
 //Enable strict mode
 
 //Fundamental variable declaration
-var topSection;
-var bottomSection;
-var leftSection;
-var rightSection;
-var aButton;
-var bButton;
-var startButton;
-var background;
-var playable;
-var pixelWidth;
-var pixelHeight;
-var playableWidth;
-var playableHeight;
-var lostHorizontalPixels;
-var lostVerticalPixels;
-var tileSize = 16;
+let topSection;
+let bottomSection;
+let leftSection;
+let rightSection;
+let aButton;
+let bButton;
+let startButton;
+let background;
+let playable;
+let pixelWidth;
+let pixelHeight;
+let playableWidth;
+let playableHeight;
+let previousPlayableWidth = 0;
+let previousPlayableHeight = 0;
+let lostHorizontalPixels;
+let lostVerticalPixels;
+let tileSize = 16;
 let resizeRedRtime;
 let resizeRedTimeout = false;
 let resizeRedDelta = 200;
 let loadingCompleted = false;
 
 //Game settings
-var scale = 2;
-var tickRate = 33;
-var animationDelay = 5;
-var textDelay = 2;
-var horzCharLimit = 17;
-var frameInterval;
-var frameQueue = [];
-var resettingScreen = false;
-var xTiles;
-var yTiles;
-var middleX;
-var middleY;
-var currentMap;
+let scale = 2;
+let tickRate = 33;
+let animationDelay = 5;
+let textDelay = 2;
+let horzCharLimit = 17;
+let frameInterval;
+let frameQueue = [];
+let resettingScreen = false;
+let xTiles;
+let yTiles;
+let middleX;
+let middleY;
+let currentMap;
+let debugEnabled = true;
 
 //Entities
-var aiCharacters = [];
-var collidables = [];
-var specialTiles = [];
-var interactableTiles = [];
-var allObjects = [];
+let aiCharacters = [];
+let collidables = [];
+let specialTiles = [];
+let interactableTiles = [];
+let allObjects = [];
 
 //Loaded resources
-var boxImage;
-var font;
-var playerSprite;
-var redsHouse;
-var imagesToLoad = [];
-var imagesLoaded = 0;
-var textBox;
-var mainComputer;
-var mainStartMenu;
-var mainQuantityMenu;
-var mainConfirmMenu;
+let boxImage;
+let font;
+let playerSprite;
+let redsHouse;
+let imagesToLoad = [];
+let imagesLoaded = 0;
+let textBox;
+let mainComputer;
+let mainStartMenu;
+let mainQuantityMenu;
+let mainConfirmMenu;
 
 //Player settings
-var player;
-var playerName = "Ryan";
+let player;
+let playerName = "Ryan";
 
 //State settings
 const states = {
@@ -71,15 +74,15 @@ const states = {
 	INBATTLE:'inbattle',
 	INCUTSCENE:'incutscene'
 }
-var currentState = states.INOVERWORLD;
-var currentMenu;
-var playerItems = [];
-var computerItems = [];
-var pokemon = [];
+let currentState = states.INOVERWORLD;
+let currentMenu;
+let playerItems = [];
+let computerItems = [];
+let pokemon = [];
 
 //AI Settings
-var moveDirections = ["up", "down", "left", "right", "none"];
-var aiMoveDelay = 0;
+let moveDirections = ["up", "down", "left", "right", "none"];
+let aiMoveDelay = 0;
 
 addEvent("load", window, pageLoaded);
 
@@ -144,14 +147,15 @@ function initialSetup() {
 function loadingComplete() {
 	if (loadingCompleted) {return};
 	loadingCompleted = true;
+	document.getElementById('mapContainerDiv').style.transition = "all " + ((tickRate) * animationDelay) + "ms linear";
 	computerItems = [new Item("POTION", 12)];
-	currentMap = new PlayerBedroom(redsHouse, middleX - 3, middleY - 6, 8, 8);
+	currentMap = new PlayerBedroom(redsHouse, 8, 8, -3, -6);
+	currentMap.draw();
 	currentMap.load();
-	player = new Player(playerSprite, middleX, middleY, 0, 0);
-	textBox = new TextBox(8, 3, middleX - 2.5, middleY + 2);
+	textBox = new TextBox(8, 3, -4, 1);
 	frameInterval = setInterval(nextFrame, tickRate);
-	mainComputer = new Computer(middleX - 2.5, middleY-4);
-	mainStartMenu = new StartMenu(middleX + 1, middleY-4.5);
+	mainComputer = new Computer(-4, -4);
+	mainStartMenu = new StartMenu(0, -3);
 	mainQuantityMenu = new QuantityMenu();
 	mainConfirmMenu = new ConfirmMenu();
 }
@@ -363,6 +367,9 @@ function setPlayable() {
 	}
 	playableHeight = (pixelHeight - lostVerticalPixels);
 	playableWidth = (pixelWidth - lostHorizontalPixels);
+	if (previousPlayableHeight == playableHeight & previousPlayableWidth == playableWidth) {
+		return;
+	}
 	playable.style.height = playableHeight + 'px';
 	playable.style.width = playableWidth + 'px';
 	playable.style.left = lostHorizontalPixels/2 + 'px';
@@ -371,9 +378,17 @@ function setPlayable() {
 	yTiles = playableHeight/tileSize;
 	middleX = Math.floor(xTiles/2);
 	middleY = Math.floor(yTiles/2);
-   if (player != undefined) {
-       player.changeLoc(middleX, middleY);
-   }
+	if (typeof currentMap != "undefined") {
+		currentMap.draw();
+		currentMap.recentreMap();
+	}
+	if (typeof player != "undefined") {
+		console.log("Resetting player");
+		player.resetCanvas();
+		player.changeLoc(player.currentX, player.currentY);
+	}
+	previousPlayableHeight = playableHeight;
+	previousPlayableWidth = playableWidth;
 }
 function scaleButtons() {
 	//let buttons = document.getElementsByTagName('button');
@@ -434,11 +449,10 @@ function screenSetup() {
 		--pixelHeight;
 	}
 	tileSize = Math.ceil((Math.sqrt(pixelHeight*pixelWidth)/16)/16)*16;
-	scale = tileSize/16;
+	scale = tileSize/2;
 	//Setup playing field
 	setPlayable();
 	scaleButtons();
-	//enableDebug();
 	resettingScreen = false;
 }
 function nextFrame() {
@@ -523,8 +537,8 @@ function keyParse(e) {
 	}
 }
 function mergeArrayDuplicates(arrayToMerge) {
-	for (var i = 0; i < arrayToMerge.length; ++i) {
-		for (var n = i + 1; n < arrayToMerge.length; ++n) {
+	for (let i = 0; i < arrayToMerge.length; ++i) {
+		for (let n = i + 1; n < arrayToMerge.length; ++n) {
 			if (arrayToMerge[i].name == arrayToMerge[n].name) {
 				arrayToMerge[i].quantity = arrayToMerge[i].quantity + arrayToMerge[n].quantity;
 				arrayToMerge.splice(n, 1);
@@ -538,7 +552,10 @@ function getTop(theElement) {
 function getLeft(theElement) {
 	return parseInt(theElement.style.left.replace('px', ''));
 }
-function enableDebug() {
+if (debugEnabled) {
+	if (typeof currentMap != "undefined") {
+		currentMap.canvas.style.border = "1px solid yellow";
+	}
 	for (let i = 0; i < xTiles*2; ++i) {
 		for (let n = 0; n < yTiles*2; ++n) {
 			let tempDiv = document.createElement('div');

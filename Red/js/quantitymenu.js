@@ -2,7 +2,7 @@
 //Enable strict mode
 
 function QuantityMenu() {
-    let quantityMenu = new Menu(3, 2, middleX+2.5, middleY);
+    let quantityMenu = new Menu(3, 2, 2.5, middleY);
     quantityMenu.class = "submenu";
     quantityMenu.parent = undefined;
     quantityMenu.currentQuantity = 1;
@@ -55,8 +55,8 @@ function QuantityMenu() {
 			quantityMenu.options[quantityMenu.currentOption].functionToRun();
         }
 	};
-    document.getElementById('menu').removeChild(quantityMenu.bCanvas);
-    document.getElementById('menu').removeChild(quantityMenu.tCanvas);
+	quantityMenu.bCanvas.parentElement.removeChild(quantityMenu.bCanvas);
+	quantityMenu.tCanvas.parentElement.removeChild(quantityMenu.tCanvas);
     document.getElementById('frontmenu').appendChild(quantityMenu.bCanvas);
     document.getElementById('frontmenu').appendChild(quantityMenu.tCanvas);
     return quantityMenu;

@@ -3,7 +3,10 @@
 
 function PlayerBedroom(tileSetParam, tlXParam, tlYParam, widthParam, heightParam) {
     let playerbedroom = new Map(tileSetParam, tlXParam, tlYParam, widthParam, heightParam);
-    playerbedroom.load = function() {
+    playerbedroom.draw = function() {
+		//First, reset the canvas
+		playerbedroom.resetCanvas();
+		playerbedroom.unload();
         //Row 1 start
         //Computer
         playerbedroom.drawHalfTile(0, 4, 0, 2, true);
@@ -103,6 +106,10 @@ function PlayerBedroom(tileSetParam, tlXParam, tlYParam, widthParam, heightParam
         playerbedroom.buildFloorTile();
         //END of rendering
     };
+	playerbedroom.load = function() {
+		player = new Player(playerSprite, 3,6);
+		playerbedroom.recentreMap();
+	};
     playerbedroom.buildWallTile = function() {
         playerbedroom.drawQuarterTile(0, 0, 0, 0, 0, 0, 0, 0, true);
     };

@@ -1,8 +1,8 @@
 'use strict';
 //Enable strict mode
 
-function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
-    let textbox = new Box(bWidthParam, bHeightParam, bXParam, bYParam);
+function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
+    let textbox = new Box(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam);
     textbox.class = "textbox";
     textbox.tCanvas = undefined;
     textbox.context = undefined;
@@ -18,7 +18,13 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
     textbox.load = function() {
         //Create the text canvas
         textbox.tCanvas = document.createElement('canvas');
+        textbox.tCanvas.id = "textCanvas";
         textbox.tCanvas.style.position = "absolute";
+        textbox.boxContainerDiv.appendChild(textbox.tCanvas);
+		textbox.resetTextBox();
+    };
+	textbox.resetTextBox = function() {
+		console.log("Resetting textbox");
         textbox.tCanvas.style.width = (textbox.bWidth * tileSize - tileSize) + "px";
         textbox.tCanvas.width = (textbox.bWidth * tileSize - tileSize);
         textbox.tCanvas.style.height = (textbox.bHeight * tileSize - tileSize * 1.5) + "px";
@@ -29,14 +35,11 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
 		textbox.context.webkitImageSmoothingEnabled = false;
 		textbox.context.msImageSmoothingEnabled = false;
 		textbox.context.imageSmoothingEnabled = false;
-        textbox.tCanvas.style.left = (textbox.bX * tileSize + tileSize / 2.25) + "px";
-        textbox.tCanvas.style.top = (textbox.bY * tileSize + tileSize / 1.5) + "px";
-        document.getElementById('menu').appendChild(textbox.tCanvas);
         textbox.tCanvas.style.display = "none";
-        //Debug
-        //textbox.tCanvas.style.border = "2px solid red";
-    };
+	};
     textbox.showContents = function() {
+        textbox.tCanvas.style.left = (tileSize/1.5) + "px";
+        textbox.tCanvas.style.top = (tileSize * 0.7) + "px";
         textbox.tCanvas.style.display = "block";
     };
     textbox.hideContents = function() {
@@ -138,6 +141,7 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
 		textbox.writeNextLetter();
 	};
 	textbox.writeLineInstant = function(toWrite) {
+		console.log("Writing...");
 		let characters = toWrite.split("");
 		for (let i = 0;i < characters.length; ++i) {
 			textbox.writeLetter(characters[i]);
@@ -179,11 +183,11 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
 		}
 	};
     textbox.drawLetter = function(x, y) {
-        textbox.context.drawImage(font, x * 8, y * 8, 8, 8, textbox.currentX * (tileSize / 3), textbox.currentY * (tileSize), tileSize / 3, tileSize / 3);
+        textbox.context.drawImage(font, x * 8, y * 8, 8, 8, textbox.currentX * (textbox.fontScale), textbox.currentY * (tileSize), textbox.fontScale, textbox.fontScale);
         textbox.currentX = textbox.currentX + 1;
     };
     textbox.drawHalfLetter = function(x, y) {
-        textbox.context.drawImage(font, x * 8, y * 8, 4, 8, textbox.currentX * (tileSize / 3), textbox.currentY * (tileSize), tileSize / 3, tileSize / 3);
+        textbox.context.drawImage(font, x * 8, y * 8, 4, 8, textbox.currentX * (textbox.fontScale), textbox.currentY * (tileSize), textbox.fontScale, textbox.fontScale);
         textbox.currentX = textbox.currentX + 0.5;
     };
 	textbox.writeNextLetter = function() {
@@ -210,6 +214,11 @@ function TextBox(bWidthParam, bHeightParam, bXParam, bYParam) {
 		}
 	};
 	textbox.writeLetter = function(whichLetter) {
+		console.log("trying to write letter!");
+		textbox.fontScale = Math.round(tileSize / 3);
+		if (textbox.fontScale % 2 != 0) {
+			++textbox.fontScale;
+		}
 		switch (whichLetter) {
 			//Row 1
 			case "A":

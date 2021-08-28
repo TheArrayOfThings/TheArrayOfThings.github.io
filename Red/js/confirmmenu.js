@@ -2,7 +2,7 @@
 //Enable strict mode
 
 function ConfirmMenu() {
-    let confirmMenu = new Menu(3, 2, middleX+2.5, middleY);
+    let confirmMenu = new Menu(3, 2, 2.5, middleY);
     confirmMenu.class = "submenu";
     confirmMenu.parent = undefined;
     confirmMenu.currentQuantity = 1;
@@ -42,8 +42,8 @@ function ConfirmMenu() {
     confirmMenu.loadNext("Yes", function() {
         confirmMenu.confirmed = false;
     });
-    document.getElementById('menu').removeChild(confirmMenu.bCanvas);
-    document.getElementById('menu').removeChild(confirmMenu.tCanvas);
+	confirmMenu.bCanvas.parentElement.removeChild(confirmMenu.bCanvas);
+	confirmMenu.tCanvas.parentElement.removeChild(confirmMenu.tCanvas);
     document.getElementById('frontmenu').appendChild(confirmMenu.bCanvas);
     document.getElementById('frontmenu').appendChild(confirmMenu.tCanvas);
     return confirmMenu;

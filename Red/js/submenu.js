@@ -2,7 +2,7 @@
 //Enable strict mode
 
 function SubMenu(widthParam, heightParam, parentParam) {
-	let submenu = new Menu(widthParam, heightParam, parentParam.bX + 2, parentParam.bY + 1);
+	let submenu = new Menu(widthParam, heightParam, -2, -4);
 	submenu.class = "submenu";
 	submenu.parent = parentParam;
 	submenu.start = function(textToShow) {
