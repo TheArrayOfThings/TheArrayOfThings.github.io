@@ -24,6 +24,7 @@ let resizeRedRtime;
 let resizeRedTimeout = false;
 let resizeRedDelta = 200;
 let loadingCompleted = false;
+let localStorage;
 
 //Game settings
 let scale = 2;
@@ -91,6 +92,9 @@ function pageLoaded() {
 		setTimeout(pageLoaded, 100);
 		return;
 	}
+	if (!isInternetExplorer) {
+		localStorage = window.localStorage;
+	}
 	//Grab required elements from page
 	background = document.getElementById('background');
 	playable = document.getElementById('playable');
@@ -149,7 +153,7 @@ function loadingComplete() {
 	loadingCompleted = true;
 	document.getElementById('mapContainerDiv').style.transition = "all " + ((tickRate) * animationDelay) + "ms linear";
 	computerItems = [new Item("POTION", 12)];
-	currentMap = new PlayerBedroom(redsHouse, 8, 8, -3, -6);
+	currentMap = new PlayerBedroom(redsHouse, 8, 8, 3, 6);
 	currentMap.draw();
 	currentMap.load();
 	textBox = new TextBox(8, 3, -4, 1);
@@ -551,22 +555,38 @@ function getTop(theElement) {
 function getLeft(theElement) {
 	return parseInt(theElement.style.left.replace('px', ''));
 }
-if (debugEnabled) {
-	if (typeof currentMap != "undefined") {
-		currentMap.canvas.style.border = "1px solid yellow";
-	}
-	for (let i = 0; i < xTiles*2; ++i) {
-		for (let n = 0; n < yTiles*2; ++n) {
-			let tempDiv = document.createElement('div');
-			tempDiv.style.outline = "1px solid red";
-			tempDiv.style.outlineOffset = "-1px";
-			tempDiv.style.position = "absolute";
-			tempDiv.style.top = (n*tileSize/2) + "px";
-			tempDiv.style.left = (i*tileSize/2) + "px";
-			tempDiv.style.width = tileSize/2 + "px";
-			tempDiv.style.height = tileSize/2 + "px";
-			playable.appendChild(tempDiv);
+function refreshDebug() {
+	if (debugEnabled) {
+		var tempDebugDivs = document.getElementById("debugDivs");
+		tempDebugDivs.innerHTML = "";
+		for (let i = 0; i < xTiles*2; ++i) {
+			for (let n = 0; n < yTiles*2; ++n) {
+				let tempDiv = document.createElement('div');
+				tempDiv.style.outline = "1px solid grey";
+				tempDiv.style.opacity = 0.5;
+				tempDiv.style.outlineOffset = "-1px";
+				tempDiv.style.position = "absolute";
+				tempDiv.style.top = ((n*tileSize/2)-getTop(currentMap.containerDiv)) + "px";
+				tempDiv.style.left = ((i*tileSize/2)-getLeft(currentMap.containerDiv)) + "px";
+				tempDiv.style.width = tileSize/2 + "px";
+				tempDiv.style.height = tileSize/2 + "px";
+				tempDebugDivs.appendChild(tempDiv);
+			}
 		}
+		for (let i = 0; i < allObjects.length; ++i) {
+			allObjects[i].enableDebug();
+		}
+		var middleDiv = document.createElement("div");
+		//middleDiv.style.outlineOffset = "-1px";
+		middleDiv.style.outline = "2px solid yellow";
+		middleDiv.style.outlineOffset = "-1px";
+		middleDiv.style.position = "absolute";
+		middleDiv.style.width = tileSize + "px";
+		middleDiv.style.height = tileSize + "px";
+		middleDiv.style.top = ((playableHeight/2 - (tileSize/2))-getTop(currentMap.containerDiv)) + "px";
+		middleDiv.style.left = ((playableWidth/2 - (tileSize/2))-getLeft(currentMap.containerDiv)) + "px";
+		middleDiv.style.zIndex = "9999";
+		tempDebugDivs.appendChild(middleDiv);
 	}
 }
 

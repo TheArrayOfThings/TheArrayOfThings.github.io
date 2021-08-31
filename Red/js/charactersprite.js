@@ -7,38 +7,47 @@ function CharacterSprite(sourceImageParam, startingXParam, startingYParam, aiDri
 	characterSprite.moving = false;
 	characterSprite.direction = undefined;
 	characterSprite.flipBit = 0;
+	characterSprite.directionFacing = undefined;
 	characterSprite.showFrontStill = function() {
+		characterSprite.directionFacing = "front";
 		characterSprite.changeSelection(0,0);
 		characterSprite.draw();
 	};
 	characterSprite.showBackStill = function() {
+		characterSprite.directionFacing = "back";
 		characterSprite.changeSelection(0,1);
 		characterSprite.draw();
 	};
 	characterSprite.showLeftStill = function() {
+		characterSprite.directionFacing = "left";
 		characterSprite.unflipHorz();
 		characterSprite.changeSelection(0,2);
 		characterSprite.draw();
 	};
 	characterSprite.showRightStill = function() {
+		characterSprite.directionFacing = "right";
 		characterSprite.flipHorz();
 		characterSprite.changeSelection(0,2);
 		characterSprite.draw();
 	};
 	characterSprite.showFrontRunning = function() {
+		characterSprite.directionFacing = "front";
 		characterSprite.changeSelection(0,3);
 		characterSprite.draw();
 	};
 	characterSprite.showBackRunning = function() {
+		characterSprite.directionFacing = "back";
 		characterSprite.changeSelection(0,4);
 		characterSprite.draw();
 	};
 	characterSprite.showLeftRunning = function() {
+		characterSprite.directionFacing = "left";
 		characterSprite.unflipHorz();
 		characterSprite.changeSelection(0,5);
 		characterSprite.draw();
 	};
 	characterSprite.showRightRunning = function() {
+		characterSprite.directionFacing = "right";
 		characterSprite.flipHorz();
 		characterSprite.changeSelection(0,5);
 		characterSprite.draw();

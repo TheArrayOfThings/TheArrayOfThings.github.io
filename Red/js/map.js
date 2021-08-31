@@ -1,13 +1,15 @@
 'use strict';
 //Enable strict mode
 
-function Map(tileSetParam, widthParam, heightParam) {
+function Map(tileSetParam, widthParam, heightParam, defaultStartXParam, defaultStartYParam) {
     let map = {
 		tileSet: tileSetParam,
 		tlX: undefined,
 		tlY: undefined,
 		cWidth: widthParam,
 		cHeight: heightParam,
+		defaultStartX: defaultStartXParam,
+		defaultStartY: defaultStartYParam,
 		containerDiv: undefined,
 		canvas: undefined,
 		context: undefined,
@@ -31,10 +33,11 @@ function Map(tileSetParam, widthParam, heightParam) {
 			this.scaleMap();
 		},
 		recentreMap: function() {
-			this.tlX = (middleX - (this.cWidth/2)) + Math.abs((player.currentX - player.startingX));
-			this.tlY = (middleY - (this.cHeight/2)) + Math.abs((player.currentY - player.startingY));
+			this.tlX = (middleX - (this.cWidth/2)) + (((this.defaultStartX/2)-0.5) - (player.currentX - this.defaultStartX));
+			this.tlY = (middleY - (this.cHeight/2)) - (((this.defaultStartY/2)-0.5) - (this.defaultStartY - player.currentY));
 			this.containerDiv.style.left = (this.tlX*tileSize) + "px";
 			this.containerDiv.style.top = (this.tlY*tileSize) + "px";
+			refreshDebug();
 		},
 		scaleMap: function() {
 			this.containerDiv.width = this.cWidth*tileSize;

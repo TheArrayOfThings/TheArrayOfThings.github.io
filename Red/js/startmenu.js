@@ -16,30 +16,10 @@ function StartMenu(xParam, yParam) {
 	};
 	startMenu.initialise = function() {
 		startMenu.loadNext("POKéMON", function() {
-			if (!startMenu.pokeMenu) {
-				//Spawn new submenu
-				startMenu.pokeMenu = new SubMenu(6, 5, pokemon.length + 1, startMenu);
-			}
-			//Reset menu
-			startMenu.pokeMenu.fullReset();
-			if (pokemon.length > 0) {
-				//Load items
-				for (let i = 0; i < pokemon.length; ++i) {
-					startMenu.pokeMenu.loadNext(pokemon[i].name, function() {
-						//Do something with the pokemon
-					}, true);
-				}
-				//Load cancel
-				startMenu.pokeMenu.loadNext("CANCEL", function() {startMenu.pokeMenu.stop();});
-				//Start the menu
-				startMenu.pokeMenu.start("Something something pokemon?");
-			} else {
-				
-				//textBox.startDialog("You have no pokemon :(", true, function(){currentState = states.INMENU;});
-			}
+			
 		});
 		startMenu.loadNext("ITEM", function() {
-			if (!startMenu.itemMenu) {
+			/*if (!startMenu.itemMenu) {
 				//Spawn new submenu
 				startMenu.itemMenu = new SubMenu(6, 5, computerItems.length + 1, startMenu);
 			}
@@ -58,54 +38,28 @@ function StartMenu(xParam, yParam) {
 				startMenu.itemMenu.start("What do you want to withdraw?");
 			} else {
 				textBox.startDialog("Nothing to withdraw&~What do you want to do?", true, function(){currentState = states.INMENU;});
-			}
+			}*/
 		});
 		startMenu.loadNext(playerName, function() {
-			if (!startMenu.playerMenu) {
-				//Spawn new submenu
-				startMenu.playerMenu = new SubMenu(6, 5, computerItems.length + 1, startMenu);
-			}
-			//Reset menu
-			startMenu.playerMenu.fullReset();
-			if (computerItems.length > 0) {
-				//Load items
-				for (let i = 0; i < computerItems.length; ++i) {
-					startMenu.playerMenu.loadNext(computerItems[i].name, function() {
-
-					}, true);
-				}
-				//Load cancel
-				startMenu.playerMenu.loadNext("CANCEL", function() {startMenu.itemMenu.stop();});
-				//Start the menu
-				startMenu.playerMenu.start("What do you want to withdraw?");
-			} else {
-				textBox.startDialog("Nothing to withdraw&~What do you want to do?", true, function(){currentState = states.INMENU;});
-			}
+			
 		});
 		startMenu.loadNext("SAVE", function() {
-			if (!startMenu.playerMenu) {
-				//Spawn new submenu
-				startMenu.playerMenu = new SubMenu(6, 5, computerItems.length + 1, startMenu);
-			}
-			//Reset menu
-			startMenu.playerMenu.fullReset();
-			if (computerItems.length > 0) {
-				//Load items
-				for (let i = 0; i < computerItems.length; ++i) {
-					startMenu.playerMenu.loadNext(computerItems[i].name, function() {
-
-					}, true);
-				}
-				//Load cancel
-				startMenu.playerMenu.loadNext("CANCEL", function() {startMenu.itemMenu.stop();});
-				//Start the menu
-				startMenu.playerMenu.start("What do you want to withdraw?");
+			if (isInternetExplorer) {
+				startMenu.stop();
+				textBox.startDialog("Internet explorer detected!&~Unable to save!", false, function(){
+					
+				});
 			} else {
-				textBox.startDialog("Nothing to withdraw&~What do you want to do?", true, function(){currentState = states.INMENU;});
+				startMenu.stop();
+				textBox.startDialog("Game saved!", false, function(){
+					localStorage.setItem("playerX", player.currentX);
+					localStorage.setItem("playerY", player.currentY);
+					localStorage.setItem("playerFacing", player.directionFacing);
+				});
 			}
 		});
 		startMenu.loadNext("OPTION", function() {
-			if (!startMenu.playerMenu) {
+			/*if (!startMenu.playerMenu) {
 				//Spawn new submenu
 				startMenu.playerMenu = new SubMenu(6, 5, computerItems.length + 1, startMenu);
 			}
@@ -124,7 +78,7 @@ function StartMenu(xParam, yParam) {
 				startMenu.playerMenu.start("What do you want to withdraw?");
 			} else {
 				textBox.startDialog("Nothing to withdraw&~What do you want to do?", true, function(){currentState = states.INMENU;});
-			}
+			}*/
 		});
 		startMenu.loadNext("EXIT", function() {
 			startMenu.stop();

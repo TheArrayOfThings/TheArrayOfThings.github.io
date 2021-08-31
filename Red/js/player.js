@@ -4,9 +4,23 @@
 function Player(resourceLocationParam, startingXParam, startingYParam) {
 	let player = new CharacterSprite(resourceLocationParam, startingXParam, startingYParam);
 	player.entityClass = "player";
-	if (typeof player.visibleDiv != "undefined") {
-		player.visibleDiv.style.outline = "2px solid purple";
-		document.getElementById("mapContainerDiv").appendChild(player.visibleDiv);
+	if (!isInternetExplorer) {
+		if (localStorage.getItem("playerFacing") != null) {
+			switch (localStorage.getItem("playerFacing")) {
+				case "front":
+					player.showFrontStill();
+				break;
+				case "back":
+					player.showBackStill();
+				break;
+				case "left":
+					player.showLeftStill();
+				break;
+				case "right":
+					player.showRightStill();
+				break;
+			}
+		}
 	}
     player.moveStep = function() {
 		let willCollide = false;
@@ -112,6 +126,7 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
 			currentMap.moveCanvas((-1), 0);
 			break;
 		}
+		refreshDebug();
 	};
 	return player;
 }

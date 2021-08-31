@@ -102,9 +102,9 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.context.drawImage(sprite.sourceImage, sprite.selectionX*16, sprite.selectionY*16, 16, 16, 0, 0, tileSize, tileSize);
 	};
 	sprite.move = function(horizontalIncrement, verticalIncrement) {
-		if (typeof this.visibleDiv != "undefined") {
-			this.visibleDiv.style.top = (getTop(sprite.canvas) + (verticalIncrement*tileSize)) + 'px';
-			this.visibleDiv.style.left = (getLeft(sprite.canvas) + (horizontalIncrement*tileSize)) + 'px';
+		if (typeof sprite.visibleDiv != "undefined") {
+			sprite.visibleDiv.style.top = (getTop(sprite.visibleDiv) + (verticalIncrement*tileSize)) + 'px';
+			sprite.visibleDiv.style.left = (getLeft(sprite.visibleDiv) + (horizontalIncrement*tileSize)) + 'px';
 		}
 		sprite.canvas.style.left = (getLeft(sprite.canvas) + (horizontalIncrement*tileSize)) + 'px';
 		sprite.canvas.style.top = (getTop(sprite.canvas) + (verticalIncrement*tileSize)) + 'px';
@@ -112,9 +112,9 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.currentY = sprite.currentY + verticalIncrement;
 	};
 	sprite.changeLoc = function(x, y) {
-		if (typeof this.visibleDiv != "undefined") {
-			this.visibleDiv.style.top = y*tileSize + 'px';
-			this.visibleDiv.style.left = x*tileSize + 'px';
+		if (typeof sprite.visibleDiv != "undefined") {
+			sprite.visibleDiv.style.top = y*tileSize + 'px';
+			sprite.visibleDiv.style.left = x*tileSize + 'px';
 		}
 		sprite.canvas.style.left = (x*tileSize) + "px";
 		sprite.canvas.style.top = (y*tileSize) + "px";

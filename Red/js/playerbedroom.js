@@ -107,7 +107,11 @@ function PlayerBedroom(tileSetParam, tlXParam, tlYParam, widthParam, heightParam
         //END of rendering
     };
 	playerbedroom.load = function() {
-		player = new Player(playerSprite, 3,6);
+		if (!isInternetExplorer && localStorage.getItem("playerX") != null && localStorage.getItem("playerY") != null ) {
+			player = new Player(playerSprite, parseInt(localStorage.getItem("playerX")),parseInt(localStorage.getItem("playerY")));
+		} else {
+			player = new Player(playerSprite, 3,6);
+		}
 		playerbedroom.recentreMap();
 	};
     playerbedroom.buildWallTile = function() {
