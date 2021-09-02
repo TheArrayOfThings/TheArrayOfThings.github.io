@@ -15,25 +15,18 @@ function Box(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
         initialise: function() {
 			this.boxContainerDiv = document.createElement("div");
 			this.boxContainerDiv.style.position = "absolute";
+			this.boxContainerDiv.id = "boxContainerDiv";
 			document.getElementById('menu').appendChild(this.boxContainerDiv);
-			this.bX = middleX + this.bX;
-			this.bY = middleY + this.bY;
             //Create the background canvas
             this.bCanvas = document.createElement('canvas');
             this.bCanvas.id = "boxCanvas";
             this.bCanvas.style.position = "absolute";
             this.bCanvas.style.overflow = "hidden";
 			this.boxContainerDiv.appendChild(this.bCanvas);
-			this.resetBox();
-        },
-		resetBox: function() {
-            this.bCanvas.style.width = this.bWidth * tileSize + "px";
+
             this.bCanvas.width = this.bWidth * tileSize;
-            this.boxContainerDiv.style.width = this.bWidth * tileSize + "px";
             this.boxContainerDiv.width = this.bWidth * tileSize;
-            this.bCanvas.style.height = this.bHeight * tileSize + "px";
             this.bCanvas.height = this.bHeight * tileSize;
-            this.boxContainerDiv.style.height = this.bHeight * tileSize + "px";
             this.boxContainerDiv.height = this.bHeight * tileSize;
             //Create the background context
             this.bContext = this.bCanvas.getContext('2d');
@@ -42,12 +35,17 @@ function Box(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 			this.bContext.msImageSmoothingEnabled = false;
 			this.bContext.imageSmoothingEnabled = false;
 			this.bContext.clearRect(0, 0, this.bCanvas.width,this.bCanvas.height);
-            this.boxContainerDiv.style.left = this.bX * tileSize + "px";
-            this.boxContainerDiv.style.top = this.bY * tileSize + "px";
-            //this.bCanvas.style.left = this.bX * tileSize + "px";
-            //this.bCanvas.style.top = this.bY * tileSize + "px";
-            this.bCanvas.style.display = "none";
             this.draw();
+            this.bCanvas.style.display = "none";
+			this.scaleBox();
+        },
+		scaleBox: function() {
+            this.boxContainerDiv.style.height = this.bHeight * tileSize + "px";
+            this.boxContainerDiv.style.width = this.bWidth * tileSize + "px";
+            this.bCanvas.style.height = this.bHeight * tileSize + "px";
+            this.bCanvas.style.width = this.bWidth * tileSize + "px";
+            this.boxContainerDiv.style.left = (middleX + this.bX) * tileSize + "px";
+            this.boxContainerDiv.style.top = (middleY + this.bY) * tileSize + "px";
 		},
         draw: function() {
             for (let i = 0; i < this.bHeight * 2; ++i) { //for each row

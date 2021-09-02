@@ -17,6 +17,13 @@ function Map(tileSetParam, widthParam, heightParam, defaultStartXParam, defaultS
 		currentY: 1,
 		debugDivs: undefined,
 		initialise: function () {
+			if (typeof player.currentX == "undefined") {
+				player.currentX = this.defaultStartX;
+
+			}
+			if (typeof player.currentX == "undefined") {
+				player.currentY = this.defaultStartY;
+			}
 			//Create a container div
 			this.containerDiv = document.getElementById('mapContainerDiv');
 			this.debugDivs = document.getElementById("debugDivs");
@@ -25,31 +32,33 @@ function Map(tileSetParam, widthParam, heightParam, defaultStartXParam, defaultS
 			this.canvas = document.createElement('canvas');
 			//Append canvas to playable area
 			this.containerDiv.appendChild(this.canvas);
-			//Make sure to reset the canvas in the overloaded draw function
-		},
-		resetCanvas: function() {
-			this.currentX = 1;
-			this.currentY = 1;
-			this.scaleMap();
-		},
-		recentreMap: function() {
-			this.tlX = (middleX - (this.cWidth/2)) + (((this.defaultStartX/2)-0.5) - (player.currentX - this.defaultStartX));
-			this.tlY = (middleY - (this.cHeight/2)) - (((this.defaultStartY/2)-0.5) - (this.defaultStartY - player.currentY));
-			this.containerDiv.style.left = (this.tlX*tileSize) + "px";
-			this.containerDiv.style.top = (this.tlY*tileSize) + "px";
-			refreshDebug();
-		},
-		scaleMap: function() {
-			this.containerDiv.width = this.cWidth*tileSize;
-			this.containerDiv.height = this.cHeight*tileSize;
 			this.canvas.width = this.cWidth*tileSize;
 			this.canvas.height = this.cHeight*tileSize;
+			this.containerDiv.width = this.cWidth*tileSize;
+			this.containerDiv.height = this.cHeight*tileSize;
 			//Create the context
 			this.context = this.canvas.getContext('2d');
 			this.context.mozImageSmoothingEnabled = false;
 			this.context.webkitImageSmoothingEnabled = false;
 			this.context.msImageSmoothingEnabled = false;
 			this.context.imageSmoothingEnabled = false;
+			this.resetMap();
+		},
+		centreMap: function() {
+			this.tlX = (middleX - (this.cWidth/2)) + (((this.defaultStartX/2)-0.5) - (player.currentX - this.defaultStartX));
+			this.tlY = (middleY - (this.cHeight/2)) - (((this.defaultStartY/2)-1) - (this.defaultStartY - player.currentY));
+			this.containerDiv.style.left = (this.tlX*tileSize) + "px";
+			this.containerDiv.style.top = (this.tlY*tileSize) + "px";
+		},
+		scaleMap: function() {
+			this.canvas.style.width = this.cWidth*tileSize + "px";
+			this.canvas.style.height = this.cHeight*tileSize + "px";
+			this.containerDiv.style.width = this.cWidth*tileSize + "px";
+			this.containerDiv.style.height = this.cHeight*tileSize + "px";
+		},
+		resetMap: function() {
+			this.scaleMap();
+			this.centreMap();
 		},
 		drawTile: function(selectionX, selectionY, collidable) {
 			if (collidable) {

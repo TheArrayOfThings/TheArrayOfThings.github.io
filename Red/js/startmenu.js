@@ -54,7 +54,7 @@ function StartMenu(xParam, yParam) {
 				textBox.startDialog("Game saved!", false, function(){
 					localStorage.setItem("playerX", player.currentX);
 					localStorage.setItem("playerY", player.currentY);
-					localStorage.setItem("playerFacing", player.directionFacing);
+					localStorage.setItem("playerDirection", player.direction);
 				});
 			}
 		});

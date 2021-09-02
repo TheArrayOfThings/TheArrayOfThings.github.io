@@ -5,12 +5,13 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
 	let player = new CharacterSprite(resourceLocationParam, startingXParam, startingYParam);
 	player.entityClass = "player";
 	if (!isInternetExplorer) {
-		if (localStorage.getItem("playerFacing") != null) {
-			switch (localStorage.getItem("playerFacing")) {
-				case "front":
+		if (localStorage.getItem("playerDirection") != null) {
+			player.direction = localStorage.getItem("playerDirection");
+			switch (localStorage.getItem("playerDirection")) {
+				case "down":
 					player.showFrontStill();
 				break;
-				case "back":
+				case "up":
 					player.showBackStill();
 				break;
 				case "left":
@@ -22,6 +23,16 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
 			}
 		}
 	}
+	player.containerDiv.id = "playerCharacter";
+	document.getElementById("playable").appendChild(player.containerDiv);
+	player.move = function(horizontalIncrement, verticalIncrement) {
+		if (typeof player.visibleDiv != "undefined") {
+			player.visibleDiv.style.top = (getTop(player.visibleDiv) + (verticalIncrement*tileSize)) + 'px';
+			player.visibleDiv.style.left = (getLeft(player.visibleDiv) + (horizontalIncrement*tileSize)) + 'px';
+		}
+		player.currentX = player.currentX + horizontalIncrement;
+		player.currentY = player.currentY + verticalIncrement;
+	};
     player.moveStep = function() {
 		let willCollide = false;
         switch (player.direction) {
@@ -100,30 +111,20 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
 	player.shiftScreen = function() {
 		switch (player.direction) {
 			case 'up':
-				player.move(0, (-1));
-			break;
-			case 'down':
-				player.move(0, (1));
-			break;
-			case 'left':
-				player.move(-1, (0));
-			break;
-			case 'right':
-				player.move(1, (0));
-			break;
-		}
-		switch (player.direction) {
-			case 'up':
 			currentMap.moveCanvas(0, (1));
+			player.move(0, (-1));
 			break;
 			case 'down':
 			currentMap.moveCanvas(0, (-1));
+			player.move(0, (1));
 			break;
 			case 'left':
 			currentMap.moveCanvas((1), 0);
+			player.move((-1), 0);
 			break;
 			case 'right':
 			currentMap.moveCanvas((-1), 0);
+			player.move((1), 0);
 			break;
 		}
 		refreshDebug();

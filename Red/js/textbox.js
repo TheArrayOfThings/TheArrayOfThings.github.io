@@ -9,6 +9,7 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
     textbox.currentX = 0;
 	textbox.currentY = 0;
 	textbox.textBuffer = [];
+	textbox.currentContents = undefined;
 	textbox.linesToWrite = [];
 	textbox.blinkInterval = undefined;
 	textbox.arrowOn = false;
@@ -16,17 +17,16 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 	textbox.endFunction = undefined;
 	textbox.busy = false;
     textbox.load = function() {
+		textbox.fontScale = Math.round(tileSize / 3);
+		if (textbox.fontScale % 2 != 0) {
+			--textbox.fontScale;
+		}
         //Create the text canvas
         textbox.tCanvas = document.createElement('canvas');
         textbox.tCanvas.id = "textCanvas";
         textbox.tCanvas.style.position = "absolute";
         textbox.boxContainerDiv.appendChild(textbox.tCanvas);
-		textbox.resetTextBox();
-    };
-	textbox.resetTextBox = function() {
-        textbox.tCanvas.style.width = (textbox.bWidth * tileSize - tileSize) + "px";
         textbox.tCanvas.width = (textbox.bWidth * tileSize - tileSize);
-        textbox.tCanvas.style.height = (textbox.bHeight * tileSize - tileSize * 1.5) + "px";
         textbox.tCanvas.height = (textbox.bHeight * tileSize - tileSize * 1.5);
         //Create the background context
 		textbox.context = textbox.tCanvas.getContext('2d');
@@ -35,10 +35,16 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 		textbox.context.msImageSmoothingEnabled = false;
 		textbox.context.imageSmoothingEnabled = false;
         textbox.tCanvas.style.display = "none";
+		textbox.scaleTextBox();
+    };
+	textbox.scaleTextBox = function() {
+		textbox.scaleBox();
+        textbox.tCanvas.style.width = ((textbox.bWidth * tileSize) - tileSize) + "px";
+        textbox.tCanvas.style.height = ((textbox.bHeight * tileSize - tileSize)) + "px";
+        textbox.tCanvas.style.left = (tileSize/2) + "px";
+        textbox.tCanvas.style.top = (tileSize/2) + "px";
 	};
     textbox.showContents = function() {
-        textbox.tCanvas.style.left = (tileSize/1.5) + "px";
-        textbox.tCanvas.style.top = (tileSize * 0.7) + "px";
         textbox.tCanvas.style.display = "block";
     };
     textbox.hideContents = function() {
@@ -50,6 +56,7 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
         textbox.currentY = 0;
     };
 	textbox.startDialog = function(textToShow, instantParam, functionToRun) {
+		textBox.scaleTextBox();
 		textbox.parseText(textToShow);
 		textbox.instantText = instantParam;
 		textbox.endFunction = functionToRun;
@@ -88,13 +95,6 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 		if (textbox.busy) {
 			return;
 		}
-		/*//Reset the current line
-		if (textbox.currentY == 0) {
-			textbox.currentY = 1;
-			textbox.currentX = 0;
-		} else {
-			textbox.clear();
-		}*/
 		//Reset the current line
 		switch (textbox.currentY) {
 			case -1:
@@ -113,6 +113,7 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 			break;
 		}
 		if (textbox.linesToWrite.length > 0) {
+			textbox.currentContents = toWrite;
 			toWrite = textbox.linesToWrite.shift();
 			textbox.writeText(toWrite);
 			if (textbox.linesToWrite.length == 0 && textbox.endFunction) {
@@ -150,15 +151,15 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 	textbox.showNextArrow = function() {
 		textbox.arrowOn = true;
 		if (textbox.currentY == 0) {
-			textbox.context.drawImage(font, 14 * 8, 6 * 8, 8, 8, 20 * (tileSize / 3), 0, tileSize / 3, tileSize / 3);	
+			textbox.context.drawImage(font, 14 * 8, 6 * 8, 8, 8, 20 * textbox.fontScale, 0, textbox.fontScale, textbox.fontScale);	
 		} else {
-			textbox.context.drawImage(font, 14 * 8, 6 * 8, 8, 8, 20 * (tileSize / 3), 1 * (tileSize), tileSize / 3, tileSize / 3);	
+			textbox.context.drawImage(font, 14 * 8, 6 * 8, 8, 8, 20 * textbox.fontScale, (textbox.fontScale*3), textbox.fontScale, textbox.fontScale);	
 		}
 	};
 	textbox.hideNextArrow = function() {
 		textbox.arrowOn = false;
-		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * (tileSize / 3), 0, tileSize / 3, tileSize / 3);	
-		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * (tileSize / 3), 1 * (tileSize), tileSize / 3, tileSize / 3);
+		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * textbox.fontScale, 0, textbox.fontScale, textbox.fontScale);	
+		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * textbox.fontScale, (textbox.fontScale*3), textbox.fontScale, textbox.fontScale);
 	};
 	textbox.blink = function() {
 		if (textbox.busy) {
@@ -212,10 +213,6 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 		}
 	};
 	textbox.writeLetter = function(whichLetter) {
-		textbox.fontScale = Math.round(tileSize / 3);
-		if (textbox.fontScale % 2 != 0) {
-			++textbox.fontScale;
-		}
 		switch (whichLetter) {
 			//Row 1
 			case "A":

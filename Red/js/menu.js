@@ -71,7 +71,7 @@ function Menu(widthParam, heightParam, xParam, yParam) {
 		currentState = states.INOVERWORLD;
 	};
 	menu.fullReset = function() {
-		menu.resetBox();
+		menu.scaleBox();
 		menu.options = [];
 		menu.loadedOptions = 0;
 		menu.currentOption = 0;

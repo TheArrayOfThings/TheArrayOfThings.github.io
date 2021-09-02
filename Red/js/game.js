@@ -152,16 +152,23 @@ function loadingComplete() {
 	if (loadingCompleted) {return};
 	loadingCompleted = true;
 	document.getElementById('mapContainerDiv').style.transition = "all " + ((tickRate) * animationDelay) + "ms linear";
+	if (!isInternetExplorer && localStorage.getItem("playerX") != null && localStorage.getItem("playerY") != null ) {
+		player = new Player(playerSprite, parseInt(localStorage.getItem("playerX")),parseInt(localStorage.getItem("playerY")));
+	} else {
+		player = new Player(playerSprite);
+	}
 	computerItems = [new Item("POTION", 12)];
 	currentMap = new PlayerBedroom(redsHouse, 8, 8, 3, 6);
-	currentMap.draw();
-	currentMap.load();
-	textBox = new TextBox(8, 3, -4, 1);
+	player.centre();
+	textBox = new TextBox(8, 3, -3.5, 1);
 	frameInterval = setInterval(nextFrame, tickRate);
-	mainComputer = new Computer(-4, -4);
+	mainComputer = new Computer(-3.5, -3.5);
 	mainStartMenu = new StartMenu(0, -3);
 	mainQuantityMenu = new QuantityMenu();
 	mainConfirmMenu = new ConfirmMenu();
+	if (debugEnabled) {
+		refreshDebug();
+	}
 }
 function upPressed() {
 	switch(currentState) {
@@ -382,13 +389,28 @@ function setPlayable() {
 	yTiles = playableHeight/tileSize;
 	middleX = Math.floor(xTiles/2);
 	middleY = Math.floor(yTiles/2);
+	//Do reset stuff!
 	if (typeof currentMap != "undefined") {
-		currentMap.draw();
-		currentMap.recentreMap();
+		currentMap.resetMap();
 	}
 	if (typeof player != "undefined") {
-		player.resetCanvas();
-		player.changeLoc(player.currentX, player.currentY);
+		player.scaleCanvas();
+		player.centre();
+	}
+	if (typeof textBox != "undefined") {
+		textBox.scaleTextBox();
+	}
+	if (typeof mainStartMenu != "undefined") {
+		mainStartMenu.scaleTextBox();
+	}
+	if (typeof mainComputer != "undefined") {
+		mainComputer.scaleTextBox();
+	}
+	if (typeof mainQuantityMenu != "undefined") {
+		mainQuantityMenu.scaleTextBox();
+	}
+	if (typeof mainConfirmMenu != "undefined") {
+		mainConfirmMenu.scaleTextBox();
 	}
 	previousPlayableHeight = playableHeight;
 	previousPlayableWidth = playableWidth;
@@ -498,7 +520,10 @@ function redResizeend() {
 	} else {
 		resizeRedTimeout = false;
 		screenSetup();
-	}               
+	}
+	if (debugEnabled) {
+		refreshDebug();
+	}
 }
 function keyParse(e) {
 	if (e.code) {
@@ -557,6 +582,9 @@ function getLeft(theElement) {
 }
 function refreshDebug() {
 	if (debugEnabled) {
+		if (document.getElementById("middleDiv")) {
+			playable.removeChild(document.getElementById("middleDiv"));
+		}
 		var tempDebugDivs = document.getElementById("debugDivs");
 		tempDebugDivs.innerHTML = "";
 		for (let i = 0; i < xTiles*2; ++i) {
@@ -577,16 +605,17 @@ function refreshDebug() {
 			allObjects[i].enableDebug();
 		}
 		var middleDiv = document.createElement("div");
+		middleDiv.id = "middleDiv";
 		//middleDiv.style.outlineOffset = "-1px";
 		middleDiv.style.outline = "2px solid yellow";
 		middleDiv.style.outlineOffset = "-1px";
 		middleDiv.style.position = "absolute";
 		middleDiv.style.width = tileSize + "px";
 		middleDiv.style.height = tileSize + "px";
-		middleDiv.style.top = ((playableHeight/2 - (tileSize/2))-getTop(currentMap.containerDiv)) + "px";
-		middleDiv.style.left = ((playableWidth/2 - (tileSize/2))-getLeft(currentMap.containerDiv)) + "px";
+		middleDiv.style.top = (middleY*tileSize) + "px";
+		middleDiv.style.left = (middleX*tileSize) + "px";
 		middleDiv.style.zIndex = "9999";
-		tempDebugDivs.appendChild(middleDiv);
+		playable.appendChild(middleDiv);
 	}
 }
 
