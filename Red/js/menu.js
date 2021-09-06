@@ -11,7 +11,6 @@ function Menu(widthParam, heightParam, xParam, yParam) {
 	menu.class = "menu";
 	menu.initialise = function() {
 		menu.fullReset();
-		menu.tCanvas.style.left = (getLeft(menu.tCanvas) + tileSize/2) + "px";
 	};
 	menu.start = function(textToShow) {
 		menu.currentOption = 0;
@@ -57,13 +56,24 @@ function Menu(widthParam, heightParam, xParam, yParam) {
 		}
 	};
 	menu.showSelectionArrow = function() {
+		var heightDif = parseInt(menu.bCanvas.style.height.replace("px", "")) - parseInt(menu.tCanvas.style.height.replace("px", ""));
 		//menu.arrowOn = true;
 		menu.hideSelectionArrow();
-		menu.bContext.drawImage(font, 13 * 8, 6 * 8, 8, 8, /*dx*/menu.fontScale, /*dy*/(((menu.currentOption+2)*tileSize) - tileSize)-tileSize/3, /*dWidth*/tileSize / 3, /*dHeight*/tileSize / 3);	
+		menu.bContext.drawImage(font, /*sx*/13 * 8, /*sy*/6 * 8, /*swidth*/8, /*sheight*/8, 
+		/*dx*/menu.originalTileSize / 3, 
+		//Need to take into account the textbox offset and height difference!
+		/*dy*/getTop(menu.tCanvas) + (menu.currentOption*((menu.originalTileSize / 3*3)+heightDif/(menu.loadedOptions*2))),
+		/*dy*///(getTop(menu.tCanvas) + (menu.currentOption*(menu.originalTileSize / 3*3))) + ((menu.currentOption)*4), 
+		/*dWidth*/menu.originalTileSize / 3, 
+		/*dHeight*/menu.originalTileSize / 3);	
 	};
 	menu.hideSelectionArrow = function() {
 		//menu.arrowOn = false;
-		menu.bContext.drawImage(font, 0 * 8, 4 * 8, 8, 8, /*dx*/menu.fontScale, /*dy*/tileSize/2, /*dWidth*/tileSize / 3, /*dHeight*/(menu.height*tileSize)-tileSize);
+		menu.bContext.drawImage(font, 0 * 8, 4 * 8, 8, 8, 
+		/*dx*/menu.originalTileSize / 3, 
+		/*dy*/menu.originalTileSize/2, 
+		/*dWidth*/menu.originalTileSize / 3, 
+		/*dHeight*/(menu.height*menu.originalTileSize)-menu.originalTileSize);
 	};
 	menu.stop = function () {
 		menu.hide();

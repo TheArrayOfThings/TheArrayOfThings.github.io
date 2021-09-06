@@ -9,10 +9,10 @@ function Box(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
         bX: bXOffsetParam,
         bY: bYOffsetParam,
         bCanvas: undefined,
-        bContext: undefined,
-		fontScale:undefined,
 		boxContainerDiv:undefined,
+		originalTileSize:undefined,
         initialise: function() {
+			this.originalTileSize = tileSize;
 			this.boxContainerDiv = document.createElement("div");
 			this.boxContainerDiv.style.position = "absolute";
 			this.boxContainerDiv.id = "boxContainerDiv";
@@ -52,25 +52,25 @@ function Box(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
                 for (let n = 0; n < this.bWidth * 2; ++n) { //for each column
                     if (i == 0 && n == 0) {
                         //Top left corner
-                        this.bContext.drawImage(boxImage, 1 * 8, 6 * 8, 8, 8, n * tileSize, i * tileSize, tileSize / 2, tileSize / 2);
+                        this.bContext.drawImage(boxImage, 1 * 8, 6 * 8, 8, 8, n * this.originalTileSize, i * this.originalTileSize, this.originalTileSize / 2, this.originalTileSize / 2);
                     } else if (i == 0 && n == this.bWidth * 2 - 1) {
                         //Top right corner
-                        this.bContext.drawImage(boxImage, 3 * 8, 6 * 8, 8, 8, n * (tileSize / 2), i * (tileSize / 2), tileSize / 2, tileSize / 2);
+                        this.bContext.drawImage(boxImage, 3 * 8, 6 * 8, 8, 8, n * (this.originalTileSize / 2), i * (this.originalTileSize / 2), this.originalTileSize / 2, this.originalTileSize / 2);
                     } else if (i == this.bHeight * 2 - 1 && n == 0) {
                         //Bottom left corner
-                        this.bContext.drawImage(boxImage, 1 * 8, 7 * 8, 8, 8, n * (tileSize / 2), i * (tileSize / 2), tileSize / 2, tileSize / 2);
+                        this.bContext.drawImage(boxImage, 1 * 8, 7 * 8, 8, 8, n * (this.originalTileSize / 2), i * (this.originalTileSize / 2), this.originalTileSize / 2, this.originalTileSize / 2);
                     } else if (i == this.bHeight * 2 - 1 && n == this.bWidth * 2 - 1) {
                         //Bottom right corner
-                        this.bContext.drawImage(boxImage, 2 * 8, 7 * 8, 8, 8, n * (tileSize / 2), i * (tileSize / 2), tileSize / 2, tileSize / 2);
+                        this.bContext.drawImage(boxImage, 2 * 8, 7 * 8, 8, 8, n * (this.originalTileSize / 2), i * (this.originalTileSize / 2), this.originalTileSize / 2, this.originalTileSize / 2);
                     } else if (i == 0 || i == this.bHeight * 2 - 1) {
                         //first or last row being drawn
-                        this.bContext.drawImage(boxImage, 2 * 8, 6 * 8, 8, 8, n * (tileSize / 2), i * (tileSize / 2), tileSize / 2, tileSize / 2);
+                        this.bContext.drawImage(boxImage, 2 * 8, 6 * 8, 8, 8, n * (this.originalTileSize / 2), i * (this.originalTileSize / 2), this.originalTileSize / 2, this.originalTileSize / 2);
                     } else if (n == 0 || n == this.bWidth * 2 - 1) {
                         //first or last column being drawn
-                        this.bContext.drawImage(boxImage, 0 * 8, 7 * 8, 8, 8, n * (tileSize / 2), i * (tileSize / 2), tileSize / 2, tileSize / 2);
+                        this.bContext.drawImage(boxImage, 0 * 8, 7 * 8, 8, 8, n * (this.originalTileSize / 2), i * (this.originalTileSize / 2), this.originalTileSize / 2, this.originalTileSize / 2);
                     } else {
                         //Draw white
-                        this.bContext.drawImage(boxImage, 3 * 8, 7 * 8, 8, 8, n * (tileSize / 2), i * (tileSize / 2), tileSize / 2, tileSize / 2);
+                        this.bContext.drawImage(boxImage, 3 * 8, 7 * 8, 8, 8, n * (this.originalTileSize / 2), i * (this.originalTileSize / 2), this.originalTileSize / 2, this.originalTileSize / 2);
                     }
                 }
             }

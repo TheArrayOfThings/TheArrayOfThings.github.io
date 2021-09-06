@@ -17,10 +17,6 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 	textbox.endFunction = undefined;
 	textbox.busy = false;
     textbox.load = function() {
-		textbox.fontScale = Math.round(tileSize / 3);
-		if (textbox.fontScale % 2 != 0) {
-			--textbox.fontScale;
-		}
         //Create the text canvas
         textbox.tCanvas = document.createElement('canvas');
         textbox.tCanvas.id = "textCanvas";
@@ -40,11 +36,12 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 	textbox.scaleTextBox = function() {
 		textbox.scaleBox();
         textbox.tCanvas.style.width = ((textbox.bWidth * tileSize) - tileSize) + "px";
-        textbox.tCanvas.style.height = ((textbox.bHeight * tileSize - tileSize)) + "px";
-        textbox.tCanvas.style.left = (tileSize/2) + "px";
-        textbox.tCanvas.style.top = (tileSize/2) + "px";
+        textbox.tCanvas.style.height = ((textbox.bHeight * tileSize) - tileSize) + "px";
+        textbox.tCanvas.style.left = tileSize/1.65 + "px";
+        textbox.tCanvas.style.top = tileSize/1.65 + "px";
 	};
     textbox.showContents = function() {
+		textbox.scaleTextBox();
         textbox.tCanvas.style.display = "block";
     };
     textbox.hideContents = function() {
@@ -56,7 +53,6 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
         textbox.currentY = 0;
     };
 	textbox.startDialog = function(textToShow, instantParam, functionToRun) {
-		textBox.scaleTextBox();
 		textbox.parseText(textToShow);
 		textbox.instantText = instantParam;
 		textbox.endFunction = functionToRun;
@@ -151,15 +147,23 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 	textbox.showNextArrow = function() {
 		textbox.arrowOn = true;
 		if (textbox.currentY == 0) {
-			textbox.context.drawImage(font, 14 * 8, 6 * 8, 8, 8, 20 * textbox.fontScale, 0, textbox.fontScale, textbox.fontScale);	
+			textbox.context.drawImage(font, /*sx*/14 * 8, /*sy*/6 * 8, /*swidth*/8, /*sheight*/8,
+			/*dx*/20 * (textbox.originalTileSize / 3),
+			/*dy*/0,
+			/*dwidth*/textbox.originalTileSize / 3,
+			/*dheight*/textbox.originalTileSize / 3);	
 		} else {
-			textbox.context.drawImage(font, 14 * 8, 6 * 8, 8, 8, 20 * textbox.fontScale, (textbox.fontScale*3), textbox.fontScale, textbox.fontScale);	
+			textbox.context.drawImage(font, /*sx*/14 * 8, /*sy*/6 * 8, /*swidth*/8, /*sheight*/8, 
+			/*dx*/20 * textbox.originalTileSize / 3, 
+			/*dy*/(textbox.originalTileSize), 
+			/*dwidth*/textbox.originalTileSize / 3, 
+			/*dheight*/textbox.originalTileSize / 3);	
 		}
 	};
 	textbox.hideNextArrow = function() {
 		textbox.arrowOn = false;
-		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * textbox.fontScale, 0, textbox.fontScale, textbox.fontScale);	
-		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * textbox.fontScale, (textbox.fontScale*3), textbox.fontScale, textbox.fontScale);
+		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * textbox.originalTileSize / 3, 0, textbox.originalTileSize / 3, textbox.originalTileSize / 3);	
+		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, /*dx*/20 * textbox.originalTileSize / 3, /*dy*/(textbox.originalTileSize), /*swidth*/textbox.originalTileSize / 3, /*sheight*/textbox.originalTileSize / 3);
 	};
 	textbox.blink = function() {
 		if (textbox.busy) {
@@ -182,11 +186,19 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 		}
 	};
     textbox.drawLetter = function(x, y) {
-        textbox.context.drawImage(font, x * 8, y * 8, 8, 8, textbox.currentX * (textbox.fontScale), textbox.currentY * (tileSize), textbox.fontScale, textbox.fontScale);
+        textbox.context.drawImage(font, x * 8, y * 8, 8, 8, 
+		textbox.currentX * (textbox.originalTileSize / 3), 
+		textbox.currentY * (textbox.originalTileSize / 3*3), 
+		textbox.originalTileSize / 3, 
+		textbox.originalTileSize / 3);
         textbox.currentX = textbox.currentX + 1;
     };
     textbox.drawHalfLetter = function(x, y) {
-        textbox.context.drawImage(font, x * 8, y * 8, 4, 8, textbox.currentX * (textbox.fontScale), textbox.currentY * (tileSize), textbox.fontScale, textbox.fontScale);
+        textbox.context.drawImage(font, x * 8, y * 8, 4, 8, 
+		textbox.currentX * (textbox.originalTileSize / 3), 
+		textbox.currentY * (textbox.originalTileSize / 3*3), 
+		textbox.originalTileSize / 3, 
+		textbox.originalTileSize / 3);
         textbox.currentX = textbox.currentX + 0.5;
     };
 	textbox.writeNextLetter = function() {

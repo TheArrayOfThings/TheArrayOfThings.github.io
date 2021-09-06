@@ -44,7 +44,6 @@ div#mapContainerDiv {
 }
 div#menu {
 	z-index:4;
-	border:2px solid red;
 	position: absolute;
 	top:0px;
 	left:0px;
@@ -54,7 +53,6 @@ div#menu {
 }
 div#frontmenu {
 	z-index:5;
-	border:1px solid orange;
 	position: absolute;
 	top:0px;
 	left:0px;
@@ -162,7 +160,7 @@ pre, code {
 .modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
-	z-index: 4; /* Sit on top */
+	z-index: 999; /* Sit on top */
 	padding-top: 100px; /* Location of the box */
 	left: 0;
 	top: 0;
@@ -189,7 +187,7 @@ div#modalOverlay {
 	position: fixed;
 	height: 100%;
 	width: 100%;
-	z-index: 3;
+	z-index: 998;
 	background-color: #4d4b46;
 	opacity:0.5;
 	display:none;
@@ -250,7 +248,7 @@ div.topMenu, nav.navBackground	{
 	margin:0em;
 	min-height:25px;
 	border-bottom:1px solid darkgrey;
-	z-index: 1;
+	z-index: 997;
 }
 div.topMenu {
 	height:5vh;

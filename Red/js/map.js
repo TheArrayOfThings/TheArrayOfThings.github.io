@@ -19,9 +19,8 @@ function Map(tileSetParam, widthParam, heightParam, defaultStartXParam, defaultS
 		initialise: function () {
 			if (typeof player.currentX == "undefined") {
 				player.currentX = this.defaultStartX;
-
 			}
-			if (typeof player.currentX == "undefined") {
+			if (typeof player.currentY == "undefined") {
 				player.currentY = this.defaultStartY;
 			}
 			//Create a container div
