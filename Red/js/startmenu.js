@@ -37,7 +37,10 @@ function StartMenu(xParam, yParam) {
 				//Start the menu
 				startMenu.itemMenu.startQuiet();
 			} else {
-				textBox.startDialog("There is nothing stored.&~What do you want to do?", true, function(){currentState = states.INMENU;});
+				textBox.startDialog("You have no items :(&~", true, function(){
+					currentState = states.INMENU;
+					textBox.hide();
+				});
 			}
 		});
 		startMenu.loadNext(playerName, function() {

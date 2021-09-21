@@ -161,6 +161,7 @@ function loadingComplete() {
 	currentMap = new PlayerBedroom(redsHouse, 8, 8, 3, 6);
 	player.centre();
 	textBox = new TextBox(8, 3, -3.5, 1);
+	document.getElementById("frontmenu").appendChild(textBox.boxContainerDiv);
 	frameInterval = setInterval(nextFrame, tickRate);
 	mainComputer = new Computer(-3.5, -3.5);
 	mainStartMenu = new StartMenu(0, -3);
