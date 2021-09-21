@@ -19,26 +19,26 @@ function StartMenu(xParam, yParam) {
 			
 		});
 		startMenu.loadNext("ITEM", function() {
-			/*if (!startMenu.itemMenu) {
+			if (!startMenu.itemMenu) {
 				//Spawn new submenu
-				startMenu.itemMenu = new SubMenu(6, 5, computerItems.length + 1, startMenu);
+				startMenu.itemMenu = new SubMenu(6, 5, startMenu);
 			}
 			//Reset menu
 			startMenu.itemMenu.fullReset();
-			if (computerItems.length > 0) {
+			if (playerItems.length > 0) {
 				//Load items
-				for (let i = 0; i < computerItems.length; ++i) {
-					startMenu.itemMenu.loadNext(computerItems[i].name, function() {
-						//Start a use menu I guess? 
-					}, true);
+				for (let i = 0; i < playerItems.length; ++i) {
+					startMenu.itemMenu.loadNext(playerItems[i].name, function() {
+						//Toss confirm menu presumably!
+					}, true, playerItems[i].quantity);
 				}
 				//Load cancel
-				startMenu.itemMenu.loadNext("CANCEL", function() {startMenu.itemMenu.stop();});
+				startMenu.itemMenu.loadNext("CANCEL", function() {startMenu.itemMenu.stopQuiet();});
 				//Start the menu
-				startMenu.itemMenu.start("What do you want to withdraw?");
+				startMenu.itemMenu.startQuiet();
 			} else {
-				textBox.startDialog("Nothing to withdraw&~What do you want to do?", true, function(){currentState = states.INMENU;});
-			}*/
+				textBox.startDialog("There is nothing stored.&~What do you want to do?", true, function(){currentState = states.INMENU;});
+			}
 		});
 		startMenu.loadNext(playerName, function() {
 			

@@ -60,19 +60,19 @@ function Menu(widthParam, heightParam, xParam, yParam) {
 		//menu.arrowOn = true;
 		menu.hideSelectionArrow();
 		menu.bContext.drawImage(font, /*sx*/13 * 8, /*sy*/6 * 8, /*swidth*/8, /*sheight*/8, 
-		/*dx*/menu.originalTileSize / 3, 
+		/*dx*/Math.round(menu.originalTileSize / 3), 
 		//Need to take into account the textbox offset and height difference!
-		/*dy*/getTop(menu.tCanvas) + (menu.currentOption*((menu.originalTileSize / 3*3)+heightDif/(menu.loadedOptions*2))),
-		/*dy*///(getTop(menu.tCanvas) + (menu.currentOption*(menu.originalTileSize / 3*3))) + ((menu.currentOption)*4), 
-		/*dWidth*/menu.originalTileSize / 3, 
-		/*dHeight*/menu.originalTileSize / 3);	
+		/*dy*/getTop(menu.tCanvas) + (menu.currentOption*((Math.round(menu.originalTileSize / 3)*3)+heightDif/(menu.loadedOptions*2))),
+		/*dy*///(getTop(menu.tCanvas) + (menu.currentOption*(Math.round(menu.originalTileSize / 3)*3))) + ((menu.currentOption)*4), 
+		/*dWidth*/Math.round(menu.originalTileSize / 3), 
+		/*dHeight*/Math.round(menu.originalTileSize / 3));	
 	};
 	menu.hideSelectionArrow = function() {
 		//menu.arrowOn = false;
 		menu.bContext.drawImage(font, 0 * 8, 4 * 8, 8, 8, 
-		/*dx*/menu.originalTileSize / 3, 
+		/*dx*/Math.round(menu.originalTileSize / 3), 
 		/*dy*/menu.originalTileSize/2, 
-		/*dWidth*/menu.originalTileSize / 3, 
+		/*dWidth*/Math.round(menu.originalTileSize / 3), 
 		/*dHeight*/(menu.height*menu.originalTileSize)-menu.originalTileSize);
 	};
 	menu.stop = function () {

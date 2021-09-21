@@ -22,8 +22,8 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
         textbox.tCanvas.id = "textCanvas";
         textbox.tCanvas.style.position = "absolute";
         textbox.boxContainerDiv.appendChild(textbox.tCanvas);
-        textbox.tCanvas.width = (textbox.bWidth * tileSize - tileSize);
-        textbox.tCanvas.height = (textbox.bHeight * tileSize - tileSize * 1.5);
+        textbox.tCanvas.width = (textbox.bWidth * textbox.originalTileSize - textbox.originalTileSize);
+        textbox.tCanvas.height = (textbox.bHeight * textbox.originalTileSize - textbox.originalTileSize * 1.5);
         //Create the background context
 		textbox.context = textbox.tCanvas.getContext('2d');
 		textbox.context.mozImageSmoothingEnabled = false;
@@ -35,10 +35,10 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
     };
 	textbox.scaleTextBox = function() {
 		textbox.scaleBox();
-        textbox.tCanvas.style.width = ((textbox.bWidth * tileSize) - tileSize) + "px";
-        textbox.tCanvas.style.height = ((textbox.bHeight * tileSize) - tileSize) + "px";
-        textbox.tCanvas.style.left = tileSize/1.65 + "px";
-        textbox.tCanvas.style.top = tileSize/1.65 + "px";
+        textbox.tCanvas.style.width = ((textbox.bWidth * textbox.originalTileSize) - textbox.originalTileSize) + "px";
+        textbox.tCanvas.style.height = ((textbox.bHeight * textbox.originalTileSize) - textbox.originalTileSize) + "px";
+        textbox.tCanvas.style.left = textbox.originalTileSize/1.65 + "px";
+        textbox.tCanvas.style.top = textbox.originalTileSize/1.65 + "px";
 	};
     textbox.showContents = function() {
 		textbox.scaleTextBox();
@@ -148,22 +148,22 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 		textbox.arrowOn = true;
 		if (textbox.currentY == 0) {
 			textbox.context.drawImage(font, /*sx*/14 * 8, /*sy*/6 * 8, /*swidth*/8, /*sheight*/8,
-			/*dx*/20 * (textbox.originalTileSize / 3),
+			/*dx*/20 * (Math.round(textbox.originalTileSize / 3)),
 			/*dy*/0,
-			/*dwidth*/textbox.originalTileSize / 3,
-			/*dheight*/textbox.originalTileSize / 3);	
+			/*dwidth*/Math.round(textbox.originalTileSize / 3),
+			/*dheight*/Math.round(textbox.originalTileSize / 3));	
 		} else {
 			textbox.context.drawImage(font, /*sx*/14 * 8, /*sy*/6 * 8, /*swidth*/8, /*sheight*/8, 
-			/*dx*/20 * textbox.originalTileSize / 3, 
+			/*dx*/20 * Math.round(textbox.originalTileSize / 3), 
 			/*dy*/(textbox.originalTileSize), 
-			/*dwidth*/textbox.originalTileSize / 3, 
-			/*dheight*/textbox.originalTileSize / 3);	
+			/*dwidth*/Math.round(textbox.originalTileSize / 3), 
+			/*dheight*/Math.round(textbox.originalTileSize / 3));	
 		}
 	};
 	textbox.hideNextArrow = function() {
 		textbox.arrowOn = false;
-		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * textbox.originalTileSize / 3, 0, textbox.originalTileSize / 3, textbox.originalTileSize / 3);	
-		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, /*dx*/20 * textbox.originalTileSize / 3, /*dy*/(textbox.originalTileSize), /*swidth*/textbox.originalTileSize / 3, /*sheight*/textbox.originalTileSize / 3);
+		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, 20 * Math.round(textbox.originalTileSize / 3), 0, Math.round(textbox.originalTileSize / 3), Math.round(textbox.originalTileSize / 3));	
+		textbox.context.drawImage(font, 0, 4 * 8, 8, 8, /*dx*/20 * Math.round(textbox.originalTileSize / 3), /*dy*/(textbox.originalTileSize), /*swidth*/Math.round(textbox.originalTileSize / 3), /*sheight*/Math.round(textbox.originalTileSize / 3));
 	};
 	textbox.blink = function() {
 		if (textbox.busy) {
@@ -187,18 +187,18 @@ function TextBox(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 	};
     textbox.drawLetter = function(x, y) {
         textbox.context.drawImage(font, x * 8, y * 8, 8, 8, 
-		textbox.currentX * (textbox.originalTileSize / 3), 
-		textbox.currentY * (textbox.originalTileSize / 3*3), 
-		textbox.originalTileSize / 3, 
-		textbox.originalTileSize / 3);
+		textbox.currentX * (Math.round(textbox.originalTileSize / 3)), 
+		textbox.currentY * (Math.round(textbox.originalTileSize / 3)*3), 
+		Math.round(textbox.originalTileSize / 3), 
+		Math.round(textbox.originalTileSize / 3));
         textbox.currentX = textbox.currentX + 1;
     };
     textbox.drawHalfLetter = function(x, y) {
         textbox.context.drawImage(font, x * 8, y * 8, 4, 8, 
-		textbox.currentX * (textbox.originalTileSize / 3), 
-		textbox.currentY * (textbox.originalTileSize / 3*3), 
-		textbox.originalTileSize / 3, 
-		textbox.originalTileSize / 3);
+		textbox.currentX * (Math.round(textbox.originalTileSize / 3)), 
+		textbox.currentY * (Math.round(textbox.originalTileSize / 3)*3), 
+		Math.round(textbox.originalTileSize / 3), 
+		Math.round(textbox.originalTileSize / 3));
         textbox.currentX = textbox.currentX + 0.5;
     };
 	textbox.writeNextLetter = function() {

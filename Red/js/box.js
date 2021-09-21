@@ -24,10 +24,10 @@ function Box(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
             this.bCanvas.style.overflow = "hidden";
 			this.boxContainerDiv.appendChild(this.bCanvas);
 
-            this.bCanvas.width = this.bWidth * tileSize;
-            this.boxContainerDiv.width = this.bWidth * tileSize;
-            this.bCanvas.height = this.bHeight * tileSize;
-            this.boxContainerDiv.height = this.bHeight * tileSize;
+            this.bCanvas.width = this.bWidth * this.originalTileSize;
+            this.boxContainerDiv.width = this.bWidth * this.originalTileSize;
+            this.bCanvas.height = this.bHeight * this.originalTileSize;
+            this.boxContainerDiv.height = this.bHeight * this.originalTileSize;
             //Create the background context
             this.bContext = this.bCanvas.getContext('2d');
 			this.bContext.mozImageSmoothingEnabled = false;
@@ -40,12 +40,12 @@ function Box(bWidthParam, bHeightParam, bXOffsetParam, bYOffsetParam) {
 			this.scaleBox();
         },
 		scaleBox: function() {
-            this.boxContainerDiv.style.height = this.bHeight * tileSize + "px";
-            this.boxContainerDiv.style.width = this.bWidth * tileSize + "px";
-            this.bCanvas.style.height = this.bHeight * tileSize + "px";
-            this.bCanvas.style.width = this.bWidth * tileSize + "px";
-            this.boxContainerDiv.style.left = (middleX + this.bX) * tileSize + "px";
-            this.boxContainerDiv.style.top = (middleY + this.bY) * tileSize + "px";
+            this.boxContainerDiv.style.height = this.bHeight * this.originalTileSize + "px";
+            this.boxContainerDiv.style.width = this.bWidth * this.originalTileSize + "px";
+            this.bCanvas.style.height = this.bHeight * this.originalTileSize + "px";
+            this.bCanvas.style.width = this.bWidth * this.originalTileSize + "px";
+            this.boxContainerDiv.style.left = (middleX + this.bX) * this.originalTileSize + "px";
+            this.boxContainerDiv.style.top = (middleY + this.bY) * this.originalTileSize + "px";
 		},
         draw: function() {
             for (let i = 0; i < this.bHeight * 2; ++i) { //for each row
