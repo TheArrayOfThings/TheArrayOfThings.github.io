@@ -66,9 +66,10 @@
 					<div id="leftSection" class="section"></div>
 					<div id="rightSection" class="section"></div>
 				</div>
+				<div id="playOverlay"><button id="playButton">Play</button></div>
 			</div>
 			<div class="expandableSection">
-				<button class="expandableHeader">Overview</button>
+				<a class="expandableHeader">Overview</a>
 					<div class="expandableContent">
 						<h2>Premise</h2>
 						<p>I wanted to get better at Javascript, CSS, and DOM manipulation so I decided the best way to do that would be to create a simple game.</p>
@@ -76,87 +77,169 @@
 						<p>I didn't stop there, adding more and more features until I created the game as it is now.</p>
 						<h2>Features</h2>
 						<ul>
+							<li>Switch between classic Snake 2 and BrowserSnake</li>
 							<li>Customisable settings, including name, colours, AI number</li>
 							<li>Two player mode (not supported on mobile)</li>
 							<li>Touch controls (mobile only)</li>
-							<li>AI controlled snakes</li>
+							<li>AI controlled snakes & enemies</li>
 							<li>Powerups with random effects</li>
-							<li>AI controlled enemies</li>
 							<li>Score board and scoring system</li>
 							<li>Custom modal box for prompts, alerts, and confirmations</li>
 							<li>Fully scaleable to any size display</li>
 							<li>Compatible with most browsers and devices</li>
-							<li>Pause button</li>
+							<li>Cheat codes and easter eggs!</li>
 						</ul>
 					</div>
 			</div>
 			<div class="expandableSection">
-				<button class="expandableHeader">Technical Details</button>
-					<div class="expandableContent">
-									<h2>Technical Details</h2>
-						<p>At a basic level, there is a background div element and a playable area div element. 
-						The playable area is dynamically scaled so that it exactly fits a grid of squares, these squares acting as tiles in a game. 
-						Every element in the game, such as a snake segment, an enemy, or a powerup, takes up exactly one of these tiles.</p>
-						<img src="./BrowserSnake/images/Grid-Visualised.png" alt="Image showing the grid of squares that makes up the playable area of the game" title	="Image showing the grid of squares that makes up the playable area of the game">
-						<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a bass Javascript object called 'Entity'. 
-						This entity object contains functions for handling collision, movement, and some AI functionality - and these functions are inherited by the game objects.</p>
-<pre>
-<code class="language-javascript">
-moveStep: function() {
-	//Check if movement has been disabled by the gamestate
-	if (this.movementEnabled == false) {
-		//Yes, then do not move
-		return;
-	}
-	//If an entity has just teleported, it needs to wait a frame before moving to keep everything in sync
-	if (this.hasTeleported) {
-		//Entity just teleported, do not move
-		this.hasTeleported = false;
-		return;
-	}
-	//If every entity moved on every frame, then everything would move very very fast
-	//The currentMoveStep and moveDelay mean that the entity will wait a number of frames (moveDelay) before actually moving each time
-	if (this.currentMoveStep &lt; this.movementDelay) {
-		//Entity hasn't waited enough frames, wait until next frame
-		++this.currentMoveStep;
-		return;
-	}
-	this.currentMoveStep = 0;
-	//Store the position of the entity before it moved, this is used in child classes
-	this.beforeMoveTop = this.collisionDiv.style.top;
-	this.beforeMoveLeft = this.collisionDiv.style.left;
-	var increment = 0;
-	//aiDriven is something that can be specified in child classes
-	if (this.aiDriven) {
-		//The entity is AI driven, so the movement direction is chosen from the autoChooseDirection function
-		this.autoChooseDirection();
-	}
-	//Travel direction has either been selected by the player using touch or computer arrows, or by the autoChooseDirection function
-	//The following calculates where to move the div elements (as increment - which can be positive or negative) and then moves them
-	if (this.travelDirection == 'right' ||  this.travelDirection == 'down') {
-		increment = Math.abs(entitySize);
-	} else if (this.travelDirection == 'left' || this.travelDirection =='up') {
-		increment = -Math.abs(entitySize);
-	}
-	if (this.travelDirection == 'left' || this.travelDirection == 'right') {
-		if (this.visibleDiv != undefined) {
-			this.visibleDiv.style.left = getLeft(this.visibleDiv) + increment + "px";
-		}
-		this.collisionDiv.style.left = getLeft(this.collisionDiv) + increment + "px";
-	} else {
-		if (this.visibleDiv != undefined) {
-			this.visibleDiv.style.top = getTop(this.visibleDiv) + increment + "px";
-		}
-		this.collisionDiv.style.top = getTop(this.collisionDiv) + increment + "px";
-	}
-	//Lastly, an action can be assigned to the Entity that will be performed after the move
-	//In this base entity, it does nothing - but derived objects can override the alternativeAction function
-	this.alternativeAction();
+				<a class="expandableHeader">Game Board</a>
+				<div class="expandableContent">
+					<h2>Playable Area & Background</h2>
+					<p>The game board is made up of two div elements, there is a background div element and a playable area div element. 
+					The playable area is dynamically scaled so that it exactly fits a grid of squares, these squares acting as tiles in a game. 
+					Every element in the game, such as a snake segment, an enemy, or a powerup, takes up exactly one of these tiles.</p>
+					<img src="./BrowserSnake/images/Grid-Visualised.png" alt="Image showing the grid of squares that makes up the playable area of the game" title	="Image showing the grid of squares that makes up the playable area of the game">
+					<h2>Scaling and Re-scaling</h2>
+					<p>Tile size is crucial to keeping everything scaled correctly. The tile size is referenced as 'entitySize' in the game, and is calculated by the following formula:
+					<pre><code class="language-javascript">entitySize = Math.ceil((Math.sqrt(pixelHeight*pixelWidth)/100)*scale);</code></pre>
+					</p>
+					<p>Scale is an integer that lets me easily, and globally, change the size of all the entities of the game, whilst 'pixelWidth' and 'pixelHeight' are the respective background div width and height in pixels, but with the parity made even if they happen do be odd:
+					<pre><code class="language-javascript">pixelWidth = background.clientWidth;
+if (pixelWidth % 2 != 0) {
+	--pixelWidth;
 }
-</code>
-</pre>
+pixelHeight = background.clientHeight;
+if (pixelHeight % 2 != 0) {
+	--pixelHeight;
+}</code></pre></p>
+					<p>Calculating the 'entitySize' (or tile size) ensures that the game scales with the device's screen width/height.</p>
+					<p>There is an event listener setup that will reset the game, including recalculating 'entitySize' and rescaling the game board, that detects when the screen size changes:
+<pre><code class="language-javascript">//Handle resize of window
+addEvent("resize", window, function() {
+	//Game is already resetting, so ignore the reset.
+	if (resetting) {
+		return;
+	}
+	//Using a timeout to prevent the reset from being called too frequently, and to delay the reset
+	//Delaying the reset prevents the game resetting every screen refresh 
+	//This could happen if the user is manually resizing the browser window by dragging, for example
+	resizeSnakeyRtime = new Date();
+	if (resizeSnakeyTimeout === false) {
+		resizeSnakeyTimeout = true;
+		//snakeyResizeend is the function that handles the game reset
+		setTimeout(snakeyResizeend, resizeSnakeyDelta);
+	}
+});</code></pre>(The 'addEvent' function is a polyfill for 'addEventListener' that supports internet explorer!)</p>
+				<p>The event listener calls 'snakeyResizeend' which checks whether a reset should actually happen:
+<pre><code class="language-javascript">function snakeyResizeend() {
+	//First, recalculate the pixelWidth and pixelHeight
+	let newPixelWidth = background.clientWidth;
+	if (newPixelWidth % 2 != 0) {
+		--newPixelWidth;
+	}
+	let newPixelHeight = background.clientHeight;
+	if (newPixelHeight % 2 != 0) {
+		--newPixelHeight;
+	}
+	//If the newly calculated values are the same as the old ones, then we don't need to re-scale and reset
+	//This happens on mobile sometimes, where hiding the searchbar triggers the event but doesn't require re-scaling/resetting
+	if (newPixelHeight == pixelHeight && newPixelWidth == pixelWidth) {
+		return;
+	}
+	//If less time has passed than the resizeSnakeyDelta, call this function again
+	if (new Date() - resizeSnakeyRtime &lt; resizeSnakeyDelta) {
+		setTimeout(snakeyResizeend, resizeSnakeyDelta);
+	} else { //Otherwise proceed to reset everything
+		resizeSnakeyTimeout = false;
+		resetEverything();
+	}               
+}</code></pre></p>
+				<p>The 'resetEverything' function is called at the beginning of the game, and also when re-scaling.
+				It resets the game state back to default by removing all spawned objects, resizing the playable area, resetting the score, and clearing the frame interval (see the <a href="#FrameInterval" onclick="toggleSection('FrameInterval')">Frame Interval</a> section!).
+				</div>
+			</div>
+					<div class="expandableSection">
+					<a class="expandableHeader">Entities</a>
+						<div class="expandableContent">
+						<h2>Overview</h2>
+						<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a base Javascript object called 'Entity'. 
+						The 'Entity' object is my way of bringing object-oriented programming to Javascript, as the 'Entity' acts as a parent class, with child classes inheriting common functions, such as handling collision, movement, and some AI functionality.</p>
+						<p>Below is some pseudo code to demonstrate this:
+<pre><code class="language-javascript">function Entity() {
+	//'entity' here is an object. 
+	//Other "classes" can extend this object.
+	var entity = {
+		//Example of inheritable property
+		aiDriven: false,
+		//Example of inheritable function
+		moveStep: function() {
+			//Functionailty to move the entity
+		},
+	};
+	//'allEntities' is useful for looping through all the entities
+	//The gamestate makes use of this to detect collisions, remove all the entities on reset etc
+	allEntities.push(entity);
+	return entity;
+}
+
+function Snake(snakeNameParam) {
+	//Extend the Entity base object
+	var snake = new Entity();
+	//Example of setting a new property
+	snake.snakeName = snakeNameParam;
+	//Example of setting a  new function
+	snake.move = function() {
+		//As 'Snake' inherited from 'Entity', can access the properties and functions of 'Entity'
+		if (snake.aiDriven) {
+			snake.moveStep();
+		}
+	};
+	return snake;
+}
+
+//New 'Snake' with all the functions and properties of Entity and Snake "classes"
+let playerSnake = new Snake("Ryan");</code></pre></p>
+				<p>The 'Entity' class alone contains the following functions:</p>
+				<table>
+					<tr>
+						<th>Function</th>
+						<th>Purpose</th>
+					</tr>
+					<tr>
+						<td>moveStep</th>
+						<td>Used by the gamestate to move the entities.</th>
+					</tr>
+					<tr>
+						<td>autoChooseDirection</th>
+						<td>If 'aiDriven' equals true, the entity will choose a direction automatically.</th>
+					</tr>
+					<tr>
+						<td>willCollide</th>
+						<td>Used by the gamestate. Returns true or false for a given direction. Used for collision detection and AI pathing.</th>
+					</tr>
+					<tr>
+						<td>kill</th>
+						<td>Removes the object from the game. Used by the gamestate when resetting, or after collisions.</th>
+					</tr>
+						<td>alternativeAction</th>
+						<td>Function called at the end of moveStep. Does nothing in 'Entity' but can be overloaded in child classes.</th>
+					</tr>
+						<td>alternativeDeathAction</th>
+						<td>Similar to alternativeAction, but runs during 'kill' function. Used for scoreboard updates mostly.</th>
+					</tr>
+				</table>
+				<p>The 'Snake' class adds 10 more function in addition to these.</p>
 				</div>
 			</div>	
+			<div class="expandableSection">
+				<a class="expandableHeader">Frame Interval</a>
+					<div class="expandableContent">
+						<h2>Premise</h2>
+						<p>It is important to keep everything in sync in Snake.
+						Each snake needs to move one after another, otherwise it collision detection becomes very difficult.</p>
+						
+					</div>
+			</div>
 		</div>
 		<div id="footer"></div>
 		<script>

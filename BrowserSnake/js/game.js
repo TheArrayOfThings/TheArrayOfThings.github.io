@@ -69,6 +69,10 @@ function pageLoaded() {
 		setTimeout(pageLoaded, 10);
 		return;
 	}
+	addEvent("click", document.getElementById("playButton"), startGame);
+}
+function startGame() {
+	document.getElementById("playOverlay").style.display = "none";
 	effects = new Effects();
 	//Grab required elements from page
 	background = document.getElementById('background');
@@ -109,12 +113,17 @@ function pageLoaded() {
 	addEvent("keydown", document, keyParse);
 	//Handle resize of window
 	addEvent("resize", window, function() {
+		//Game is already resetting, so ignore the reset.
 		if (resetting) {
 			return;
 		}
+		//Using a timeout to prevent the reset from being called too frequently, and to delay the reset
+		//Delaying the reset prevents the game resetting every screen refresh 
+		//This could happen if the user is manually resizing the browser window by dragging, for example
 		resizeSnakeyRtime = new Date();
 		if (resizeSnakeyTimeout === false) {
 			resizeSnakeyTimeout = true;
+			//snakeyResizeend is the function that handles the game reset
 			setTimeout(snakeyResizeend, resizeSnakeyDelta);
 		}
 	});
@@ -360,6 +369,7 @@ function scaleButtons() {
 	}
 }
 function snakeyResizeend() {
+	//First, recalculate the pixelWidth and pixelHeight
 	let newPixelWidth = background.clientWidth;
 	if (newPixelWidth % 2 != 0) {
 		--newPixelWidth;
@@ -368,12 +378,15 @@ function snakeyResizeend() {
 	if (newPixelHeight % 2 != 0) {
 		--newPixelHeight;
 	}
+	//If the newly calculated values are the same as the old ones, then we don't need to re-scale and reset
+	//This happens on mobile sometimes, where hiding the searchbar triggers the event but doesn't require re-scaling/resetting
 	if (newPixelHeight == pixelHeight && newPixelWidth == pixelWidth) {
 		return;
 	}
+	//If less time has passed than the resizeSnakeyDelta, call this function again
 	if (new Date() - resizeSnakeyRtime < resizeSnakeyDelta) {
 		setTimeout(snakeyResizeend, resizeSnakeyDelta);
-	} else {
+	} else { //Otherwise proceed to reset everything
 		resizeSnakeyTimeout = false;
 		resetEverything();
 	}               
