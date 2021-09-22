@@ -1,13 +1,14 @@
 'use strict';
 //Enable strict mode
 
-function CharacterSprite(sourceImageParam, startingXParam, startingYParam, aiDrivenParam) {
+function CharacterSprite(sourceImageParam, startingXParam, startingYParam, wandersParam, dialogFunctionParam) {
 	let characterSprite = new Sprite(sourceImageParam, startingXParam, startingYParam, 0, 0, true);
 	characterSprite.entityClass = "characterSprite";
 	characterSprite.moving = false;
 	characterSprite.direction = undefined;
 	characterSprite.flipBit = 0;
 	characterSprite.directionFacing = undefined;
+	characterSprite.functionToRun = dialogFunctionParam;
 	characterSprite.showFrontStill = function() {
 		characterSprite.directionFacing = "front";
 		characterSprite.changeSelection(0,0);
@@ -113,8 +114,26 @@ function CharacterSprite(sourceImageParam, startingXParam, startingYParam, aiDri
 		}
 		frameQueue.push(function(){characterSprite.moving = false;}.bind(characterSprite));
 	};
-	if (characterSprite.aiDriven) {
-		aiCharacters.push(characterSprite);
-	}
+	characterSprite.facePlayer = function() {
+		//Player is to left of character
+		if (player.currentX < characterSprite.currentX && player.currentY == characterSprite.currentY) {
+			characterSprite.showLeftStill();
+		}
+		//Player is above character
+		if (player.currentX == characterSprite.currentX && player.currentY < characterSprite.currentY) {
+			characterSprite.showBackStill();
+		}
+		//Player is to right character
+		if (player.currentX > characterSprite.currentX && player.currentY == characterSprite.currentY) {
+			characterSprite.showRightStill();
+		}
+		//Player is below character
+		if (player.currentX == characterSprite.currentX && player.currentY > characterSprite.currentY) {
+			characterSprite.showFrontStill();
+		}
+	};
+	aiCharacters.push(characterSprite);
+	collidables.push(characterSprite);
+	interactableTiles.push(characterSprite);
 	return characterSprite;
 }

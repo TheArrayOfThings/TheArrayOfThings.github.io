@@ -6,7 +6,7 @@ function PlayerBedroom(tileSetParam, tlXParam, tlYParam, widthParam, heightParam
     playerbedroom.draw = function() {
 		//First, reset the canvas
 		playerbedroom.scaleMap();
-		playerbedroom.unload();
+		playerbedroom.clearMap();
         //Row 1 start
         //Computer
         playerbedroom.drawHalfTile(0, 4, 0, 2, true);
@@ -40,8 +40,11 @@ function PlayerBedroom(tileSetParam, tlXParam, tlYParam, widthParam, heightParam
         playerbedroom.buildFloorTile();
         //Stairs
         playerbedroom.drawSpecialTile(5, 0, function() {
-			    textBox.startDialog("Ryan feels a sense of cosmic horror.&He is unable to descend!");
-		    }, true);
+			console.log("Loading new map...");
+			//Load next map
+			playerbedroom.unload();
+			currentMap = new RedLivingRoom(redsHouse, 8, 8, 3, 6);
+		}, false);
         //Row 3 start (floor tiles only)
         playerbedroom.buildFloorTile();
         playerbedroom.buildFloorTile();

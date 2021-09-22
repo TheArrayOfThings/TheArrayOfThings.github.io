@@ -26,7 +26,7 @@ function Map(tileSetParam, widthParam, heightParam, defaultStartXParam, defaultS
 			//Create a container div
 			this.containerDiv = document.getElementById('mapContainerDiv');
 			this.debugDivs = document.getElementById("debugDivs");
-			playable.appendChild(this.containerDiv);
+			//playable.appendChild(this.containerDiv);
 			//Create the canvas
 			this.canvas = document.createElement('canvas');
 			//Append canvas to playable area
@@ -71,6 +71,18 @@ function Map(tileSetParam, widthParam, heightParam, defaultStartXParam, defaultS
 			new sObject(this.currentX - 1, this.currentY - 1, functionToRun, runOnceParam);
 			//Draw tile
 			this.context.drawImage(this.tileSet, selectionX*16, selectionY*16, 16, 16, ((this.currentX*tileSize) - tileSize), ((this.currentY*tileSize) - tileSize), tileSize, tileSize);
+			this.nextTile();
+		},
+		drawSpecialQuarterTile: function(tlX, tlY, trX, trY, blX, blY, brX, brY, functionToRun, runOnceParam) {
+			new sObject(this.currentX - 1, this.currentY - 1, functionToRun, runOnceParam);
+			//Draw top-left quarter
+			this.context.drawImage(this.tileSet, tlX*8, tlY*8, 8, 8, ((this.currentX*tileSize) - tileSize), ((this.currentY*tileSize) - tileSize), tileSize/2, tileSize/2);
+			//Draw top-right quarter
+			this.context.drawImage(this.tileSet, trX*8, trY*8, 8, 8, ((this.currentX*tileSize) - tileSize) + tileSize/2, ((this.currentY*tileSize) - tileSize), tileSize/2, tileSize/2);
+			//Draw bottom-left quarter
+			this.context.drawImage(this.tileSet, blX*8, blY*8, 8, 8, ((this.currentX*tileSize) - tileSize), ((this.currentY*tileSize) - tileSize) + tileSize/2, tileSize/2, tileSize/2);
+			//Draw bottom-right quarter
+			this.context.drawImage(this.tileSet, brX*8, brY*8, 8, 8, ((this.currentX*tileSize) - tileSize) + tileSize/2, ((this.currentY*tileSize) - tileSize) + tileSize/2, tileSize/2, tileSize/2);
 			this.nextTile();
 		},
 		drawInteractableTile: function(selectionX, selectionY, functionToRun) {
@@ -132,10 +144,20 @@ function Map(tileSetParam, widthParam, heightParam, defaultStartXParam, defaultS
 			
 		},
 		unload: function() {
+			this.clearMap();
+			this.containerDiv.removeChild(this.canvas);
+			frameQueue = [];
+			justUnloaded = true;
+		},
+		clearMap: function() {
+			for (let i = 0; i < aiCharacters.length; ++i) {
+				aiCharacters[i].remove();
+			}
 			aiCharacters = [];
 			collidables = [];
 			specialTiles = [];
 			interactableTiles = [];
+			specialTiles = [];
 			if (typeof player != "undefined") {
 				allObjects = [player];
 			} else {

@@ -53,6 +53,16 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 	sprite.draw = function () {
 		sprite.context.clearRect(0, 0, sprite.canvas.width,sprite.canvas.height);
 		sprite.context.drawImage(sprite.sourceImage, sprite.selectionX*16, sprite.selectionY*16, 16, 16, 0, 0, sprite.canvas.width, sprite.canvas.height);
+		sprite.removeWhite();
+	};
+	sprite.removeWhite = function() {
+		var imageData = sprite.context.getImageData(0, 0, sprite.canvas.width, sprite.canvas.height);
+		for (var i = 0; i < imageData.data.length; i+= 4) {
+			if (imageData.data[i] == 255 && imageData.data[i+1] == 255 && imageData.data[i+2] == 255) {
+				imageData.data[i+3] =0;
+			}
+		}
+		sprite.context.putImageData(imageData, 0, 0);
 	};
 	sprite.flipHorz = function() {
 		if (sprite.flippedHorizontally) {
@@ -67,6 +77,7 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.context.scale(-1, 1);
 		//Third, draw the image
 		sprite.context.drawImage(sprite.sourceImage, sprite.selectionX*16, sprite.selectionY*16, 16, 16, 0, 0, tileSize, tileSize);
+		sprite.removeWhite();
 	};		
 	sprite.unflipHorz = function() {
 		if (sprite.flippedHorizontally == false) {
@@ -81,6 +92,7 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.context.scale(-1, 1);
 		//Third, draw the image
 		sprite.context.drawImage(sprite.sourceImage, sprite.selectionX*16, sprite.selectionY*16, 16, 16, 0, 0, tileSize, tileSize);
+		sprite.removeWhite();
 	};
 	sprite.flipVert = function() {
 		if (sprite.flippedVertically) {
@@ -109,6 +121,7 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 		sprite.context.scale(-1, 1);
 		//Third, draw the image
 		sprite.context.drawImage(sprite.sourceImage, sprite.selectionX*16, sprite.selectionY*16, 16, 16, 0, 0, tileSize, tileSize);
+		sprite.removeWhite();
 	};
 	sprite.move = function(horizontalIncrement, verticalIncrement) {
 		if (typeof sprite.visibleDiv != "undefined") {
@@ -143,6 +156,11 @@ function Sprite(resourceLocationParam, startingXParam, startingYParam, selection
 	sprite.changeSelection = function(x,y) {
 		sprite.selectionX = x;
 		sprite.selectionY = y;
+	};
+	sprite.remove = function() {
+		if (sprite.entityClass != "player") {
+			document.getElementById('mapContainerDiv').removeChild(sprite.containerDiv);
+		}
 	};
 	sprite.initialise();
     return sprite;

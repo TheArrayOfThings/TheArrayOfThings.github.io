@@ -6,6 +6,7 @@ function sObject(startingXParam, startingYParam, functionToRunParam, runOncePara
 	sobject.entityClass = "specialobject";
 	sobject.functionToRun = functionToRunParam;
    	sobject.runOnce = runOnceParam;
+	sobject.hasRun = false;
 	specialTiles.push(sobject);
 	return sobject;
 }

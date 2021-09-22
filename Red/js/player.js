@@ -105,6 +105,7 @@ function Player(resourceLocationParam, startingXParam, startingYParam) {
         }
 		if (willCollide == false) {
 			player.shiftScreen();
+			justUnloaded = false;
 		}
 		setTimeout(player.afterMove.bind(player), ((tickRate*animationDelay)));
     };

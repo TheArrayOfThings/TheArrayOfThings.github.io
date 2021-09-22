@@ -41,6 +41,7 @@ let middleX;
 let middleY;
 let currentMap;
 let debugEnabled = false;
+let justUnloaded = false;
 
 //Entities
 let aiCharacters = [];
@@ -53,6 +54,7 @@ let allObjects = [];
 let boxImage;
 let font;
 let playerSprite;
+let momSprite;
 let redsHouse;
 let imagesToLoad = [];
 let imagesLoaded = 0;
@@ -144,6 +146,7 @@ function initialSetup() {
 	//Load all images
 	boxImage = loadImage("/Red/gfx/text_box.png");
 	playerSprite = loadImage("/Red/gfx/sprites/red.png");
+	momSprite = loadImage("/Red/gfx/sprites/mom.png");
 	redsHouse = loadImage("/Red/gfx/tilesets/reds_house.png");
 	font = loadImage("/Red/gfx/font.png");
 	//Next step is imagesLoaded (which is called once all images are loaded) - eventually 'loadingComplete' called
@@ -485,16 +488,21 @@ function nextFrame() {
 	//Check if player has collided with a special tile
 	for (let i = 0; i < specialTiles.length; ++i) {
 		if (player.currentX == specialTiles[i].currentX && player.currentY == specialTiles[i].currentY) {
+			if (justUnloaded) {
+				continue;
+			}
 			specialTiles[i].functionToRun();
-        if (specialTiles[i].runOnce) {
-            specialTiles.splice(i, 1);
-        }
+			if (specialTiles[i].runOnce) {
+				specialTiles.splice(i, 1);
+			}
 		}
 	}
 	if (aiMoveDelay == 0) {
 		//Queue up AI moves eveny 20 frames
 		for (let i = 0; i < aiCharacters.length; ++i) {
-			aiCharacters[i].startMove(moveDirections[Math.floor(Math.random() * moveDirections.length)]);
+			if (aiCharacters[i].wanders) {
+				aiCharacters[i].startMove(moveDirections[Math.floor(Math.random() * moveDirections.length)]);
+			}
 		}
 		aiMoveDelay = 200;
 	} else {
