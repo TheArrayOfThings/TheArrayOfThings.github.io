@@ -236,8 +236,47 @@ let playerSnake = new Snake("Ryan");</code></pre></p>
 					<div class="expandableContent">
 						<h2>Premise</h2>
 						<p>It is important to keep everything in sync in Snake.
-						Each snake needs to move one after another, otherwise it collision detection becomes very difficult.</p>
-						
+						Each entity in the game needs to move one after another, otherwise collision handling becomes very difficult.</p>
+						<p>The game uses a setInterval called 'frameInterval' on a loop to run through each frame of the game. It handles the following over the course of a frame:</p>
+						<ul>
+							<li>Checks for any entities that have 'died' since the last frame and cleans them up</li>
+							<li>Checks for any collisions (entities that occupy the same tile) and handles the collision</li>
+							<li>Checks if any of the snakes have hit an edge, and teleports them to the other edge if so</li>
+						</ul>
+						<h2>Collisions</h2>
+						<p>Most of the interesting logic from the game happens in the collision handling logic. For example, a snake colliding with a powerup:</p>
+<pre><code class="language-javascript">function powerUpHit(whichSnake) {
+	//First, check if the game is currently resetting. If so, do nothing.
+	if (resetting) {
+		return;
+	}
+	//Increase the score of the snake that hit the powerup
+	whichSnake.internalScore = whichSnake.internalScore + 1;
+	//Update that snakes scoreboard to reflect this
+	whichSnake.scoreBox.innerHTML = whichSnake.internalScore;
+	//If the score is the highest that snake has had (and the snake is a player) then update the highscore
+	//and store the new highscore in local storage
+	if (whichSnake.internalScore > persHighScore && whichSnake.aiDriven == false) {
+		persHighScore = whichSnake.internalScore;
+		persHighScoreBox.innerHTML = persHighScore + " (" + whichSnake.snakeName + ")";
+		//Only set the localstorage if not internet explorer, as IE doesn't support this.
+		if (!isInternetExplorer) {
+			localStorage.setItem("PersonalHighScore", persHighScore);
+			localStorage.setItem("PersonalHighScoreName", whichSnake.snakeName);
+		}
+	}
+	//Increase the length of the snake that hit the powerup
+	//Set the returned div element to not display initially, as we only want to see it once the snake has moved a step
+	whichSnake.appendSegment().style.display = 'none';
+	//Classic snake doesn't use the random effects, so don't use this if classic snake
+	if (!classicSnake) {
+		//Get one of the random effects and apply it to this snake
+		effects.getRandomEffect()(whichSnake);
+	}
+	//Move the powerup to a new location (randomiseLocation avoids collisions)
+	randomiseLocation(powerUp.collisionDiv);
+}</code></pre>
+					
 					</div>
 			</div>
 		</div>

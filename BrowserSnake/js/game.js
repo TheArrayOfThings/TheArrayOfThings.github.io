@@ -441,24 +441,34 @@ function keyParse(e) {
 
 }
 function powerUpHit(whichSnake) {
+	//First, check if the game is currently resetting. If so, do nothing.
 	if (resetting) {
 		return;
 	}
+	//Increase the score of the snake that hit the powerup
 	whichSnake.internalScore = whichSnake.internalScore + 1;
+	//Update that snakes scoreboard to reflect this
 	whichSnake.scoreBox.innerHTML = whichSnake.internalScore;
+	//If the score is the highest that snake has had (and the snake is a player) then update the highscore
+	//and store the new highscore in local storage
 	if (whichSnake.internalScore > persHighScore && whichSnake.aiDriven == false) {
 		persHighScore = whichSnake.internalScore;
 		persHighScoreBox.innerHTML = persHighScore + " (" + whichSnake.snakeName + ")";
+		//Only set the localstorage if not internet explorer, as IE doesn't support this.
 		if (!isInternetExplorer) {
 			localStorage.setItem("PersonalHighScore", persHighScore);
 			localStorage.setItem("PersonalHighScoreName", whichSnake.snakeName);
-			//postHighScore(whichSnake.snakeName, whichSnake.internalScore);
 		}
 	}
+	//Increase the length of the snake that hit the powerup
+	//Set the returned div element to not display initially, as we only want to see it once the snake has moved a step
 	whichSnake.appendSegment().style.display = 'none';
+	//Classic snake doesn't use the random effects, so don't use this if classic snake
 	if (!classicSnake) {
+		//Get one of the random effects and apply it to this snake
 		effects.getRandomEffect()(whichSnake);
 	}
+	//Move the powerup to a new location (randomiseLocation avoids collisions)
 	randomiseLocation(powerUp.collisionDiv);
 }
 /*function enemyKilled(whichBullet) {
