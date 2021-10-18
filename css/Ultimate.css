@@ -140,7 +140,7 @@ button#playButton {
 .expandableContent {
 	display:none;
 }
-a.expandableHeader {
+a.expandableHeader, a.expandableHeader:visited {
 	text-decoration:none!important;
 	color: white;
 	font-size:calc(10px + 0.20vh + 0.20vw);

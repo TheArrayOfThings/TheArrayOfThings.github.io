@@ -594,18 +594,24 @@ function nextFrame() {
 					continue;
 				}
 			}
-		//Check if hit edge (if not snakesegment!
-		if (allEntities[i].entityClass != 'snakesegment') {
-			//if(allEntities[i].entityClass != 'snakesegment') {
+			//Check if hit edge (if not snakesegment!)
+			//Every other entity (including the powerUp, due to one of the random effects where it moves) can move to the other side
+			if (allEntities[i].entityClass != 'snakesegment') {
+				//Check if the entity is past the rightmost playable area
 				if (getLeft(allEntities[i].collisionDiv) >= playableWidth) {
-					//Has hit the right wall
+					//Entity has hit the right wall
+					//Move it to the left-most tile
 					allEntities[i].collisionDiv.style.left = 0 + "px";
+					//If it has a visible component, move that too
 					if (allEntities[i].visibleDiv != undefined) {
 						allEntities[i].visibleDiv.style.left = (allEntities[i].visibleOffSet) + "px";
 					}
+					//hasTeleported delays movement by one step
+					//This prevents double movement by moving before the move step
 					allEntities[i].hasTeleported = true;
 				} else if (getLeft(allEntities[i].collisionDiv) <= -entitySize) {
 					//Has hit the left wall
+					//Move it to the right-most tile
 					allEntities[i].collisionDiv.style.left = (playableWidth - entitySize) + "px";
 					if (allEntities[i].visibleDiv != undefined) {
 						allEntities[i].visibleDiv.style.left = ((playableWidth - entitySize) + (allEntities[i].visibleOffSet)) + "px";
@@ -613,6 +619,7 @@ function nextFrame() {
 					allEntities[i].hasTeleported = true;
 				} else if (getTop(allEntities[i].collisionDiv) <= -entitySize)  {
 					//Has hit the top wall
+					//Move it to the bottom-most tile
 					allEntities[i].collisionDiv.style.top = (playableHeight - entitySize) + "px";
 					if (allEntities[i].visibleDiv != undefined) {
 						allEntities[i].visibleDiv.style.top = ((playableHeight - entitySize) + (allEntities[i].visibleOffSet)) + "px";
@@ -620,6 +627,7 @@ function nextFrame() {
 					allEntities[i].hasTeleported = true;
 				}else if (getTop(allEntities[i].collisionDiv) >= playableHeight) {
 					//Has hit the bottom wall
+					//Move it to the top-most tile
 					allEntities[i].collisionDiv.style.top = 0 + "px";
 					if (allEntities[i].visibleDiv != undefined) {
 						allEntities[i].visibleDiv.style.top = (allEntities[i].visibleOffSet) + "px";
@@ -744,7 +752,8 @@ function resetEverything() {
 	while (allEntities.length > 0) {
 		allEntities.pop().kill();
 	}
-	allEntities = [];
+	console.log(allEntities);
+	//allEntities = [];
 	
 	//Reset game settings
 	if (classicSnake) {

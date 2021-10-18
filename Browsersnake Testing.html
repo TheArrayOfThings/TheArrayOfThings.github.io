@@ -229,6 +229,8 @@ let playerSnake = new Snake("Ryan");</code></pre></p>
 					</tr>
 				</table>
 				<p>The 'Snake' class adds 10 more function in addition to these.</p>
+				<p>Every entity in the game is added to an array called 'allEntities'. This allows the game to loop through all of the entities, check their state, and update them.
+				See the <a href="#FrameInterval" onclick="toggleSection('FrameInterval')">Frame Interval</a> section for more info on this.</p>
 				</div>
 			</div>	
 			<div class="expandableSection">
@@ -276,9 +278,29 @@ let playerSnake = new Snake("Ryan");</code></pre></p>
 	//Move the powerup to a new location (randomiseLocation avoids collisions)
 	randomiseLocation(powerUp.collisionDiv);
 }</code></pre>
-					
-					</div>
+					<p>As commented above, increasing the score and increasing the length of the snake are both triggered as part of the powerUpHit code. 
+					The benefit of changing everything from the frame interval is that everything gets updated in the correct order.</p>
+					<p>Other collision effects handle the death of certain entities. In 'BrowserSnake' mode, the bullets 'die' on every collision (apart from colliding with other bullets). 
+					The bullets are themselves only capable of killing the enemy entities, and the collision handling code ensures this!</p>
+					<h2>allEntities</h2>
+					<p>An array called 'allEntities' is used to track every entity in the game. Entities are added to this array by the base entity object (see the <a href="#Entities" onclick="toggleSection('Entities')">Entities</a> section).
+					The frame loops through all of the entities when checking for collisions, calling the 'moveStep' function (the base entity object has a dummy moveStep function, to avoid errors!), and to cleanup all of the entity objects in the event of a reset:</p>
+<pre><code class="language-javascript">//Remove all entities
+while (allEntities.length > 0) {
+	allEntities.pop().kill();
+}</code></pre>
+					</div>	
 			</div>
+			<div class="expandableSection">
+				<a class="expandableHeader">Game Log</a>
+				<div class="expandableContent">
+					<h2>Premise</h2>
+					<p>Game state changes are communicated to the player by showing these on the game board, behind the entities</p>
+				</div>
+			</div>
+				
+			
+		<!-- End of main -->
 		</div>
 		<div id="footer"></div>
 		<script>
