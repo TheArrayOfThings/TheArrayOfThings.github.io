@@ -327,12 +327,4 @@ function Snake(snakeNameParm, aiDrivenParm) {
 	snake.initialise();
 	return snake;
 }
-
-
-
-
-
-
-
-
 //End

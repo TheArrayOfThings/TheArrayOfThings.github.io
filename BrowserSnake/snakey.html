@@ -69,102 +69,49 @@
 				<div id="playOverlay"><button id="playButton">Play</button></div>
 			</div>
 			<div class="expandableSection">
-				<a class="expandableHeader">Overview</a>
-					<div class="expandableContent">
-						<h2>Premise</h2>
-						<p>I wanted to get better at Javascript, CSS, and DOM manipulation so I decided the best way to do that would be to create a simple game.</p>
-						<p>As as kid, I remember playing a lot of Snake 2 on my dad's Nokia phone. I figured this would be an easy game to recreate in the Browser!</p>
-						<p>I didn't stop there, adding more and more features until I created the game as it is now.</p>
-						<h2>Features</h2>
-						<ul>
-							<li>Switch between classic Snake 2 and BrowserSnake</li>
-							<li>Customisable settings, including name, colours, AI number</li>
-							<li>Two player mode (not supported on mobile)</li>
-							<li>Touch controls (mobile only)</li>
-							<li>AI controlled snakes & enemies</li>
-							<li>Powerups with random effects</li>
-							<li>Score board and scoring system</li>
-							<li>Custom modal box for prompts, alerts, and confirmations</li>
-							<li>Fully scaleable to any size display</li>
-							<li>Compatible with most browsers and devices</li>
-							<li>Cheat codes and easter eggs!</li>
-						</ul>
-					</div>
-			</div>
-			<div class="expandableSection">
-				<a class="expandableHeader">Game Board</a>
+				<a class="expandableHeader">What is this?</a>
 				<div class="expandableContent">
-					<h2>Playable Area & Background</h2>
-					<p>The game board is made up of two div elements, there is a background div element and a playable area div element. 
-					The playable area is dynamically scaled so that it exactly fits a grid of squares, these squares acting as tiles in a game. 
-					Every element in the game, such as a snake segment, an enemy, or a powerup, takes up exactly one of these tiles.</p>
-					<img src="/BrowserSnake/images/Grid-Visualised.png" alt="Image showing the grid of squares that makes up the playable area of the game" title	="Image showing the grid of squares that makes up the playable area of the game">
-					<h2>Scaling and Re-scaling</h2>
-					<p>Tile size is crucial to keeping everything scaled correctly. The tile size is referenced as 'entitySize' in the game, and is calculated by the following formula:
-					<pre><code class="language-javascript">entitySize = Math.ceil((Math.sqrt(pixelHeight*pixelWidth)/100)*scale);</code></pre>
+					<h2>BrowserSnake</h2>
+					<p>This is a game that runs in (any vaguely modern) browser, desktop or mobile. It is written in Javascript, HTML, and CSS only.</p>
+					<h2>Features</h2>
+					<ul>
+						<li>Switch between classic Snake 2 and BrowserSnake</li>
+						<li>Customisable settings, including name, colours, AI number</li>
+						<li>Two player mode (not supported on mobile)</li>
+						<li>Touch controls (mobile only)</li>
+						<li>AI controlled snakes & enemies</li>
+						<li>Powerups with random effects</li>
+						<li>Score board and scoring system</li>
+						<li>Custom modal box for prompts, alerts, and confirmations</li>
+						<li>Fully scaleable to any size display</li>
+						<li>Compatible with most browsers and devices</li>
+						<li>Cheat codes and easter eggs!</li>
+					</ul>
+					<h2>Purpose</h2>
+					<p>I used this project to learn Javascript! I thought it would be an interesting way to learn the core front-end web technologies and apply them to an interesting project.
+					When learning a new programming language I prefer to research the basics and then build a project from there, picking up useful information and applying it so that it sticks.
 					</p>
-					<p>Scale is an integer that lets me easily, and globally, change the size of all the entities of the game, whilst 'pixelWidth' and 'pixelHeight' are the respective background div width and height in pixels, but with the parity made even if they happen do be odd:
-					<pre><code class="language-javascript">pixelWidth = background.clientWidth;
-if (pixelWidth % 2 != 0) {
-	--pixelWidth;
-}
-pixelHeight = background.clientHeight;
-if (pixelHeight % 2 != 0) {
-	--pixelHeight;
-}</code></pre></p>
-					<p>Calculating the 'entitySize' (or tile size) ensures that the game scales with the device's screen width/height.</p>
-					<p>There is an event listener setup that will reset the game, including recalculating 'entitySize' and rescaling the game board, that detects when the screen size changes:
-<pre><code class="language-javascript">//Handle resize of window
-addEvent("resize", window, function() {
-	//Game is already resetting, so ignore the reset.
-	if (resetting) {
-		return;
-	}
-	//Using a timeout to prevent the reset from being called too frequently, and to delay the reset
-	//Delaying the reset prevents the game resetting every screen refresh 
-	//This could happen if the user is manually resizing the browser window by dragging, for example
-	resizeSnakeyRtime = new Date();
-	if (resizeSnakeyTimeout === false) {
-		resizeSnakeyTimeout = true;
-		//snakeyResizeend is the function that handles the game reset
-		setTimeout(snakeyResizeend, resizeSnakeyDelta);
-	}
-});</code></pre>(The 'addEvent' function is a polyfill for 'addEventListener' that supports internet explorer!)</p>
-				<p>The event listener calls 'snakeyResizeend' which checks whether a reset should actually happen:
-<pre><code class="language-javascript">function snakeyResizeend() {
-	//First, recalculate the pixelWidth and pixelHeight
-	let newPixelWidth = background.clientWidth;
-	if (newPixelWidth % 2 != 0) {
-		--newPixelWidth;
-	}
-	let newPixelHeight = background.clientHeight;
-	if (newPixelHeight % 2 != 0) {
-		--newPixelHeight;
-	}
-	//If the newly calculated values are the same as the old ones, then we don't need to re-scale and reset
-	//This happens on mobile sometimes, where hiding the searchbar triggers the event but doesn't require re-scaling/resetting
-	if (newPixelHeight == pixelHeight && newPixelWidth == pixelWidth) {
-		return;
-	}
-	//If less time has passed than the resizeSnakeyDelta, call this function again
-	if (new Date() - resizeSnakeyRtime &lt; resizeSnakeyDelta) {
-		setTimeout(snakeyResizeend, resizeSnakeyDelta);
-	} else { //Otherwise proceed to reset everything
-		resizeSnakeyTimeout = false;
-		resetEverything();
-	}               
-}</code></pre></p>
-				<p>The 'resetEverything' function is called at the beginning of the game, and also when re-scaling.
-				It resets the game state back to default by removing all spawned objects, resizing the playable area, resetting the score, and clearing the frame interval (see the <a href="#FrameInterval" onclick="toggleSection('FrameInterval')">Frame Interval</a> section!).
 				</div>
 			</div>
-					<div class="expandableSection">
-					<a class="expandableHeader">Entities</a>
-						<div class="expandableContent">
-						<h2>Overview</h2>
-						<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a base Javascript object called 'Entity'. 
-						The 'Entity' object is my way of bringing object-oriented programming to Javascript, as the 'Entity' acts as a parent class, with child classes inheriting common functions, such as handling collision, movement, and some AI functionality.</p>
-						<p>Below is some pseudo code to demonstrate this:
+			<div class="expandableSection">
+				<a class="expandableHeader">Why is this interesting?</a>
+				<div class="expandableContent">
+					<h2>It helped me secure my first IT job!</h2>
+					<p>For the 'Senior Application Support Analyst' role at Bournemouth University I was given a written Javascript test to see if I was capable of writing code for the ServiceNow platform.
+					I was not familiar with the ServiceNow platform at the time but I had a really solid grasp of Javascript from this project so I was able to pass the paper test!</p>
+					<h2>Pure Javascript!</h2>
+					<p>I chose to create this project (and all of my web projects hosted here, including the website itself!) without the use of any frameworks or external code.
+					I did this for a couple of reasons:
+					<ol>
+						<li>Frameworks come and go and I wanted my web projects to endure</li>
+						<li>I personaly beleive that it is best to learn the fundementals well</li>
+					</ol>
+					<p>I can, and have, written code for functonality which I could have accessed with a single function call from a Javascript framework - but it is my belief that I learned more by not relying on frameworks to do the heavy lifing.</p>
+					<p>Plus, I can likely pickup a particular framework pretty quickly from my knowledge of Javascript, but I might not be able to pickup a new framework as quickly had I learned Javascript using from a specific framework.</p>
+					<h2>Object Oriented Programming in Javascript?</h2>
+					<p>Every object in the game (such as snakes, bullets, enemies, and powerups) use a base Javascript object called 'Entity'. 
+					The 'Entity' object is my way of bringing object-oriented programming to Javascript, as the 'Entity' acts as a parent class, with child classes inheriting common functions, such as handling collision, movement, and some AI functionality.</p>
+					<p>Below is some pseudo code to demonstrate this:
 <pre><code class="language-javascript">function Entity() {
 	//'entity' here is an object. 
 	//Other "classes" can extend this object.
@@ -199,86 +146,50 @@ function Snake(snakeNameParam) {
 
 //New 'Snake' with all the functions and properties of Entity and Snake "classes"
 let playerSnake = new Snake("Ryan");</code></pre></p>
-				<p>The 'Entity' class alone contains the following functions:</p>
-				<table>
-					<tr>
-						<th>Function</th>
-						<th>Purpose</th>
-					</tr>
-					<tr>
-						<td>moveStep</th>
-						<td>Used by the gamestate to move the entities.</th>
-					</tr>
-					<tr>
-						<td>autoChooseDirection</th>
-						<td>If 'aiDriven' equals true, the entity will choose a direction automatically.</th>
-					</tr>
-					<tr>
-						<td>willCollide</th>
-						<td>Used by the gamestate. Returns true or false for a given direction. Used for collision detection and AI pathing.</th>
-					</tr>
-					<tr>
-						<td>kill</th>
-						<td>Removes the object from the game. Used by the gamestate when resetting, or after collisions.</th>
-					</tr>
-						<td>alternativeAction</th>
-						<td>Function called at the end of moveStep. Does nothing in 'Entity' but can be overloaded in child classes.</th>
-					</tr>
-						<td>alternativeDeathAction</th>
-						<td>Similar to alternativeAction, but runs during 'kill' function. Used for scoreboard updates mostly.</th>
-					</tr>
-				</table>
-				<p>The 'Snake' class adds 10 more function in addition to these.</p>
+					<p>For a project like this, I needed some way of defining classes (as I am used to from Java and C#) and this idea of extending Javascript's objects worked really well!</p>
+					<h2>Internet Explorer Compatibility</h2>
+					<p>BrowserSnake is compatible with IE6 and upwards!</p>
+					<p>You might be asking yourself 'why would he even bother doing this'? And I had a couple of reasons:
+					<ol>
+						<li>Internet Explorer has the worst compatibility of any modern browser, so I figured that if BrowserSnake could run on IE then it could run anywhere</li>
+						<li>IE compatibility meant implementing polyfills for certain essential functions which was an interesting technical challenge</li>
+					</ol>
+					<p>I developed an IE compatibility js file for BrowserSnake but I now use it throughout the site as there is no harm in having extra compatibility.</p>
+					<h2>Stored settings</h2>
+					<p>The game uses local storage (when not running in IE compatibility mode) to store the user's name, settings, and high score.
+					The idea is that you setup the game to your liking and can then revist it without going through the initial setup again and again.</p>
 				</div>
-			</div>	
+			</div>
 			<div class="expandableSection">
-				<a class="expandableHeader">Frame Interval</a>
-					<div class="expandableContent">
-						<h2>Premise</h2>
-						<p>It is important to keep everything in sync in Snake.
-						Each entity in the game needs to move one after another, otherwise collision handling becomes very difficult.</p>
-						<p>The game uses a setInterval called 'frameInterval' on a loop to run through each frame of the game. It handles the following over the course of a frame:</p>
-						<ul>
-							<li>Checks for any entities that have 'died' since the last frame and cleans them up</li>
-							<li>Checks for any collisions (entities that occupy the same tile) and handles the collision</li>
-							<li>Checks if any of the snakes have hit an edge, and teleports them to the other edge if so</li>
-						</ul>
-						<h2>Collisions</h2>
-						<p>Most of the interesting logic from the game happens in the collision handling logic. For example, a snake colliding with a powerup:</p>
-<pre><code class="language-javascript">function powerUpHit(whichSnake) {
-	//First, check if the game is currently resetting. If so, do nothing.
-	if (resetting) {
-		return;
-	}
-	//Increase the score of the snake that hit the powerup
-	whichSnake.internalScore = whichSnake.internalScore + 1;
-	//Update that snakes scoreboard to reflect this
-	whichSnake.scoreBox.innerHTML = whichSnake.internalScore;
-	//If the score is the highest that snake has had (and the snake is a player) then update the highscore
-	//and store the new highscore in local storage
-	if (whichSnake.internalScore > persHighScore && whichSnake.aiDriven == false) {
-		persHighScore = whichSnake.internalScore;
-		persHighScoreBox.innerHTML = persHighScore + " (" + whichSnake.snakeName + ")";
-		//Only set the localstorage if not internet explorer, as IE doesn't support this.
-		if (!isInternetExplorer) {
-			localStorage.setItem("PersonalHighScore", persHighScore);
-			localStorage.setItem("PersonalHighScoreName", whichSnake.snakeName);
-		}
-	}
-	//Increase the length of the snake that hit the powerup
-	//Set the returned div element to not display initially, as we only want to see it once the snake has moved a step
-	whichSnake.appendSegment().style.display = 'none';
-	//Classic snake doesn't use the random effects, so don't use this if classic snake
-	if (!classicSnake) {
-		//Get one of the random effects and apply it to this snake
-		effects.getRandomEffect()(whichSnake);
-	}
-	//Move the powerup to a new location (randomiseLocation avoids collisions)
-	randomiseLocation(powerUp.collisionDiv);
-}</code></pre>
-						
-					</div>
-			</div>	
+				<a class="expandableHeader">What skills does this show off?</a>
+				<div class="expandableContent">
+					<h2>DOM manipulation</h2>
+					<p>This project shows that I am highly proficient at manipulating DOM elements using Javascript. 
+					Creating a game engine within a browser requires the dynamic creation of new elements and the ability to move the various game elements around the game board.
+					The Snakes themselves, for example, are div elements and each snake has it's own div elements as children that represent the body segments.</p>
+					<h2>Creativity</h2>
+					<p>Javascript, HTML, and CSS were not exactly designed to be used as a game engine so it took a fair bit of creativity to get a game engine running at all within the browser.
+					I had to implement a dynamically resizing gameboard, grid-based collision system, movement system, dynamic scoreboard system, and more all from scratch for this game.
+					Each system uses div elements on the page for visual representation and a complex gamestate behind-the-scenes to handle the game logic.</p>
+					<p>In addition, the design of the game, in it's systems and visual design, all took a bit of creative flair!</p>
+					<h2>Dedication</h2>
+					<p>I started work on BrowserSnake back in 2017 and have been tweaking/adding to it on and off since then. 
+					As my knowledge of Javascript has increased, I have come back to this project to use my improved skills to better the project.</p>
+					<p>At present, BrowserSnake has nearly 2000 lines of code and that is after many optimisation passes over the years. It took a few years but I am happy to have finished such a huge project.</p>
+					<h2>Quality</h2>
+					<p>My hope is that, if you played the game before reading these sections, is that you did not come across a single bug.
+					I have spent a great deal of time fixing the many, many bugs over the years. The game now is, as far as I can tell from my testing, bug-free.</p>
+					<p>I have also spent a good deal of time optimising the game so it should run fairly well on slower devices too (it runs great on my phone!).</p>
+					<h2>Responsive Design</h2>
+					<p>A big focus of the project was the idea of having BrowserSnake run anywhere, on any-sized screen, on mobile or desktop. 
+					Anything that can run Javascript should be able to run BrowserSnake!</p>
+					<p>A lot of the game code is dedicated to scaling and re-scaling. 
+					The game can rescale itself after the page has finished loading too, to account for users flipping phones into horizontal mode etc.</p>					
+				</div>
+			</div>
+			<h2>Want to see more?</h2>
+			<p>The code for this project, other projects on the website, and the website itself can be found on my <a href="https://gitub.com/TheArrayOfThings">github</a>!</p>
+		<!-- End of main -->
 		</div>
 		<div id="footer"></div>
 		<script>

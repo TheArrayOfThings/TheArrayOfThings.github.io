@@ -93,6 +93,7 @@ function toggleSection (sectionContentParam) {
 
 function parseInternalLink(internalLinkToParse) {
 	let returnString = internalLinkToParse.replaceAll(" ", "");
+	returnString = returnString.replaceAll("?", "");
 	return returnString;
 }
 
