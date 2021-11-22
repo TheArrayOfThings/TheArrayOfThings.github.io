@@ -60,6 +60,15 @@ div#frontmenu {
 	height:100%;
 	float:left;
 }
+div#mobileInteractMenu {
+	z-index:6;
+	position: absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	float:left;
+}
 div#boxContainerDiv {
 	z-index:2;
 }
@@ -232,6 +241,7 @@ td:first-child, th:first-child {
 }
 /*End of Tables*/
 h1, table.scoreboard	{
+	font-size:calc(10px + 0.20vh + 0.20vw);
 	box-sizing: border-box;
 	border: 1px solid black;
 	padding: 0.2em;
@@ -251,6 +261,8 @@ a#question, div.quiz p	{
 	margin: 0.2em;
 }
 table, tr, td {
+	word-wrap:break-word;
+	font-size:calc(10px + 0.20vh + 0.20vw);
 	text-align: left;
 }
 div.topBarLeft {

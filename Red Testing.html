@@ -7,7 +7,7 @@
 		<meta name="author" content="Ryan Flanagan">
 		<meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
 		<meta charset="UTF-8">
-			<title>Pokemon Red Remake</title>
+		<title>Pokemon Red Remake</title>
 		<script src="./js/compatibility.js"></script> 
 		<script src="./js/jquery.js"></script> 
 		<script>
@@ -41,22 +41,31 @@
 			<p>This is a remake of Red's house in Pokemon Red! This remake is made entirely in pure Javascript, HTML, and CSS!</p>
 			<ul class="contentMenu"></ul>
 			<div id="hidden" style="display: none;"></div>
-			<div id="background"><div id="playable"><div id="mapContainerDiv"><div id="debugDivs"></div></div><div id="menu"></div><div id="frontmenu"></div></div></div>
-			<div id="topSectionVisible" class="section"><div class="centre">Up</div></div>
-			<div id="bottomSectionVisible" class="section"><div class="centre">Down</div></div>
-			<div id="leftSectionVisible" class="section"><div class="centre">Left</div></div>
-			<div id="rightSectionVisible" class="section"><div class="centre">Right</div></div>
-			<div id="aButtonVisible" class="section"><div class="centre">A Button</div></div>
-			<div id="bButtonVisible" class="section"><div class="centre">B Button</div></div>
-			<div id="startButtonVisible" class="section"><div class="centre">Start</div></div>
-			<button type="button" id="settings">Settings</button>
-			<div id="topSection" class="section"></div>
-			<div id="bottomSection" class="section"></div>
-			<div id="leftSection" class="section"></div>
-			<div id="rightSection" class="section"></div>
-			<div id="aButton" class="section"></div>
-			<div id="bButton" class="section"></div>
-			<div id="startButton" class="section"></div>
+			<div id="background">
+				<div id="playable">
+					<div id="mapContainerDiv">
+						<div id="debugDivs"></div>
+					</div>
+					<div id="menu"></div>
+					<div id="frontmenu"></div>
+					<div id="mobileInteractMenu">
+						<div id="topSectionVisible" class="section"><div class="centre">Up</div></div>
+						<div id="bottomSectionVisible" class="section"><div class="centre">Down</div></div>
+						<div id="leftSectionVisible" class="section"><div class="centre">Left</div></div>
+						<div id="rightSectionVisible" class="section"><div class="centre">Right</div></div>
+						<div id="aButtonVisible" class="section"><div class="centre">A Button</div></div>
+						<div id="bButtonVisible" class="section"><div class="centre">B Button</div></div>
+						<div id="startButtonVisible" class="section"><div class="centre">Start</div></div>
+						<div id="topSection" class="section"></div>
+						<div id="bottomSection" class="section"></div>
+						<div id="leftSection" class="section"></div>
+						<div id="rightSection" class="section"></div>
+						<div id="aButton" class="section"></div>
+						<div id="bButton" class="section"></div>
+						<div id="startButton" class="section"></div>
+					</div>
+				</div>
+			</div>
 			<div class="expandableSection">
 				<a class="expandableHeader">What is this?</a>
 				<div class="expandableContent">
@@ -100,7 +109,7 @@
 					<p>To begin with, this project used the engine I created for BrowserSnake but this remake now contains the fundamentals for a full RPG. 
 					I reworked the engine considerably to add the functionality I needed for this project.</p>
 					<p>I use a frame queue system, which is a system where functions are passed from objects in the game (such as characters) to the framequeue and then run in the order they were added.
-					A frame is then executed at set intervals, to ensure the game runs smoothly and consistently - and allows objects to internally track their state.</p>
+					A frame is then executed at set intervals, to ensure the game runs smoothly and consistently - and allows objects to internally track their state.</p>																															   
 				</div>
 			</div>
 		<!-- End of Main -->
