@@ -856,11 +856,13 @@ function getLeft(theElement) {
 function postHighScore(snakeName, snakeScore) {
 	if (isInternetExplorer) {
 		return;
-    }
+	}
+	let data = `{\"identifier\": \"${identifier}\",\"localdatetime\": \"${localDateTime}\",\"name\": \"${snakeName}\",\"score\": ${snakeScore}}`;
 	let reqObject = new XMLHttpRequest();
 	reqObject.open("POST", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
-	reqObject.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	reqObject.send(JSON.stringify({ identifier: identifier, row: localDateTime, name: snakeName, score: snakeScore}));
+	reqObject.setRequestHeader("Access-Control-Allow-Credentials", "true");
+	reqObject.setRequestHeader("Content-Type", "text/plain");
+	reqObject.send(data);
 	//Call getHighScore again just in case we have topped it!
 	setTimeout(getHighScore, 4000);
 }
@@ -880,8 +882,10 @@ function getHighScore() {
 		return;
     }
 	try {
+		let data = `{\"identifier\": \"high\",\"localdatetime\": \"score\"}`;
 		let reqObject = new XMLHttpRequest();
 		reqObject.open("GET", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
+		reqObject.setRequestHeader("Access-Control-Allow-Credentials", "true");
 		reqObject.setRequestHeader("Content-Type", "text/plain");
 		reqObject.onreadystatechange = function () {
 			if (reqObject.readyState === 4 && reqObject.status === 200) {
@@ -891,7 +895,7 @@ function getHighScore() {
 				servHighScoreBox.innerHTML = servHighScore + " (" + receivedJSON.PlayerName + ")";
 			} 
 		};
-		reqObject.send(JSON.stringify({ identifier: "high", row: "score"}));
+		reqObject.send(data);
 	} catch (error) {
 		console.log("High Score error: " + error);
 	}
