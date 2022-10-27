@@ -62,6 +62,10 @@ let enemyMovementDelay = 16;
 let allEntities = [];
 let toKill = [];
 
+//Player information
+let localDateTime;
+let identifier;
+
 addEvent("load", window, pageLoaded);
 
 function pageLoaded() {
@@ -90,19 +94,25 @@ function startGame() {
 	
 	//Run compatibility checks/fixes
 	if (!isInternetExplorer) {
+		//If the identifier is not present, generate one
+		if (localStorage.getItem("identifier") != null && localStorage.getItem("localDateTime") != null) {
+			localDateTime = localStorage.getItem("localDateTime");
+			identifier = localStorage.getItem("identifier");
+		} else {
+			generateIdentifiers();
+        }
 		//If PersonalHighScore present, set to this!
 		if (localStorage.getItem("PersonalHighScore") != null) {
 			persHighScore = parseInt(localStorage.getItem("PersonalHighScore"));
 			persHighScoreBox.innerHTML = persHighScore + " (" + localStorage.getItem("PersonalHighScoreName") + ")";
 			//Post the high score in case the server has been restarted
-			//postHighScore(localStorage.getItem("PersonalHighScoreName"), parseInt(localStorage.getItem("PersonalHighScore")));
+			postHighScore(localStorage.getItem("PersonalHighScoreName"), parseInt(localStorage.getItem("PersonalHighScore")));
 		}
 	}
 
-	//The following was used on a server verstion that cached high scores
-	/*getHighScore();
+	getHighScore();
 	//Call getHighScore every 5 minutes to keep the server highscore up to date
-	setInterval(getHighScore, 300000);*/
+	setInterval(getHighScore, 300000);
 	showAllSettings = false;
 	setupStart();
 	//Add settings event to settings button
@@ -843,28 +853,45 @@ function getLeft(theElement) {
 	return parseInt(theElement.style.left.replace('px', ''));
 }
 function postHighScore(snakeName, snakeScore) {
-	/*let reqObject = new XMLHttpRequest();
-	reqObject.open("PUT", "/hsm", true);
+	if (isInternetExplorer) {
+		return;
+    }
+	let reqObject = new XMLHttpRequest();
+	reqObject.open("POST", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
 	reqObject.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	reqObject.send(JSON.stringify({snakeName: snakeName, snakeHighScore: snakeScore}));
+	reqObject.send(JSON.stringify({ identifier: identifier, row: localDateTime, name: snakeName, score: snakeScore}));
 	//Call getHighScore again just in case we have topped it!
-	setTimeout(getHighScore, 4000);*/
+	setTimeout(getHighScore, 4000);
+}
+function generateIdentifiers() {
+	let characters = "abcdefghijklmnopqrstuvwxyz1234567890<>,.;:'@#~]}[{=+-_)(*&^%$£";
+	localDateTime = new Date().toString();
+
+	for (i = 0; i < 20; ++i) {
+		identifier += characters[Math.floor(Math.random() * characters.length)];
+	}
+
+	localStorage.setItem("localDateTime", localDateTime);
+	localStorage.setItem("identifier", identifier);
 }
 function getHighScore() {
+	if (isInternetExplorer) {
+		return;
+    }
 	try {
 		//alert("Trying to get high score...");
 		let reqObject = new XMLHttpRequest();
-		reqObject.open("GET", "/hsm", true);
+		reqObject.open("GET", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
 		reqObject.setRequestHeader("Content-Type", "text/plain");
 		reqObject.onreadystatechange = function () {
 			if (reqObject.readyState === 4 && reqObject.status === 200) {
 				//Response received grab the highscore
 				let receivedJSON = JSON.parse(reqObject.responseText);
-				servHighScore = receivedJSON.snakeHighScore;
-				servHighScoreBox.innerHTML = servHighScore + " (" + receivedJSON.snakeName + ")";
+				servHighScore = receivedJSON.PlayerScore;
+				servHighScoreBox.innerHTML = servHighScore + " (" + receivedJSON.PlayerName + ")";
 			} 
 		};
-		reqObject.send(null);
+		reqObject.send(JSON.stringify({ identifier: "high", row: "score"}));
 	} catch (error) {
 		console.log("High Score error: " + error);
 	}
