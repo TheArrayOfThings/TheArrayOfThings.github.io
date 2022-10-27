@@ -880,7 +880,6 @@ function getHighScore() {
 		return;
     }
 	try {
-		alert("Trying to get high score2...");
 		let reqObject = new XMLHttpRequest();
 		reqObject.open("GET", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
 		reqObject.setRequestHeader("Content-Type", "text/plain");
