@@ -867,7 +867,7 @@ function generateIdentifiers() {
 	let characters = "abcdefghijklmnopqrstuvwxyz1234567890<>,.;:'@#~]}[{=+-_)(*&^%$£";
 	localDateTime = new Date().toString();
 
-	for (i = 0; i < 20; ++i) {
+	for (var i = 0; i < 20; ++i) {
 		identifier += characters[Math.floor(Math.random() * characters.length)];
 	}
 
