@@ -468,6 +468,7 @@ function powerUpHit(whichSnake) {
 		if (!isInternetExplorer) {
 			localStorage.setItem("PersonalHighScore", persHighScore);
 			localStorage.setItem("PersonalHighScoreName", whichSnake.snakeName);
+			postHighScore(whichSnake.snakeName, whichSnake.internalScore);
 		}
 	}
 	//Increase the length of the snake that hit the powerup
@@ -859,6 +860,7 @@ function postHighScore(snakeName, snakeScore) {
 	let reqObject = new XMLHttpRequest();
 	reqObject.open("POST", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
 	reqObject.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	reqObject.setRequestHeader("Access-Control-Allow-Origin", "https://thearrayofthings.github.io");
 	reqObject.send(JSON.stringify({ identifier: identifier, row: localDateTime, name: snakeName, score: snakeScore}));
 	//Call getHighScore again just in case we have topped it!
 	setTimeout(getHighScore, 4000);
@@ -883,6 +885,7 @@ function getHighScore() {
 		let reqObject = new XMLHttpRequest();
 		reqObject.open("GET", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
 		reqObject.setRequestHeader("Content-Type", "text/plain");
+		reqObject.setRequestHeader("Access-Control-Allow-Origin", "https://thearrayofthings.github.io");
 		reqObject.onreadystatechange = function () {
 			if (reqObject.readyState === 4 && reqObject.status === 200) {
 				//Response received grab the highscore
