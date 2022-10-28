@@ -884,14 +884,12 @@ function getHighScore() {
 	try {
 		let reqObject = new XMLHttpRequest();
 		reqObject.open("GET", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==&identifier=high&localdatetime=score", true);
-		reqObject.setRequestHeader("Access-Control-Allow-Credentials", "true");
-		reqObject.setRequestHeader("Content-Type", "text/plain");
 		reqObject.onreadystatechange = function () {
 			if (reqObject.readyState === 4 && reqObject.status === 200) {
 				//Response received grab the highscore
 				let receivedJSON = JSON.parse(reqObject.responseText);
-				servHighScore = receivedJSON.PlayerScore;
-				servHighScoreBox.innerHTML = servHighScore + " (" + receivedJSON.PlayerName + ")";
+				servHighScore = receivedJSON.playerScore;
+				servHighScoreBox.innerHTML = servHighScore + " (" + receivedJSON.playerName + ")";
 			} 
 		};
 		reqObject.send(null);
