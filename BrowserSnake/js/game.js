@@ -63,8 +63,8 @@ let allEntities = [];
 let toKill = [];
 
 //Player information
-let localDateTime;
-let identifier;
+let localDateTime = "";
+let identifier = "";
 
 addEvent("load", window, pageLoaded);
 
@@ -763,7 +763,7 @@ function resetEverything() {
 	while (allEntities.length > 0) {
 		allEntities.pop().kill();
 	}
-	console.log(allEntities);
+	//console.log(allEntities);
 	//allEntities = [];
 	
 	//Reset game settings
@@ -811,8 +811,8 @@ function resetEverything() {
 		startAlertModal("Hi Cousin!", "Hi Lucas, from Ryan! :)", function () {
 			resetting = false;
 		});
-	}  else if (playerOneName.toLowerCase() == "brandon") {
-		startAlertModal("Hi Brandon!", "Lots of love from Ryan! <3", function () {
+	}  else if (playerOneName.toLowerCase() == "swifty") {
+		startAlertModal("Hi Jon!", "Lots of love from Ryan! <3", function () {
 			resetting = false;
 		});
 	} else {
