@@ -45,6 +45,7 @@ let snakeResults = "";
 let showAllSettings = true;
 let paused = false;
 let classicSnake = false;
+let postHighScoreLocked = true;
 
 //Snakes
 let playerOne;
@@ -108,6 +109,7 @@ function startGame() {
 			persHighScore = parseInt(localStorage.getItem("PersonalHighScore"));
 			persHighScoreBox.innerHTML = persHighScore + " (" + localStorage.getItem("PersonalHighScoreName") + ")";
 			//Post the high score in case the server has been restarted
+			postHighScoreLocked = false;
 			postHighScore(localStorage.getItem("PersonalHighScoreName"), parseInt(localStorage.getItem("PersonalHighScore")));
 		}
 	}
@@ -470,6 +472,7 @@ function powerUpHit(whichSnake) {
 		if (!isInternetExplorer) {
 			localStorage.setItem("PersonalHighScore", persHighScore);
 			localStorage.setItem("PersonalHighScoreName", whichSnake.snakeName);
+			postHighScoreLocked = false;
 			postHighScore(whichSnake.snakeName, whichSnake.internalScore);
 		}
 	}
@@ -856,7 +859,7 @@ function getLeft(theElement) {
 	return parseInt(theElement.style.left.replace('px', ''));
 }
 function postHighScore(snakeName, snakeScore) {
-	if (isInternetExplorer) {
+	if (isInternetExplorer || postHighScoreLocked) {
 		return;
 	}
 	let data = `{\"identifier\": \"${identifier}\",\"localdatetime\": \"${localDateTime}\",\"name\": \"${snakeName}\",\"score\": ${snakeScore}}`;
@@ -867,6 +870,7 @@ function postHighScore(snakeName, snakeScore) {
 	reqObject.send(data);
 	//Call getHighScore again just in case we have topped it!
 	setTimeout(getHighScore, 4000);
+	postHighScoreLocked = true;
 }
 function generateIdentifiers() {
 	let characters = "abcdefghijklmnopqrstuvwxyz1234567890<>,.;:'@#~]}[{=+-_)(*&^%$£";
