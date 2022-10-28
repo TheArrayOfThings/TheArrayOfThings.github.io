@@ -72,7 +72,9 @@ function pageLoaded() {
 	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
 		setTimeout(pageLoaded, 10);
 		return;
-	}
+	} else if (isInternetExplorer == true) {
+		alert("Internet explorer detected!");
+    }
 	addEvent("click", document.getElementById("playButton"), startGame);
 }
 function startGame() {
