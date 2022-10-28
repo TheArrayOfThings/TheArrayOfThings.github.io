@@ -882,9 +882,8 @@ function getHighScore() {
 		return;
     }
 	try {
-		let data = `{\"identifier\": \"high\",\"localdatetime\": \"score\"}`;
 		let reqObject = new XMLHttpRequest();
-		reqObject.open("GET", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
+		reqObject.open("GET", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==&identifier=high&localdatetime=score", true);
 		reqObject.setRequestHeader("Access-Control-Allow-Credentials", "true");
 		reqObject.setRequestHeader("Content-Type", "text/plain");
 		reqObject.onreadystatechange = function () {
@@ -895,7 +894,7 @@ function getHighScore() {
 				servHighScoreBox.innerHTML = servHighScore + " (" + receivedJSON.PlayerName + ")";
 			} 
 		};
-		reqObject.send(data);
+		reqObject.send(null);
 	} catch (error) {
 		console.log("High Score error: " + error);
 	}
