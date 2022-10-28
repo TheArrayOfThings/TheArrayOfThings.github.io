@@ -83,7 +83,7 @@ function startGame() {
 	playable = document.getElementById('playable');
 	persHighScoreBox = document.getElementsByClassName('pershighscore')[0];
 	pauseButton = document.getElementById("pause");
-	//servHighScoreBox = document.getElementsByClassName('servhighscore')[0];
+	servHighScoreBox = document.getElementsByClassName('servhighscore')[0];
 	scoreLabels = document.getElementsByClassName('scoreLabels')[0];
 	scores = document.getElementsByClassName('scores')[0];
 	topSection = document.getElementById('topSection');
