@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BrowserSnake",
+    "\\BrowserSnake\\js",
+    "\\css",
+    "\\js"
   ],
-  "SelectedNode": "\\C:\\Users\\rflanagan\\Source\\Repos\\TheArrayOfThings.github.io",
+  "SelectedNode": "\\css\\Ultimate.css",
   "PreviewInSolutionExplorer": false
 }
