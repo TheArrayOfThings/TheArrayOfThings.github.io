@@ -222,7 +222,6 @@ function Entity() {
 					removeElement(this.allDivs.pop());
 				}
 				entityDied(entity);
-				allEntities[this.arrayIndex] = undefined;
 			}
 		},
 		alternativeAction: function() {
@@ -232,7 +231,6 @@ function Entity() {
         
 		}
 	};
-	entity.arrayIndex = allEntities.length;
 	allEntities.push(entity);
 	return entity;
 }

@@ -510,7 +510,7 @@ function gameLost(whichSnake) {
 	}
 	let resultString = "Round over - " + whichSnake.snakeName + " died!<br>";
 	for (let i = 0; i < allEntities.length; ++i) {
-		if (allEntities[i] != "undefined" && allEntities[i].entityClass == 'snake') {
+		if (allEntities[i].entityClass == 'snake') {
 			if (snakeResults.indexOf(allEntities[i].snakeName + " scored " + allEntities[i].internalScore + "<br>") == -1) {
 				resultString += allEntities[i].snakeName + " scored " + allEntities[i].internalScore + "<br>";
 			}
@@ -536,7 +536,7 @@ function nextFrame() {
 	if (modalVisible || paused) {
 		return;
 	}
-	/*let tempArray = [];
+	let tempArray = [];
 	//Cleanup killed objects
 	for (let i = 0; i < allEntities.length; ++i) {
 		if (allEntities[i].isDead == false) {
@@ -545,12 +545,9 @@ function nextFrame() {
 		  allEntities[i] = undefined;
 		}
 	}
-	allEntities = tempArray;*/
+	allEntities = tempArray;
 	//First, check if any entities have collided
 	for (let i = 0; i < allEntities.length; ++i) {
-		if (allEntities[i] == "undefined") {
-			continue;
-        }
 		try {
 			//Check if collided with another entity
 			for (let e = 0; e < allEntities.length; ++e) {
@@ -670,9 +667,9 @@ function randomiseLocation(theElement) {
 		let leftPos = getLeft(theElement);
 		let topPos = getTop(theElement);
 		for (let i = 0; i < allEntities.length; ++i) {
-			if (allEntities[i] == "undefined" || theElement == allEntities[i].collisionDiv) {
+			if (theElement == allEntities[i].collisionDiv) {
 				continue;
-            }
+			}
 			if (theElement.className.indexOf("snake head") != -1) {
 				//It was easier to just make it so that snakes don't spawn on the same vertical axis
 				if (topPos == getTop(allEntities[i].collisionDiv)) {
@@ -769,13 +766,10 @@ function resetEverything() {
 	}
 	//Remove all entities
 	while (allEntities.length > 0) {
-		if (allEntities[i] == "undefined") {
-			continue;
-		}
-		allEntities.kill();
+		allEntities.pop().kill();
 	}
-	console.log(allEntities);
-	allEntities = [];
+	//console.log(allEntities);
+	//allEntities = [];
 	
 	//Reset game settings
 	if (classicSnake) {
