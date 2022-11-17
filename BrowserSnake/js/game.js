@@ -873,8 +873,7 @@ function postHighScore(snakeName, snakeScore) {
 	postHighScoreLocked = true;
 }
 function generateIdentifiers() {
-	var characters = "abcdefghijklmnopqrstuvwxyz1234567890<>,.;:'@#~]}[{=+-_)(*&^%$£";
-	console.log(characters);
+	let characters = "abcdefghijklmnopqrstuvwxyz1234567890<>,.;:'@#~]}[{=+-_)(*&^%$";
 	localDateTime = new Date().toString();
 
 	for (var i = 0; i < 20; ++i) {
