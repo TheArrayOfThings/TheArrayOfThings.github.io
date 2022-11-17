@@ -233,7 +233,7 @@ function Entity() {
         
 		}
 	};
-	this.arrayIndex = allEntities.length;
+	entity.arrayIndex = allEntities.length;
 	allEntities.push(entity);
 	return entity;
 }
