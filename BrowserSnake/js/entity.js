@@ -17,7 +17,7 @@ function Entity() {
 		visibleOffSet: 0,
 		fireDelay: 0,
 		hasTeleported: false,
-		arrayIndex: allEntities.length,
+		arrayIndex: 0,
 		moveStep: function() {
 			//Check if movement has been disabled by the gamestate
 			if (this.movementEnabled == false) {
@@ -233,6 +233,7 @@ function Entity() {
         
 		}
 	};
+	this.arrayIndex = allEntities.length;
 	allEntities.push(entity);
 	return entity;
 }
