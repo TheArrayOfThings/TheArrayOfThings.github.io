@@ -523,12 +523,12 @@ function gameLost(whichSnake) {
 	});
 }
 function nextFrame() {
-	if (getLeft(playerOne.collisionDiv) % entitySize > 0) {
+	/*if (getLeft(playerOne.collisionDiv) % entitySize > 0) {
 		console.log("Snake is out of sync! Left coordinate = " + getLeft(playerOne.collisionDiv) + " out of sync by = " + getLeft(playerOne.collisionDiv) % entitySize);
 	}
 	if (getTop(playerOne.collisionDiv) % entitySize > 0) {
 		console.log("Snake is out of sync! Top coordinate = " + getTop(playerOne.collisionDiv) + " out of sync by = " + getTop(playerOne.collisionDiv) % entitySize);
-	}
+	}*/
 	//console.log(getLeft(playerOne.collisionDiv));
 	if (resetting) {
 		return;
@@ -536,7 +536,7 @@ function nextFrame() {
 	if (modalVisible || paused) {
 		return;
 	}
-	let tempArray = [];
+	/*let tempArray = [];
 	//Cleanup killed objects
 	for (let i = 0; i < allEntities.length; ++i) {
 		if (allEntities[i].isDead == false) {
@@ -545,7 +545,7 @@ function nextFrame() {
 		  allEntities[i] = undefined;
 		}
 	}
-	allEntities = tempArray;
+	allEntities = tempArray;*/
 	//First, check if any entities have collided
 	for (let i = 0; i < allEntities.length; ++i) {
 		try {
