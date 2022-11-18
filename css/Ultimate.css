@@ -11,9 +11,6 @@ html, body	{
 	font-family:calibri;
 	min-height:100vh;
 }
-a {
-	color: #00ffe5;
-}
 div#map {
 	height: 80vh;
 	width: 100%;
@@ -87,7 +84,7 @@ ul.contentMenu {
 	list-style-type: none;
 }
 a {
-	color:#4717F6;
+	color: #00ffe5;
 	cursor: pointer;
 }
 a:hover, a:focus {
