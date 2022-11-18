@@ -83,12 +83,19 @@ body {
 ul.contentMenu {
 	list-style-type: none;
 }
+/*Defaults for anchor tags*/
 a {
 	color: #00ffe5;
 	cursor: pointer;
 }
 a:hover, a:focus {
 	color:#633af8;
+}
+a:visited {
+	color:#A239CA;
+}
+a:active {
+	color:#4717F6;
 }
 /*Buttons*/
 button {
@@ -442,15 +449,6 @@ div#footer div {
 	overflow: hidden;
 	font-size:calc(10px + 0.20vh + 0.20vw);
 	overflow:hidden;
-}
-a:visited {
-	color:#A239CA;
-}
-a:hover {
-	color:white;
-}
-a:active {
-	color:#4717F6;
 }
 a:visited.navigate	{
 	background-color:black;
