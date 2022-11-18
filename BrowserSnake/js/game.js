@@ -568,10 +568,6 @@ function nextFrame() {
 							powerUpHit(secondCollided);
 							continue;
 						}
-						//The rest of the collision checks are only needed for Browsersnake rather than classic snake
-						if (classicSnake) {
-							continue;
-						}
 						//Bullet hit enemy
 						if (firstCollided.entityClass == 'bullet' && secondCollided.entityClass == 'enemy') {
 							//enemyKilled(firstCollided);
