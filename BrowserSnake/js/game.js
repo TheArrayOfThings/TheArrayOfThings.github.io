@@ -531,10 +531,7 @@ function nextFrame() {
 		console.log("Snake is out of sync! Top coordinate = " + getTop(playerOne.collisionDiv) + " out of sync by = " + getTop(playerOne.collisionDiv) % entitySize);
 	}*/
 	//console.log(getLeft(playerOne.collisionDiv));
-	if (resetting) {
-		return;
-	}
-	if (modalVisible || paused) {
+	if (resetting || modalVisible || paused) {
 		return;
 	}
 	/*let tempArray = [];
@@ -574,6 +571,18 @@ function nextFrame() {
 							powerUpHit(secondCollided);
 							continue;
 						}
+						//Some of the checks are not needed for classic snake
+						if (classicSnake) {
+							//Do not kill powerups
+							if (firstCollided.entityClass != 'powerup') {
+								firstCollided.kill();
+							}
+							//Do not kill powerups
+							if (secondCollided.entityClass != 'powerup') {
+								secondCollided.kill();
+							}
+							continue;
+                        }
 						//Bullet hit enemy
 						if (firstCollided.entityClass == 'bullet' && secondCollided.entityClass == 'enemy') {
 							//enemyKilled(firstCollided);
@@ -610,7 +619,8 @@ function nextFrame() {
 							secondCollided.kill();
 						}
 					}
-				}  catch (err) {
+				} catch (err) {
+					console.log(`Frame Collision Error: ${err}`);
 					continue;
 				}
 			}
@@ -658,11 +668,15 @@ function nextFrame() {
 				allEntities[i].moveStep();
 			}
 		} catch (err) {
+			console.log(`Frame General Error: ${err}`);
 			continue;
 		}
 	}
 }
 function randomiseLocation(theElement) {
+	/*TODO
+	 * Make it so that enemies cannot spawn directly in front of a player's head
+	*/
 	randomiseProper(theElement);
 	//Check for collisions from random location
 	let collisionDetected = true;
@@ -670,12 +684,14 @@ function randomiseLocation(theElement) {
 	while (collisionDetected) {
 		let leftPos = getLeft(theElement);
 		let topPos = getTop(theElement);
-		for (let i = 0; i < allEntities.length; ++i) {
+		let i = allEntities.length;
+		//for (let i = 0; i < allEntities.length; ++i) {
+		while (i--) {
 			if (theElement == allEntities[i].collisionDiv) {
 				continue;
 			}
 			if (theElement.className.indexOf("snake head") != -1) {
-				//It was easier to just make it so that snakes don't spawn on the same vertical axis
+				//It was easier and more performant to just make it so that snakes don't spawn on the same vertical axis
 				if (topPos == getTop(allEntities[i].collisionDiv)) {
 					randomiseProper(theElement);
 					continue randomCheckStart;
@@ -758,7 +774,7 @@ function resetEverything() {
 	
 	//Reset colour array and AI Name array
 	colorArray =  ["DeepPink", "MediumVioletRed", "Crimson", "Red ", "DarkOliveGreen", "Lime", "MediumSpringGreen ", "Green", "BlueViolet", "Purple", "Indigo", "MediumSlateBlue ", "OrangeRed", "Orange", "DarkOrange", "Yellow", "Gold", "Aqua", "Teal", "LightSeaGreen", "Blue", "DeepSkyBlue", "Maroon", "MidnightBlue", "DimGray", "Honeydew"];
-	aiNameArray = ['Squish', 'Squash', 'Slither', 'Slide', 'Slugo', 'Mush', 'Fluffy', 'Geoff', 'Sid', 'Splashy', 'Splat'];
+	aiNameArray = ['Squish', 'Squash', 'Slither', 'Slide', 'Slugo', 'Mush', 'Fluffy', 'Geoff', 'Sid', 'Splashy', 'Splat', 'Crash'];
 	//Remove names from AI pool if selected by players
 	//Remove AI name from pool if player one has selected it
 	if (aiNameArray.indexOf(playerOneName) != -1) {
