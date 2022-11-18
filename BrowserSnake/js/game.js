@@ -487,6 +487,7 @@ function powerUpHit(whichSnake) {
 	//Move the powerup to a new location (randomiseLocation avoids collisions)
 	randomiseLocation(powerUp.collisionDiv);
 }
+//Browsersnake used to score on enemies killed - but this doesn't work with the scoring system!
 /*function enemyKilled(whichBullet) {
 	if (resetting) {
 		return;
@@ -547,10 +548,15 @@ function nextFrame() {
 	}
 	allEntities = tempArray;*/
 	//First, check if any entities have collided
-	for (let i = 0; i < allEntities.length; ++i) {
+	//Aparently using a reverse while loop is more performant than a for loop
+	let i = allEntities.length;
+	//for (let i = 0; i < allEntities.length; ++i) {
+	while (i--) {
 		try {
 			//Check if collided with another entity
-			for (let e = 0; e < allEntities.length; ++e) {
+			//for (let e = 0; e < allEntities.length; ++e) {
+			let e = allEntities.length;
+			while (e--) {
 				try {
 					if (allEntities[i] == allEntities[e]) {
 						continue;
