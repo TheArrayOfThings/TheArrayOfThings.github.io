@@ -222,6 +222,14 @@ function Entity() {
 					removeElement(this.allDivs.pop());
 				}
 				entityDied(entity);
+				//Find this entity in the allEntitiesArray and remove it
+				for (let i = 0; i < allEntities.length; ++i) {
+					if (allEntities[i] == this) {
+						allEntities.splice(i, 1);
+						break;
+                    }
+                }
+				
 			}
 		},
 		alternativeAction: function() {

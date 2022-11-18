@@ -536,7 +536,7 @@ function nextFrame() {
 	if (modalVisible || paused) {
 		return;
 	}
-	let tempArray = [];
+	/*let tempArray = [];
 	//Cleanup killed objects
 	for (let i = 0; i < allEntities.length; ++i) {
 		if (allEntities[i].isDead == false) {
@@ -545,7 +545,7 @@ function nextFrame() {
 		  allEntities[i] = undefined;
 		}
 	}
-	allEntities = tempArray;
+	allEntities = tempArray;*/
 	//First, check if any entities have collided
 	for (let i = 0; i < allEntities.length; ++i) {
 		try {
