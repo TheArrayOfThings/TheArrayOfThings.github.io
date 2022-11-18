@@ -1,49 +1,53 @@
 <!DOCTYPE HTML>
 <html lang="en-GB">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="Portfolio site for Ryan Flanagan">
-		<meta name="author" content="Ryan Flanagan">
-		<meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
-		<title>HomePage</title>
-		<script src="/js/compatibility.js"></script> 
-		<script src="/js/jquery.js"></script> 
-		<script>
-			var topBarLoaded;
-			$(function(){
-			  $("#topBar").load("/html/TopBar.html", function () {
-				topBarLoaded = true;
-			  }); 
-			  $("#footer").load("/html/Footer.html");
-			});
-		</script> 
-		<link rel="stylesheet" href="/css/Ultimate.css">
-	</head>
-	<body>
-		<div id="modalOverlay"></div>
-		<div id="topBar"></div>
-		<div id="modalBox" class="modal">
-			<!-- Modal popup content -->
-			<div class="modal-content">
-				<h1 id="modalTitle"></h1>
-				<p id="modalTextContent">Default content</p>
-				<label id="modalInputLabel" for="modalInput">Input:</label>
-				<input type="text" id="modalInput" name="modalInput">
-				<button class="modalYes">Yes</button>
-				<button class="modalNo">No</button>
-				<button class="modalButton">Submit</button>
-			</div>
-		</div>
-		<div class="main">
-			<p id="testing">Hello</p>
-		</div>
-		<div id="footer"></div>
-		<script src="/js/ExpandableSection.js"></script>
-		<script src="/js/Logo.js"></script>
-		<script src="/js/Selected.js"></script>
-		<script src="/js/MenuBurger.js"></script>
-		<script src="/js/SetTitle.js"></script>
-		<script src="/js/ModalBox.js"></script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio site for Ryan Flanagan">
+    <meta name="author" content="Ryan Flanagan">
+    <meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
+    <title>HomePage</title>
+    <link rel="stylesheet" href="/css/Ultimate.css">
+</head>
+<body>
+    <div id="modalOverlay"></div>
+    <div id="topBar"></div>
+    <div id="modalBox" class="modal">
+        <!-- Modal popup content -->
+        <div class="modal-content">
+            <h1 id="modalTitle"></h1>
+            <p id="modalTextContent">Default content</p>
+            <label id="modalInputLabel" for="modalInput">Input:</label>
+            <input type="text" id="modalInput" name="modalInput">
+            <button class="modalYes">Yes</button>
+            <button class="modalNo">No</button>
+            <button class="modalButton">Submit</button>
+        </div>
+    </div>
+    <div class="main">
+        <h1>Welcome!</h1>
+        <p>This is my portfolio site. Click the menu button on the top right to navigate around a couple of my web-based projects.</p>
+        <p>I built this website from scratch (which, I am sure shows!) - no wordpress here.</p>
+        <p>So yeah, the website is a bit basic - but I think shows off my skills reasonably well as I did eveything myself without the help of frameworks.</p>
+        <p>Thanks for dropping by!</p>
+    </div>
+    <div id="footer"></div>
+    <script src="/js/compatibility.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/ExpandableSection.js"></script>
+    <script src="/js/Logo.js"></script>
+    <script src="/js/Selected.js"></script>
+    <script src="/js/MenuBurger.js"></script>
+    <script src="/js/SetTitle.js"></script>
+    <script src="/js/ModalBox.js"></script>
+    <script>
+        var topBarLoaded;
+        $(function () {
+            $("#topBar").load("/html/TopBar.html", function () {
+                topBarLoaded = true;
+            });
+            $("#footer").load("/html/Footer.html");
+        });
+    </script>
+</body>
 </html>

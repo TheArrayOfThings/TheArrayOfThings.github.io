@@ -1,59 +1,59 @@
 <!DOCTYPE HTML>
 <html lang="en-GB">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="Find the perfect wild camping spot in Dartmoor">
-		<meta name="author" content="Ryan Flanagan">
-		<meta name="keywords" content="HTML, website, portfolio, Dartmoor, wild camping">
-		<title>Dartmoor Wild Camping Map</title>
-		<link rel="stylesheet" href="/css/Ultimate.css">
-		<script src="/js/compatibility.js"></script> 
-		<script src="/js/jquery.js"></script> 
-		<script>
-			var topBarLoaded;
-			$(function(){
-			  $("#topBar").load("/html/TopBar.html", function () {
-				topBarLoaded = true;
-			  }); 
-			  $("#footer").load("/html/Footer.html");
-			});
-		</script> 
-	</head>
-	<body>
-		<div id="modalOverlay"></div>
-		<div id="topBar"></div>
-		<div id="modalBox" class="modal">
-			<!-- Modal popup content -->
-			<div class="modal-content">
-				<h1 id="modalTitle"></h1>
-				<p id="modalTextContent">Default content</p>
-				<label id="modalInputLabel" for="modalInput">Input:</label>
-				<input type="text" id="modalInput" name="modalInput">
-				<button class="modalYes">Yes</button>
-				<button class="modalNo">No</button>
-				<button class="modalButton">Submit</button>
-			</div>
-		</div>
-		<div class="main">
-			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD82Y97n7A_rouMcx2clbLCH2TifSEWfgU&callback=initMap" type="text/javascript"></script>
-			<script src="/Dartmoor/js/Dartmoor.js"></script>
-			<p>This webpage has a version of the wild camping map of dartmoor, taken from government data.</p>
-			<div id="map"></div>
-			<h1>What went into this</h1>
-			<p>This project involved the following:</p>
-			<p>1): I downloaded the government provided shapefile from <a href="https://data.gov.uk/dataset/179407cc-4efd-4a46-bb2f-a4bbc30ce2e4/dnpa-wild-camping-permitted">here</a></p>
-			<p>2): I converted this shapefile to a geoJSON file using <a href="https://mapshaper.org/">mapshaper.org</a></p>
-			<p>3): I ran the geoJSON through <a href="https://geojsonlint.com/">geojsonlint.com</a> and observed multiple <i>Polygons and MultiPolygons should follow the right-hand rule</i> errors</p>
-			<p>4): I used mapster's <a href="https://mapster.me/right-hand-rule-geojson-fixer/">Right Hand Rule GeoJSON Fixer </a> and downloaded the fixed geoJSON</p>
-			<p>5): Finally, I used google maps Javascript API to display a map with the geoJSON overlayed - which is what you see here :)</p>
-		</div>
-		<div id="footer"></div>
-		<script src="/js/ExpandableSection.js"></script>
-		<script src="/js/Logo.js"></script>
-		<script src="/js/Selected.js"></script>
-		<script src="/js/MenuBurger.js"></script>
-		<script src="/js/SetTitle.js"></script>
-		<script src="/js/ModalBox.js"></script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Find the perfect wild camping spot in Dartmoor">
+    <meta name="author" content="Ryan Flanagan">
+    <meta name="keywords" content="HTML, website, portfolio, Dartmoor, wild camping">
+    <title>Dartmoor Wild Camping Map</title>
+    <link rel="stylesheet" href="/css/Ultimate.css">
+</head>
+<body>
+    <div id="modalOverlay"></div>
+    <div id="topBar"></div>
+    <div id="modalBox" class="modal">
+        <!-- Modal popup content -->
+        <div class="modal-content">
+            <h1 id="modalTitle"></h1>
+            <p id="modalTextContent">Default content</p>
+            <label id="modalInputLabel" for="modalInput">Input:</label>
+            <input type="text" id="modalInput" name="modalInput">
+            <button class="modalYes">Yes</button>
+            <button class="modalNo">No</button>
+            <button class="modalButton">Submit</button>
+        </div>
+    </div>
+    <div class="main">
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD82Y97n7A_rouMcx2clbLCH2TifSEWfgU&callback=initMap" type="text/javascript"></script>
+        <script src="/Dartmoor/js/Dartmoor.js"></script>
+        <p>This webpage has a version of the wild camping map of dartmoor, taken from government data.</p>
+        <div id="map"></div>
+        <h1>What went into this</h1>
+        <p>This project involved the following:</p>
+        <p>1): I downloaded the government provided shapefile from <a href="https://data.gov.uk/dataset/179407cc-4efd-4a46-bb2f-a4bbc30ce2e4/dnpa-wild-camping-permitted">here</a></p>
+        <p>2): I converted this shapefile to a geoJSON file using <a href="https://mapshaper.org/">mapshaper.org</a></p>
+        <p>3): I ran the geoJSON through <a href="https://geojsonlint.com/">geojsonlint.com</a> and observed multiple <i>Polygons and MultiPolygons should follow the right-hand rule</i> errors</p>
+        <p>4): I used mapster's <a href="https://mapster.me/right-hand-rule-geojson-fixer/">Right Hand Rule GeoJSON Fixer </a> and downloaded the fixed geoJSON</p>
+        <p>5): Finally, I used google maps Javascript API to display a map with the geoJSON overlayed - which is what you see here :)</p>
+    </div>
+    <div id="footer"></div>
+    <script src="/js/compatibility.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/ExpandableSection.js"></script>
+    <script src="/js/Logo.js"></script>
+    <script src="/js/Selected.js"></script>
+    <script src="/js/MenuBurger.js"></script>
+    <script src="/js/SetTitle.js"></script>
+    <script src="/js/ModalBox.js"></script>
+    <script>
+        var topBarLoaded;
+        $(function () {
+            $("#topBar").load("/html/TopBar.html", function () {
+                topBarLoaded = true;
+            });
+            $("#footer").load("/html/Footer.html");
+        });
+    </script>
+</body>
 </html>
