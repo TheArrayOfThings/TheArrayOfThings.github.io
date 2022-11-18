@@ -21,7 +21,20 @@
 		<link rel="stylesheet" href="/css/Ultimate.css">
 	</head>
 	<body>
+		<div id="modalOverlay"></div>
 		<div id="topBar"></div>
+		<div id="modalBox" class="modal">
+			<!-- Modal popup content -->
+			<div class="modal-content">
+				<h1 id="modalTitle"></h1>
+				<p id="modalTextContent">Default content</p>
+				<label id="modalInputLabel" for="modalInput">Input:</label>
+				<input type="text" id="modalInput" name="modalInput">
+				<button class="modalYes">Yes</button>
+				<button class="modalNo">No</button>
+				<button class="modalButton">Submit</button>
+			</div>
+		</div>
 		<div class="main">
 			<p id="testing">Hello</p>
 		</div>

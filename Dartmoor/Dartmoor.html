@@ -21,7 +21,20 @@
 		</script> 
 	</head>
 	<body>
+		<div id="modalOverlay"></div>
 		<div id="topBar"></div>
+		<div id="modalBox" class="modal">
+			<!-- Modal popup content -->
+			<div class="modal-content">
+				<h1 id="modalTitle"></h1>
+				<p id="modalTextContent">Default content</p>
+				<label id="modalInputLabel" for="modalInput">Input:</label>
+				<input type="text" id="modalInput" name="modalInput">
+				<button class="modalYes">Yes</button>
+				<button class="modalNo">No</button>
+				<button class="modalButton">Submit</button>
+			</div>
+		</div>
 		<div class="main">
 			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD82Y97n7A_rouMcx2clbLCH2TifSEWfgU&callback=initMap" type="text/javascript"></script>
 			<script src="/Dartmoor/js/Dartmoor.js"></script>
