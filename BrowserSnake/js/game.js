@@ -555,55 +555,57 @@ function nextFrame() {
 					if (allEntities[i] == allEntities[e]) {
 						continue;
 					}
-					if (getLeft(allEntities[i].collisionDiv) == getLeft(allEntities[e].collisionDiv)) {
-						if (getTop(allEntities[i].collisionDiv) == getTop(allEntities[e].collisionDiv)) {
-							//Something is colliding
-							let firstCollided = allEntities[i];
-							let secondCollided = allEntities[e];
-							//Snake hit powerup
-							if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'powerup') {
-								powerUpHit(firstCollided);
-								continue;
-							}
-							if (firstCollided.entityClass == 'powerup' && secondCollided.entityClass == 'snake') {
-								powerUpHit(secondCollided);
-								continue;
-							}
-							//Bullet hit enemy
-							if (firstCollided.entityClass == 'bullet' && secondCollided.entityClass == 'enemy') {
-								//enemyKilled(firstCollided);
-								secondCollided.kill();
-								continue;
-							}
-							//Enemy hit bullet
-							if (firstCollided.entityClass == 'enemy' && secondCollided.entityClass == 'bullet') {
-								//enemyKilled(secondCollided);
-								firstCollided.kill();
-								continue;
-							}
-							//Save snakes from bullets
-							if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'bullet') {
-								secondCollided.kill();
-								continue;
-							}
-							//Save snakes from bullets
-							if (secondCollided.entityClass == 'snake' && firstCollided.entityClass == 'bullet') {
-								firstCollided.kill();
-								continue;
-							}
-							//Teleport powerup when collide with snakesegment (it happens... somehow)
-							if (firstCollided.entityClass == 'snakesegment' && secondCollided.entityClass == 'powerup' || firstCollided.entityClass == 'powerup' && secondCollided.entityClass == 'snakesegment') {
-								randomiseLocation(powerUp.collisionDiv);
-								continue;
-							}
-							//Do not kill powerups or snake segments
-							if (firstCollided.entityClass != 'powerup' && firstCollided.entityClass != 'snakesegment') {
-								firstCollided.kill();
-							}
-							//Do not kill powerups or snake segments
-							if (secondCollided.entityClass != 'powerup' && secondCollided.entityClass != 'snakesegment') {
-								secondCollided.kill();
-							}
+					if ((getLeft(allEntities[i].collisionDiv) == getLeft(allEntities[e].collisionDiv)) && (getTop(allEntities[i].collisionDiv) == getTop(allEntities[e].collisionDiv))) {
+						//Something is colliding
+						let firstCollided = allEntities[i];
+						let secondCollided = allEntities[e];
+						//Snake hit powerup
+						if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'powerup') {
+							powerUpHit(firstCollided);
+							continue;
+						}
+						if (firstCollided.entityClass == 'powerup' && secondCollided.entityClass == 'snake') {
+							powerUpHit(secondCollided);
+							continue;
+						}
+						//The rest of the collision checks are only needed for Browsersnake rather than classic snake
+						if (classicSnake) {
+							continue;
+						}
+						//Bullet hit enemy
+						if (firstCollided.entityClass == 'bullet' && secondCollided.entityClass == 'enemy') {
+							//enemyKilled(firstCollided);
+							secondCollided.kill();
+							continue;
+						}
+						//Enemy hit bullet
+						if (firstCollided.entityClass == 'enemy' && secondCollided.entityClass == 'bullet') {
+							//enemyKilled(secondCollided);
+							firstCollided.kill();
+							continue;
+						}
+						//Save snakes from bullets
+						if (firstCollided.entityClass == 'snake' && secondCollided.entityClass == 'bullet') {
+							secondCollided.kill();
+							continue;
+						}
+						//Save snakes from bullets
+						if (secondCollided.entityClass == 'snake' && firstCollided.entityClass == 'bullet') {
+							firstCollided.kill();
+							continue;
+						}
+						//Teleport powerup when collide with snakesegment (it happens... somehow)
+						if (firstCollided.entityClass == 'snakesegment' && secondCollided.entityClass == 'powerup' || firstCollided.entityClass == 'powerup' && secondCollided.entityClass == 'snakesegment') {
+							randomiseLocation(powerUp.collisionDiv);
+							continue;
+						}
+						//Do not kill powerups or snake segments
+						if (firstCollided.entityClass != 'powerup' && firstCollided.entityClass != 'snakesegment') {
+							firstCollided.kill();
+						}
+						//Do not kill powerups or snake segments
+						if (secondCollided.entityClass != 'powerup' && secondCollided.entityClass != 'snakesegment') {
+							secondCollided.kill();
 						}
 					}
 				}  catch (err) {
