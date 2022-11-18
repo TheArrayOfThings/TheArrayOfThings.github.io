@@ -97,12 +97,12 @@ a {
     cursor: pointer;
 }
 
-    a:hover, a:focus {
+    a:hover, a:focus, a:visited:hover {
         color: white;
     }
 
     a:visited {
-        color: #00ffe5;
+        color: #fc03df;
     }
 
     a:active {
