@@ -251,22 +251,22 @@ div#modalOverlay {
 }
 /*End of Modal Components*/
 /*Tables*/
-table {
+/*table {
+    border: 1px solid white;
+    border-collapse: separate;
+    border-radius: 0.5em;
+}
+*/
+td, th {
+    padding-left: 0.4em;
+    padding-right: 0.4em;
     border: 1px solid white;
     border-collapse: separate;
     border-radius: 0.5em;
 }
 
-td, th {
-    padding-left: 0.4em;
-    padding-right: 0.4em;
-    border-left: 1px solid white;
-    border-top: 1px solid white;
-}
-
 th {
     text-align: center;
-    border-top: none;
 }
 
     td:first-child, th:first-child {
