@@ -251,12 +251,9 @@ div#modalOverlay {
 }
 /*End of Modal Components*/
 /*Tables*/
-/*table {
-    border: 1px solid white;
-    border-collapse: separate;
-    border-radius: 0.5em;
+table {
+    padding-left:0.4em;
 }
-*/
 td, th {
     padding-left: 0.4em;
     padding-right: 0.4em;
