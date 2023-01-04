@@ -548,7 +548,7 @@ function nextFrame() {
 	//Aparently using a reverse while loop is more performant than a for loop
 	let i = 0, e = 0, len = allEntities.length;
 	//for (let i = 0; i < allEntities.length; ++i) {
-	while (i < len {
+	while (i < len) {
 		try {
 			//Check if collided with another entity
 			//for (let e = 0; e < allEntities.length; ++e) {
