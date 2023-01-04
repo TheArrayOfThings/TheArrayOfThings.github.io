@@ -1,5 +1,5 @@
 function Snake(snakeNameParm, aiDrivenParm) {
-	var snake = new Entity();
+	let snake = new Entity();
 	//Define bullet specific variables
 	//Snake name!
 	snake.snakeName = snakeNameParm;
@@ -58,8 +58,8 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		<th class='scoreboard score playerTwoScore'>0</th>
 		</tr>
 		*/
-		var scoreLabels = document.getElementsByClassName('scoreLabels')[0];
-		var scores = document.getElementsByClassName('scores')[0];
+		let scoreLabels = document.getElementsByClassName('scoreLabels')[0];
+		let scores = document.getElementsByClassName('scores')[0];
 		snake.snakeScoreLabel = document.createElement('th');
 		snake.snakeScoreLabel.className += ' scoreboard';
 		snake.snakeScoreLabel.className += ' name';
@@ -74,14 +74,14 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		snake.scoreBox = snake.snakeScore;
 	};
 	snake.initialiseSegments = function () {
-		for (var i = 0; i < initialPieces; ++i) {
+		for (let i = 0; i < initialPieces; ++i) {
 			snake.appendSegment();
 		}
 		snake.childSegments[snake.childSegments.length - 1].collisionDiv.style.borderRadius = "40% 0px 0px 40%";
 	};
 	snake.setSnakeBody = function () {
-		var childNumber = 1;
-		for (var i = 0; i < snake.childSegments.length; ++i) {
+		let childNumber = 1;
+		for (let i = 0; i < snake.childSegments.length; ++i) {
 			snake.childSegments[i].collisionDiv.style.top = (parseInt(snake.collisionDiv.style.top.replace('px', ''))) + 'px';
 			snake.childSegments[i].collisionDiv.style.left = (parseInt(snake.collisionDiv.style.left.replace('px', '')) - (entitySize * childNumber)) + 'px';
 			++childNumber;
@@ -112,8 +112,8 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		<div class="snake head down"></div>
 		</div>
 		*/
-		var wholeSnake = document.createElement('div');
-		var head;
+		let wholeSnake = document.createElement('div');
+		let head;
 		wholeSnake.className += ' wholeSnake';
 		head = document.createElement('div');
 		head.className += ' snake';
@@ -138,7 +138,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		playable.appendChild(wholeSnake);
 		snake.snakeDiv = wholeSnake;
 		snake.allDivs.push(wholeSnake);
-		for (var i = 0; i < snake.snakeDiv.childNodes.length; ++i) {
+		for (let i = 0; i < snake.snakeDiv.childNodes.length; ++i) {
 			if (snake.snakeDiv.childNodes[i].className && snake.snakeDiv.childNodes[i].className.indexOf('right') != -1) {
 				snake.rightHead = snake.snakeDiv.childNodes[i];
 			}
@@ -153,7 +153,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			}
 		}
 		//Add the eyes to the snake heads
-		var tempEye = snake.createEye();
+		let tempEye = snake.createEye();
 		tempEye.style.top = "0px";
 		tempEye.style.right = "0px";
 		snake.rightHead.appendChild(tempEye);
@@ -250,7 +250,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		}
 	};
 	snake.createEye = function () {
-		var newEye = document.createElement('div');
+		let newEye = document.createElement('div');
 		newEye.className += " eye";
 		newEye.style.background = snake.eyeColor;
 		return newEye;
@@ -258,7 +258,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 	//Behaviour functions
 	snake.alternativeAction = function () {
 		snake.swapHead();
-		for (var i = 0; i < snake.childSegments.length; ++i) {
+		for (let i = 0; i < snake.childSegments.length; ++i) {
 			if (i == (snake.childSegments.length - 1)) {
 				//Last snake segment top-left, top-right, bottom-right, bottom-left
 				if (getTop(snake.childSegments[i - 1].collisionDiv) < getTop(snake.childSegments[i].collisionDiv)) {
@@ -277,8 +277,8 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			} else {
 				snake.childSegments[i].collisionDiv.style.borderRadius = "unset";
 			}
-			var tempTop = snake.childSegments[i].collisionDiv.style.top;
-			var tempLeft = snake.childSegments[i].collisionDiv.style.left;
+			let tempTop = snake.childSegments[i].collisionDiv.style.top;
+			let tempLeft = snake.childSegments[i].collisionDiv.style.left;
 			snake.childSegments[i].collisionDiv.style.top = snake.beforeMoveTop;
 			snake.childSegments[i].collisionDiv.style.left = snake.beforeMoveLeft;
 			snake.beforeMoveTop = tempTop;
@@ -296,7 +296,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		}
 	};
 	snake.alternativeDeathAction = function () {
-		for (var i = 0; i < snake.childSegments.length; ++i) {
+		for (let i = 0; i < snake.childSegments.length; ++i) {
 			snake.childSegments[i].kill();
 		}
 	};
