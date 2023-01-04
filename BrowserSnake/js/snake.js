@@ -78,7 +78,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		let i = 0, len = initialPieces;
 		while (i < len) {
 			snake.appendSegment();
-			i++;
+			++i;
 		}
 		snake.childSegments[snake.childSegments.length - 1].collisionDiv.style.borderRadius = "40% 0px 0px 40%";
 	};
@@ -88,7 +88,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		while (i < len) {
 			snake.childSegments[i].collisionDiv.style.top = (parseInt(snake.collisionDiv.style.top.replace('px', ''))) + 'px';
 			snake.childSegments[i].collisionDiv.style.left = (parseInt(snake.collisionDiv.style.left.replace('px', '')) - (entitySize * (i + 1))) + 'px';
-			i++;
+			++i;
 		}
 	};
 	snake.appendSegment = function () {
@@ -157,7 +157,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			if (snake.snakeDiv.childNodes[i].className && snake.snakeDiv.childNodes[i].className.indexOf('down') != -1) {
 				snake.downHead = snake.snakeDiv.childNodes[i];
 			}
-			i++;
+			++i;
 		}
 		//Add the eyes to the snake heads
 		let tempEye = snake.createEye();
@@ -293,7 +293,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			snake.beforeMoveTop = tempTop;
 			snake.beforeMoveLeft = tempLeft;
 			snake.childSegments[i].collisionDiv.style.display = 'inline';
-			i++;
+			++i;
 		}
 		if (classicSnake) {
 			return;
