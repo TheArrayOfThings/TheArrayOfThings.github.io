@@ -74,17 +74,21 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		snake.scoreBox = snake.snakeScore;
 	};
 	snake.initialiseSegments = function () {
-		for (let i = 0; i < initialPieces; ++i) {
+		//for (let i = 0; i < initialPieces; ++i) {
+		let i = 0, len = initialPieces;
+		while (i < len) {
 			snake.appendSegment();
+			i++;
 		}
 		snake.childSegments[snake.childSegments.length - 1].collisionDiv.style.borderRadius = "40% 0px 0px 40%";
 	};
 	snake.setSnakeBody = function () {
-		let childNumber = 1;
-		for (let i = 0; i < snake.childSegments.length; ++i) {
+		//for (let i = 0; i < snake.childSegments.length; ++i) {
+		let i = 0, len = snake.childSegments.length;
+		while (i < len) {
 			snake.childSegments[i].collisionDiv.style.top = (parseInt(snake.collisionDiv.style.top.replace('px', ''))) + 'px';
-			snake.childSegments[i].collisionDiv.style.left = (parseInt(snake.collisionDiv.style.left.replace('px', '')) - (entitySize * childNumber)) + 'px';
-			++childNumber;
+			snake.childSegments[i].collisionDiv.style.left = (parseInt(snake.collisionDiv.style.left.replace('px', '')) - (entitySize * (i + 1))) + 'px';
+			i++;
 		}
 	};
 	snake.appendSegment = function () {
