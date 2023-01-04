@@ -882,12 +882,19 @@ function postHighScore(snakeName, snakeScore) {
 	if (isInternetExplorer || postHighScoreLocked) {
 		return;
 	}
-	let data = `{\"identifier\": \"${identifier}\",\"localdatetime\": \"${localDateTime}\",\"name\": \"${snakeName}\",\"score\": ${snakeScore}\",\"locationdata\": \"${Intl.DateTimeFormat().resolvedOptions().timeZone ?? ""}}`;
+	let data = {
+		"identifier": identifier,
+		"localdatetime": localDateTime,
+		"name": snakeName,
+		"score": snakeScore,
+		"locationdata": Intl.DateTimeFormat().resolvedOptions().timeZone ?? ""
+	};
+
 	let reqObject = new XMLHttpRequest();
 	reqObject.open("POST", "https://browsersnakescoring.azurewebsites.net/api/ScoreHandler?code=dhKYnpaC1BCTpqw9p2OTbfIrt9G6vseQqcXfPyRptoGtAzFujVG82g==", true);
 	reqObject.setRequestHeader("Access-Control-Allow-Credentials", "true");
 	reqObject.setRequestHeader("Content-Type", "text/plain");
-	reqObject.send(data);
+	reqObject.send(JSON.stringify(data));
 	//Call getHighScore again just in case we have topped it!
 	setTimeout(getHighScore, 4000);
 	postHighScoreLocked = true;
