@@ -546,14 +546,13 @@ function nextFrame() {
 	allEntities = tempArray;*/
 	//First, check if any entities have collided
 	//Aparently using a reverse while loop is more performant than a for loop
-	let i = allEntities.length;
+	let i = 0, e = 0, len = allEntities.length;
 	//for (let i = 0; i < allEntities.length; ++i) {
-	while (i--) {
+	while (i < len {
 		try {
 			//Check if collided with another entity
 			//for (let e = 0; e < allEntities.length; ++e) {
-			let e = allEntities.length;
-			while (e--) {
+			while (e < len) {
 				try {
 					if (allEntities[i] == allEntities[e]) {
 						continue;
@@ -623,6 +622,8 @@ function nextFrame() {
 					console.log(`Frame Collision Error: ${err}`);
 					continue;
 				}
+				len = allEntities.length;
+				++e;
 			}
 			//Check if hit edge (if not snakesegment!)
 			//Every other entity (including the powerUp, due to one of the random effects where it moves) can move to the other side
@@ -672,6 +673,8 @@ function nextFrame() {
 			continue;
 		}
 	}
+	len = allEntities.length;
+	++i;
 }
 function randomiseLocation(theElement) {
 	/*TODO
@@ -684,9 +687,9 @@ function randomiseLocation(theElement) {
 	while (collisionDetected) {
 		let leftPos = getLeft(theElement);
 		let topPos = getTop(theElement);
-		let i = allEntities.length;
+		let i = 0, len = allEntities.length;
 		//for (let i = 0; i < allEntities.length; ++i) {
-		while (i--) {
+		while (i < len) {
 			if (theElement == allEntities[i].collisionDiv) {
 				continue;
 			}
@@ -701,6 +704,7 @@ function randomiseLocation(theElement) {
 				randomiseProper(theElement);
 				continue randomCheckStart;
 			}
+			++i;
 		}
 		collisionDetected = false;
 	}
@@ -786,7 +790,7 @@ function resetEverything() {
 	}
 	//Remove all entities
 	while (allEntities.length > 0) {
-		allEntities.pop().kill();
+		allEntities.kill();
 	}
 	//console.log(allEntities);
 	//allEntities = [];
