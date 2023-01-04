@@ -142,7 +142,9 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		playable.appendChild(wholeSnake);
 		snake.snakeDiv = wholeSnake;
 		snake.allDivs.push(wholeSnake);
-		for (let i = 0; i < snake.snakeDiv.childNodes.length; ++i) {
+		//for (let i = 0; i < snake.snakeDiv.childNodes.length; ++i) {
+		let i = 0, len = snake.snakeDiv.childNodes.length;
+		while (i < len) {
 			if (snake.snakeDiv.childNodes[i].className && snake.snakeDiv.childNodes[i].className.indexOf('right') != -1) {
 				snake.rightHead = snake.snakeDiv.childNodes[i];
 			}
@@ -155,6 +157,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			if (snake.snakeDiv.childNodes[i].className && snake.snakeDiv.childNodes[i].className.indexOf('down') != -1) {
 				snake.downHead = snake.snakeDiv.childNodes[i];
 			}
+			i++;
 		}
 		//Add the eyes to the snake heads
 		let tempEye = snake.createEye();
@@ -262,7 +265,9 @@ function Snake(snakeNameParm, aiDrivenParm) {
 	//Behaviour functions
 	snake.alternativeAction = function () {
 		snake.swapHead();
-		for (let i = 0; i < snake.childSegments.length; ++i) {
+		//for (let i = 0; i < snake.childSegments.length; ++i) {
+		let i = 0, len = snake.childSegments.length;
+		while (i < len) {
 			if (i == (snake.childSegments.length - 1)) {
 				//Last snake segment top-left, top-right, bottom-right, bottom-left
 				if (getTop(snake.childSegments[i - 1].collisionDiv) < getTop(snake.childSegments[i].collisionDiv)) {
@@ -288,6 +293,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			snake.beforeMoveTop = tempTop;
 			snake.beforeMoveLeft = tempLeft;
 			snake.childSegments[i].collisionDiv.style.display = 'inline';
+			i++;
 		}
 		if (classicSnake) {
 			return;
@@ -300,8 +306,11 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		}
 	};
 	snake.alternativeDeathAction = function () {
-		for (let i = 0; i < snake.childSegments.length; ++i) {
+		//for (let i = 0; i < snake.childSegments.length; ++i) {
+		let i = 0, len = snake.childSegments.length;
+		while (i < len) {
 			snake.childSegments[i].kill();
+			++i;
 		}
 	};
 	snake.fire = function () {
