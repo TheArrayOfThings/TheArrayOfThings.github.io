@@ -265,8 +265,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 	snake.alternativeAction = function() {
 		snake.swapHead();
 		let i = snake.childSegments.length;
-		//for (let i = 0; i < snake.childSegments.length; ++i) {
-		while (i--) {
+		for (var i = 0; i < snake.childSegments.length; ++i) {
 			if (i == (snake.childSegments.length - 1)) {
 				//Last snake segment top-left, top-right, bottom-right, bottom-left
 				if (getTop(snake.childSegments[i - 1].collisionDiv) < getTop(snake.childSegments[i].collisionDiv)) {
@@ -285,8 +284,8 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			} else {
 				snake.childSegments[i].collisionDiv.style.borderRadius = "unset";
 			}
-			let tempTop = snake.childSegments[i].collisionDiv.style.top;
-			let tempLeft = snake.childSegments[i].collisionDiv.style.left;
+			var tempTop = snake.childSegments[i].collisionDiv.style.top;
+			var tempLeft = snake.childSegments[i].collisionDiv.style.left;
 			snake.childSegments[i].collisionDiv.style.top = snake.beforeMoveTop;
 			snake.childSegments[i].collisionDiv.style.left = snake.beforeMoveLeft;
 			snake.beforeMoveTop = tempTop;
