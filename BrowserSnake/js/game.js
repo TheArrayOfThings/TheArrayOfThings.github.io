@@ -622,7 +622,6 @@ function nextFrame() {
 					console.log(`Frame Collision Error: ${err}`);
 					continue;
 				}
-				len = allEntities.length;
 				++e;
 			}
 			//Check if hit edge (if not snakesegment!)
@@ -673,7 +672,6 @@ function nextFrame() {
 			continue;
 		}
 	}
-	len = allEntities.length;
 	++i;
 }
 function randomiseLocation(theElement) {
