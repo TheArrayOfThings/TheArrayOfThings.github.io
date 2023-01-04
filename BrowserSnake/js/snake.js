@@ -1,5 +1,5 @@
 function Snake(snakeNameParm, aiDrivenParm) {
-	let snake = new Entity();
+	var snake = new Entity();
 	//Define bullet specific variables
 	//Snake name!
 	snake.snakeName = snakeNameParm;
@@ -29,7 +29,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 	snake.randomBulletsEnabled = false;
 	snake.homingBulletsEnabled = false;
 	//Initialise functions
-	snake.initialise = function() {
+	snake.initialise = function () {
 		if (snake.aiDriven) {
 			++aliveAI;
 		}
@@ -44,7 +44,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		snake.scoreBox.innerHTML = 0;
 	};
 	//Visual functions
-	snake.buildScoreBoard = function() {
+	snake.buildScoreBoard = function () {
 		/*
 		Building the following html
 		<tr class="scoreLabels">
@@ -58,8 +58,8 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		<th class='scoreboard score playerTwoScore'>0</th>
 		</tr>
 		*/
-		let scoreLabels = document.getElementsByClassName('scoreLabels')[0];
-		let scores = document.getElementsByClassName('scores')[0];
+		var scoreLabels = document.getElementsByClassName('scoreLabels')[0];
+		var scores = document.getElementsByClassName('scores')[0];
 		snake.snakeScoreLabel = document.createElement('th');
 		snake.snakeScoreLabel.className += ' scoreboard';
 		snake.snakeScoreLabel.className += ' name';
@@ -74,28 +74,24 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		snake.scoreBox = snake.snakeScore;
 	};
 	snake.initialiseSegments = function () {
-		let i = initialPieces;
-		//for (let i = 0; i < initialPieces; ++i) {
-		while (i--) {
+		for (var i = 0; i < initialPieces; ++i) {
 			snake.appendSegment();
 		}
 		snake.childSegments[snake.childSegments.length - 1].collisionDiv.style.borderRadius = "40% 0px 0px 40%";
 	};
-	snake.setSnakeBody = function() {
-		let childNumber = 1;
-		let i = snake.childSegments.length;
-		//for (let i = 0; i < snake.childSegments.length; ++i) {
-		while (i--) {
-			snake.childSegments[i].collisionDiv.style.top = (parseInt(snake.collisionDiv.style.top.replace('px',''))) + 'px';
-			snake.childSegments[i].collisionDiv.style.left = (parseInt(snake.collisionDiv.style.left.replace('px','')) - (entitySize * childNumber)) + 'px';
+	snake.setSnakeBody = function () {
+		var childNumber = 1;
+		for (var i = 0; i < snake.childSegments.length; ++i) {
+			snake.childSegments[i].collisionDiv.style.top = (parseInt(snake.collisionDiv.style.top.replace('px', ''))) + 'px';
+			snake.childSegments[i].collisionDiv.style.left = (parseInt(snake.collisionDiv.style.left.replace('px', '')) - (entitySize * childNumber)) + 'px';
 			++childNumber;
 		}
 	};
-	snake.appendSegment = function() {
+	snake.appendSegment = function () {
 		snake.childSegments.push(new SnakeSegment(snake));
 		return snake.childSegments[snake.childSegments.length - 1].collisionDiv;
 	};
-	snake.setSnakeCss = function(targetElement) {
+	snake.setSnakeCss = function (targetElement) {
 		targetElement.style.width = entitySize + 'px';
 		targetElement.style.height = entitySize + 'px';
 		targetElement.style.position = 'absolute';
@@ -104,9 +100,9 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		} else {
 			targetElement.style.background = snake.secondaryColor;
 		}
-		targetElement.style.boxShadow = "0px 0px 0px " + Math.ceil(entitySize/30) + "px white";
+		targetElement.style.boxShadow = "0px 0px 0px " + Math.ceil(entitySize / 30) + "px white";
 	};
-	snake.setHeads = function() {
+	snake.setHeads = function () {
 		/*
 		Building the following html
 		<div class='wholeSnake'>
@@ -116,35 +112,33 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		<div class="snake head down"></div>
 		</div>
 		*/
-		let wholeSnake = document.createElement('div');
-		let head;
+		var wholeSnake = document.createElement('div');
+		var head;
 		wholeSnake.className += ' wholeSnake';
 		head = document.createElement('div');
-		head.className +=' snake';
-		head.className +=' head';
-		head.className +=' right';
+		head.className += ' snake';
+		head.className += ' head';
+		head.className += ' right';
 		wholeSnake.appendChild(head);
 		head = document.createElement('div');
-		head.className +=' snake';
-		head.className +=' head';
-		head.className +=' left';
+		head.className += ' snake';
+		head.className += ' head';
+		head.className += ' left';
 		wholeSnake.appendChild(head);
 		head = document.createElement('div');
-		head.className +=' snake';
-		head.className +=' head';
-		head.className +=' up';
+		head.className += ' snake';
+		head.className += ' head';
+		head.className += ' up';
 		wholeSnake.appendChild(head);
 		head = document.createElement('div');
-		head.className +=' snake';
-		head.className +=' head';
-		head.className +=' down';
+		head.className += ' snake';
+		head.className += ' head';
+		head.className += ' down';
 		wholeSnake.appendChild(head);
 		playable.appendChild(wholeSnake);
 		snake.snakeDiv = wholeSnake;
 		snake.allDivs.push(wholeSnake);
-		let i = snake.snakeDiv.childNodes.length;
-		//for (let i = 0; i < snake.snakeDiv.childNodes.length; ++i) {
-		while (i--) {
+		for (var i = 0; i < snake.snakeDiv.childNodes.length; ++i) {
 			if (snake.snakeDiv.childNodes[i].className && snake.snakeDiv.childNodes[i].className.indexOf('right') != -1) {
 				snake.rightHead = snake.snakeDiv.childNodes[i];
 			}
@@ -159,7 +153,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			}
 		}
 		//Add the eyes to the snake heads
-		let tempEye = snake.createEye();
+		var tempEye = snake.createEye();
 		tempEye.style.top = "0px";
 		tempEye.style.right = "0px";
 		snake.rightHead.appendChild(tempEye);
@@ -167,7 +161,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		tempEye.style.bottom = "0px";
 		tempEye.style.right = "0px";
 		snake.rightHead.appendChild(tempEye);
-		
+
 		tempEye = snake.createEye();
 		tempEye.style.bottom = "0px";
 		tempEye.style.left = "0px";
@@ -176,7 +170,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		tempEye.style.top = "0px";
 		tempEye.style.left = "0px";
 		snake.leftHead.appendChild(tempEye);
-		
+
 		tempEye = snake.createEye();
 		tempEye.style.top = "0px";
 		tempEye.style.right = "0px";
@@ -185,7 +179,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		tempEye.style.top = "0px";
 		tempEye.style.left = "0px";
 		snake.upHead.appendChild(tempEye);
-		
+
 		tempEye = snake.createEye();
 		tempEye.style.bottom = "0px";
 		tempEye.style.right = "0px";
@@ -194,49 +188,49 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		tempEye.style.bottom = "0px";
 		tempEye.style.left = "0px";
 		snake.downHead.appendChild(tempEye);
-		
+
 		//Round the corners of the snake heads top-left, top-right, bottom-right, bottom-left
-		
+
 		snake.setSnakeCss(snake.rightHead);
 		snake.setSnakeCss(snake.leftHead);
 		snake.setSnakeCss(snake.upHead);
 		snake.setSnakeCss(snake.downHead);
-		
+
 		snake.leftHead.style.display = 'inline';
 		snake.leftHead.style.display = 'none';
 		snake.upHead.style.display = 'none';
 		snake.downHead.style.display = 'none';
-		
+
 		snake.collisionDiv = snake.rightHead;
 		randomiseLocation(snake.collisionDiv);
 	};
-	snake.swapHead = function() {
+	snake.swapHead = function () {
 		snake.collisionDiv.style.display = 'none';
 		switch (snake.travelDirection) {
 			case 'right':
-			snake.rightHead.style.top = snake.collisionDiv.style.top;
-			snake.rightHead.style.left = snake.collisionDiv.style.left;
-			snake.collisionDiv = snake.rightHead;
-			break;
+				snake.rightHead.style.top = snake.collisionDiv.style.top;
+				snake.rightHead.style.left = snake.collisionDiv.style.left;
+				snake.collisionDiv = snake.rightHead;
+				break;
 			case 'left':
-			snake.leftHead.style.top = snake.collisionDiv.style.top;
-			snake.leftHead.style.left = snake.collisionDiv.style.left;
-			snake.collisionDiv = snake.leftHead;
-			break;
+				snake.leftHead.style.top = snake.collisionDiv.style.top;
+				snake.leftHead.style.left = snake.collisionDiv.style.left;
+				snake.collisionDiv = snake.leftHead;
+				break;
 			case 'up':
-			snake.upHead.style.top = snake.collisionDiv.style.top;
-			snake.upHead.style.left = snake.collisionDiv.style.left;
-			snake.collisionDiv = snake.upHead;
-			break;
+				snake.upHead.style.top = snake.collisionDiv.style.top;
+				snake.upHead.style.left = snake.collisionDiv.style.left;
+				snake.collisionDiv = snake.upHead;
+				break;
 			case 'down':
-			snake.downHead.style.top = snake.collisionDiv.style.top;
-			snake.downHead.style.left = snake.collisionDiv.style.left;
-			snake.collisionDiv = snake.downHead;
-			break;
+				snake.downHead.style.top = snake.collisionDiv.style.top;
+				snake.downHead.style.left = snake.collisionDiv.style.left;
+				snake.collisionDiv = snake.downHead;
+				break;
 		}
 		snake.collisionDiv.style.display = 'inline';
 	};
-	snake.randomiseColors = function() {
+	snake.randomiseColors = function () {
 		if (!isInternetExplorer) {
 			if (localStorage.getItem("SnakePrimary" + snake.snakeName) != null) {
 				snake.primaryColor = colorArray.splice(colorArray.indexOf(localStorage.getItem("SnakePrimary" + snake.snakeName)), 1);
@@ -255,14 +249,14 @@ function Snake(snakeNameParm, aiDrivenParm) {
 			}
 		}
 	};
-	snake.createEye = function() {
-		let newEye = document.createElement('div');
+	snake.createEye = function () {
+		var newEye = document.createElement('div');
 		newEye.className += " eye";
 		newEye.style.background = snake.eyeColor;
 		return newEye;
 	};
 	//Behaviour functions
-	snake.alternativeAction = function() {
+	snake.alternativeAction = function () {
 		snake.swapHead();
 		for (var i = 0; i < snake.childSegments.length; ++i) {
 			if (i == (snake.childSegments.length - 1)) {
@@ -302,13 +296,11 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		}
 	};
 	snake.alternativeDeathAction = function () {
-		let i = snake.childSegments.length;
-		//for (let i = 0; i < snake.childSegments.length; ++i) {
-		while (i--) {
+		for (var i = 0; i < snake.childSegments.length; ++i) {
 			snake.childSegments[i].kill();
-		}   
+		}
 	};
-	snake.fire = function() {
+	snake.fire = function () {
 		if (snake.tripleShotEnabled) {
 			if (snake.travelDirection == 'left' || snake.travelDirection == 'right') {
 				new Bullet(getTop(snake.collisionDiv), getLeft(snake.collisionDiv), snake);
@@ -330,7 +322,7 @@ function Snake(snakeNameParm, aiDrivenParm) {
 		} else {
 			new Bullet(getTop(snake.collisionDiv), getLeft(snake.collisionDiv), snake);
 		}
-		
+
 	};
 	snake.initialise();
 	return snake;
