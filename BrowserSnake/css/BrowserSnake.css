@@ -1,0 +1,213 @@
+/*Browsersnake*/
+div#playOverlay {
+    width: 100%;
+    height: 100%;
+    background-color: #27282B;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+div#background {
+    height: 70vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    border: 4px solid rgb(116, 178, 243);
+    border-radius: 0.5em;
+    background-color: #27282B;
+}
+
+div#playable {
+    background-color: #27282B;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+div#powerUp {
+    position: absolute;
+    background: yellow;
+    top: 0px;
+    left: 0px;
+    border-radius: 100px;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.section {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+}
+
+div#topSectionVisible {
+    text-align: center;
+}
+
+div#bottomSectionVisible {
+    text-align: center;
+}
+
+div#leftSectionVisible {
+    text-align: left;
+}
+
+div#rightSectionVisible {
+    text-align: right;
+}
+
+div#topSection, div#bottomSection, div#leftSection, div#rightSection {
+    z-index: 1;
+}
+
+div#topSectionVisible, div#bottomSectionVisible, div#leftSectionVisible, div#rightSectionVisible, div#aButtonVisible, div#bButtonVisible, div#startButtonVisible {
+    color: white;
+    border: 1px solid #4717F6;
+    display: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.centre {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/*Tables*/
+
+table {
+    padding-left: 0.4em;
+}
+
+table, tr, td {
+    word-wrap: break-word;
+    font-size: calc(10px + 0.20vh + 0.20vw);
+    text-align: left;
+}
+
+td, th {
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    border: 1px solid white;
+    border-collapse: separate;
+    border-radius: 0.5em;
+}
+
+th {
+    text-align: center;
+}
+
+td:first-child, th:first-child {
+    border-left: none;
+}
+
+table.scoreboard {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 1%;
+    border-spacing: 10px 0;
+    margin: 0px;
+    padding: 0px;
+}
+
+table.scoreboard {
+    font-size: calc(10px + 0.20vh + 0.20vw);
+    box-sizing: border-box;
+    padding: 0.2em;
+    border-radius: 10px;
+}
+
+/*End of Tables*/
+
+th.scoreboard, td.scoreboard {
+    border: none;
+}
+
+tr.scoreLabels, tr.scores, th.scoreboard {
+    color: white;
+    font-size: calc(10px + 1vh);
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+button#settings, button#pause {
+    position: absolute;
+    width: 10%;
+    height: 5%;
+    bottom: 0px;
+}
+button#settings {
+    right: 0px;
+}
+
+button#pause {
+    left: 0px;
+}
+
+button#playButton {
+    width: 20%;
+    height: 10%;
+    position: absolute;
+    left: 40%;
+    top: 45%;
+}
+
+div.eye {
+    width: 35%;
+    height: 35%;
+    position: absolute;
+    border-radius: 100px;
+}
+
+div.bullet {
+    background: red;
+    border-radius: 100px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.enemy {
+    background: pink;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+p#info {
+    color: powderblue;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    animation: fade 2s linear forwards;
+}
+
+/*Snake CSS*/
+div.snake.head.right {
+    border-radius: 0px 15% 15% 0px;
+}
+
+div.snake.head.left {
+    border-radius: 15% 0px 0px 15%;
+}
+
+div.snake.head.up {
+    border-radius: 15% 15% 0px 0px;
+}
+
+div.snake.head.down {
+    border-radius: 0px 0px 15% 15%;
+}
+/*End of Snake CSS*/

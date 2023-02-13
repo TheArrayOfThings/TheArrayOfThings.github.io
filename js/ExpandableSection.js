@@ -1,5 +1,6 @@
 function initialiseExpandableSection() {
-	if (topBarLoaded != true || typeof isInternetExplorer == "undefined" || typeof internalURL == "undefined") {
+	if (typeof isInternetExplorer == "undefined" || typeof internalURL == "undefined") {
+		console.log("Retrying...");
 		setTimeout(initialiseExpandableSection, 10);
 		return;
 	}

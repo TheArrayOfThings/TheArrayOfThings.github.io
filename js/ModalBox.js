@@ -13,7 +13,7 @@ let modalCallback;
 let yesCallback;
 let noCallback;
 function setupModal () {
-	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
+	if (typeof isInternetExplorer == "undefined") {
 		setTimeout(setupModal, 10);
 		return;
 	}

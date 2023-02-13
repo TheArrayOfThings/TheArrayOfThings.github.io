@@ -1,19 +1,19 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en-GB">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Play snake in your browser!">
+    <meta name="description" content="Portfolio site for Ryan Flanagan">
     <meta name="author" content="Ryan Flanagan">
     <meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
     <title>BrowserSnake</title>
     <link rel="icon" type="image/x-icon" href="/BrowserSnake/images/logobasic.ico">
-    <link rel="stylesheet" href="/css/Ultimate.css">
+    <link rel="stylesheet" href="/css/Website.css">
+    <link rel="stylesheet" href="/BrowserSnake/css/BrowserSnake.css">
     <link rel="stylesheet" href="/Highlight/styles/stackoverflow-dark.min.css">
 </head>
 <body>
     <div id="modalOverlay"></div>
-    <div id="topBar"></div>
     <div id="modalBox" class="modal">
         <!-- Modal popup content -->
         <div class="modal-content">
@@ -21,43 +21,53 @@
             <p id="modalTextContent">Default content</p>
             <label id="modalInputLabel" for="modalInput">Input:</label>
             <input type="text" id="modalInput" name="modalInput">
-            <button class="modalYes">Yes</button>
-            <button class="modalNo">No</button>
-            <button class="modalButton">Submit</button>
+            <div class="modalButtonContainer">
+                <button class="modalYes">Yes</button>
+                <button class="modalNo">No</button>
+                <button class="modalButton">Submit</button>
+            </div>
         </div>
     </div>
-    <div class="main">
-        <h1>Welcome</h1>
-        <p>This is BrowserSnake! A game made entirely in pure Javascript, HTML, and CSS!</p>
-        <ul class="contentMenu"></ul>
-        <div id="background">
-            <div id="playable">
-                <p id="info"></p>
-                <table class='scoreboard'>
-                    <tr class="scoreLabels">
-                        <th class='scoreboard'>Your Best</th>
-                        <th class='scoreboard'>Top Score</th>
-                    </tr>
-                    <tr class="scores">
-                        <th class='scoreboard pershighscore'>0</th>
-                        <th class='scoreboard servhighscore'>0</th>
-                    </tr>
-                </table>
-                <div id="topSectionVisible" class="section">Up</div>
-                <div id="bottomSectionVisible" class="section">Down</div>
-                <div id="leftSectionVisible" class="section">Left</div>
-                <div id="rightSectionVisible" class="section">Right</div>
-                <button type="button" id="pause">Pause</button>
-                <button type="button" id="settings">Settings</button>
-                <div id="topSection" class="section"></div>
-                <div id="bottomSection" class="section"></div>
-                <div id="leftSection" class="section"></div>
-                <div id="rightSection" class="section"></div>
-            </div>
-            <div id="playOverlay"><button id="playButton">Play</button></div>
+    <header class="header">
+        <button id="showSidebarLeftButton"><span>__</span><span>__</span><span>__</span></button>
+        <div class="headerContent">
+            Ryan Flanagan -
+            <script>document.write(document.title);</script>
         </div>
-        <div class="expandableSection">
-            <a class="expandableHeader">What is this?</a>
+    </header>
+    <div id="sidebarLeftOverlay"></div>
+    <div id="sidebarLeftContainer"></div>
+    <div class="mainBody">
+        <article class="main">
+            <h1>The Game</h1>
+            <p>This is BrowserSnake! A game made entirely in pure Javascript, HTML, and CSS!</p>
+            <ul class="contentMenu"></ul>
+            <div id="background">
+                <div id="playable">
+                    <p id="info"></p>
+                    <table class='scoreboard'>
+                        <tr class="scoreLabels">
+                            <th class='scoreboard'>Your Best</th>
+                            <th class='scoreboard'>Top Score</th>
+                        </tr>
+                        <tr class="scores">
+                            <th class='scoreboard pershighscore'>0</th>
+                            <th class='scoreboard servhighscore'>0</th>
+                        </tr>
+                    </table>
+                    <div id="topSectionVisible" class="section">Up</div>
+                    <div id="bottomSectionVisible" class="section">Down</div>
+                    <div id="leftSectionVisible" class="section">Left</div>
+                    <div id="rightSectionVisible" class="section">Right</div>
+                    <button type="button" id="pause">Pause</button>
+                    <button type="button" id="settings">Settings</button>
+                    <div id="topSection" class="section"></div>
+                    <div id="bottomSection" class="section"></div>
+                    <div id="leftSection" class="section"></div>
+                    <div id="rightSection" class="section"></div>
+                </div>
+                <div id="playOverlay"><button id="playButton">Play</button></div>
+            </div>
             <div class="expandableContent">
                 <h2>BrowserSnake</h2>
                 <p>This is a game that runs in (any vaguely modern) browser, desktop or mobile. It is written in Javascript, HTML, and CSS only.</p>
@@ -80,10 +90,9 @@
                     I used this project to learn Javascript! I thought it would be an interesting way to learn the core front-end web technologies and apply them to an interesting project.
                     When learning a new programming language I prefer to research the basics and then build a project from there, picking up useful information and applying it so that it sticks.
                 </p>
+
             </div>
-        </div>
-        <div class="expandableSection">
-            <a class="expandableHeader">Why is this interesting?</a>
+            <h1>Why is this interesting?</h1>
             <div class="expandableContent">
                 <h2>It helped me secure my first IT job!</h2>
                 <p>
@@ -100,7 +109,7 @@
                     </ol>
                 <p>I can, and have, written code for functonality which I could have accessed with a single function call from a Javascript framework - but it is my belief that I learned more by not relying on frameworks to do the heavy lifing.</p>
                 <p>Plus, I can likely pickup a particular framework pretty quickly from my knowledge of Javascript, but I might not be able to pickup a new framework as quickly had I learned Javascript using from a specific framework.</p>
-                <h2>Object Oriented Programming in Javascript?</h2>
+                <h2>Object Oriented Programming without Classes</h2>
                 <p>
                     Every object in the game (such as snakes, bullets, enemies, and powerups) use a base Javascript object called 'Entity'.
                     The 'Entity' object is my way of bringing object-oriented programming to Javascript, as the 'Entity' acts as a parent class, with child classes inheriting common functions, such as handling collision, movement, and some AI functionality.
@@ -158,9 +167,7 @@ let playerSnake = new Snake("Ryan");</code></pre>
                     The idea is that you setup the game to your liking and can then revist it without going through the initial setup again and again.
                 </p>
             </div>
-        </div>
-        <div class="expandableSection">
-            <a class="expandableHeader">What skills does this show off?</a>
+            <h1>What skills does this show off?</h1>
             <div class="expandableContent">
                 <h2>DOM manipulation</h2>
                 <p>
@@ -197,35 +204,24 @@ let playerSnake = new Snake("Ryan");</code></pre>
                     The game can rescale itself after the page has finished loading too, to account for users flipping phones into horizontal mode etc.
                 </p>
             </div>
-        </div>
-        <h2>Want to see more?</h2>
-        <p>The code for this project, other projects on the website, and the website itself can be found on my <a href="https://gitub.com/TheArrayOfThings">github</a>!</p>
-        <!-- End of main -->
+            <h2>Want to see more?</h2>
+            <p>The code for this project, other projects on the website, and the website itself can be found on my <a href="https://gitub.com/TheArrayOfThings">github</a>!</p>
+            <!-- End of main -->
+        </article>
+        <footer class="footer">
+            <div class="footerContent">
+                <script>document.write(new Date().getFullYear());</script> <a href="https://www.linkedin.com/in/ryan-flanagan-52b0a3133/">Ryan Flanagan</a>
+            </div>
+        </footer>
     </div>
-    <div id="footer"></div>
+    <aside class="sidebarRight">
+        <div id="contentsList" class="sidebarRightContent">
+            <span class="sidebarRightHeader">Page Contents</span>
+        </div>
+    </aside>
     <script src="/js/compatibility.js"></script>
     <script src="/js/jquery.js"></script>
-    <script>
-        //Check for IE and load only if not IE
-        if (!isInternetExplorer) {
-            $(function () {
-                $.ajax({
-                    url: "/Highlight/highlight.min.js",
-                    dataType: "script",
-                    contentType: "text/javascript",
-                    beforeSend: function (xhr) { xhr.overrideMimeType("text/javascript; charset=x-user-defined"); },
-                    success: function () {
-                        hljs.highlightAll();
-                    }
-                });
-            });
-        }
-    </script>
-    <script src="/js/ExpandableSection.js"></script>
-    <script src="/js/Logo.js"></script>
-    <script src="/js/Selected.js"></script>
-    <script src="/js/MenuBurger.js"></script>
-    <script src="/js/SetTitle.js"></script>
+    <script src="/js/ContentCreation.js"></script>
     <script src="/js/ModalBox.js"></script>
     <script src="/BrowserSnake/js/game.js"></script>
     <script src="/BrowserSnake/js/entity.js"></script>
@@ -235,14 +231,5 @@ let playerSnake = new Snake("Ryan");</code></pre>
     <script src="/BrowserSnake/js/snakesegment.js"></script>
     <script src="/BrowserSnake/js/bullet.js"></script>
     <script src="/BrowserSnake/js/enemy.js"></script>
-    <script>
-        var topBarLoaded;
-        $(function () {
-            $("#topBar").load("/html/TopBar.html", function () {
-                topBarLoaded = true;
-            });
-            $("#footer").load("/html/Footer.html");
-        });
-    </script>
 </body>
 </html>

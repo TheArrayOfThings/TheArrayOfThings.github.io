@@ -6,9 +6,8 @@
     <meta name="description" content="Portfolio site for Ryan Flanagan">
     <meta name="author" content="Ryan Flanagan">
     <meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
-    <title>Dartmoor Map</title>
+    <title>About Me</title>
     <link rel="stylesheet" href="/css/Website.css">
-    <link rel="stylesheet" href="/Dartmoor/css/Dartmoor.css">
     <link rel="stylesheet" href="/Highlight/styles/stackoverflow-dark.min.css">
 </head>
 <body>
@@ -38,16 +37,41 @@
     <div id="sidebarLeftContainer"></div>
     <div class="mainBody">
         <article class="main">
-            <h1>The Map</h1>
-            <p>This webpage has a version of the wild camping map of dartmoor, taken from government data.</p>
-            <div id="map"></div>
-            <h1>What went into this</h1>
-            <p>This project involved the following:</p>
-            <p>1): I downloaded the government provided shapefile from <a href="https://data.gov.uk/dataset/179407cc-4efd-4a46-bb2f-a4bbc30ce2e4/dnpa-wild-camping-permitted">here</a></p>
-            <p>2): I converted this shapefile to a geoJSON file using <a href="https://mapshaper.org/">mapshaper.org</a></p>
-            <p>3): I ran the geoJSON through <a href="https://geojsonlint.com/">geojsonlint.com</a> and observed multiple <i>Polygons and MultiPolygons should follow the right-hand rule</i> errors</p>
-            <p>4): I used mapster's <a href="https://mapster.me/right-hand-rule-geojson-fixer/">Right Hand Rule GeoJSON Fixer </a> and downloaded the fixed geoJSON</p>
-            <p>5): Finally, I used google maps Javascript API to display a map with the geoJSON overlayed - which is what you see here :)</p>
+            <h1>
+                Ryan Flanagan
+            </h1>
+            <i>Software Developer, Consultant</i>
+            <br />
+            <br />
+            <p>
+                Thank you for having a look at my portfolio site!
+            </p>
+            <p>
+                I am a software developer with a broad range of experience, currently working as a Power Platform Technical Consultant at <a href="https://www.hitachi-solutions.co.uk/">Hitachi Solutions Europe.</a>
+                I develop effective solutions using a mix of high-code and low-code, all centered around the <a href="https://powerplatform.microsoft.com/en-gb/">Microsoft Power Platform.</a>
+                My specialties include developing assembly plugins using C#, Power Apps Component Framework (PCF) controls using React and TypeScript, and Power Automate flow development (low-code!).
+
+            </p>
+            <h1>Get in touch!</h1>
+            <table>
+                <tr>
+                    <th>Email:</th>
+                    <td><a href="javascript:window.open('mailto:' + ['TheArrayOfThings','protonmail.com'].join('@'))">
+                    <script>document.write(['TheArrayOfThings', 'protonmail.com'].join('@'));</script></a></td>
+                </tr>
+                <tr>
+                    <th>LinkedIn:</th>
+                    <td><a href="https://www.linkedin.com/in/ryan-flanagan-52b0a3133/">LinkedIn</a></td>
+                </tr>
+                <tr>
+                    <th>Github:</th>
+                    <td><a href="https://gitub.com/TheArrayOfThings">gitub.com/TheArrayOfThings</a></td>
+                </tr>
+            </table>
+            <br />
+            <p>
+                <i><b>Disclaimer:</b> Views and opinions on this site are solely my own, and they do not necessarily reflect the views and opinions of my employer.</i>
+            </p>
         </article>
         <footer class="footer">
             <div class="footerContent">
@@ -64,7 +88,5 @@
     <script src="/js/jquery.js"></script>
     <script src="/js/ContentCreation.js"></script>
     <script src="/js/ModalBox.js"></script>
-    <script src="/Dartmoor/js/Dartmoor.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD82Y97n7A_rouMcx2clbLCH2TifSEWfgU&callback=initMap" type="text/javascript"></script>
 </body>
 </html>

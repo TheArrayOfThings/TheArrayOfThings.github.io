@@ -70,7 +70,8 @@ let identifier = "";
 addEvent("load", window, pageLoaded);
 
 function pageLoaded() {
-	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
+	console.log("Version 4");
+	if (typeof isInternetExplorer == "undefined") {
 		setTimeout(pageLoaded, 10);
 		return;
 	} else if (isInternetExplorer == true) {
@@ -291,7 +292,7 @@ function doResetColours() {
 	chooseClassic();
 }
 function chooseClassic() {
-	if (showAllSettings || !!isInternetExplorer || localStorage.getItem("ClassicSnake") == null) {
+	/*if (showAllSettings || !!isInternetExplorer || localStorage.getItem("ClassicSnake") == null) {
 		classicSnake = false;
 		localStorage.setItem("ClassicSnake", false);
 		startConfirmModal("Classic Snake?", "Do you want to enable classic-style Snake?", classicSnakeTurnedOn, classicSnakeTurnedOff);
@@ -300,7 +301,10 @@ function chooseClassic() {
 		classicSnake = localStorage.getItem("ClassicSnake") == "true" ? true:false;
 		resetEverything();
 		return;
-	}
+	}*/
+	classicSnake = true;
+	resetEverything();
+	return;
 }
 function classicSnakeTurnedOn() {
 	classicSnake = true;

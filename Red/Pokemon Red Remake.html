@@ -3,15 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Pokemon red browser remake proof of concept">
+    <meta name="description" content="Portfolio site for Ryan Flanagan">
     <meta name="author" content="Ryan Flanagan">
     <meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
-    <title>Pokemon Red Remake</title>
-    <link rel="stylesheet" href="/css/Ultimate.css">
+    <title>Pokemon Red</title>
+    <link rel="stylesheet" href="/css/Website.css">
+    <link rel="stylesheet" href="/Red/css/Red.css">
+    <link rel="stylesheet" href="/Highlight/styles/stackoverflow-dark.min.css">
 </head>
 <body>
     <div id="modalOverlay"></div>
-    <div id="topBar"></div>
     <div id="modalBox" class="modal">
         <!-- Modal popup content -->
         <div class="modal-content">
@@ -19,105 +20,115 @@
             <p id="modalTextContent">Default content</p>
             <label id="modalInputLabel" for="modalInput">Input:</label>
             <input type="text" id="modalInput" name="modalInput">
-            <button class="modalYes">Yes</button>
-            <button class="modalNo">No</button>
-            <button class="modalButton">Submit</button>
+            <div class="modalButtonContainer">
+                <button class="modalYes">Yes</button>
+                <button class="modalNo">No</button>
+                <button class="modalButton">Submit</button>
+            </div>
         </div>
     </div>
-    <div class="main">
-        <h1>Welcome</h1>
-        <p>This is a remake of Red's house in Pokemon Red! This remake is made entirely in pure Javascript, HTML, and CSS!</p>
-        <ul class="contentMenu"></ul>
-        <div id="hidden" style="display: none;"></div>
-        <div id="background">
-            <div id="playable">
-                <div id="mapContainerDiv">
-                    <div id="debugDivs"></div>
+    <header class="header">
+        <button id="showSidebarLeftButton"><span>__</span><span>__</span><span>__</span></button>
+        <div class="headerContent">
+            Ryan Flanagan -
+            <script>document.write(document.title);</script>
+        </div>
+    </header>
+    <div id="sidebarLeftOverlay"></div>
+    <div id="sidebarLeftContainer"></div>
+    <div class="mainBody">
+        <article class="main">
+            <h1>The Game</h1>
+            <p>This is a remake of Red's house in Pokemon Red! This remake is made entirely in pure Javascript, HTML, and CSS!</p>
+            <ul class="contentMenu"></ul>
+            <div id="hidden" style="display: none;"></div>
+            <div id="background">
+                <div id="playable">
+                    <div id="mapContainerDiv">
+                        <div id="debugDivs"></div>
+                    </div>
+                    <div id="menu"></div>
+                    <div id="frontmenu"></div>
+                    <div id="mobileInteractMenu">
+                        <div id="topSectionVisible" class="section"><div class="centre">Up</div></div>
+                        <div id="bottomSectionVisible" class="section"><div class="centre">Down</div></div>
+                        <div id="leftSectionVisible" class="section"><div class="centre">Left</div></div>
+                        <div id="rightSectionVisible" class="section"><div class="centre">Right</div></div>
+                        <div id="aButtonVisible" class="section"><div class="centre">A Button</div></div>
+                        <div id="bButtonVisible" class="section"><div class="centre">B Button</div></div>
+                        <div id="startButtonVisible" class="section"><div class="centre">Start</div></div>
+                        <div id="topSection" class="section"></div>
+                        <div id="bottomSection" class="section"></div>
+                        <div id="leftSection" class="section"></div>
+                        <div id="rightSection" class="section"></div>
+                        <div id="aButton" class="section"></div>
+                        <div id="bButton" class="section"></div>
+                        <div id="startButton" class="section"></div>
+                    </div>
                 </div>
-                <div id="menu"></div>
-                <div id="frontmenu"></div>
-                <div id="mobileInteractMenu">
-                    <div id="topSectionVisible" class="section"><div class="centre">Up</div></div>
-                    <div id="bottomSectionVisible" class="section"><div class="centre">Down</div></div>
-                    <div id="leftSectionVisible" class="section"><div class="centre">Left</div></div>
-                    <div id="rightSectionVisible" class="section"><div class="centre">Right</div></div>
-                    <div id="aButtonVisible" class="section"><div class="centre">A Button</div></div>
-                    <div id="bButtonVisible" class="section"><div class="centre">B Button</div></div>
-                    <div id="startButtonVisible" class="section"><div class="centre">Start</div></div>
-                    <div id="topSection" class="section"></div>
-                    <div id="bottomSection" class="section"></div>
-                    <div id="leftSection" class="section"></div>
-                    <div id="rightSection" class="section"></div>
-                    <div id="aButton" class="section"></div>
-                    <div id="bButton" class="section"></div>
-                    <div id="startButton" class="section"></div>
-                </div>
             </div>
-        </div>
-        <div class="expandableSection">
-            <a class="expandableHeader">What is this?</a>
-            <div class="expandableContent">
-                <h2>Pokemon Red</h2>
-                <p>
-                    Pokemon Red was a gameboy game from 1997. I played it a lot as a child and grew pretty familar with it.
-                    I figured that remaking such an old game in a modern browser, whilst using all the original assets, would make for a very interesting challenge!
-                    My original intention was to remake the whole game, but that would take me years to do on my own.
-                    So instead, I settled on remaking Red's house, which acts as the first area of the game.
-                </p>
-                <h2>Features</h2>
-                <ul>
-                    <li>Recreation of Red's house from Pokemon Red</li>
-                    <li>Computer, inventory, movement, collision, and conversations all fully implemented</li>
-                    <li>Runs in most browsers</li>
-                    <li>Mobile supported</li>
-                    <li>Rescales to any sized dislay</li>
-                    <li>Loading and unloading of locations</li>
-                    <li>Save progress</li>
-                </ul>
+            <h1>What is this?</h1>
+            <h2>Pokemon Red</h2>
+            <p>
+                Pokemon Red was a gameboy game from 1997. I played it a lot as a child and grew pretty familar with it.
+                I figured that remaking such an old game in a modern browser, whilst using all the original assets, would make for a very interesting challenge!
+                My original intention was to remake the whole game, but that would take me years to do on my own.
+                So instead, I settled on remaking Red's house, which acts as the first area of the game.
+            </p>
+            <h2>Features</h2>
+            <ul>
+                <li>Recreation of Red's house from Pokemon Red</li>
+                <li>Computer, inventory, movement, collision, and conversations all fully implemented</li>
+                <li>Runs in most browsers</li>
+                <li>Mobile supported</li>
+                <li>Rescales to any sized dislay</li>
+                <li>Loading and unloading of locations</li>
+                <li>Save progress</li>
+            </ul>
+            <h1>Why is this interesting?</h1>
+            <h2>Original assets</h2>
+            <p>I decided early on that I would use the assets exported from the game as-is, rather than modifying in advance.</p>
+            <p>For example, here is the tileset for Red's house (the tileset I used for this remake):</p>
+            <img width="25%" src="/Red/gfx/tilesets/reds_house.png">
+            <p>
+                Does not look much like a bedroom or a living room does it?
+                This is because Pokemon red was distributed in a cartidge with very limited space, so they couldn't exactly keep an image for every room as there wasn't space.
+                So instead, the backgrounds of the game are stitched together from tilesets like the above.
+            </p>
+            <p>The code for this project does the same, it stitches it's backgrounds together based on the original tileset image!</p>
+            <h2>Authenticity</h2>
+            <p>By using the assets, manipulating them in the same way, and some careful coding, I've made this remake as authentic as possible within the confines of a browser.</p>
+            <p>Instead of simplying handling the textboxes with modern CSS, I instead opted to craft the text in the same way the original game did, stitching characters together from an image.</p>
+            <p>So this:</p>
+            <img width="25%" src="/Red/gfx/font.png">
+            <p>Becomes this:</p>
+            <img width="25%" src="/Red/Images/Completed Textbox.png">
+            <p>I also had to recreate the various systems and quirks of the game in Javascript!</p>
+            <h2>Fully fledged engine</h2>
+            <p>
+                To begin with, this project used the engine I created for BrowserSnake but this remake now contains the fundamentals for a full RPG.
+                I reworked the engine considerably to add the functionality I needed for this project.
+            </p>
+            <p>
+                I use a frame queue system, which is a system where functions are passed from objects in the game (such as characters) to the framequeue and then run in the order they were added.
+                A frame is then executed at set intervals, to ensure the game runs smoothly and consistently - and allows objects to internally track their state.
+            </p>
+            <!-- End of Main -->
+        </article>
+        <footer class="footer">
+            <div class="footerContent">
+                <script>document.write(new Date().getFullYear());</script> <a href="https://www.linkedin.com/in/ryan-flanagan-52b0a3133/">Ryan Flanagan</a>
             </div>
-        </div>
-        <div class="expandableSection">
-            <a class="expandableHeader">Why is this interesting?</a>
-            <div class="expandableContent">
-                <h2>Original assets</h2>
-                <p>I decided early on that I would use the assets exported from the game as-is, rather than modifying in advance.</p>
-                <p>For example, here is the tileset for Red's house (the tileset I used for this remake):</p>
-                <img width="25%" src="/Red/gfx/tilesets/reds_house.png">
-                <p>
-                    Does not look much like a bedroom or a living room does it?
-                    This is because Pokemon red was distributed in a cartidge with very limited space, so they couldn't exactly keep an image for every room as there wasn't space.
-                    So instead, the backgrounds of the game are stitched together from tilesets like the above.
-                </p>
-                <p>The code for this project does the same, it stitches it's backgrounds together based on the original tileset image!</p>
-                <h2>Authenticity</h2>
-                <p>By using the assets, manipulating them in the same way, and some careful coding, I've made this remake as authentic as possible within the confines of a browser.</p>
-                <p>Instead of simplying handling the textboxes with modern CSS, I instead opted to craft the text in the same way the original game did, stitching characters together from an image.</p>
-                <p>So this:</p>
-                <img width="25%" src="/Red/gfx/font.png">
-                <p>Becomes this:</p>
-                <img width="25%" src="/Red/Images/Completed Textbox.png">
-                <p>I also had to recreate the various systems and quirks of the game in Javascript!</p>
-                <h2>Fully fledged engine</h2>
-                <p>
-                    To begin with, this project used the engine I created for BrowserSnake but this remake now contains the fundamentals for a full RPG.
-                    I reworked the engine considerably to add the functionality I needed for this project.
-                </p>
-                <p>
-                    I use a frame queue system, which is a system where functions are passed from objects in the game (such as characters) to the framequeue and then run in the order they were added.
-                    A frame is then executed at set intervals, to ensure the game runs smoothly and consistently - and allows objects to internally track their state.
-                </p>
-            </div>
-        </div>
-        <!-- End of Main -->
+        </footer>
     </div>
-    <div id="footer"></div>
+    <aside class="sidebarRight">
+        <div id="contentsList" class="sidebarRightContent">
+            <span class="sidebarRightHeader">Page Contents</span>
+        </div>
+    </aside>
     <script src="/js/compatibility.js"></script>
     <script src="/js/jquery.js"></script>
-    <script src="/js/ExpandableSection.js"></script>
-    <script src="/js/Logo.js"></script>
-    <script src="/js/Selected.js"></script>
-    <script src="/js/MenuBurger.js"></script>
-    <script src="/js/SetTitle.js"></script>
+    <script src="/js/ContentCreation.js"></script>
     <script src="/js/ModalBox.js"></script>
     <script src="/Red/js/game.js"></script>
     <script src="/Red/js/map.js"></script>
@@ -140,14 +151,5 @@
     <script src="/Red/js/sprite.js"></script>
     <script src="/Red/js/charactersprite.js"></script>
     <script src="/Red/js/player.js"></script>
-    <script>
-        var topBarLoaded;
-        $(function () {
-            $("#topBar").load("/html/TopBar.html", function () {
-                topBarLoaded = true;
-            });
-            $("#footer").load("/html/Footer.html");
-        });
-    </script>
 </body>
 </html>

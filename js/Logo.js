@@ -1,5 +1,5 @@
 function resizeLogoText() {
-	if (topBarLoaded != true || typeof isInternetExplorer == "undefined") {
+	if (typeof isInternetExplorer == "undefined") {
 		setTimeout(resizeLogoText, 10);
 		return;
 	}
