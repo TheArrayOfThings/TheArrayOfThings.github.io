@@ -312,20 +312,14 @@ html:not([data-show-header='1']) .header {
 }
 #contentsList {
     margin-top: 80px;
-    width:100%;
+    width: var(--sidebarLeftWidth);
 }
-div.sidebarRightContent span.sidebarRightHeader {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    padding-left: 10px;
-    font-size: 1rem;
-    letter-spacing: -0.02em;
-    font-family: 'Oswald';
-    color: #6c757d;
-    margin-left: -2px;
+div.sidebarRightContent * {
+    width: calc(var(--sidebarLeftWidth) - 12px);
+    padding-left:5px;
 }
 div.sidebarRightContent a {
-    display:block;
+    display: block;
     font-size: .9rem;
     color: #6c757d;
     text-decoration: none;
@@ -334,33 +328,16 @@ div.sidebarRightContent a {
     text-decoration-color: currentcolor;
     text-decoration-thickness: auto;
 }
-div.sidebarRightContent div {
-    width: 100%;
+div.sidebarRightContent span.sidebarRightHeader {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+    font-family: 'Oswald';
+    color: #6c757d;
 }
 div.sidebarRightContent div#H1 {
     filter: brightness(1.25);
-    padding-left: 20px;
-    width: calc(var(--sidebarLeftWidth) - 20px);
-}
-div.sidebarRightContent div#H2 {
-    padding-left: 30px;
-    width: calc(var(--sidebarLeftWidth) - 30px);
-}
-div.sidebarRightContent div#H3 {
-    padding-left: 40px;
-    width: calc(var(--sidebarLeftWidth) - 40px);
-}
-div.sidebarRightContent div#H4 {
-    padding-left: 50px;
-    width: calc(var(--sidebarLeftWidth) - 50px);
-}
-div.sidebarRightContent div#H5 {
-    padding-left: 60px;
-    width: calc(var(--sidebarLeftWidth) - 60px);
-}
-div.sidebarRightContent div#H6 {
-    padding-left: 70px;
-    width: calc(var(--sidebarLeftWidth) - 70px);
 }
 div.sidebarRightContent div:hover {
     transition: box-shadow 0.35s ease-in-out;
