@@ -190,7 +190,7 @@ img.socialImage {
     transition: margin 0.25s ease-in-out;
 }
 .mainBody * {
-    max-width: 100%;
+    display: inline-block;
 }
 .main {
     text-align: left;
