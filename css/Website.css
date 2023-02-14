@@ -59,6 +59,13 @@ a:hover {
 }
 /*End of default anchor tags*/
 
+/*Defaults for tables*/
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+/*End of defaults for tables*/
+
 /*Profile*/
 div.profileImageContainer {
     min-width: 100px;
@@ -188,9 +195,6 @@ img.socialImage {
     width: calc(100vw - (var(--sidebarLeftWidth)*2));
     height: 100vh;
     transition: margin 0.25s ease-in-out;
-}
-.mainBody * {
-    display: inline-block;
 }
 .main {
     text-align: left;
