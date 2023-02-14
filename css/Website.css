@@ -422,7 +422,7 @@ html:is([data-is-portrait='1']) .header {
     left: 0vw;
 }
 html:is([data-is-portrait='1']) .mainBody {
-    width: 55vw;
+    width: 70vw;
     margin-left: 0vw;
 }
 html:is([data-show-sidebar-left='0']) #sidebarLeft {
@@ -433,7 +433,7 @@ html:is([data-show-sidebar-left='0']) .header {
     left: 0vw;
 }
 html:is([data-show-sidebar-left='0']) .mainBody {
-    width:55vw;
+    width:70vw;
     margin-left: 0vw;
 }
 html:is([data-show-sidebar-left='1'][data-is-portrait='1']) #sidebarLeftOverlay {
