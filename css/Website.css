@@ -5,6 +5,7 @@
     --mainTextColor: rgb(175, 176, 177);
     --mainTextHighlightColor: rgb(116, 178, 243);
     --sidebarLeftWidth: 15vw;
+    --sidebarRightWidth: 15vw;
     --isPortrait: 0;
 }
 
@@ -61,8 +62,7 @@ a:hover {
 
 /*Defaults for tables*/
 table {
-    table-layout: fixed;
-    width: 100%;
+
 }
 /*End of defaults for tables*/
 
@@ -103,6 +103,10 @@ a#topLogoLink {
     transition: color 0.35s ease-in-out;
 }
 /*End of logo*/
+
+div.scrollXDiv {
+    overflow-x: auto;
+}
 
 .subtitle {
     font-size: 95%;
@@ -152,6 +156,7 @@ div.navContainer {
 /*Social*/
 div.socialContainer {
     padding-top:20%;
+    padding-bottom:20%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -192,7 +197,7 @@ img.socialImage {
 /*Main content*/
 .mainBody {
     margin-left: var(--sidebarLeftWidth);
-    width: calc(100vw - (var(--sidebarLeftWidth)*2));
+    width: calc(100vw - var(--sidebarLeftWidth) - var(--sidebarRightWidth));
     height: 100vh;
     transition: margin 0.25s ease-in-out;
 }
@@ -308,7 +313,7 @@ html:not([data-show-header='1']) .header {
     position: fixed;
     top: 0;
     right: 0;
-    width: var(--sidebarLeftWidth);
+    width: var(--sidebarRightWidth);
     overflow-y: auto;
 }
 .sidebarRightContent {
@@ -319,11 +324,11 @@ html:not([data-show-header='1']) .header {
 }
 #contentsList {
     margin-top: 80px;
-    width: var(--sidebarLeftWidth);
+    width: var(--sidebarRightWidth);
 }
 div.sidebarRightContent * {
-    width: calc(var(--sidebarLeftWidth) - 12px);
-    padding-left:5px;
+    width: calc(var(--sidebarRightWidth) - 12px);
+    padding-left: 5px;
 }
 div.sidebarRightContent a {
     display: block;

@@ -102,11 +102,13 @@ function portraitOrLandscapeCheck() {
 	if (clientWidth > clientHeight) {
 		document.documentElement.dataset.isPortrait = 0;
 		document.querySelector(":root").style.setProperty("--sidebarLeftWidth", "15vw");
+		document.querySelector(":root").style.setProperty("--sidebarRightWidth", "15vw");
 		document.documentElement.dataset.showSidebarLeft = "1";
 
 	} else {
 		document.documentElement.dataset.isPortrait = 1;
-		document.querySelector(":root").style.setProperty("--sidebarLeftWidth", "30vw");
+		document.querySelector(":root").style.setProperty("--sidebarLeftWidth", "40vw");
+		document.querySelector(":root").style.setProperty("--sidebarRightWidth", "30vw");
 		document.documentElement.dataset.showSidebarLeft = "0";
 	}
 	console.log(document.documentElement.dataset.isPortrait);
