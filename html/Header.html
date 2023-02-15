@@ -1,0 +1,18 @@
+<div class="header">
+    <button id="showSidebarLeftButton"><span>___</span><span>___</span><span>___</span></button>
+    <div id="headerContent">
+        Ryan Flanagan -
+    </div>
+    <script>
+        //Add the document title to the header
+        document.getElementById("headerContent").innerText += ` ${document.title}`;
+        //Add an event handler to the showSidebarLeftButton to show/hide left menu
+        addEvent("click", document.getElementById("showSidebarLeftButton"), () => {
+            if (document.documentElement.dataset.showSidebarLeft != "0") {
+                document.documentElement.dataset.showSidebarLeft = "0";
+            } else {
+                document.documentElement.dataset.showSidebarLeft = "1";
+            }
+        });
+    </script>
+</div>

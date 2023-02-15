@@ -260,7 +260,7 @@ html:not([data-show-header='1']) .header {
     transition: top 0.25s ease-in-out;
     top: -40px;
 }
-.headerContent {
+#headerContent {
     position:absolute;
     left: 80px;
     font-size: 1rem;
@@ -383,11 +383,11 @@ div.selectedHeader a {
     background-color: #1B1B1E;
     border: 3px solid #2C2D2D;
     border-radius: 0.5em;
-    width: 20vw;
-    height: 20vh;
+    width: 50vw;
+    height: 30vh;
     overflow: auto; /* Enable scroll if needed */
-    left: 40vw;
-    top: 40vh;
+    left: 25vw;
+    top: 30vh;
     display:flex;
     flex-direction: column;
 }
@@ -398,12 +398,20 @@ div.selectedHeader a {
 #modalTextContent {
     word-wrap: break-word;
     margin:0;
-    margin-top:1vh;
-    padding:0;
-    flex:1;
+    padding:1vw;
+    flex:2;
 }
 #modalInput, #modalInputLabel {
     display: none;
+}
+#modalTitle {
+}
+#modalTextContent {
+}
+#modalInputLabel {
+}
+input#modalInput {
+    flex:1;
 }
 div#modalOverlay {
     position: fixed;

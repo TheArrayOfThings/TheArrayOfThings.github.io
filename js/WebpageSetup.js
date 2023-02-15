@@ -114,10 +114,12 @@ function portraitOrLandscapeCheck() {
 	console.log(document.documentElement.dataset.isPortrait);
 }
 
-//Load the LeftSideBar.html
+//Load the webpage html elements
 addEvent("load", window, () => {
+	$("#modalContainer").load("/html/Modal.html");
 	$("#sidebarLeftContainer").load("/html/LeftSideBar.html");
-})
+	$("#headerContainer").load("/html/Header.html");
+});
 
 //Setup the header show/hide javascript
 addEvent("load", window, () => {
@@ -171,14 +173,6 @@ addEvent("load", window, () => {
 addEvent("load", window, portraitOrLandscapeCheck);
 //Add an event to update this when window is resized
 addEvent("resize", window, portraitOrLandscapeCheck);
-//Add an event handler to the showSidebarLeftButton to show/hide left menu
-addEvent("click", document.getElementById("showSidebarLeftButton"), () => {
-	if (document.documentElement.dataset.showSidebarLeft != "0") {
-		document.documentElement.dataset.showSidebarLeft = "0";
-	} else {
-		document.documentElement.dataset.showSidebarLeft = "1";
-	}
-});
 //Add an event to sidebarLeftOverlay to hide the sidebar if clicked
 addEvent("click", document.getElementById("sidebarLeftOverlay"), () => {
 	document.documentElement.dataset.showSidebarLeft = "0";
