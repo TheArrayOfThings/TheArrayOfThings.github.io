@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio site for Ryan Flanagan">
+    <meta name="author" content="Ryan Flanagan">
+    <meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
+    <title>Client Samples</title>
+    <link rel="stylesheet" href="/css/Website.css">
+    <link rel="stylesheet" href="/Highlight/styles/stackoverflow-light.min.css">
+</head>
+<body>
+    <div id="modalOverlay"></div>
+    <div id="modalBox" class="modal">
+        <!-- Modal popup content -->
+        <div class="modal-content">
+            <h1 id="modalTitle"></h1>
+            <p id="modalTextContent">Default content</p>
+            <label id="modalInputLabel" for="modalInput">Input:</label>
+            <input type="text" id="modalInput" name="modalInput">
+            <div class="modalButtonContainer">
+                <button class="modalYes">Yes</button>
+                <button class="modalNo">No</button>
+                <button class="modalButton">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div id="headerContainer"></div>
+    <div id="sidebarLeftOverlay"></div>
+    <div id="sidebarLeftContainer"></div>
+    <div class="mainBody">
+        <article class="main">
+            <h1>Purpose</h1>
+            <p>
+                The functions on this page use the 
+                <a href="https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/reference">Microsoft Client API</a> 
+                to perform actions on a model-driven form.
+            </p>
+            <p>
+                I wrote the functions to be reasonable generic, so that they can be implemented mostly as-presented here.
+            </p>
+            <h2>Toggle Field Visibility Based on Another Field</h2>
+            <h3>Description</h3>
+            This function modifies the visiblity of a column based on the Yes/No value of another column.
+            <h3>Parameters</h3>
+                <ul>
+                    <li><b>contextParam</b> is the context</li>
+                    <li><b>toCheck</b> is the logical name of the Yes/No optionset column that you want to check</li> 
+                    <li><b>toSet</b> is the logical name of the column you want to show/hide based on the value in toCheck</li>
+                </ul>
+                <h3>The Code</h3>
+            <pre><code class="language-javascript">CompanyNamespace.showField = function(contextParam, toCheck, toSet) {
+    var formContext = contextParam.getFormContext();
+    if (formContext.getAttribute(toCheck).getValue() === true) {
+        formContext.getControl(toSet).setVisible(true);
+    } else {
+        formContext.getControl(toSet).setVisible(false);
+    }
+}</code></pre>
+            <h2>Append Text To Option Set Label</h2>
+            <h3>Description</h3>
+            This function appends text to the label of an option set column without modifying the data.
+            This is useful for aesthetic-only tweaks or for dynamically changing the label on the fly.
+            <h3>Parameters</h3>
+                <ul>
+                    <li><b>contextParam</b> is the context</li>
+                    <li><b>toAddField</b> is the logical name of the option set column</li> 
+                    <li><b>toAddText</b> is the text you want to append to the option set label</li>
+                </ul>
+                <h3>The Code</h3>
+            <pre><code class="language-javascript">CompanyNamespace.appendText = function(contextParam, toAddField, toAddText) {
+    var formContext = contextParam.getFormContext();
+    var fieldValue = formContext.getAttribute(toAddField).getValue();
+    if (fieldValue != null) {
+        formContext.getAttribute(toAddField).setValue(fieldValue + " " + toAddText);
+    }
+}</code></pre>
+            <h2>Hide Deprecated Choices</h2>
+            <h3>Description</h3>
+            This function hides any choices which contain "deprecated" in the choice label. 
+            Very useful for hiding choice options without deleting them (so historic data remains).
+            <h3>Parameters</h3>
+                <ul>
+                    <li><b>contextParam</b> is the context</li>
+                    <li><b>fieldParam</b> is the logical name of the choices column</li> 
+                </ul>
+                <h3>The Code</h3>
+            <pre><code class="language-javascript">CompanyNamespace.hideDeprecatedOptions = function(contextParam, fieldParam) {
+	var formContext = contextParam.getFormContext();
+	var fieldToModify = formContext.getControl(fieldParam);
+	var options = fieldToModify.getOptions();
+	for (var i = 0; i < options.length; ++i) {
+		//Remove the option, if it contains 'deprecated'
+		if (options[i].text.toLowerCase().indexOf("deprecated") !== -1) {
+			//Make sure to leave the option alone if it is the currently selected one...
+			if (formContext.getAttribute(fieldParam) != null && 
+				formContext.getAttribute(fieldParam) != "" && 
+				options[i].value !== formContext.getAttribute(fieldParam).getValue()
+				) 
+			{
+				fieldToModify.removeOption(options[i].value);
+			}
+		}
+	}
+}</code></pre>
+            <h2>Lock/Unlock All Columns</h2>
+            <h3>Description</h3>
+            This function locks or unlocks all columns on a form.
+            Useful for dynamically setting a form as read-only.
+            <h3>Parameters</h3>
+                <ul>
+                    <li><b>contextParam</b> is the context</li>
+                    <li><b>lockAll</b> is a boolean - it locks everything if true</li> 
+                </ul>
+                <h3>The Code</h3>
+            <pre><code class="language-javascript">CompanyNamespace.lockAllControls = function (contextParam, lockAll) {
+	const formContext = contextParam.getFormContext();
+	//Loop through each control and set it to disabled or enabled dependign on lockAll
+	formContext.data.entity.attributes.forEach(function (attribute, index) {
+        //console.log("Locking field: " + attribute.getName());
+        //Have to use index, as getControl sometimes returns null when using the attribute name
+		let control = formContext.getControl(index);
+		if (control) {
+			control.setDisabled(lockAll);
+		} else {
+            console.log("Cannot lock control: " + attribute.getName());
+        }
+	});
+}</code></pre>
+            <h2>Whitelist Security Roles For Column</h2>
+            <h3>Description</h3>
+            This function locks the Status Reason column for users who don't have a security role listed in the "unlockStatusReasonSecurityRoles" array.
+            You can substitute the status reason column for another, and modify the "unlockStatusReasonSecurityRoles" array.
+            <h3>Parameters</h3>
+                <ul>
+                    <li><b>contextParam</b> is the context</li>
+                </ul>
+                <h3>The Code</h3>
+            <pre><code class="language-javascript">CompanyNamespace.lockStatusReason = function(contextParam) {
+	let unlockStatusReasonSecurityRoles = ["System Customizer", "System Administrator"];
+	//Get user's security roles...
+	let lockStatusReason = true;
+	let userSecurityRoles = Xrm.Utility.getGlobalContext().userSettings.roles;
+    userSecurityRoles.forEach(function (item) {
+		//Check if the user's security roles are one of the ones allowed to modify status reason
+        if (unlockStatusReasonSecurityRoles.includes(item.name)) {
+            lockStatusReason = false;
+        }
+    });
+	//Lock or unlock the Status Reason column depending on user's security roles
+    contextParam.getFormContext().getControl("statuscode").setDisabled(lockStatusReason);
+}</code></pre>
+        </article>
+        <footer class="footer">
+            <div class="footerContent">
+                <script>document.write(new Date().getFullYear());</script> <a href="https://www.linkedin.com/in/ryan-flanagan-52b0a3133/">Ryan Flanagan</a>
+            </div>
+        </footer>
+    </div>
+    <aside class="sidebarRight">
+        <div id="contentsList" class="sidebarRightContent">
+            <span class="sidebarRightHeader">Page Contents</span>
+        </div>
+    </aside>
+    <script src="/js/compatibility.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/WebpageSetup.js"></script>
+    <script src="/js/ModalBox.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 var isScrolling;
 
 function populatePageContents() {
-	let contentHeaders = $("h1, h2, h3, h4, h5, h6");
+	let contentHeaders = $("h1, h2");
 	let contentsList = document.getElementById("contentsList");
 	let newAnchor;
 	let newDiv;
@@ -69,7 +69,7 @@ function selectHeader() {
 	let scrollY = window.pageYOffset;
 
 	//Get the headers
-	let headers = $("h1, h2, h3, h4, h5, h6");
+	let headers = $("h1, h2");
 
 	var closest = null;
 

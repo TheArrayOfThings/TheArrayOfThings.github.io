@@ -6,10 +6,9 @@
     <meta name="description" content="Portfolio site for Ryan Flanagan">
     <meta name="author" content="Ryan Flanagan">
     <meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
-    <title>Dartmoor Map</title>
+    <title>Power Automate Error Handling</title>
     <link rel="stylesheet" href="/css/Website.css">
-    <link rel="stylesheet" href="/Dartmoor/css/Dartmoor.css">
-    <link rel="stylesheet" href="/Highlight/styles/stackoverflow-dark.min.css">
+    <link rel="stylesheet" href="/Highlight/styles/stackoverflow-light.min.css">
 </head>
 <body>
     <div id="modalOverlay"></div>
@@ -32,16 +31,11 @@
     <div id="sidebarLeftContainer"></div>
     <div class="mainBody">
         <article class="main">
-            <h1>The Map</h1>
-            <p>This webpage has a version of the wild camping map of dartmoor, taken from government data.</p>
-            <div id="map"></div>
-            <h1>What went into this</h1>
-            <p>This project involved the following:</p>
-            <p>1): I downloaded the government provided shapefile from <a href="https://data.gov.uk/dataset/179407cc-4efd-4a46-bb2f-a4bbc30ce2e4/dnpa-wild-camping-permitted">here</a></p>
-            <p>2): I converted this shapefile to a geoJSON file using <a href="https://mapshaper.org/">mapshaper.org</a></p>
-            <p>3): I ran the geoJSON through <a href="https://geojsonlint.com/">geojsonlint.com</a> and observed multiple <i>Polygons and MultiPolygons should follow the right-hand rule</i> errors</p>
-            <p>4): I used mapster's <a href="https://mapster.me/right-hand-rule-geojson-fixer/">Right Hand Rule GeoJSON Fixer </a> and downloaded the fixed geoJSON</p>
-            <p>5): Finally, I used google maps Javascript API to display a map with the geoJSON overlayed - which is what you see here :)</p>
+            <h1>Introduction</h1>
+            <p>Power Automate is not always great at notifying makers when an error occurs. 
+                Sometimes, this means a flow can be encountering errors for some time before someone notices! 
+                So here is a guide on adding error handling to a Power Automate flow.
+            </p>
         </article>
         <footer class="footer">
             <div class="footerContent">
@@ -58,7 +52,5 @@
     <script src="/js/jquery.js"></script>
     <script src="/js/WebpageSetup.js"></script>
     <script src="/js/ModalBox.js"></script>
-    <script src="/Dartmoor/js/Dartmoor.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD82Y97n7A_rouMcx2clbLCH2TifSEWfgU&callback=initMap" type="text/javascript"></script>
 </body>
 </html>
