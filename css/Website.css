@@ -72,7 +72,7 @@ div.profileImageContainer {
     min-height: 100px;
     width: 100px;
     height: 100px;
-    margin-top: 20px;
+    margin-top: 40px;
     border: 2px solid #b6b6b6;
     border-radius: 50%;
     object-fit: cover;
@@ -274,10 +274,10 @@ html:not([data-show-header='1']) .header {
     text-align: center;
     background: radial-gradient(circle, #242424 0%, #1d1f27 100%);
     position: fixed;
-    top: 40px;
+    top: 0px;
     left: 0;
     width: var(--sidebarLeftWidth);
-    height: calc(100vh - 40px);
+    height: 100vh;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
