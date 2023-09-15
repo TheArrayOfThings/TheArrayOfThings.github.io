@@ -156,7 +156,7 @@ div.navContainer {
 /*Social*/
 div.socialContainer {
     padding-top:20%;
-    padding-bottom:20%;
+    padding-bottom:40%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -265,16 +265,19 @@ html:not([data-show-header='1']) .header {
     left: 80px;
     font-size: 1rem;
     color: gray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
 #sidebarLeft {
     text-align: center;
     background: radial-gradient(circle, #242424 0%, #1d1f27 100%);
     position: fixed;
-    top: 0;
+    top: 40px;
     left: 0;
     width: var(--sidebarLeftWidth);
-    height: calc(100vh - 20px);
-    padding-top: 20px;
+    height: calc(100vh - 40px);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
