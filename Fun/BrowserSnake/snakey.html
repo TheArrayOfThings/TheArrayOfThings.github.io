@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en-GB">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="/Fun/BrowserSnake/css/BrowserSnake.css">
     <link rel="stylesheet" href="/Highlight/styles/stackoverflow-light.min.css">
 </head>
+
 <body>
     <div id="modalOverlay"></div>
     <div id="modalBox" class="modal">
@@ -64,7 +66,8 @@
             </div>
             <div class="expandableContent">
                 <h2>BrowserSnake</h2>
-                <p>This is a game that runs in (any vaguely modern) browser, desktop or mobile. It is written in Javascript, HTML, and CSS only.</p>
+                <p>This is a game that runs in (any vaguely modern) browser, desktop or mobile. It is written in
+                    Javascript, HTML, and CSS only.</p>
                 <h2>Features</h2>
                 <ul>
                     <li>Switch between classic Snake 2 and BrowserSnake</li>
@@ -81,8 +84,10 @@
                 </ul>
                 <h2>Purpose</h2>
                 <p>
-                    I used this project to learn Javascript! I thought it would be an interesting way to learn the core front-end web technologies and apply them to an interesting project.
-                    When learning a new programming language I prefer to research the basics and then build a project from there, picking up useful information and applying it so that it sticks.
+                    I used this project to learn Javascript! I thought it would be an interesting way to learn the core
+                    front-end web technologies and apply them to an interesting project.
+                    When learning a new programming language I prefer to research the basics and then build a project
+                    from there, picking up useful information and applying it so that it sticks.
                 </p>
 
             </div>
@@ -90,75 +95,51 @@
             <div class="expandableContent">
                 <h2>It helped me secure my first IT job!</h2>
                 <p>
-                    For the 'Senior Application Support Analyst' role at Bournemouth University I was given a written Javascript test to see if I was capable of writing code for the ServiceNow platform.
-                    I was not familiar with the ServiceNow platform at the time but I had a really solid grasp of Javascript from this project so I was able to pass the paper test!
+                    For the 'Senior Application Support Analyst' role at Bournemouth University I was given a written
+                    Javascript test to see if I was capable of writing code for the ServiceNow platform.
+                    I was not familiar with the ServiceNow platform at the time but I had a really solid grasp of
+                    Javascript from this project so I was able to pass the paper test!
                 </p>
                 <h2>Pure Javascript!</h2>
                 <p>
-                    I chose to create this project (and all of my web projects hosted here, including the website itself!) without the use of any frameworks or external code.
+                    I chose to create this project (and all of my web projects hosted here, including the website
+                    itself!) without the use of any frameworks or external code.
                     I did this for a couple of reasons:
-                    <ol>
-                        <li>Frameworks come and go and I wanted my web projects to endure</li>
-                        <li>I personaly beleive that it is best to learn the fundementals well</li>
-                    </ol>
-                <p>I can, and have, written code for functonality which I could have accessed with a single function call from a Javascript framework - but it is my belief that I learned more by not relying on frameworks to do the heavy lifing.</p>
-                <p>Plus, I can likely pickup a particular framework pretty quickly from my knowledge of Javascript, but I might not be able to pickup a new framework as quickly had I learned Javascript using from a specific framework.</p>
-                <h2>Object Oriented Programming without Classes</h2>
+                <ol>
+                    <li>Frameworks come and go and I wanted my web projects to endure</li>
+                    <li>I personaly beleive that it is best to learn the fundementals well</li>
+                </ol>
+                <p>I can, and have, written code for functonality which I could have accessed with a single function
+                    call from a Javascript framework - but it is my belief that I learned more by not relying on
+                    frameworks to do the heavy lifing.</p>
+                <p>Plus, I can likely pickup a particular framework pretty quickly from my knowledge of Javascript, but
+                    I might not be able to pickup a new framework as quickly had I learned Javascript using from a
+                    specific framework.</p>
+                <h2>Azure Integration</h2>
                 <p>
-                    Every object in the game (such as snakes, bullets, enemies, and powerups) use a base Javascript object called 'Entity'.
-                    The 'Entity' object is my way of bringing object-oriented programming to Javascript, as the 'Entity' acts as a parent class, with child classes inheriting common functions, such as handling collision, movement, and some AI functionality.
+                    BrowserSnake uses an Azure Function to pass the user's high score data back to an Azure Cosmos DB instance.
                 </p>
                 <p>
-                    Below is some pseudo code to demonstrate this:
-<pre><code class="language-javascript">function Entity() {
-	//'entity' here is an object. 
-	//Other "classes" can extend this object.
-	var entity = {
-		//Example of inheritable property
-		aiDriven: false,
-		//Example of inheritable function
-		moveStep: function() {
-			//Functionailty to move the entity
-		},
-	};
-	//'allEntities' is useful for looping through all the entities
-	//The gamestate makes use of this to detect collisions, remove all the entities on reset etc
-	allEntities.push(entity);
-	return entity;
-}
-
-function Snake(snakeNameParam) {
-	//Extend the Entity base object
-	var snake = new Entity();
-	//Example of setting a new property
-	snake.snakeName = snakeNameParam;
-	//Example of setting a  new function
-	snake.move = function() {
-		//As 'Snake' inherited from 'Entity', can access the properties and functions of 'Entity'
-		if (snake.aiDriven) {
-			snake.moveStep();
-		}
-	};
-	return snake;
-}
-
-//New 'Snake' with all the functions and properties of Entity and Snake "classes"
-let playerSnake = new Snake("Ryan");</code></pre>
+                    This means that your the highest score should be visible. And, if you beat it, your high score can appear here too!
                 </p>
-                <p>For a project like this, I needed some way of defining classes (as I am used to from Java and C#) and this idea of extending Javascript's objects worked really well!</p>
+                <img src="./images/HighScore.png"/>
                 <h2>Internet Explorer Compatibility</h2>
                 <p>BrowserSnake is compatible with IE6 and upwards!</p>
                 <p>
                     You might be asking yourself 'why would he even bother doing this'? And I had a couple of reasons:
-                    <ol>
-                        <li>Internet Explorer has the worst compatibility of any modern browser, so I figured that if BrowserSnake could run on IE then it could run anywhere</li>
-                        <li>IE compatibility meant implementing polyfills for certain essential functions which was an interesting technical challenge</li>
-                    </ol>
-                <p>I developed an IE compatibility js file for BrowserSnake but I now use it throughout the site as there is no harm in having extra compatibility.</p>
+                <ol>
+                    <li>Internet Explorer has the worst compatibility of any modern browser, so I figured that if
+                        BrowserSnake could run on IE then it could run anywhere</li>
+                    <li>IE compatibility meant implementing polyfills for certain essential functions which was an
+                        interesting technical challenge</li>
+                </ol>
+                <p>I developed an IE compatibility js file for BrowserSnake but I now use it throughout the site as
+                    there is no harm in having extra compatibility.</p>
                 <h2>Stored settings</h2>
                 <p>
-                    The game uses local storage (when not running in IE compatibility mode) to store the user's name, settings, and high score.
-                    The idea is that you setup the game to your liking and can then revist it without going through the initial setup again and again.
+                    The game uses local storage (when not running in IE compatibility mode) to store the user's name, colour, and settings.
+                    The idea is that you setup the game to your liking and can then revist it without going through the
+                    initial setup again and again.
                 </p>
             </div>
             <h1>What skills does this show off?</h1>
@@ -166,45 +147,61 @@ let playerSnake = new Snake("Ryan");</code></pre>
                 <h2>DOM manipulation</h2>
                 <p>
                     This project shows that I am highly proficient at manipulating DOM elements using Javascript.
-                    Creating a game engine within a browser requires the dynamic creation of new elements and the ability to move the various game elements around the game board.
-                    The Snakes themselves, for example, are div elements and each snake has it's own div elements as children that represent the body segments.
+                    Creating a game engine within a browser requires the dynamic creation of new elements and the
+                    ability to move the various game elements around the game board.
+                    The Snakes themselves, for example, are div elements and each snake has it's own div elements as
+                    children that represent the body segments.
                 </p>
                 <h2>Creativity</h2>
                 <p>
-                    Javascript, HTML, and CSS were not exactly designed to be used as a game engine so it took a fair bit of creativity to get a game engine running at all within the browser.
-                    I had to implement a dynamically resizing gameboard, grid-based collision system, movement system, dynamic scoreboard system, and more all from scratch for this game.
-                    Each system uses div elements on the page for visual representation and a complex gamestate behind-the-scenes to handle the game logic.
+                    Javascript, HTML, and CSS were not exactly designed to be used as a game engine so it took a fair
+                    bit of creativity to get a game engine running at all within the browser.
+                    I had to implement a dynamically resizing gameboard, grid-based collision system, movement system,
+                    dynamic scoreboard system, and more all from scratch for this game.
+                    Each system uses div elements on the page for visual representation and a complex gamestate
+                    behind-the-scenes to handle the game logic.
                 </p>
-                <p>In addition, the design of the game, in it's systems and visual design, all took a bit of creative flair!</p>
+                <p>In addition, the design of the game, in it's systems and visual design, all took a bit of creative
+                    flair!</p>
                 <h2>Dedication</h2>
                 <p>
-                    I started work on BrowserSnake back in 2017 and have been tweaking/adding to it on and off since then.
-                    As my knowledge of Javascript has increased, I have come back to this project to use my improved skills to better the project.
+                    I started work on BrowserSnake back in 2017 and have been tweaking/adding to it on and off since
+                    then.
+                    As my knowledge of Javascript has increased, I have come back to this project to use my improved
+                    skills to better the project.
                 </p>
-                <p>At present, BrowserSnake has nearly 2000 lines of code and that is after many optimisation passes over the years. It took a few years but I am happy to have finished such a huge project.</p>
+                <p>BrowserSnake has had many optimisation passes
+                    over the years to get it performing well in any browser. It took a few years but I am happy to have finished such a huge project.</p>
                 <h2>Quality</h2>
                 <p>
-                    My hope is that, if you played the game before reading these sections, is that you did not come across a single bug.
-                    I have spent a great deal of time fixing the many, many bugs over the years. The game now is, as far as I can tell from my testing, bug-free.
+                    My hope is that, if you played the game before reading these sections, is that you did not come
+                    across a single bug.
+                    I have spent a great deal of time fixing the many, many bugs over the years. The game now is, as far
+                    as I can tell from my testing, bug-free.
                 </p>
-                <p>I have also spent a good deal of time optimising the game so it should run fairly well on slower devices too (it runs great on my phone!).</p>
+                <p>I have also spent a good deal of time optimising the game so it should run fairly well on slower
+                    devices too (it runs great on my phone!).</p>
                 <h2>Responsive Design</h2>
                 <p>
-                    A big focus of the project was the idea of having BrowserSnake run anywhere, on any-sized screen, on mobile or desktop.
+                    A big focus of the project was the idea of having BrowserSnake run anywhere, on any-sized screen, on
+                    mobile or desktop.
                     Anything that can run Javascript should be able to run BrowserSnake!
                 </p>
                 <p>
                     A lot of the game code is dedicated to scaling and re-scaling.
-                    The game can rescale itself after the page has finished loading too, to account for users flipping phones into horizontal mode etc.
+                    The game can rescale itself after the page has finished loading too, to account for users flipping
+                    phones into horizontal mode etc.
                 </p>
             </div>
             <h2>Want to see more?</h2>
-            <p>The code for this project, other projects on the website, and the website itself can be found on my <a href="https://gitub.com/TheArrayOfThings">github</a>!</p>
+            <p>The code for this project, other projects on the website, and the website itself can be found on my <a
+                    href="https://github.com/TheArrayOfThings">github</a>!</p>
             <!-- End of main -->
         </article>
         <footer class="footer">
             <div class="footerContent">
-                <script>document.write(new Date().getFullYear());</script> <a href="https://www.linkedin.com/in/ryan-flanagan-52b0a3133/">Ryan Flanagan</a>
+                <script>document.write(new Date().getFullYear());</script> <a
+                    href="https://www.linkedin.com/in/ryan-flanagan-52b0a3133/">Ryan Flanagan</a>
             </div>
         </footer>
     </div>
