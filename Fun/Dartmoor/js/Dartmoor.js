@@ -12,7 +12,7 @@ function initMap() {
         strokeWeight: 1,
 		fillOpacity: 0.5
     });
-	map.data.loadGeoJson('/Dartmoor/Resources/camping_webmap.geojson');
+	map.data.loadGeoJson('/Fun/Dartmoor/Resources/camping_webmap.geojson');
 	map.data.setMap(map);
 	infoWindow = new google.maps.InfoWindow();
 	const locationButton = document.createElement("button");
