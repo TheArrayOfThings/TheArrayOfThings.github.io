@@ -66,12 +66,12 @@ function selectHeader() {
 	clearClass("selectedHeader");
 
 	// Get current scroll position
-	let scrollY = window.pageYOffset;
+	let scrollY = window.scrollY;
 
 	//Get the headers
 	let headers = $("h1, h2");
 
-	var closest = null;
+	let closest = null;
 
 	// Now we loop through headers determining closest to scroll
 	for (let i = 0; i < headers.length; ++i) {
@@ -101,17 +101,16 @@ function portraitOrLandscapeCheck() {
 	let clientWidth = window.innerWidth;
 	if (clientWidth > clientHeight) {
 		document.documentElement.dataset.isPortrait = 0;
-		document.querySelector(":root").style.setProperty("--sidebarLeftWidth", "15vw");
-		document.querySelector(":root").style.setProperty("--sidebarRightWidth", "15vw");
+		rootElement.style.setProperty("--sidebarLeftWidth", "15vw");
+		rootElement.style.setProperty("--sidebarRightWidth", "15vw");
 		document.documentElement.dataset.showSidebarLeft = "1";
 
 	} else {
 		document.documentElement.dataset.isPortrait = 1;
-		document.querySelector(":root").style.setProperty("--sidebarLeftWidth", "40vw");
-		document.querySelector(":root").style.setProperty("--sidebarRightWidth", "30vw");
+		rootElement.style.setProperty("--sidebarLeftWidth", "40vw");
+		rootElement.style.setProperty("--sidebarRightWidth", "30vw");
 		document.documentElement.dataset.showSidebarLeft = "0";
 	}
-	console.log(document.documentElement.dataset.isPortrait);
 }
 
 //Load the webpage html elements

@@ -7,9 +7,9 @@
     <meta name="description" content="Portfolio site for Ryan Flanagan">
     <meta name="author" content="Ryan Flanagan">
     <meta name="keywords" content="Portfolio, html, css, javascript, c#, java">
-    <title>Power Platform</title>
+    <title>Debugging Client</title>
     <link rel="stylesheet" href="/css/Website.css">
-    <link rel="stylesheet" href="/Highlight/styles/stackoverflow-dark.min.css">
+    <link rel="stylesheet" href="/Highlight/styles/stackoverflow-light.min.css">
 </head>
 
 <body>
@@ -33,25 +33,33 @@
     <div id="sidebarLeftContainer"></div>
     <div class="mainBody">
         <article class="main">
-            <h1>Power Platform</h1>
-            <p>
-                This is an index of some of the Power Platform posts on this site. Definitely a work in progress!
+            <h1>Premise</h1>
+            <p>It is possible to access the Client API and Web API from the debug console in a browser.
+                This allows you to write (and more importantly test) Client API calls and Web API calls without having
+                to update and publish web resources each time.
             </p>
-            <h2>Client API Samples</h2>
-            <p>
-                <a href="./clientsamples.html">Client API Samples</a> - some useful samples of model-driven form
-                functions that I've written.
-            </p>
-            <h2>Debugging Client</h2>
-            <p>
-                <a href="./debuggingclient.html">Debugging Client</a> - how to access the Form Context and Web API
-                directly from your browser.
-            </p>
-            <h2>Calling Flows from Ribbon Buttons</h2>
-            <p>
-                <a href="./callflowmodeldrivenbutton.html">Calling Flows from Ribbon Buttons</a> - a tutorial on calling a Power Automate Flow from a model-driven ribbon button.
-            </p>
-
+            <h2>Form Context</h2>
+            <p>The equivalent of the <a
+                    href="https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/clientapi-form-context">Client
+                    API form context</a> can be accessed as so:</p>
+            <pre><code class="language-javascript">Xrm.Page.ui._formContext</code></pre>
+            <img src="./images/FormContextEquivalent.png" />
+            <p>This then enables access to the typical form context functionality, such as accessing form controls and
+                attributes. </p>
+            <h2>Web API</h2>
+            <p>The equivalent of the Dynamics <a
+                    href="https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/about?view=dataverse-latest">Web
+                    API</a> can be acessed as so:</p>
+            <pre><code class="language-javascript">Xrm.WebApi.online</code></pre>
+            <p>The Web API can then be utilised as normal:</p>
+            <pre><code class="language-javascript">Xrm.WebApi.online.retrieveRecord("contact", contactGuid).then(
+    (success) => {
+        console.log(success);
+    },
+    (error) => {
+        console.log(error);
+    }
+);</code></pre>
         </article>
         <footer class="footer">
             <div class="footerContent">

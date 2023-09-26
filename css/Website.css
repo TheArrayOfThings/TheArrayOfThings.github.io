@@ -19,10 +19,6 @@ html, body {
     background: #1B1B1E;
 }
 
-.expandableContent {
-    display: none;
-}
-
 /*Image defaults*/
 img {
     max-width:100%;
@@ -49,7 +45,6 @@ h2 {
 }
 
 .expandableHeader {
-    color: orange;
     cursor: pointer;
 }
 
@@ -69,12 +64,6 @@ a:hover {
     color: dodgerblue;
 }
 /*End of default anchor tags*/
-
-/*Defaults for tables*/
-table {
-
-}
-/*End of defaults for tables*/
 
 /*Profile*/
 div.profileImageContainer {
@@ -218,9 +207,10 @@ img.socialImage {
     padding-left: 5vw;
     padding-right: 5vw;
     padding-top: 60px;
-    padding-bottom: 40px;
+    padding-bottom: calc(100% - 40px);
     line-height: 1.8;
     word-wrap: break-word;
+
 }
 .main p {
     font-size: 1.03rem;
@@ -416,12 +406,6 @@ div.selectedHeader a {
 }
 #modalInput, #modalInputLabel {
     display: none;
-}
-#modalTitle {
-}
-#modalTextContent {
-}
-#modalInputLabel {
 }
 input#modalInput {
     flex:1;

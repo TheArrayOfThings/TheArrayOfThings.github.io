@@ -49,38 +49,6 @@ function toggleSection (section) {
 			this.href= `#${internalLink}`;
 		}
 	}
-	return;
-	//let expandableSectionContent = document.getElementsByClassName("expandableContent");
-	let thisSectionContent;
-	if (typeof sectionContentParam != "string") {
-		thisSectionContent = this.parentElement.getElementsByClassName("expandableContent")[0];
-	} else {
-		thisSectionContent = document.getElementsByClassName(sectionContentParam)[0].getElementsByClassName("expandableContent")[0];
-	}
-
-	for (let i = 0; i < expandableSectionContent.length; ++i) {
-		if (expandableSectionContent[i] == thisSectionContent) {
-			continue;
-		} else {
-			expandableSectionContent[i].style.display = "none";
-		}
-	}
-	if (!!( thisSectionContent.offsetWidth || thisSectionContent.offsetHeight || thisSectionContent.getClientRects().length )) {
-		//Hide the section
-		thisSectionContent.style.display = "none";
-		//Add the URL to the section header!
-		this.href="#";
-		//Redirect to only the base URL
-		//window.location.href = baseURL;
-	} else {
-		if (typeof sectionContentParam != "string") {
-			this.href="#" + parseInternalLink(this.innerText);
-		} else {
-			this.href="#" + parseInternalLink(sectionContentParam);
-		}
-		thisSectionContent.style.display ="block";
-		thisSectionContent.scrollIntoView({behavior: "smooth"}); 
-	}
 }
 
 
