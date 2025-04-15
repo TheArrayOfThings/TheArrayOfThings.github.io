@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Personal Blog & Portfolio for Ryan Flanagan">
+    <meta name="author" content="Ryan Flanagan">
+    <meta name="keywords" content="Portfolio, html, css, javascript, c#, java, react, fluent ui, power platform">
+    <title>Security</title>
+    <link rel="stylesheet" href="/css/Website.css">
+    <link rel="stylesheet" href="/Highlight/styles/stackoverflow-dark.min.css">
+</head>
+<body>
+    <div id="modalOverlay"></div>
+    <div id="modalBox" class="modal">
+        <!-- Modal popup content -->
+        <div class="modal-content">
+            <h1 id="modalTitle"></h1>
+            <p id="modalTextContent">Default content</p>
+            <label id="modalInputLabel" for="modalInput">Input:</label>
+            <input type="text" id="modalInput" name="modalInput">
+            <div class="modalButtonContainer">
+                <button class="modalYes">Yes</button>
+                <button class="modalNo">No</button>
+                <button class="modalButton">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div id="headerContainer"></div>
+    <div id="sidebarLeftOverlay"></div>
+    <div id="sidebarLeftContainer"></div>
+    <div class="mainBody">
+        <article class="main">
+            <h1>Security Index</h1>
+            <p>
+                My notes, learning, and resources for security-related stuff.
+            </p>
+            <h2>Custom Adlist (Sans Ecosia)</h2>
+            <p>
+                <a href="./CustomAdlist/Adlist.txt">The Adlist</a> is used with <a href="https://pi-hole.net/">Pi-hole</a>. This list is based on <a href="https://github.com/hagezi/dns-blocklists?tab=readme-ov-file">hagezi's</a> Multi pro - Big broom: Extended protection Full.
+                The Key difference is that this list has exemptions for the Google alternative <a href="https://www.ecosia.org/">Ecosia</a> (which you may wish to use for climate change reasons).
+            </p>
+            <a href="./CustomAdlist/Adlist.txt">Hagezi's Multi pro - Big broom: Extended protection Full leaving Ecosia</a>
+        </article>
+        <footer class="footer">
+            <div class="footerContent">
+                <script>document.write(new Date().getFullYear());</script> <a href="https://www.linkedin.com/in/ryan-flanagan-52b0a3133/">Ryan Flanagan</a>
+            </div>
+        </footer>
+    </div>
+    <aside class="sidebarRight">
+        <div id="contentsList" class="sidebarRightContent">
+            <span class="sidebarRightHeader">Page Contents</span>
+        </div>
+    </aside>
+    <script src="/js/compatibility.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/WebpageSetup.js"></script>
+    <script src="/js/ModalBox.js"></script>
+</body>
+</html>
